@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routes
-app.use('/users', require('./routes'));
+require('./routes')(app);
 
 //Error Handler
 app.use((req, res, next) => {

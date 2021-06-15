@@ -1,5 +1,5 @@
-const AuthenticationServices = require('./auth/authentication');
-const TranslationServices = require('./translations');
+const AuthenticationServices = require('./user/authentication');
+const TranslationServices = require('./translation');
 
 module.exports = {
   AuthenticationServices,

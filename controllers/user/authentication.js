@@ -1,3 +1,5 @@
+/* global WEBAPP_DB */
+
 /**
  * Authentications module
  * @module Authentications
@@ -7,9 +9,6 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const { ValidationException } = require('../../exceptions/httpsException');
-
-//Queries
-const UsersQueries = require('../../queries/users');
 
 const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
 
@@ -36,7 +35,7 @@ const loginUser = async (req, res, next) => {
       throw new ValidationException(null, validationResult.error);
     }
 
-    const user = await UsersQueries.getUser({ email: data.email });
+    const user = await WEBAPP_DB.findOne({ where: { email: data.email } });
 
     if (!user || !user.email) {
       throw new ValidationException(null, 'User Not Registered');
@@ -58,7 +57,7 @@ const loginUser = async (req, res, next) => {
       role: user.role,
     };
 
-    const token = jwt.sign(payload, jwtSecretKey);
+    const token = jwt.sign({ user_id: user.id }, jwtSecretKey);
 
     res.status(200).json({
       user: payload,

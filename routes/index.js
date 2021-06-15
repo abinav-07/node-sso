@@ -1,17 +1,5 @@
-const express = require('express');
-const checkJWTToken = require('../middlewares/checkJWT');
+const userRoutes = require('./user');
 
-//Services
-const Services = require('../controllers');
-
-const router = express.Router();
-
-//Services
-
-//Routes
-router.get('/translation', Services.TranslationServices);
-
-router.use(checkJWTToken);
-router.get('/login', Services.AuthenticationServices.loginUser);
-
-module.exports = router;
+module.exports = function (app) {
+  app.use('/users', userRoutes);
+};
