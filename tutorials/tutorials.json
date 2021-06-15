@@ -1,3 +1,4 @@
 {    
-    "mySqlDatabase": { "title": "MySQL Database" }
+    "mySqlDatabase": { "title": "MySQL Database" },
+    "howToDocumentCode": { "title" : "How to document code" }
 }
