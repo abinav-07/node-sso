@@ -4,6 +4,8 @@ const cors = require('cors');
 const i18next = require('i18next');
 const i18nextBackend = require('i18next-fs-backend');
 const i18nextMiddleware = require('i18next-http-middleware');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const { NotFoundException } = require('./exceptions/httpsException');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -48,6 +50,37 @@ global.WEBAPP_DB = require('./database/ab-webapp-db/models');
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Swagger
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      version: '1.0.0',
+      title: 'ASR API',
+      description: 'ASR API Information',
+      contact: {
+        name: 'Amazing Developer',
+        url: "http://www.example.com/support",
+        email: "support@example.com"
+      },
+      license: {
+        name: "Apache 2.0",
+        url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      servers:
+        {
+          url: "http://localhost:5000",
+          description: "Development server"
+        },
+    },
+  },
+  apis: ['./routes/*.js'], // files containing annotations as above
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //Routes
 require('./routes')(app);
