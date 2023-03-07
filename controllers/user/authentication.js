@@ -13,13 +13,30 @@ const { ValidationException } = require('../../exceptions/httpsException');
 const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
 
 /**
+ * @api {post} /api/users/login Login User
+ * @apiName LoginUser
+ * @apiGroup Auth
+ *
+ * @apiParam {String} email email
+ * @apiParam {String} password password
+ *
+ * @apiSuccess {String} token JWT
+ *
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "token": "18927398172c hsdkucbfy voq2 3rj23.41.2,3k4hjd`x8o237c49p8123759[48c17]`"
+ * }
+ */
+/**
  *
  * @param {*} req
  * @param {*} res
  * @param {*} next
- * @returns {json}
+ * @param req.body {Object} email and password
+ * @name LoginUser
+ * @returns {json} User Details and Token
  */
-
 const loginUser = async (req, res, next) => {
   const data = req.body;
 
@@ -70,13 +87,30 @@ const loginUser = async (req, res, next) => {
 
 
 /**
+ * @api {post} /api/users/register Register User
+ * @apiName RegisterUser
+ * @apiGroup Auth
+ *
+ * @apiParam {String} email email
+ * @apiParam {String} password password
+ *
+ * @apiSuccess {String} token JWT
+ *
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 200 OK
+ * {
+ *   "token": "18927398172c hsdkucbfy voq2 3rj23.41.2,3k4hjd`x8o237c49p8123759[48c17]`"
+ * }
+ */
+/**
  *
  * @param {*} req
  * @param {*} res
  * @param {*} next
- * @returns {json}
+ * @param req.body {Object} email and password
+ * @name RegisterUser
+ * @returns {json} User Details and Token
  */
-
  const registerUser = async (req, res, next) => {
   const data = req.body;
 

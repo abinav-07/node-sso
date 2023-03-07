@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Backend Struct Tutorial: MySQL Database</title>
+	<title>Backend Struct Tutorial: How to document code</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -68,74 +68,117 @@
 <header>
     
 
-    <h2>MySQL Database</h2>
+    <h2>How to document code</h2>
 </header>
 
 <article>
-    <h2>INTRODUCTION</h2>
-<p>The application will be using MySQL Relational Database as the company business logics are related to relationships between database entities.</p>
-<h2>CONVENTIONS</h2>
-<ol>
-<li>
-<h3>Database Names</h3>
-<ul>
-<li>Singular names with first letter capitalized. (Audiobee)</li>
-<li>Pascal Casing for names with multiple words. (StagingAudiobee)</li>
-<li>Self Explanatory Names.</li>
-</ul>
-</li>
-<li>
-<h3>Table Names</h3>
-<ul>
-<li>Singular names to be lowercased. (user)</li>
-<li>Camel Casing for names with multiple words. (userAddress)</li>
-<li>Only Alpha English Alphabets.</li>
-</ul>
-</li>
-<li>
-<h3>Field Names</h3>
-<ul>
-<li>Singular names to be lowercased. (name)</li>
-<li>Camel Casing for names with multiple words. (firstName)</li>
-<li>Primary key should be id.(Donot Modify)</li>
-<li>Only Alpha English Alphabets.</li>
-</ul>
-</li>
-<li>
-<h3>Normalization</h3>
-<ul>
-<li>Normalize.</li>
-</ul>
-</li>
-</ol>
-<h2>ASR Database</h2>
-<p>Database Tables:</p>
-<p>Future Work:</p>
-<!-- - country(id, countryName, countryCode, createdAt, updatedAt); -->
-<!-- - language(id, languageName, languageCode, countryId, createdAt, updatedAt); -->
-<!-- - user(id, firstName, lastName, userName, email, gender(opt), roleId, dateofBirth(opt), password, phoneNumber(opt), deviceName(opt), countryId(opt), company(opt), nativeLanguageId(opt), createdAt, updatedAt);
+    <hr>
+<h4>How to Generate docs</h4>
+<p>To generate the document, run <code>npm run doc</code> command after changes.</p>
+<hr>
+<h4>Module</h4>
+<p>Add the below code in every module with their appropriate name and point to the tutorial (optional).</p>
+<pre class="prettyprint source"><code>/**
+ * ModuleName module - See tutorialName
+ */
+</code></pre>
+<hr>
+<h4>Function</h4>
+<pre class="prettyprint source"><code>/**
+ * This is a function.
+ *
+ * @param {string} n - A string param
+ * @return {string} A good string //  {void} if no return statement
+ *
+ * @example
+ *
+ *     foo('hello')
+ */
+function foo(n) {
+  return n
+}
+</code></pre>
+<hr>
+<h3>Variables</h3>
+<pre class="prettyprint source"><code>/**
+ * @type {number}
+ */
+var FOO = 1
+/**
+ * @const {number}
+ */
+const FOO = 1
+</code></pre>
+<hr>
+<h3>Types</h3>
+<pre class="prettyprint source"><code>@param {string=} n	//Optional
+@param {string} [n]	//Optional
+@param {(string|number)} n	//Multiple types
+@param {*} n	//Any type
+@param {...string} n	//Repeatable arguments
+@param {string} [n=&quot;hi&quot;]	//Optional with default
+@param {string[]} n	//Array of strings
+@return {Promise&lt;string[]>} n	//Promise fulfilled by array of strings
+</code></pre>
+<hr>
+<h3>Class</h3>
+<pre class="prettyprint source"><code>/**
+ * Class to create a person object
+ */
+class Person {
+  /**
+   *
+   * @param {Object} personInfo Information about the person
+   */
+  constructor(personInfo) {
+    /**
+     * @property {string} name Persons name
+     */
+    this.name = personInfo.name;
+    /**
+     * @property {string} age Persons age
+     */
+    this.age = personInfo.age;
+  }
 
-- userRecording(id, recordingName, userId, isApproved(opt), languageId(opt), status, isPublished(bool), fileName, fileUrl, audioLength, createdAt, updatedAt); -->
+  /**
+   * @property {Function} greet A greeting with the name and age
+   * @returns {void}
+   */
+  greet() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age}`);
+  }
+}
+
+/**
+ * See Person
+ */
+const person1 = new Person({
+  name: 'John Doe',
+  age: 30
+});
+</code></pre>
+<hr>
+<h3>Tutorials</h3>
 <ul>
-<li>
-<p>role(id, role);</p>
-</li>
-<li>
-<p>user(id, firstName, lastName, userName, email, password, createdAt, updatedAt);</p>
-</li>
-<li>
-<p>userRole(id, userId, roleId);</p>
-</li>
-<li>
-<p>userRecording(id, recordingName, userId, status, isPublished(bool/false), transcriptedText, transcriptionType(human/machine), fileName, s3Url, audioLength, createdAt, updatedAt);</p>
-</li>
-<li>
-<p>recordingSplit(id, recordingId, splitIndex, s3Url, audioLength, isTranscribed(bool/false), startTime, endTime, createdAt, updatedAt);</p>
-</li>
-<li>
-<p>recordingTranscription(id, recordingSplitId, transcriptedText, isCorrect, createdAt, updatedAt);</p>
-</li>
+<li>To create a tutorial, go to the tutorials folder and create a new markdown file.</li>
+<li>You can change the name of the tutorial in <code>tutorials/tutorials.json</code> file.</li>
 </ul>
+<hr>
+<h3>Other Keywords</h3>
+<pre class="prettyprint source"><code>/**
+ * @throws {FooException}
+ * @private
+ * @deprecated
+ * @see
+ *
+ * @function
+ * @class
+ */
+</code></pre>
+<hr>
+<h3>References</h3>
+<p><code>https://devhints.io/jsdoc</code></p>
 </article>
 
 </section>
