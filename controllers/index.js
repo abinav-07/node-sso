@@ -1,5 +1,5 @@
-const AuthenticationControllers = require('./user/authentication');
-const TranslationControllers = require('./translation');
+const AuthenticationControllers = require('./v1/user/authentication');
+const TranslationControllers = require('./v1/translation');
 
 module.exports = {
   AuthenticationControllers,

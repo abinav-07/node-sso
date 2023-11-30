@@ -8,7 +8,7 @@
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
-const { ValidationException } = require('../../exceptions/httpsException');
+const { ValidationException } = require('../../../exceptions/httpsException');
 
 const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
 

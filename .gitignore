@@ -37,6 +37,7 @@ TEST*.xml
 Thumbs.db
 
 # Documentation
+documentation/
 documentation/code/docs/*
 documentation/api/*
 
