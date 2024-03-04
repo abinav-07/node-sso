@@ -1,18 +1,18 @@
 (function($) {
-  var navbarHeight;
-  var initialised = false;
-  var navbarOffset;
+  let navbarHeight;
+  let initialised = false;
+  let navbarOffset;
 
   function elOffset($el) {
     return $el.offset().top - (navbarHeight + navbarOffset);
   }
 
   function scrollToHash(duringPageLoad) {
-    var elScrollToId = location.hash.replace(/^#/, '');
-    var $el;
+    const elScrollToId = location.hash.replace(/^#/, '');
+    let $el;
 
     function doScroll() {
-      var offsetTop = elOffset($el);
+      const offsetTop = elOffset($el);
       window.scrollTo(window.pageXOffset || window.scrollX, offsetTop);
     }
 
@@ -50,51 +50,51 @@
   }
 
   $.catchAnchorLinks = function(options) {
-    var opts = $.extend({}, jQuery.fn.toc.defaults, options);
+    const opts = $.extend({}, jQuery.fn.toc.defaults, options);
     init(opts);
   };
 
   $.fn.toc = function(options) {
-    var self = this;
-    var opts = $.extend({}, jQuery.fn.toc.defaults, options);
+    const self = this;
+    const opts = $.extend({}, jQuery.fn.toc.defaults, options);
 
-    var container = $(opts.container);
-    var tocs = [];
-    var headings = $(opts.selectors, container);
-    var headingOffsets = [];
-    var activeClassName = 'active';
-    var ANCHOR_PREFIX = "__anchor";
-    var maxScrollTo;
-    var visibleHeight;
-    var headerHeight = 10; // so if the header is readable, its counted as shown
+    const container = $(opts.container);
+    const tocs = [];
+    const headings = $(opts.selectors, container);
+    let headingOffsets = [];
+    const activeClassName = 'active';
+    const ANCHOR_PREFIX = "__anchor";
+    let maxScrollTo;
+    let visibleHeight;
+    const headerHeight = 10; // so if the header is readable, its counted as shown
     init();
 
-    var scrollTo = function(e) {
+    const scrollTo = function(e) {
       e.preventDefault();
-      var target = $(e.target);
+      let target = $(e.target);
       if (target.prop('tagName').toLowerCase() !== "a") {
         target = target.parent();
       }
-      var elScrollToId = target.attr('href').replace(/^#/, '') + ANCHOR_PREFIX;
-      var $el = $(document.getElementById(elScrollToId));
+      const elScrollToId = target.attr('href').replace(/^#/, '') + ANCHOR_PREFIX;
+      const $el = $(document.getElementById(elScrollToId));
 
-      var offsetTop = Math.min(maxScrollTo, elOffset($el));
+      const offsetTop = Math.min(maxScrollTo, elOffset($el));
 
       $('body,html').animate({ scrollTop: offsetTop }, 400, 'swing', function() {
-        location.hash = '#' + elScrollToId;
+        location.hash = `#${  elScrollToId}`;
       });
 
       $('a', self).removeClass(activeClassName);
       target.addClass(activeClassName);
     };
 
-    var calcHadingOffsets = function() {
+    const calcHadingOffsets = function() {
       maxScrollTo = $("body").height() - $(window).height();
       visibleHeight = $(window).height() - navbarHeight;
       headingOffsets = [];
       headings.each(function(i, heading) {
-        var anchorSpan = $(heading).prev("span");
-        var top = 0;
+        const anchorSpan = $(heading).prev("span");
+        let top = 0;
         if (anchorSpan.length) {
           top = elOffset(anchorSpan);
         }
@@ -103,8 +103,8 @@
     }
 
     //highlight on scroll
-    var timeout;
-    var highlightOnScroll = function(e) {
+    let timeout;
+    const highlightOnScroll = function(e) {
       if (!tocs.length) {
         return;
       }
@@ -112,10 +112,10 @@
         clearTimeout(timeout);
       }
       timeout = setTimeout(function() {
-        var top = $(window).scrollTop(),
-          highlighted;
-        for (var i = headingOffsets.length - 1; i >= 0; i--) {
-          var isActive = tocs[i].hasClass(activeClassName);
+        const top = $(window).scrollTop();
+          let highlighted;
+        for (let i = headingOffsets.length - 1; i >= 0; i--) {
+          const isActive = tocs[i].hasClass(activeClassName);
           // at the end of the page, allow any shown header
           if (isActive && headingOffsets[i] >= maxScrollTo && top >= maxScrollTo) {
             return;
@@ -147,21 +147,21 @@
 
     return this.each(function() {
       //build TOC
-      var el = $(this);
-      var ul = $('<div class="list-group">');
+      const el = $(this);
+      const ul = $('<div class="list-group">');
 
       headings.each(function(i, heading) {
-        var $h = $(heading);
+        const $h = $(heading);
 
-        var anchor = $('<span/>').attr('id', opts.anchorName(i, heading, opts.prefix) + ANCHOR_PREFIX).insertBefore($h);
+        const anchor = $('<span/>').attr('id', opts.anchorName(i, heading, opts.prefix) + ANCHOR_PREFIX).insertBefore($h);
 
-        var span = $('<span/>')
+        const span = $('<span/>')
           .text(opts.headerText(i, heading, $h));
 
         //build TOC item
-        var a = $('<a class="list-group-item"/>')
+        const a = $('<a class="list-group-item"/>')
           .append(span)
-          .attr('href', '#' + opts.anchorName(i, heading, opts.prefix))
+          .attr('href', `#${  opts.anchorName(i, heading, opts.prefix)}`)
           .bind('click', function(e) {
             scrollTo(e);
             el.trigger('selected', $(this).attr('href'));
@@ -185,17 +185,17 @@ jQuery.fn.toc.defaults = {
   selectors: 'h1,h2,h3',
   smoothScrolling: true,
   prefix: 'toc',
-  onHighlight: function() {},
+  onHighlight() {},
   highlightOnScroll: true,
   navbarOffset: 0,
-  anchorName: function(i, heading, prefix) {
+  anchorName(i, heading, prefix) {
     return prefix+i;
   },
-  headerText: function(i, heading, $heading) {
+  headerText(i, heading, $heading) {
     return $heading.text();
   },
-  itemClass: function(i, heading, $heading, prefix) {
-    return prefix + '-' + $heading[0].tagName.toLowerCase();
+  itemClass(i, heading, $heading, prefix) {
+    return `${prefix  }-${  $heading[0].tagName.toLowerCase()}`;
   }
 
 };

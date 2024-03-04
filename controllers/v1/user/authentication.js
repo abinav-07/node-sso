@@ -39,10 +39,9 @@ const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
  */
 const loginUser = async (req, res, next) => {
   const data = req.body;
-console.log(a) 
   const schema = Joi.object({
     email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    password: Joi.string().required()
   });
 
   const validationResult = schema.validate(data, { abortEarly: false });
@@ -71,20 +70,19 @@ console.log(a)
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      role: user.role,
+      role: user.role
     };
 
     const token = jwt.sign({ user_id: user.id }, jwtSecretKey);
 
     res.status(200).json({
       user: payload,
-      token,
+      token
     });
   } catch (err) {
     next(err);
   }
 };
-
 
 /**
  * @api {post} /api/users/register Register User
@@ -111,12 +109,12 @@ console.log(a)
  * @name RegisterUser
  * @returns {json} User Details and Token
  */
- const registerUser = async (req, res, next) => {
+const registerUser = async (req, res, next) => {
   const data = req.body;
 
   const schema = Joi.object({
     email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    password: Joi.string().required()
   });
 
   const validationResult = schema.validate(data, { abortEarly: false });
@@ -145,14 +143,14 @@ console.log(a)
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      role: user.role,
+      role: user.role
     };
 
     const token = jwt.sign({ user_id: user.id }, jwtSecretKey);
 
     res.status(200).json({
       user: payload,
-      token,
+      token
     });
   } catch (err) {
     next(err);

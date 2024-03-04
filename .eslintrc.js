@@ -9,6 +9,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 12,
   },
+  ignorePatterns: [
+    'node_modules/*',
+    'database/database_name/models/index.js',
+    'documentation/*',
+    'out/*',
+    '**/vendor/*.js',
+  ],
   rules: {
     'no-console': 'off',
     'func-names': 'off',
