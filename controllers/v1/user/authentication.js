@@ -39,7 +39,7 @@ const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
  */
 const loginUser = async (req, res, next) => {
   const data = req.body;
-
+console.log(a) 
   const schema = Joi.object({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
