@@ -1,7 +1,7 @@
 const {
   HttpExceptions,
   ValidationException,
-} = require('../exceptions/httpsException');
+} = require('../../../exceptions/httpsException');
 
 const errorHandler = (error, req, res, next) => {
   try {

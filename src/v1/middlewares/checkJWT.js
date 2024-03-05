@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { UnauthorizedException } = require('../exceptions/httpsException');
+const { UnauthorizedException } = require('../../../exceptions/httpsException');
 
 dotenv.config();
 

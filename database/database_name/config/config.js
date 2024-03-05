@@ -1,4 +1,4 @@
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -9,28 +9,28 @@ const password = process.env.MYSQL_PASSWORD;
 const database = process.env.MYSQL_DBNAME_AUDIOBEE_DB;
 
 module.exports = {
-  "development": {
+  development: {
     username,
     password,
     database,
     host,
     port,
-    dialect: "mysql",
+    dialect: 'mysql',
     dialectOptions: {
-      bigNumberStrings: true
+      bigNumberStrings: true,
     },
     logging: false,
   },
-  "production": {
+  production: {
     username,
     password,
     database,
     host,
     port,
-    dialect: "mysql",
+    dialect: 'mysql',
     dialectOptions: {
-      bigNumberStrings: true
+      bigNumberStrings: true,
     },
     logging: false,
-  }
-}
+  },
+};

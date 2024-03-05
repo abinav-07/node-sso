@@ -5,7 +5,6 @@ const i18next = require('i18next');
 const i18nextBackend = require('i18next-fs-backend');
 const i18nextMiddleware = require('i18next-http-middleware');
 const { NotFoundException } = require('./exceptions/httpsException');
-const errorHandler = require('./middlewares/errorHandler');
 
 dotenv.config();
 
@@ -51,13 +50,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routes
-require('./routes')(app);
+app.use('/v1', require('./src/v1/routes')(app));
 
 //Error Handler
 app.use((req, res, next) => {
   next(new NotFoundException(null, `404 Not found: ${req.url} does not exist`));
 });
-app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
