@@ -5,6 +5,7 @@ const i18next = require('i18next');
 const i18nextBackend = require('i18next-fs-backend');
 const i18nextMiddleware = require('i18next-http-middleware');
 const { NotFoundException } = require('./exceptions/httpsException');
+const { rateLimit } = require('express-rate-limit');
 
 dotenv.config();
 
@@ -48,6 +49,14 @@ global.WEBAPP_DB = require('./database/database_name/models');
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(rateLimit({
+  // How long to remember requests for (1 minute)
+  windowMs:60*1000,
+  // How many requests to allow 
+  max:5,
+  // Message to display
+  message:"You exceeded the 5 request mark."
+}))
 
 //Routes
 app.use('/v1', require('./src/v1/routes')(app));
