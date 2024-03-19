@@ -8,43 +8,42 @@
  * Licensed under WTFPL <http://sam.zoy.org/wtfpl/>
  */
 (function (window, document, undefined) {
-  const //http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
+  var //http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
     //we have to sniff this because IE requires \r
-    isIe = !+'\v1';
-  const EOL = isIe ? '\r' : '\n';
-  const EMPTY = function () {
-    return null;
-  };
-  let HIGHLIGHTED_NODE_COUNT = 0;
-  const DEFAULT_LANGUAGE = 'plaintext';
-  const DEFAULT_CLASS_PREFIX = 'sunlight-';
-
-  //global sunlight variables
-  let defaultAnalyzer;
-  let getComputedStyle;
-  const globalOptions = {
-    tabWidth: 4,
-    classPrefix: DEFAULT_CLASS_PREFIX,
-    showWhitespace: false,
-    maxHeight: false,
-  };
-  const languages = {};
-  let languageDefaults = {};
-  const events = {
-    beforeHighlightNode: [],
-    beforeHighlight: [],
-    beforeTokenize: [],
-    afterTokenize: [],
-    beforeAnalyze: [],
-    afterAnalyze: [],
-    afterHighlight: [],
-    afterHighlightNode: [],
-  };
+    isIe = !+'\v1',
+    EOL = isIe ? '\r' : '\n',
+    EMPTY = function () {
+      return null;
+    },
+    HIGHLIGHTED_NODE_COUNT = 0,
+    DEFAULT_LANGUAGE = 'plaintext',
+    DEFAULT_CLASS_PREFIX = 'sunlight-',
+    //global sunlight variables
+    defaultAnalyzer,
+    getComputedStyle,
+    globalOptions = {
+      tabWidth: 4,
+      classPrefix: DEFAULT_CLASS_PREFIX,
+      showWhitespace: false,
+      maxHeight: false,
+    },
+    languages = {},
+    languageDefaults = {},
+    events = {
+      beforeHighlightNode: [],
+      beforeHighlight: [],
+      beforeTokenize: [],
+      afterTokenize: [],
+      beforeAnalyze: [],
+      afterAnalyze: [],
+      afterHighlight: [],
+      afterHighlightNode: [],
+    };
 
   defaultAnalyzer = (function () {
     function defaultHandleToken(suffix) {
       return function (context) {
-        const element = document.createElement('span');
+        var element = document.createElement('span');
         element.className = context.options.classPrefix + suffix;
         element.appendChild(
           context.createTextNode(context.tokens[context.index])
@@ -54,21 +53,21 @@
     }
 
     return {
-      handleToken(context) {
+      handleToken: function (context) {
         return defaultHandleToken(context.tokens[context.index].name)(context);
       },
 
       //just append default content as a text node
-      handle_default(context) {
+      handle_default: function (context) {
         return context.addNode(
           context.createTextNode(context.tokens[context.index])
         );
       },
 
       //this handles the named ident mayhem
-      handle_ident(context) {
-        const evaluate = function (rules, createRule) {
-          let i;
+      handle_ident: function (context) {
+        var evaluate = function (rules, createRule) {
+          var i;
           rules = rules || [];
           for (i = 0; i < rules.length; i++) {
             if (typeof rules[i] === 'function') {
@@ -138,12 +137,12 @@
 
   //adapted from http://blargh.tommymontgomery.com/2010/04/get-computed-style-in-javascript/
   getComputedStyle = (function () {
-    let func = null;
+    var func = null;
     if (document.defaultView && document.defaultView.getComputedStyle) {
       func = document.defaultView.getComputedStyle;
     } else {
       func = function (element, anything) {
-        return element.currentStyle || {};
+        return element['currentStyle'] || {};
       };
     }
 
@@ -157,13 +156,13 @@
   //-----------
 
   function createCodeReader(text) {
-    let index = 0;
-    let line = 1;
-    let column = 1;
-    let length;
-    const EOF = undefined;
-    let currentChar;
-    let nextReadBeginsLine;
+    var index = 0,
+      line = 1,
+      column = 1,
+      length,
+      EOF = undefined,
+      currentChar,
+      nextReadBeginsLine;
 
     text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n'); //normalize line endings to unix
 
@@ -171,7 +170,7 @@
     currentChar = length > 0 ? text.charAt(0) : EOF;
 
     function getCharacters(count) {
-      let value;
+      var value;
       if (count === 0) {
         return '';
       }
@@ -183,26 +182,38 @@
     }
 
     return {
-      toString() {
-        return `length: ${length}, index: ${index}, line: ${line}, column: ${column}, current: [${currentChar}]`;
+      toString: function () {
+        return (
+          'length: ' +
+          length +
+          ', index: ' +
+          index +
+          ', line: ' +
+          line +
+          ', column: ' +
+          column +
+          ', current: [' +
+          currentChar +
+          ']'
+        );
       },
 
-      peek(count) {
+      peek: function (count) {
         return getCharacters(count);
       },
 
-      substring() {
+      substring: function () {
         return text.substring(index);
       },
 
-      peekSubstring() {
+      peekSubstring: function () {
         return text.substring(index + 1);
       },
 
-      read(count) {
-        const value = getCharacters(count);
-        let newlineCount;
-        let lastChar;
+      read: function (count) {
+        var value = getCharacters(count),
+          newlineCount,
+          lastChar;
 
         if (value === '') {
           //this is a result of reading/peeking/doing nothing
@@ -243,25 +254,25 @@
         return value;
       },
 
-      text() {
+      text: function () {
         return text;
       },
 
-      getLine() {
+      getLine: function () {
         return line;
       },
-      getColumn() {
+      getColumn: function () {
         return column;
       },
-      isEof() {
+      isEof: function () {
         return index >= length;
       },
-      isSol() {
+      isSol: function () {
         return column === 1;
       },
-      isSolWs() {
-        let temp = index;
-        let c;
+      isSolWs: function () {
+        var temp = index,
+          c;
         if (column === 1) {
           return true;
         }
@@ -278,11 +289,11 @@
 
         return true;
       },
-      isEol() {
+      isEol: function () {
         return nextReadBeginsLine;
       },
-      EOF,
-      current() {
+      EOF: EOF,
+      current: function () {
         return currentChar;
       },
     };
@@ -296,7 +307,7 @@
   }
 
   function appendAll(parent, children) {
-    let i;
+    var i;
     for (i = 0; i < children.length; i++) {
       parent.appendChild(children[i]);
     }
@@ -311,7 +322,7 @@
 
   //array.contains()
   function contains(arr, value, caseInsensitive) {
-    let i;
+    var i;
     if (arr.indexOf && !caseInsensitive) {
       return arr.indexOf(value) >= 0;
     }
@@ -336,7 +347,7 @@
 
   //non-recursively merges one object into the other
   function merge(defaultObject, objectToMerge) {
-    let key;
+    var key;
     if (!objectToMerge) {
       return defaultObject;
     }
@@ -365,10 +376,10 @@
   ) {
     tokenRequirements = tokenRequirements.slice(0);
     return function (tokens) {
-      let tokenIndexStart = startIndex;
-      let j;
-      let expected;
-      let actual;
+      var tokenIndexStart = startIndex,
+        j,
+        expected,
+        actual;
 
       if (direction === 1) {
         tokenRequirements.reverse();
@@ -379,19 +390,19 @@
         expected = tokenRequirements[tokenRequirements.length - 1 - j];
 
         if (actual === undefined) {
-          if (expected.optional !== undefined && expected.optional) {
+          if (expected['optional'] !== undefined && expected.optional) {
             tokenIndexStart -= direction;
           } else {
             return false;
           }
         } else if (
           actual.name === expected.token &&
-          (expected.values === undefined ||
+          (expected['values'] === undefined ||
             contains(expected.values, actual.value, caseInsensitive))
         ) {
           //derp
           continue;
-        } else if (expected.optional !== undefined && expected.optional) {
+        } else if (expected['optional'] !== undefined && expected.optional) {
           tokenIndexStart -= direction; //we need to reevaluate against this token again
         } else {
           return false;
@@ -404,9 +415,9 @@
 
   function createBetweenRule(startIndex, opener, closer, caseInsensitive) {
     return function (tokens) {
-      let index = startIndex;
-      let token;
-      let success = false;
+      var index = startIndex,
+        token,
+        success = false;
 
       //check to the left: if we run into a closer or never run into an opener, fail
       while ((token = tokens[--index]) !== undefined) {
@@ -472,12 +483,12 @@
   }
 
   function matchWord(context, wordMap, tokenName, doNotRead) {
-    let current = context.reader.current();
-    let i;
-    let word;
-    let peek;
-    const line = context.reader.getLine();
-    const column = context.reader.getColumn();
+    var current = context.reader.current(),
+      i,
+      word,
+      peek,
+      line = context.reader.getLine(),
+      column = context.reader.getColumn();
 
     wordMap = wordMap || [];
     if (context.language.caseInsensitive) {
@@ -509,8 +520,8 @@
 
   //gets the next token in the specified direction while matcher matches the current token
   function getNextWhile(tokens, index, direction, matcher) {
-    let count = 1;
-    let token;
+    var count = 1,
+      token;
 
     direction = direction || 1;
     while ((token = tokens[index + direction * count++])) {
@@ -525,10 +536,10 @@
   //this is crucial for performance
   function createHashMap(wordMap, boundary, caseInsensitive) {
     //creates a hash table where the hash is the first character of the word
-    const newMap = {};
-    let i;
-    let word;
-    let firstChar;
+    var newMap = {},
+      i,
+      word,
+      firstChar;
 
     for (i = 0; i < wordMap.length; i++) {
       word = caseInsensitive ? wordMap[i].toUpperCase() : wordMap[i];
@@ -540,7 +551,7 @@
       newMap[firstChar].push({
         value: word,
         regex: new RegExp(
-          `^${regexEscape(word)}${boundary}`,
+          '^' + regexEscape(word) + boundary,
           caseInsensitive ? 'i' : ''
         ),
       });
@@ -550,12 +561,12 @@
   }
 
   function defaultNumberParser(context) {
-    const current = context.reader.current();
-    let number;
-    const line = context.reader.getLine();
-    const column = context.reader.getColumn();
-    let allowDecimal = true;
-    let peek;
+    var current = context.reader.current(),
+      number,
+      line = context.reader.getLine(),
+      column = context.reader.getColumn(),
+      allowDecimal = true,
+      peek;
 
     if (!/\d/.test(current)) {
       //is it a decimal followed by a number?
@@ -600,8 +611,8 @@
   }
 
   function fireEvent(eventName, highlighter, eventContext) {
-    const delegates = events[eventName] || [];
-    let i;
+    var delegates = events[eventName] || [],
+      i;
 
     for (i = 0; i < delegates.length; i++) {
       delegates[i].call(highlighter, eventContext);
@@ -613,7 +624,7 @@
   }
 
   Highlighter.prototype = (function () {
-    const parseNextToken = (function () {
+    var parseNextToken = (function () {
       function isIdentMatch(context) {
         return (
           context.language.identFirstLetter &&
@@ -627,8 +638,7 @@
       }
 
       function parseCustomTokens(context) {
-        let tokenName;
-        let token;
+        var tokenName, token;
         if (context.language.customTokens === undefined) {
           return null;
         }
@@ -652,7 +662,7 @@
       }
 
       function parsePunctuation(context) {
-        const current = context.reader.current();
+        var current = context.reader.current();
         if (context.language.punctuation.test(regexEscape(current))) {
           return context.createToken(
             'punctuation',
@@ -666,10 +676,10 @@
       }
 
       function parseIdent(context) {
-        let ident;
-        let peek;
-        const line = context.reader.getLine();
-        const column = context.reader.getColumn();
+        var ident,
+          peek,
+          line = context.reader.getLine(),
+          column = context.reader.getColumn();
 
         if (!isIdentMatch(context)) {
           return null;
@@ -699,15 +709,15 @@
       }
 
       function parseScopes(context) {
-        const current = context.reader.current();
-        let tokenName;
-        let specificScopes;
-        let j;
-        let opener;
-        let line;
-        let column;
-        let continuation;
-        let value;
+        var current = context.reader.current(),
+          tokenName,
+          specificScopes,
+          j,
+          opener,
+          line,
+          column,
+          continuation,
+          value;
 
         for (tokenName in context.language.scopes) {
           specificScopes = context.language.scopes[tokenName];
@@ -740,9 +750,9 @@
       }
 
       function parseCustomRules(context) {
-        const customRules = context.language.customParseRules;
-        let i;
-        let token;
+        var customRules = context.language.customParseRules,
+          i,
+          token;
 
         if (customRules === undefined) {
           return null;
@@ -778,13 +788,13 @@
     })();
 
     function getScopeReaderFunction(scope, tokenName) {
-      const escapeSequences = scope[2] || [];
-      const closerLength = scope[1].length;
-      const closer =
-        typeof scope[1] === 'string'
-          ? new RegExp(regexEscape(scope[1]))
-          : scope[1].regex;
-      const zeroWidth = scope[3] || false;
+      var escapeSequences = scope[2] || [],
+        closerLength = scope[1].length,
+        closer =
+          typeof scope[1] === 'string'
+            ? new RegExp(regexEscape(scope[1]))
+            : scope[1].regex,
+        zeroWidth = scope[3] || false;
 
       //processCurrent indicates that this is being called from a continuation
       //which means that we need to process the current char, rather than peeking at the next
@@ -796,16 +806,16 @@
         column,
         processCurrent
       ) {
-        let foundCloser = false;
+        var foundCloser = false;
         buffer = buffer || '';
 
         processCurrent = processCurrent ? 1 : 0;
 
         function process(processCurrent) {
           //check for escape sequences
-          let peekValue;
-          const current = context.reader.current();
-          let i;
+          var peekValue,
+            current = context.reader.current(),
+            i;
 
           for (i = 0; i < escapeSequences.length; i++) {
             peekValue =
@@ -858,8 +868,7 @@
 
     //called before processing the current
     function switchToEmbeddedLanguageIfNecessary(context) {
-      let i;
-      let embeddedLanguage;
+      var i, embeddedLanguage;
 
       for (i = 0; i < context.language.embeddedLanguages.length; i++) {
         if (!languages[context.language.embeddedLanguages[i].language]) {
@@ -884,8 +893,8 @@
 
     //called after processing the current
     function switchBackFromEmbeddedLanguageIfNecessary(context) {
-      const current = last(context.embeddedLanguageStack);
-      let lang;
+      var current = last(context.embeddedLanguageStack),
+        lang;
 
       if (current && current.switchBack(context)) {
         context.language = languages[current.parentLanguage];
@@ -898,26 +907,29 @@
     }
 
     function tokenize(unhighlightedCode, language, partialContext, options) {
-      let tokens = [];
-      let context;
-      let continuation;
-      let token;
+      var tokens = [],
+        context,
+        continuation,
+        token;
 
-      fireEvent('beforeTokenize', this, { code: unhighlightedCode, language });
+      fireEvent('beforeTokenize', this, {
+        code: unhighlightedCode,
+        language: language,
+      });
       context = {
         reader: createCodeReader(unhighlightedCode),
-        language,
+        language: language,
         items: clone(language.contextItems),
-        token(index) {
+        token: function (index) {
           return tokens[index];
         },
-        getAllTokens() {
+        getAllTokens: function () {
           return tokens.slice(0);
         },
-        count() {
+        count: function () {
           return tokens.length;
         },
-        options,
+        options: options,
         embeddedLanguageStack: [],
 
         defaultData: {
@@ -925,12 +937,12 @@
           line: 1,
           column: 1,
         },
-        createToken(name, value, line, column) {
+        createToken: function (name, value, line, column) {
           return {
-            name,
-            line,
+            name: name,
+            line: line,
             value: isIe ? value.replace(/\n/g, '\r') : value,
-            column,
+            column: column,
             language: this.language.name,
           };
         },
@@ -1004,45 +1016,44 @@
     }
 
     function createAnalyzerContext(parserContext, partialContext, options) {
-      let nodes = [];
-      const prepareText = (function () {
-        let nbsp;
-        let tab;
-        if (options.showWhitespace) {
-          nbsp = String.fromCharCode(0xb7);
-          tab =
-            new Array(options.tabWidth).join(String.fromCharCode(0x2014)) +
-            String.fromCharCode(0x2192);
-        } else {
-          nbsp = String.fromCharCode(0xa0);
-          tab = new Array(options.tabWidth + 1).join(nbsp);
-        }
-
-        return function (token) {
-          let value = token.value.split(' ').join(nbsp);
-          let tabIndex;
-          let lastNewlineColumn;
-          let actualColumn;
-          let tabLength;
-
-          //tabstop madness: replace \t with the appropriate number of characters, depending on the tabWidth option and its relative position in the line
-          while ((tabIndex = value.indexOf('\t')) >= 0) {
-            lastNewlineColumn = value.lastIndexOf(EOL, tabIndex);
-            actualColumn =
-              lastNewlineColumn === -1
-                ? tabIndex
-                : tabIndex - lastNewlineColumn - 1;
-            tabLength = options.tabWidth - (actualColumn % options.tabWidth); //actual length of the TAB character
-
-            value =
-              value.substring(0, tabIndex) +
-              tab.substring(options.tabWidth - tabLength) +
-              value.substring(tabIndex + 1);
+      var nodes = [],
+        prepareText = (function () {
+          var nbsp, tab;
+          if (options.showWhitespace) {
+            nbsp = String.fromCharCode(0xb7);
+            tab =
+              new Array(options.tabWidth).join(String.fromCharCode(0x2014)) +
+              String.fromCharCode(0x2192);
+          } else {
+            nbsp = String.fromCharCode(0xa0);
+            tab = new Array(options.tabWidth + 1).join(nbsp);
           }
 
-          return value;
-        };
-      })();
+          return function (token) {
+            var value = token.value.split(' ').join(nbsp),
+              tabIndex,
+              lastNewlineColumn,
+              actualColumn,
+              tabLength;
+
+            //tabstop madness: replace \t with the appropriate number of characters, depending on the tabWidth option and its relative position in the line
+            while ((tabIndex = value.indexOf('\t')) >= 0) {
+              lastNewlineColumn = value.lastIndexOf(EOL, tabIndex);
+              actualColumn =
+                lastNewlineColumn === -1
+                  ? tabIndex
+                  : tabIndex - lastNewlineColumn - 1;
+              tabLength = options.tabWidth - (actualColumn % options.tabWidth); //actual length of the TAB character
+
+              value =
+                value.substring(0, tabIndex) +
+                tab.substring(options.tabWidth - tabLength) +
+                value.substring(tabIndex + 1);
+            }
+
+            return value;
+          };
+        })();
 
       return {
         tokens: (partialContext.tokens || []).concat(
@@ -1051,18 +1062,18 @@
         index: partialContext.index ? partialContext.index + 1 : 0,
         language: null,
         getAnalyzer: EMPTY,
-        options,
+        options: options,
         continuation: parserContext.continuation,
-        addNode(node) {
+        addNode: function (node) {
           nodes.push(node);
         },
-        createTextNode(token) {
+        createTextNode: function (token) {
           return document.createTextNode(prepareText(token));
         },
-        getNodes() {
+        getNodes: function () {
           return nodes;
         },
-        resetNodes() {
+        resetNodes: function () {
           nodes = [];
         },
         items: parserContext.items,
@@ -1072,8 +1083,8 @@
     //partialContext allows us to perform a partial parse, and then pick up where we left off at a later time
     //this functionality enables nested highlights (language within a language, e.g. PHP within HTML followed by more PHP)
     function highlightText(unhighlightedCode, languageId, partialContext) {
-      let language = languages[languageId];
-      let analyzerContext;
+      var language = languages[languageId],
+        analyzerContext;
 
       partialContext = partialContext || {};
       if (language === undefined) {
@@ -1083,7 +1094,7 @@
 
       fireEvent('beforeHighlight', this, {
         code: unhighlightedCode,
-        language,
+        language: language,
         previousContext: partialContext,
       });
 
@@ -1105,28 +1116,21 @@
         partialContext.index ? partialContext.index + 1 : 0
       );
 
-      fireEvent('afterHighlight', this, { analyzerContext });
+      fireEvent('afterHighlight', this, { analyzerContext: analyzerContext });
 
       return analyzerContext;
     }
 
     function createContainer(ctx) {
-      const container = document.createElement('span');
+      var container = document.createElement('span');
       container.className = ctx.options.classPrefix + ctx.language.name;
       return container;
     }
 
     function analyze(analyzerContext, startIndex) {
-      let nodes;
-      let lastIndex;
-      let container;
-      let i;
-      let tokenName;
-      let func;
-      let language;
-      let analyzer;
+      var nodes, lastIndex, container, i, tokenName, func, language, analyzer;
 
-      fireEvent('beforeAnalyze', this, { analyzerContext });
+      fireEvent('beforeAnalyze', this, { analyzerContext: analyzerContext });
 
       if (analyzerContext.tokens.length > 0) {
         analyzerContext.language =
@@ -1151,7 +1155,7 @@
 
           analyzerContext.index = i;
           tokenName = analyzerContext.tokens[i].name;
-          func = `handle_${tokenName}`;
+          func = 'handle_' + tokenName;
 
           analyzer =
             analyzerContext.getAnalyzer.call(analyzerContext) ||
@@ -1170,18 +1174,20 @@
         }
       }
 
-      fireEvent('afterAnalyze', this, { analyzerContext });
+      fireEvent('afterAnalyze', this, { analyzerContext: analyzerContext });
     }
 
     return {
       //matches the language of the node to highlight
       matchSunlightNode: (function () {
-        let regex;
+        var regex;
 
         return function (node) {
           if (!regex) {
             regex = new RegExp(
-              `(?:\\s|^)${this.options.classPrefix}highlight-(\\S+)(?:\\s|$)`
+              '(?:\\s|^)' +
+                this.options.classPrefix +
+                'highlight-(\\S+)(?:\\s|$)'
             );
           }
 
@@ -1191,11 +1197,11 @@
 
       //determines if the node has already been highlighted
       isAlreadyHighlighted: (function () {
-        let regex;
+        var regex;
         return function (node) {
           if (!regex) {
             regex = new RegExp(
-              `(?:\\s|^)${this.options.classPrefix}highlighted(?:\\s|$)`
+              '(?:\\s|^)' + this.options.classPrefix + 'highlighted(?:\\s|$)'
             );
           }
 
@@ -1204,21 +1210,21 @@
       })(),
 
       //highlights a block of text
-      highlight(code, languageId) {
+      highlight: function (code, languageId) {
         return highlightText.call(this, code, languageId);
       },
 
       //recursively highlights a DOM node
       highlightNode: function highlightRecursive(node) {
-        let match;
-        let languageId;
-        let currentNodeCount;
-        let j;
-        let nodes;
-        let k;
-        let partialContext;
-        let container;
-        let codeContainer;
+        var match,
+          languageId,
+          currentNodeCount,
+          j,
+          nodes,
+          k,
+          partialContext,
+          container,
+          codeContainer;
 
         if (
           this.isAlreadyHighlighted(node) ||
@@ -1229,7 +1235,7 @@
 
         languageId = match[1];
         currentNodeCount = 0;
-        fireEvent('beforeHighlightNode', this, { node });
+        fireEvent('beforeHighlightNode', this, { node: node });
         for (j = 0; j < node.childNodes.length; j++) {
           if (node.childNodes[j].nodeType === 3) {
             //text nodes
@@ -1254,15 +1260,15 @@
         }
 
         //indicate that this node has been highlighted
-        node.className += ` ${this.options.classPrefix}highlighted`;
+        node.className += ' ' + this.options.classPrefix + 'highlighted';
 
         //if the node is block level, we put it in a container, otherwise we just leave it alone
         if (getComputedStyle(node, 'display') === 'block') {
           container = document.createElement('div');
-          container.className = `${this.options.classPrefix}container`;
+          container.className = this.options.classPrefix + 'container';
 
           codeContainer = document.createElement('div');
-          codeContainer.className = `${this.options.classPrefix}code-container`;
+          codeContainer.className = this.options.classPrefix + 'code-container';
 
           //apply max height if specified in options
           if (this.options.maxHeight !== false) {
@@ -1284,9 +1290,9 @@
         }
 
         fireEvent('afterHighlightNode', this, {
-          container,
-          codeContainer,
-          node,
+          container: container,
+          codeContainer: codeContainer,
+          node: node,
           count: currentNodeCount,
         });
       },
@@ -1296,26 +1302,24 @@
   //public facing object
   window.Sunlight = {
     version: '1.18',
-    Highlighter,
-    createAnalyzer() {
+    Highlighter: Highlighter,
+    createAnalyzer: function () {
       return create(defaultAnalyzer);
     },
-    globalOptions,
+    globalOptions: globalOptions,
 
-    highlightAll(options) {
-      const highlighter = new Highlighter(options);
-      const tags = document.getElementsByTagName('*');
-      let i;
+    highlightAll: function (options) {
+      var highlighter = new Highlighter(options),
+        tags = document.getElementsByTagName('*'),
+        i;
 
       for (i = 0; i < tags.length; i++) {
         highlighter.highlightNode(tags[i]);
       }
     },
 
-    registerLanguage(languageId, languageData) {
-      let tokenName;
-      let embeddedLanguages;
-      let languageName;
+    registerLanguage: function (languageId, languageData) {
+      var tokenName, embeddedLanguages, languageName;
 
       if (!languageId) {
         throw 'Languages must be registered with an identifier, e.g. "php" for PHP';
@@ -1359,47 +1363,47 @@
       languages[languageData.name] = languageData;
     },
 
-    isRegistered(languageId) {
+    isRegistered: function (languageId) {
       return languages[languageId] !== undefined;
     },
 
-    bind(event, callback) {
+    bind: function (event, callback) {
       if (!events[event]) {
-        throw `Unknown event "${event}"`;
+        throw 'Unknown event "' + event + '"';
       }
 
       events[event].push(callback);
     },
 
     util: {
-      last,
-      regexEscape,
+      last: last,
+      regexEscape: regexEscape,
       eol: EOL,
-      clone,
+      clone: clone,
       escapeSequences: ['\\n', '\\t', '\\r', '\\\\', '\\v', '\\f'],
-      contains,
-      matchWord,
-      createHashMap,
-      createBetweenRule,
-      createProceduralRule,
-      getNextNonWsToken(tokens, index) {
+      contains: contains,
+      matchWord: matchWord,
+      createHashMap: createHashMap,
+      createBetweenRule: createBetweenRule,
+      createProceduralRule: createProceduralRule,
+      getNextNonWsToken: function (tokens, index) {
         return getNextWhile(tokens, index, 1, function (token) {
           return token.name === 'default';
         });
       },
-      getPreviousNonWsToken(tokens, index) {
+      getPreviousNonWsToken: function (tokens, index) {
         return getNextWhile(tokens, index, -1, function (token) {
           return token.name === 'default';
         });
       },
-      getNextWhile(tokens, index, matcher) {
+      getNextWhile: function (tokens, index, matcher) {
         return getNextWhile(tokens, index, 1, matcher);
       },
-      getPreviousWhile(tokens, index, matcher) {
+      getPreviousWhile: function (tokens, index, matcher) {
         return getNextWhile(tokens, index, -1, matcher);
       },
       whitespace: { token: 'default', optional: true },
-      getComputedStyle,
+      getComputedStyle: getComputedStyle,
     },
   };
 

@@ -74,10 +74,9 @@ const loginUser = async (req, res, next) => {
       throw new ValidationException(null, 'Password did not match');
     }
 
-
     const token = jwt.sign({ user_id: user.id }, jwtSecretKey);
 
-    delete user.password
+    delete user.password;
 
     res.status(200).json({
       user,
@@ -128,7 +127,7 @@ const registerUser = async (req, res, next) => {
       throw new ValidationException(null, validationResult.error);
     }
 
-    const user = await UserQueries.getUser({  email: data.email  });
+    const user = await UserQueries.getUser({ email: data.email });
 
     if (!user || !user.email) {
       throw new ValidationException(null, 'User Not Registered');
@@ -144,7 +143,7 @@ const registerUser = async (req, res, next) => {
 
     const token = jwt.sign({ user_id: user.id }, jwtSecretKey);
 
-    delete user.password
+    delete user.password;
 
     res.status(200).json({
       user,
@@ -182,7 +181,7 @@ const OAuthSignIn = async (req, res, next) => {
       scope: 'openid profile email',
       response_type: 'code',
     });
-    console.log("Sign in URL:", url)
+    console.log('Sign in URL:', url);
     res.redirect(url);
   } catch (err) {
     next(err);
@@ -214,7 +213,10 @@ const OAuthCallback = async (req, res, next) => {
   try {
     const OAuthClient = await initOAuth();
 
-    const  tokens  = await OAuthClient.callback('http://localhost:8000/oauth/callback', req.query);
+    const tokens = await OAuthClient.callback(
+      'http://localhost:8000/oauth/callback',
+      req.query
+    );
 
     const { data } = await axios
       .get('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -228,13 +230,12 @@ const OAuthCallback = async (req, res, next) => {
       throw new BadRequestException(null, 'Google auth verification failed!');
     }
 
-
     const checkUserExists = await UserQueries.getUser({ email: data?.email });
     // Create new user if user dsnt exist
     if (!checkUserExists) {
       const createUserData = {
         email: data?.email,
-        password:data?.id,
+        password: data?.id,
         full_name: data?.name,
         token: tokens?.access_token,
         token_expiry_time: tokens?.expiry_date,
@@ -284,33 +285,31 @@ const OAuthCallback = async (req, res, next) => {
  */
 const OAuthLogout = async (req, res, next) => {
   try {
-    try{
+    try {
       const OAuthClient = await initOAuth();
       // const tokenSet=new TokenSet({
       //   access_token: `Bearer ${req.user?.token}`
       // })
       // Revoking token access from GCloud OAuth
-      await OAuthClient.revoke(req.user?.token)
-      
-      // Setting tokens to null in DB
-      await UserQueries.updateUser(req.user?.id,{
-        token:null,
-        token_expiry_time:null,
-      })
+      await OAuthClient.revoke(req.user?.token);
 
-      
+      // Setting tokens to null in DB
+      await UserQueries.updateUser(req.user?.id, {
+        token: null,
+        token_expiry_time: null,
+      });
+
       res.status(200).json({
-        message:"Signed our successfully"
-      })
-    }catch(err){
-      console.log(err)
-      throw new BadRequestException(null, err)
+        message: 'Signed our successfully',
+      });
+    } catch (err) {
+      console.log(err);
+      throw new BadRequestException(null, err);
     }
   } catch (err) {
     next(err);
   }
 };
-
 
 /**
  * @api {post} /v1/users/oauth/check Check OAuth
@@ -332,15 +331,15 @@ const OAuthLogout = async (req, res, next) => {
  * @name checkSSO
  * @returns {json} Message
  */
-const checkSSO=async(req,res,next)=>{
-  try{
+const checkSSO = async (req, res, next) => {
+  try {
     res.status(200).json({
-      message:"Succesfully verified through SSO."
-    })
-  }catch(err){
-    next(err)
+      message: 'Succesfully verified through SSO.',
+    });
+  } catch (err) {
+    next(err);
   }
-}
+};
 
 module.exports = {
   loginUser,

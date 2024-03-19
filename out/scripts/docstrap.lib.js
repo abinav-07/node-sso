@@ -1,6 +1,6 @@
 if (
   (!(function (a, b) {
-    typeof module === 'object' && typeof module.exports === 'object'
+    'object' == typeof module && 'object' == typeof module.exports
       ? (module.exports = a.document
           ? b(a, !0)
           : function (a) {
@@ -9,17 +9,17 @@ if (
               return b(a);
             })
       : b(a);
-  })(typeof window !== 'undefined' ? window : this, function (a, b) {
+  })('undefined' != typeof window ? window : this, function (a, b) {
     function c(a) {
-      const b = 'length' in a && a.length;
-      const c = _.type(a);
+      var b = 'length' in a && a.length,
+        c = _.type(a);
       return (
-        c !== 'function' &&
+        'function' !== c &&
         !_.isWindow(a) &&
-        (!(a.nodeType !== 1 || !b) ||
-          c === 'array' ||
-          b === 0 ||
-          (typeof b === 'number' && b > 0 && b - 1 in a))
+        (!(1 !== a.nodeType || !b) ||
+          'array' === c ||
+          0 === b ||
+          ('number' == typeof b && b > 0 && b - 1 in a))
       );
     }
     function d(a, b, c) {
@@ -31,7 +31,7 @@ if (
         return _.grep(a, function (a) {
           return (a === b) !== c;
         });
-      if (typeof b === 'string') {
+      if ('string' == typeof b) {
         if (ha.test(b)) return _.filter(b, a, c);
         b = _.filter(b, a);
       }
@@ -40,11 +40,11 @@ if (
       });
     }
     function e(a, b) {
-      for (; (a = a[b]) && a.nodeType !== 1; );
+      for (; (a = a[b]) && 1 !== a.nodeType; );
       return a;
     }
     function f(a) {
-      const b = (oa[a] = {});
+      var b = (oa[a] = {});
       return (
         _.each(a.match(na) || [], function (a, c) {
           b[c] = !0;
@@ -59,27 +59,27 @@ if (
     }
     function h() {
       Object.defineProperty((this.cache = {}), 0, {
-        get() {
+        get: function () {
           return {};
         },
       }),
         (this.expando = _.expando + h.uid++);
     }
     function i(a, b, c) {
-      let d;
-      if (void 0 === c && a.nodeType === 1)
+      var d;
+      if (void 0 === c && 1 === a.nodeType)
         if (
-          ((d = `data-${b.replace(ua, '-$1').toLowerCase()}`),
+          ((d = 'data-' + b.replace(ua, '-$1').toLowerCase()),
           (c = a.getAttribute(d)),
-          typeof c === 'string')
+          'string' == typeof c)
         ) {
           try {
             c =
-              c === 'true' ||
-              (c !== 'false' &&
-                (c === 'null'
+              'true' === c ||
+              ('false' !== c &&
+                ('null' === c
                   ? null
-                  : `${+c}` === c
+                  : +c + '' === c
                   ? +c
                   : ta.test(c)
                   ? _.parseJSON(c)
@@ -102,32 +102,25 @@ if (
     }
     function m(a, b) {
       return _.nodeName(a, 'table') &&
-        _.nodeName(b.nodeType !== 11 ? b : b.firstChild, 'tr')
+        _.nodeName(11 !== b.nodeType ? b : b.firstChild, 'tr')
         ? a.getElementsByTagName('tbody')[0] ||
             a.appendChild(a.ownerDocument.createElement('tbody'))
         : a;
     }
     function n(a) {
-      return (a.type = `${a.getAttribute('type') !== null}/${a.type}`), a;
+      return (a.type = (null !== a.getAttribute('type')) + '/' + a.type), a;
     }
     function o(a) {
-      const b = Ka.exec(a.type);
+      var b = Ka.exec(a.type);
       return b ? (a.type = b[1]) : a.removeAttribute('type'), a;
     }
     function p(a, b) {
-      for (let c = 0, d = a.length; d > c; c++)
+      for (var c = 0, d = a.length; d > c; c++)
         ra.set(a[c], 'globalEval', !b || ra.get(b[c], 'globalEval'));
     }
     function q(a, b) {
-      let c;
-      let d;
-      let e;
-      let f;
-      let g;
-      let h;
-      let i;
-      let j;
-      if (b.nodeType === 1) {
+      var c, d, e, f, g, h, i, j;
+      if (1 === b.nodeType) {
         if (
           ra.hasData(a) &&
           ((f = ra.access(a)), (g = ra.set(b, f)), (j = f.events))
@@ -141,7 +134,7 @@ if (
       }
     }
     function r(a, b) {
-      const c = a.getElementsByTagName
+      var c = a.getElementsByTagName
         ? a.getElementsByTagName(b || '*')
         : a.querySelectorAll
         ? a.querySelectorAll(b || '*')
@@ -149,28 +142,28 @@ if (
       return void 0 === b || (b && _.nodeName(a, b)) ? _.merge([a], c) : c;
     }
     function s(a, b) {
-      const c = b.nodeName.toLowerCase();
-      c === 'input' && ya.test(a.type)
+      var c = b.nodeName.toLowerCase();
+      'input' === c && ya.test(a.type)
         ? (b.checked = a.checked)
-        : (c === 'input' || c === 'textarea') &&
+        : ('input' === c || 'textarea' === c) &&
           (b.defaultValue = a.defaultValue);
     }
     function t(b, c) {
-      let d;
-      const e = _(c.createElement(b)).appendTo(c.body);
-      const f =
-        a.getDefaultComputedStyle && (d = a.getDefaultComputedStyle(e[0]))
-          ? d.display
-          : _.css(e[0], 'display');
+      var d,
+        e = _(c.createElement(b)).appendTo(c.body),
+        f =
+          a.getDefaultComputedStyle && (d = a.getDefaultComputedStyle(e[0]))
+            ? d.display
+            : _.css(e[0], 'display');
       return e.detach(), f;
     }
     function u(a) {
-      let b = Z;
-      let c = Oa[a];
+      var b = Z,
+        c = Oa[a];
       return (
         c ||
           ((c = t(a, b)),
-          (c !== 'none' && c) ||
+          ('none' !== c && c) ||
             ((Na = (
               Na || _("<iframe frameborder='0' width='0' height='0'/>")
             ).appendTo(b.documentElement)),
@@ -184,16 +177,16 @@ if (
       );
     }
     function v(a, b, c) {
-      let d;
-      let e;
-      let f;
-      let g;
-      const h = a.style;
+      var d,
+        e,
+        f,
+        g,
+        h = a.style;
       return (
         (c = c || Ra(a)),
         c && (g = c.getPropertyValue(b) || c[b]),
         c &&
-          (g !== '' || _.contains(a.ownerDocument, a) || (g = _.style(a, b)),
+          ('' !== g || _.contains(a.ownerDocument, a) || (g = _.style(a, b)),
           Qa.test(g) &&
             Pa.test(b) &&
             ((d = h.width),
@@ -204,12 +197,12 @@ if (
             (h.width = d),
             (h.minWidth = e),
             (h.maxWidth = f))),
-        void 0 !== g ? `${g}` : g
+        void 0 !== g ? g + '' : g
       );
     }
     function w(a, b) {
       return {
-        get() {
+        get: function () {
           return a()
             ? void delete this.get
             : (this.get = b).apply(this, arguments);
@@ -223,40 +216,42 @@ if (
       return d;
     }
     function y(a, b, c) {
-      const d = Ta.exec(b);
+      var d = Ta.exec(b);
       return d ? Math.max(0, d[1] - (c || 0)) + (d[2] || 'px') : b;
     }
     function z(a, b, c, d, e) {
       for (
-        var f = c === (d ? 'border' : 'content') ? 4 : b === 'width' ? 1 : 0,
+        var f = c === (d ? 'border' : 'content') ? 4 : 'width' === b ? 1 : 0,
           g = 0;
-        f < 4;
+        4 > f;
         f += 2
       )
-        c === 'margin' && (g += _.css(a, c + wa[f], !0, e)),
+        'margin' === c && (g += _.css(a, c + wa[f], !0, e)),
           d
-            ? (c === 'content' && (g -= _.css(a, `padding${wa[f]}`, !0, e)),
-              c !== 'margin' && (g -= _.css(a, `border${wa[f]}Width`, !0, e)))
-            : ((g += _.css(a, `padding${wa[f]}`, !0, e)),
-              c !== 'padding' && (g += _.css(a, `border${wa[f]}Width`, !0, e)));
+            ? ('content' === c && (g -= _.css(a, 'padding' + wa[f], !0, e)),
+              'margin' !== c &&
+                (g -= _.css(a, 'border' + wa[f] + 'Width', !0, e)))
+            : ((g += _.css(a, 'padding' + wa[f], !0, e)),
+              'padding' !== c &&
+                (g += _.css(a, 'border' + wa[f] + 'Width', !0, e)));
       return g;
     }
     function A(a, b, c) {
-      let d = !0;
-      let e = b === 'width' ? a.offsetWidth : a.offsetHeight;
-      const f = Ra(a);
-      const g = _.css(a, 'boxSizing', !1, f) === 'border-box';
-      if (e <= 0 || e == null) {
+      var d = !0,
+        e = 'width' === b ? a.offsetWidth : a.offsetHeight,
+        f = Ra(a),
+        g = 'border-box' === _.css(a, 'boxSizing', !1, f);
+      if (0 >= e || null == e) {
         if (
           ((e = v(a, b, f)),
-          (e < 0 || e == null) && (e = a.style[b]),
+          (0 > e || null == e) && (e = a.style[b]),
           Qa.test(e))
         )
           return e;
         (d = g && (Y.boxSizingReliable() || e === a.style[b])),
           (e = parseFloat(e) || 0);
       }
-      return `${e + z(a, b, c || (g ? 'border' : 'content'), d, f)}px`;
+      return e + z(a, b, c || (g ? 'border' : 'content'), d, f) + 'px';
     }
     function B(a, b) {
       for (var c, d, e, f = [], g = 0, h = a.length; h > g; g++)
@@ -265,17 +260,17 @@ if (
             ((f[g] = ra.get(d, 'olddisplay')),
             (c = d.style.display),
             b
-              ? (f[g] || c !== 'none' || (d.style.display = ''),
-                d.style.display === '' &&
+              ? (f[g] || 'none' !== c || (d.style.display = ''),
+                '' === d.style.display &&
                   xa(d) &&
                   (f[g] = ra.access(d, 'olddisplay', u(d.nodeName))))
               : ((e = xa(d)),
-                (c === 'none' && e) ||
+                ('none' === c && e) ||
                   ra.set(d, 'olddisplay', e ? c : _.css(d, 'display'))));
       for (g = 0; h > g; g++)
         (d = a[g]),
           d.style &&
-            ((b && d.style.display !== 'none' && d.style.display !== '') ||
+            ((b && 'none' !== d.style.display && '' !== d.style.display) ||
               (d.style.display = b ? f[g] || '' : 'none'));
       return a;
     }
@@ -291,11 +286,11 @@ if (
       );
     }
     function E(a, b) {
-      let c;
-      let d = 0;
-      const e = { height: a };
-      for (b = b ? 1 : 0; d < 4; d += 2 - b)
-        (c = wa[d]), (e[`margin${c}`] = e[`padding${c}`] = a);
+      var c,
+        d = 0,
+        e = { height: a };
+      for (b = b ? 1 : 0; 4 > d; d += 2 - b)
+        (c = wa[d]), (e['margin' + c] = e['padding' + c] = a);
       return b && (e.opacity = e.width = a), e;
     }
     function F(a, b, c) {
@@ -307,22 +302,22 @@ if (
         if ((d = e[f].call(c, b, a))) return d;
     }
     function G(a, b, c) {
-      let d;
-      let e;
-      let f;
-      let g;
-      let h;
-      let i;
-      let j;
-      let k;
-      const l = this;
-      const m = {};
-      const n = a.style;
-      let o = a.nodeType && xa(a);
-      let p = ra.get(a, 'fxshow');
+      var d,
+        e,
+        f,
+        g,
+        h,
+        i,
+        j,
+        k,
+        l = this,
+        m = {},
+        n = a.style,
+        o = a.nodeType && xa(a),
+        p = ra.get(a, 'fxshow');
       c.queue ||
         ((h = _._queueHooks(a, 'fx')),
-        h.unqueued == null &&
+        null == h.unqueued &&
           ((h.unqueued = 0),
           (i = h.empty.fire),
           (h.empty.fire = function () {
@@ -334,13 +329,13 @@ if (
             h.unqueued--, _.queue(a, 'fx').length || h.empty.fire();
           });
         })),
-        a.nodeType === 1 &&
+        1 === a.nodeType &&
           ('height' in b || 'width' in b) &&
           ((c.overflow = [n.overflow, n.overflowX, n.overflowY]),
           (j = _.css(a, 'display')),
-          (k = j === 'none' ? ra.get(a, 'olddisplay') || u(a.nodeName) : j),
-          k === 'inline' &&
-            _.css(a, 'float') === 'none' &&
+          (k = 'none' === j ? ra.get(a, 'olddisplay') || u(a.nodeName) : j),
+          'inline' === k &&
+            'none' === _.css(a, 'float') &&
             (n.display = 'inline-block')),
         c.overflow &&
           ((n.overflow = 'hidden'),
@@ -353,16 +348,16 @@ if (
         if (((e = b[d]), $a.exec(e))) {
           if (
             (delete b[d],
-            (f = f || e === 'toggle'),
+            (f = f || 'toggle' === e),
             e === (o ? 'hide' : 'show'))
           ) {
-            if (e !== 'show' || !p || void 0 === p[d]) continue;
+            if ('show' !== e || !p || void 0 === p[d]) continue;
             o = !0;
           }
           m[d] = (p && p[d]) || _.style(a, d);
         } else j = void 0;
       if (_.isEmptyObject(m))
-        (j === 'none' ? u(a.nodeName) : j) === 'inline' && (n.display = j);
+        'inline' === ('none' === j ? u(a.nodeName) : j) && (n.display = j);
       else {
         p ? 'hidden' in p && (o = p.hidden) : (p = ra.access(a, 'fxshow', {})),
           f && (p.hidden = !o),
@@ -372,7 +367,7 @@ if (
                 _(a).hide();
               }),
           l.done(function () {
-            let b;
+            var b;
             ra.remove(a, 'fxshow');
             for (b in m) _.style(a, b, m[b]);
           });
@@ -382,15 +377,11 @@ if (
               ((p[d] = g.start),
               o &&
                 ((g.end = g.start),
-                (g.start = d === 'width' || d === 'height' ? 1 : 0)));
+                (g.start = 'width' === d || 'height' === d ? 1 : 0)));
       }
     }
     function H(a, b) {
-      let c;
-      let d;
-      let e;
-      let f;
-      let g;
+      var c, d, e, f, g;
       for (c in a)
         if (
           ((d = _.camelCase(c)),
@@ -406,59 +397,59 @@ if (
         } else b[d] = e;
     }
     function I(a, b, c) {
-      let d;
-      let e;
-      let f = 0;
-      const g = bb.length;
-      const h = _.Deferred().always(function () {
-        delete i.elem;
-      });
-      var i = function () {
-        if (e) return !1;
-        for (
-          var b = Ya || D(),
-            c = Math.max(0, j.startTime + j.duration - b),
-            d = c / j.duration || 0,
-            f = 1 - d,
-            g = 0,
-            i = j.tweens.length;
-          i > g;
-          g++
-        )
-          j.tweens[g].run(f);
-        return (
-          h.notifyWith(a, [j, f, c]),
-          f < 1 && i ? c : (h.resolveWith(a, [j]), !1)
-        );
-      };
-      var j = h.promise({
-        elem: a,
-        props: _.extend({}, b),
-        opts: _.extend(!0, { specialEasing: {} }, c),
-        originalProperties: b,
-        originalOptions: c,
-        startTime: Ya || D(),
-        duration: c.duration,
-        tweens: [],
-        createTween(b, c) {
-          const d = _.Tween(
-            a,
-            j.opts,
-            b,
-            c,
-            j.opts.specialEasing[b] || j.opts.easing
+      var d,
+        e,
+        f = 0,
+        g = bb.length,
+        h = _.Deferred().always(function () {
+          delete i.elem;
+        }),
+        i = function () {
+          if (e) return !1;
+          for (
+            var b = Ya || D(),
+              c = Math.max(0, j.startTime + j.duration - b),
+              d = c / j.duration || 0,
+              f = 1 - d,
+              g = 0,
+              i = j.tweens.length;
+            i > g;
+            g++
+          )
+            j.tweens[g].run(f);
+          return (
+            h.notifyWith(a, [j, f, c]),
+            1 > f && i ? c : (h.resolveWith(a, [j]), !1)
           );
-          return j.tweens.push(d), d;
         },
-        stop(b) {
-          let c = 0;
-          const d = b ? j.tweens.length : 0;
-          if (e) return this;
-          for (e = !0; d > c; c++) j.tweens[c].run(1);
-          return b ? h.resolveWith(a, [j, b]) : h.rejectWith(a, [j, b]), this;
-        },
-      });
-      const k = j.props;
+        j = h.promise({
+          elem: a,
+          props: _.extend({}, b),
+          opts: _.extend(!0, { specialEasing: {} }, c),
+          originalProperties: b,
+          originalOptions: c,
+          startTime: Ya || D(),
+          duration: c.duration,
+          tweens: [],
+          createTween: function (b, c) {
+            var d = _.Tween(
+              a,
+              j.opts,
+              b,
+              c,
+              j.opts.specialEasing[b] || j.opts.easing
+            );
+            return j.tweens.push(d), d;
+          },
+          stop: function (b) {
+            var c = 0,
+              d = b ? j.tweens.length : 0;
+            if (e) return this;
+            for (e = !0; d > c; c++) j.tweens[c].run(1);
+            return b ? h.resolveWith(a, [j, b]) : h.rejectWith(a, [j, b]), this;
+          },
+        }),
+        k = j.props;
       for (H(k, j.opts.specialEasing); g > f; f++)
         if ((d = bb[f].call(j, a, k, j.opts))) return d;
       return (
@@ -474,25 +465,25 @@ if (
     }
     function J(a) {
       return function (b, c) {
-        typeof b !== 'string' && ((c = b), (b = '*'));
-        let d;
-        let e = 0;
-        const f = b.toLowerCase().match(na) || [];
+        'string' != typeof b && ((c = b), (b = '*'));
+        var d,
+          e = 0,
+          f = b.toLowerCase().match(na) || [];
         if (_.isFunction(c))
           for (; (d = f[e++]); )
-            d[0] === '+'
+            '+' === d[0]
               ? ((d = d.slice(1) || '*'), (a[d] = a[d] || []).unshift(c))
               : (a[d] = a[d] || []).push(c);
       };
     }
     function K(a, b, c, d) {
       function e(h) {
-        let i;
+        var i;
         return (
           (f[h] = !0),
           _.each(a[h] || [], function (a, h) {
-            const j = h(b, c, d);
-            return typeof j !== 'string' || g || f[j]
+            var j = h(b, c, d);
+            return 'string' != typeof j || g || f[j]
               ? g
                 ? !(i = j)
                 : void 0
@@ -501,19 +492,19 @@ if (
           i
         );
       }
-      var f = {};
-      var g = a === tb;
+      var f = {},
+        g = a === tb;
       return e(b.dataTypes[0]) || (!f['*'] && e('*'));
     }
     function L(a, b) {
-      let c;
-      let d;
-      const e = _.ajaxSettings.flatOptions || {};
+      var c,
+        d,
+        e = _.ajaxSettings.flatOptions || {};
       for (c in b) void 0 !== b[c] && ((e[c] ? a : d || (d = {}))[c] = b[c]);
       return d && _.extend(!0, a, d), a;
     }
     function M(a, b, c) {
-      for (var d, e, f, g, h = a.contents, i = a.dataTypes; i[0] === '*'; )
+      for (var d, e, f, g, h = a.contents, i = a.dataTypes; '*' === i[0]; )
         i.shift(),
           void 0 === d &&
             (d = a.mimeType || b.getResponseHeader('Content-Type'));
@@ -526,7 +517,7 @@ if (
       if (i[0] in c) f = i[0];
       else {
         for (e in c) {
-          if (!i[0] || a.converters[`${e} ${i[0]}`]) {
+          if (!i[0] || a.converters[e + ' ' + i[0]]) {
             f = e;
             break;
           }
@@ -537,13 +528,13 @@ if (
       return f ? (f !== i[0] && i.unshift(f), c[f]) : void 0;
     }
     function N(a, b, c, d) {
-      let e;
-      let f;
-      let g;
-      let h;
-      let i;
-      const j = {};
-      const k = a.dataTypes.slice();
+      var e,
+        f,
+        g,
+        h,
+        i,
+        j = {},
+        k = a.dataTypes.slice();
       if (k[1]) for (g in a.converters) j[g.toLowerCase()] = a.converters[g];
       for (f = k.shift(); f; )
         if (
@@ -552,13 +543,13 @@ if (
           (i = f),
           (f = k.shift()))
         )
-          if (f === '*') f = i;
-          else if (i !== '*' && i !== f) {
-            if (((g = j[`${i} ${f}`] || j[`* ${f}`]), !g))
+          if ('*' === f) f = i;
+          else if ('*' !== i && i !== f) {
+            if (((g = j[i + ' ' + f] || j['* ' + f]), !g))
               for (e in j)
                 if (
                   ((h = e.split(' ')),
-                  h[1] === f && (g = j[`${i} ${h[0]}`] || j[`* ${h[0]}`]))
+                  h[1] === f && (g = j[i + ' ' + h[0]] || j['* ' + h[0]]))
                 ) {
                   g === !0
                     ? (g = j[e])
@@ -573,91 +564,91 @@ if (
                 } catch (a) {
                   return {
                     state: 'parsererror',
-                    error: g ? a : `No conversion from ${i} to ${f}`,
+                    error: g ? a : 'No conversion from ' + i + ' to ' + f,
                   };
                 }
           }
       return { state: 'success', data: b };
     }
     function O(a, b, c, d) {
-      let e;
+      var e;
       if (_.isArray(b))
         _.each(b, function (b, e) {
           c || yb.test(a)
             ? d(a, e)
-            : O(`${a}[${typeof e === 'object' ? b : ''}]`, e, c, d);
+            : O(a + '[' + ('object' == typeof e ? b : '') + ']', e, c, d);
         });
-      else if (c || _.type(b) !== 'object') d(a, b);
-      else for (e in b) O(`${a}[${e}]`, b[e], c, d);
+      else if (c || 'object' !== _.type(b)) d(a, b);
+      else for (e in b) O(a + '[' + e + ']', b[e], c, d);
     }
     function P(a) {
-      return _.isWindow(a) ? a : a.nodeType === 9 && a.defaultView;
+      return _.isWindow(a) ? a : 9 === a.nodeType && a.defaultView;
     }
-    const Q = [];
-    const R = Q.slice;
-    const S = Q.concat;
-    const T = Q.push;
-    var U = Q.indexOf;
-    const V = {};
-    const W = V.toString;
-    const X = V.hasOwnProperty;
-    var Y = {};
-    var Z = a.document;
-    const $ = '2.1.4';
-    var _ = function (a, b) {
-      return new _.fn.init(a, b);
-    };
-    const aa = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-    const ba = /^-ms-/;
-    const ca = /-([\da-z])/gi;
-    const da = function (a, b) {
-      return b.toUpperCase();
-    };
+    var Q = [],
+      R = Q.slice,
+      S = Q.concat,
+      T = Q.push,
+      U = Q.indexOf,
+      V = {},
+      W = V.toString,
+      X = V.hasOwnProperty,
+      Y = {},
+      Z = a.document,
+      $ = '2.1.4',
+      _ = function (a, b) {
+        return new _.fn.init(a, b);
+      },
+      aa = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
+      ba = /^-ms-/,
+      ca = /-([\da-z])/gi,
+      da = function (a, b) {
+        return b.toUpperCase();
+      };
     (_.fn = _.prototype =
       {
         jquery: $,
         constructor: _,
         selector: '',
         length: 0,
-        toArray() {
+        toArray: function () {
           return R.call(this);
         },
-        get(a) {
-          return a != null
-            ? a < 0
+        get: function (a) {
+          return null != a
+            ? 0 > a
               ? this[a + this.length]
               : this[a]
             : R.call(this);
         },
-        pushStack(a) {
-          const b = _.merge(this.constructor(), a);
+        pushStack: function (a) {
+          var b = _.merge(this.constructor(), a);
           return (b.prevObject = this), (b.context = this.context), b;
         },
-        each(a, b) {
+        each: function (a, b) {
           return _.each(this, a, b);
         },
-        map(a) {
+        map: function (a) {
           return this.pushStack(
             _.map(this, function (b, c) {
               return a.call(b, c, b);
             })
           );
         },
-        slice() {
+        slice: function () {
           return this.pushStack(R.apply(this, arguments));
         },
-        first() {
+        first: function () {
           return this.eq(0);
         },
-        last() {
+        last: function () {
           return this.eq(-1);
         },
-        eq(a) {
-          const b = this.length;
-          const c = +a + (a < 0 ? b : 0);
+        eq: function (a) {
+          var b = this.length,
+            c = +a + (0 > a ? b : 0);
           return this.pushStack(c >= 0 && b > c ? [this[c]] : []);
         },
-        end() {
+        end: function () {
           return this.prevObject || this.constructor(null);
         },
         push: T,
@@ -666,24 +657,24 @@ if (
       }),
       (_.extend = _.fn.extend =
         function () {
-          let a;
-          let b;
-          let c;
-          let d;
-          let e;
-          let f;
-          let g = arguments[0] || {};
-          let h = 1;
-          const i = arguments.length;
-          let j = !1;
+          var a,
+            b,
+            c,
+            d,
+            e,
+            f,
+            g = arguments[0] || {},
+            h = 1,
+            i = arguments.length,
+            j = !1;
           for (
-            typeof g === 'boolean' && ((j = g), (g = arguments[h] || {}), h++),
-              typeof g === 'object' || _.isFunction(g) || (g = {}),
+            'boolean' == typeof g && ((j = g), (g = arguments[h] || {}), h++),
+              'object' == typeof g || _.isFunction(g) || (g = {}),
               h === i && ((g = this), h--);
             i > h;
             h++
           )
-            if ((a = arguments[h]) != null)
+            if (null != (a = arguments[h]))
               for (b in a)
                 (c = g[b]),
                   (d = a[b]),
@@ -697,25 +688,25 @@ if (
           return g;
         }),
       _.extend({
-        expando: `jQuery${($ + Math.random()).replace(/\D/g, '')}`,
+        expando: 'jQuery' + ($ + Math.random()).replace(/\D/g, ''),
         isReady: !0,
-        error(a) {
+        error: function (a) {
           throw new Error(a);
         },
-        noop() {},
-        isFunction(a) {
-          return _.type(a) === 'function';
+        noop: function () {},
+        isFunction: function (a) {
+          return 'function' === _.type(a);
         },
         isArray: Array.isArray,
-        isWindow(a) {
-          return a != null && a === a.window;
+        isWindow: function (a) {
+          return null != a && a === a.window;
         },
-        isNumeric(a) {
+        isNumeric: function (a) {
           return !_.isArray(a) && a - parseFloat(a) + 1 >= 0;
         },
-        isPlainObject(a) {
+        isPlainObject: function (a) {
           return (
-            _.type(a) === 'object' &&
+            'object' === _.type(a) &&
             !a.nodeType &&
             !_.isWindow(a) &&
             !(
@@ -723,40 +714,40 @@ if (
             )
           );
         },
-        isEmptyObject(a) {
-          let b;
+        isEmptyObject: function (a) {
+          var b;
           for (b in a) return !1;
           return !0;
         },
-        type(a) {
-          return a == null
-            ? `${a}`
-            : typeof a === 'object' || typeof a === 'function'
+        type: function (a) {
+          return null == a
+            ? a + ''
+            : 'object' == typeof a || 'function' == typeof a
             ? V[W.call(a)] || 'object'
             : typeof a;
         },
-        globalEval(a) {
-          let b;
-          const c = eval;
+        globalEval: function (a) {
+          var b,
+            c = eval;
           (a = _.trim(a)),
             a &&
-              (a.indexOf('use strict') === 1
+              (1 === a.indexOf('use strict')
                 ? ((b = Z.createElement('script')),
                   (b.text = a),
                   Z.head.appendChild(b).parentNode.removeChild(b))
                 : c(a));
         },
-        camelCase(a) {
+        camelCase: function (a) {
           return a.replace(ba, 'ms-').replace(ca, da);
         },
-        nodeName(a, b) {
+        nodeName: function (a, b) {
           return a.nodeName && a.nodeName.toLowerCase() === b.toLowerCase();
         },
-        each(a, b, d) {
-          let e;
-          let f = 0;
-          const g = a.length;
-          const h = c(a);
+        each: function (a, b, d) {
+          var e,
+            f = 0,
+            g = a.length,
+            h = c(a);
           if (d) {
             if (h) for (; g > f && ((e = b.apply(a[f], d)), e !== !1); f++);
             else for (f in a) if (((e = b.apply(a[f], d)), e === !1)) break;
@@ -765,49 +756,47 @@ if (
           else for (f in a) if (((e = b.call(a[f], f, a[f])), e === !1)) break;
           return a;
         },
-        trim(a) {
-          return a == null ? '' : `${a}`.replace(aa, '');
+        trim: function (a) {
+          return null == a ? '' : (a + '').replace(aa, '');
         },
-        makeArray(a, b) {
-          const d = b || [];
+        makeArray: function (a, b) {
+          var d = b || [];
           return (
-            a != null &&
+            null != a &&
               (c(Object(a))
-                ? _.merge(d, typeof a === 'string' ? [a] : a)
+                ? _.merge(d, 'string' == typeof a ? [a] : a)
                 : T.call(d, a)),
             d
           );
         },
-        inArray(a, b, c) {
-          return b == null ? -1 : U.call(b, a, c);
+        inArray: function (a, b, c) {
+          return null == b ? -1 : U.call(b, a, c);
         },
-        merge(a, b) {
+        merge: function (a, b) {
           for (var c = +b.length, d = 0, e = a.length; c > d; d++)
             a[e++] = b[d];
           return (a.length = e), a;
         },
-        grep(a, b, c) {
+        grep: function (a, b, c) {
           for (var d, e = [], f = 0, g = a.length, h = !c; g > f; f++)
             (d = !b(a[f], f)), d !== h && e.push(a[f]);
           return e;
         },
-        map(a, b, d) {
-          let e;
-          let f = 0;
-          const g = a.length;
-          const h = c(a);
-          const i = [];
-          if (h) for (; g > f; f++) (e = b(a[f], f, d)), e != null && i.push(e);
-          else for (f in a) (e = b(a[f], f, d)), e != null && i.push(e);
+        map: function (a, b, d) {
+          var e,
+            f = 0,
+            g = a.length,
+            h = c(a),
+            i = [];
+          if (h) for (; g > f; f++) (e = b(a[f], f, d)), null != e && i.push(e);
+          else for (f in a) (e = b(a[f], f, d)), null != e && i.push(e);
           return S.apply([], i);
         },
         guid: 1,
-        proxy(a, b) {
-          let c;
-          let d;
-          let e;
+        proxy: function (a, b) {
+          var c, d, e;
           return (
-            typeof b === 'string' && ((c = a[b]), (b = a), (a = c)),
+            'string' == typeof b && ((c = a[b]), (b = a), (a = c)),
             _.isFunction(a)
               ? ((d = R.call(arguments, 2)),
                 (e = function () {
@@ -826,33 +815,24 @@ if (
           ' '
         ),
         function (a, b) {
-          V[`[object ${b}]`] = b.toLowerCase();
+          V['[object ' + b + ']'] = b.toLowerCase();
         }
       );
-    const ea = (function (a) {
+    var ea = (function (a) {
       function b(a, b, c, d) {
-        let e;
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        let l;
-        let n;
-        let o;
-        let p;
+        var e, f, g, h, i, j, l, n, o, p;
         if (
           ((b ? b.ownerDocument || b : O) !== G && F(b),
           (b = b || G),
           (c = c || []),
           (h = b.nodeType),
-          typeof a !== 'string' || !a || (h !== 1 && h !== 9 && h !== 11))
+          'string' != typeof a || !a || (1 !== h && 9 !== h && 11 !== h))
         )
           return c;
         if (!d && I) {
-          if (h !== 11 && (e = sa.exec(a)))
+          if (11 !== h && (e = sa.exec(a)))
             if ((g = e[1])) {
-              if (h === 9) {
+              if (9 === h) {
                 if (((f = b.getElementById(g)), !f || !f.parentNode)) return c;
                 if (f.id === g) return c.push(f), c;
               } else if (
@@ -871,15 +851,15 @@ if (
             if (
               ((n = l = N),
               (o = b),
-              (p = h !== 1 && a),
-              h === 1 && b.nodeName.toLowerCase() !== 'object')
+              (p = 1 !== h && a),
+              1 === h && 'object' !== b.nodeName.toLowerCase())
             ) {
               for (
                 j = z(a),
                   (l = b.getAttribute('id'))
                     ? (n = l.replace(ua, '\\$&'))
                     : b.setAttribute('id', n),
-                  n = `[id='${n}'] `,
+                  n = "[id='" + n + "'] ",
                   i = j.length;
                 i--;
 
@@ -901,8 +881,8 @@ if (
       function c() {
         function a(c, d) {
           return (
-            b.push(`${c} `) > w.cacheLength && delete a[b.shift()],
-            (a[`${c} `] = d)
+            b.push(c + ' ') > w.cacheLength && delete a[b.shift()],
+            (a[c + ' '] = d)
           );
         }
         var b = [];
@@ -912,7 +892,7 @@ if (
         return (a[N] = !0), a;
       }
       function e(a) {
-        let b = G.createElement('div');
+        var b = G.createElement('div');
         try {
           return !!a(b);
         } catch (a) {
@@ -922,29 +902,29 @@ if (
         }
       }
       function f(a, b) {
-        for (let c = a.split('|'), d = a.length; d--; ) w.attrHandle[c[d]] = b;
+        for (var c = a.split('|'), d = a.length; d--; ) w.attrHandle[c[d]] = b;
       }
       function g(a, b) {
-        let c = b && a;
-        const d =
-          c &&
-          a.nodeType === 1 &&
-          b.nodeType === 1 &&
-          (~b.sourceIndex || V) - (~a.sourceIndex || V);
+        var c = b && a,
+          d =
+            c &&
+            1 === a.nodeType &&
+            1 === b.nodeType &&
+            (~b.sourceIndex || V) - (~a.sourceIndex || V);
         if (d) return d;
         if (c) for (; (c = c.nextSibling); ) if (c === b) return -1;
         return a ? 1 : -1;
       }
       function h(a) {
         return function (b) {
-          const c = b.nodeName.toLowerCase();
-          return c === 'input' && b.type === a;
+          var c = b.nodeName.toLowerCase();
+          return 'input' === c && b.type === a;
         };
       }
       function i(a) {
         return function (b) {
-          const c = b.nodeName.toLowerCase();
-          return (c === 'input' || c === 'button') && b.type === a;
+          var c = b.nodeName.toLowerCase();
+          return ('input' === c || 'button' === c) && b.type === a;
         };
       }
       function j(a) {
@@ -959,7 +939,7 @@ if (
         });
       }
       function k(a) {
-        return a && typeof a.getElementsByTagName !== 'undefined' && a;
+        return a && 'undefined' != typeof a.getElementsByTagName && a;
       }
       function l() {}
       function m(a) {
@@ -967,23 +947,23 @@ if (
         return d;
       }
       function n(a, b, c) {
-        const d = b.dir;
-        const e = c && d === 'parentNode';
-        const f = Q++;
+        var d = b.dir,
+          e = c && 'parentNode' === d,
+          f = Q++;
         return b.first
           ? function (b, c, f) {
-              for (; (b = b[d]); ) if (b.nodeType === 1 || e) return a(b, c, f);
+              for (; (b = b[d]); ) if (1 === b.nodeType || e) return a(b, c, f);
             }
           : function (b, c, g) {
-              let h;
-              let i;
-              const j = [P, f];
+              var h,
+                i,
+                j = [P, f];
               if (g) {
                 for (; (b = b[d]); )
-                  if ((b.nodeType === 1 || e) && a(b, c, g)) return !0;
+                  if ((1 === b.nodeType || e) && a(b, c, g)) return !0;
               } else
                 for (; (b = b[d]); )
-                  if (b.nodeType === 1 || e) {
+                  if (1 === b.nodeType || e) {
                     if (
                       ((i = b[N] || (b[N] = {})),
                       (h = i[d]) && h[0] === P && h[1] === f)
@@ -996,17 +976,17 @@ if (
       function o(a) {
         return a.length > 1
           ? function (b, c, d) {
-              for (let e = a.length; e--; ) if (!a[e](b, c, d)) return !1;
+              for (var e = a.length; e--; ) if (!a[e](b, c, d)) return !1;
               return !0;
             }
           : a[0];
       }
       function p(a, c, d) {
-        for (let e = 0, f = c.length; f > e; e++) b(a, c[e], d);
+        for (var e = 0, f = c.length; f > e; e++) b(a, c[e], d);
         return d;
       }
       function q(a, b, c, d, e) {
-        for (var f, g = [], h = 0, i = a.length, j = b != null; i > h; h++)
+        for (var f, g = [], h = 0, i = a.length, j = null != b; i > h; h++)
           (f = a[h]) && (!c || c(f, d, e)) && (g.push(f), j && b.push(h));
         return g;
       }
@@ -1015,15 +995,15 @@ if (
           e && !e[N] && (e = r(e)),
           f && !f[N] && (f = r(f, g)),
           d(function (d, g, h, i) {
-            let j;
-            let k;
-            let l;
-            const m = [];
-            const n = [];
-            const o = g.length;
-            const r = d || p(b || '*', h.nodeType ? [h] : h, []);
-            const s = !a || (!d && b) ? r : q(r, m, a, h, i);
-            let t = c ? (f || (d ? a : o || e) ? [] : g) : s;
+            var j,
+              k,
+              l,
+              m = [],
+              n = [],
+              o = g.length,
+              r = d || p(b || '*', h.nodeType ? [h] : h, []),
+              s = !a || (!d && b) ? r : q(r, m, a, h, i),
+              t = c ? (f || (d ? a : o || e) ? [] : g) : s;
             if ((c && c(s, t, h, i), e))
               for (j = q(t, n), e(j, [], h, i), k = j.length; k--; )
                 (l = j[k]) && (t[n[k]] = !(s[n[k]] = l));
@@ -1068,7 +1048,7 @@ if (
             ),
             k = [
               function (a, c, d) {
-                const e =
+                var e =
                   (!f && (d || c !== C)) ||
                   ((b = c).nodeType ? i(a, c, d) : j(a, c, d));
                 return (b = null), e;
@@ -1087,7 +1067,7 @@ if (
                   m(
                     a
                       .slice(0, h - 1)
-                      .concat({ value: a[h - 2].type === ' ' ? '*' : '' })
+                      .concat({ value: ' ' === a[h - 2].type ? '*' : '' })
                   ).replace(ia, '$1'),
                 c,
                 d > h && s(a.slice(h, d)),
@@ -1100,132 +1080,167 @@ if (
         return o(k);
       }
       function t(a, c) {
-        const e = c.length > 0;
-        const f = a.length > 0;
-        const g = function (d, g, h, i, j) {
-          let k;
-          let l;
-          let m;
-          let n = 0;
-          let o = '0';
-          const p = d && [];
-          let r = [];
-          const s = C;
-          const t = d || (f && w.find.TAG('*', j));
-          const u = (P += s == null ? 1 : Math.random() || 0.1);
-          const v = t.length;
-          for (j && (C = g !== G && g); o !== v && (k = t[o]) != null; o++) {
-            if (f && k) {
-              for (l = 0; (m = a[l++]); )
-                if (m(k, g, h)) {
-                  i.push(k);
-                  break;
-                }
-              j && (P = u);
+        var e = c.length > 0,
+          f = a.length > 0,
+          g = function (d, g, h, i, j) {
+            var k,
+              l,
+              m,
+              n = 0,
+              o = '0',
+              p = d && [],
+              r = [],
+              s = C,
+              t = d || (f && w.find.TAG('*', j)),
+              u = (P += null == s ? 1 : Math.random() || 0.1),
+              v = t.length;
+            for (j && (C = g !== G && g); o !== v && null != (k = t[o]); o++) {
+              if (f && k) {
+                for (l = 0; (m = a[l++]); )
+                  if (m(k, g, h)) {
+                    i.push(k);
+                    break;
+                  }
+                j && (P = u);
+              }
+              e && ((k = !m && k) && n--, d && p.push(k));
             }
-            e && ((k = !m && k) && n--, d && p.push(k));
-          }
-          if (((n += o), e && o !== n)) {
-            for (l = 0; (m = c[l++]); ) m(p, r, g, h);
-            if (d) {
-              if (n > 0) for (; o--; ) p[o] || r[o] || (r[o] = Y.call(i));
-              r = q(r);
+            if (((n += o), e && o !== n)) {
+              for (l = 0; (m = c[l++]); ) m(p, r, g, h);
+              if (d) {
+                if (n > 0) for (; o--; ) p[o] || r[o] || (r[o] = Y.call(i));
+                r = q(r);
+              }
+              $.apply(i, r),
+                j && !d && r.length > 0 && n + c.length > 1 && b.uniqueSort(i);
             }
-            $.apply(i, r),
-              j && !d && r.length > 0 && n + c.length > 1 && b.uniqueSort(i);
-          }
-          return j && ((P = u), (C = s)), p;
-        };
+            return j && ((P = u), (C = s)), p;
+          };
         return e ? d(g) : g;
       }
-      let u;
-      let v;
-      let w;
-      let x;
-      let y;
-      let z;
-      let A;
-      let B;
-      let C;
-      let D;
-      let E;
-      let F;
-      let G;
-      let H;
-      let I;
-      let J;
-      let K;
-      let L;
-      let M;
-      var N = `sizzle${1 * new Date()}`;
-      var O = a.document;
-      var P = 0;
-      var Q = 0;
-      const R = c();
-      const S = c();
-      const T = c();
-      let U = function (a, b) {
-        return a === b && (E = !0), 0;
-      };
-      var V = 1 << 31;
-      const W = {}.hasOwnProperty;
-      let X = [];
-      var Y = X.pop;
-      const Z = X.push;
-      var $ = X.push;
-      const _ = X.slice;
-      var aa = function (a, b) {
-        for (let c = 0, d = a.length; d > c; c++) if (a[c] === b) return c;
-        return -1;
-      };
-      const ba =
-        'checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped';
-      const ca = '[\\x20\\t\\r\\n\\f]';
-      const da = '(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+';
-      const ea = da.replace('w', 'w#');
-      const fa = `\\[${ca}*(${da})(?:${ca}*([*^$|!~]?=)${ca}*(?:'((?:\\\\.|[^\\\\'])*)'|"((?:\\\\.|[^\\\\"])*)"|(${ea}))|)${ca}*\\]`;
-      const ga = `:(${da})(?:\\((('((?:\\\\.|[^\\\\'])*)'|"((?:\\\\.|[^\\\\"])*)")|((?:\\\\.|[^\\\\()[\\]]|${fa})*)|.*)\\)|)`;
-      const ha = new RegExp(`${ca}+`, 'g');
-      var ia = new RegExp(`^${ca}+|((?:^|[^\\\\])(?:\\\\.)*)${ca}+$`, 'g');
-      const ja = new RegExp(`^${ca}*,${ca}*`);
-      const ka = new RegExp(`^${ca}*([>+~]|${ca})${ca}*`);
-      const la = new RegExp(`=${ca}*([^\\]'"]*?)${ca}*\\]`, 'g');
-      const ma = new RegExp(ga);
-      const na = new RegExp(`^${ea}$`);
-      const oa = {
-        ID: new RegExp(`^#(${da})`),
-        CLASS: new RegExp(`^\\.(${da})`),
-        TAG: new RegExp(`^(${da.replace('w', 'w*')})`),
-        ATTR: new RegExp(`^${fa}`),
-        PSEUDO: new RegExp(`^${ga}`),
-        CHILD: new RegExp(
-          `^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(${ca}*(even|odd|(([+-]|)(\\d*)n|)${ca}*(?:([+-]|)${ca}*(\\d+)|))${ca}*\\)|)`,
-          'i'
+      var u,
+        v,
+        w,
+        x,
+        y,
+        z,
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G,
+        H,
+        I,
+        J,
+        K,
+        L,
+        M,
+        N = 'sizzle' + 1 * new Date(),
+        O = a.document,
+        P = 0,
+        Q = 0,
+        R = c(),
+        S = c(),
+        T = c(),
+        U = function (a, b) {
+          return a === b && (E = !0), 0;
+        },
+        V = 1 << 31,
+        W = {}.hasOwnProperty,
+        X = [],
+        Y = X.pop,
+        Z = X.push,
+        $ = X.push,
+        _ = X.slice,
+        aa = function (a, b) {
+          for (var c = 0, d = a.length; d > c; c++) if (a[c] === b) return c;
+          return -1;
+        },
+        ba =
+          'checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped',
+        ca = '[\\x20\\t\\r\\n\\f]',
+        da = '(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+',
+        ea = da.replace('w', 'w#'),
+        fa =
+          '\\[' +
+          ca +
+          '*(' +
+          da +
+          ')(?:' +
+          ca +
+          '*([*^$|!~]?=)' +
+          ca +
+          '*(?:\'((?:\\\\.|[^\\\\\'])*)\'|"((?:\\\\.|[^\\\\"])*)"|(' +
+          ea +
+          '))|)' +
+          ca +
+          '*\\]',
+        ga =
+          ':(' +
+          da +
+          ')(?:\\(((\'((?:\\\\.|[^\\\\\'])*)\'|"((?:\\\\.|[^\\\\"])*)")|((?:\\\\.|[^\\\\()[\\]]|' +
+          fa +
+          ')*)|.*)\\)|)',
+        ha = new RegExp(ca + '+', 'g'),
+        ia = new RegExp(
+          '^' + ca + '+|((?:^|[^\\\\])(?:\\\\.)*)' + ca + '+$',
+          'g'
         ),
-        bool: new RegExp(`^(?:${ba})$`, 'i'),
-        needsContext: new RegExp(
-          `^${ca}*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(${ca}*((?:-\\d)?\\d*)${ca}*\\)|)(?=[^-]|$)`,
-          'i'
-        ),
-      };
-      const pa = /^(?:input|select|textarea|button)$/i;
-      const qa = /^h\d$/i;
-      const ra = /^[^{]+\{\s*\[native \w/;
-      var sa = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
-      var ta = /[+~]/;
-      var ua = /'|\\/g;
-      const va = new RegExp(`\\\\([\\da-f]{1,6}${ca}?|(${ca})|.)`, 'ig');
-      const wa = function (a, b, c) {
-        const d = `0x${b}` - 65536;
-        return d !== d || c
-          ? b
-          : d < 0
-          ? String.fromCharCode(d + 65536)
-          : String.fromCharCode((d >> 10) | 55296, (1023 & d) | 56320);
-      };
-      const xa = function () {
-        F();
-      };
+        ja = new RegExp('^' + ca + '*,' + ca + '*'),
+        ka = new RegExp('^' + ca + '*([>+~]|' + ca + ')' + ca + '*'),
+        la = new RegExp('=' + ca + '*([^\\]\'"]*?)' + ca + '*\\]', 'g'),
+        ma = new RegExp(ga),
+        na = new RegExp('^' + ea + '$'),
+        oa = {
+          ID: new RegExp('^#(' + da + ')'),
+          CLASS: new RegExp('^\\.(' + da + ')'),
+          TAG: new RegExp('^(' + da.replace('w', 'w*') + ')'),
+          ATTR: new RegExp('^' + fa),
+          PSEUDO: new RegExp('^' + ga),
+          CHILD: new RegExp(
+            '^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(' +
+              ca +
+              '*(even|odd|(([+-]|)(\\d*)n|)' +
+              ca +
+              '*(?:([+-]|)' +
+              ca +
+              '*(\\d+)|))' +
+              ca +
+              '*\\)|)',
+            'i'
+          ),
+          bool: new RegExp('^(?:' + ba + ')$', 'i'),
+          needsContext: new RegExp(
+            '^' +
+              ca +
+              '*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(' +
+              ca +
+              '*((?:-\\d)?\\d*)' +
+              ca +
+              '*\\)|)(?=[^-]|$)',
+            'i'
+          ),
+        },
+        pa = /^(?:input|select|textarea|button)$/i,
+        qa = /^h\d$/i,
+        ra = /^[^{]+\{\s*\[native \w/,
+        sa = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
+        ta = /[+~]/,
+        ua = /'|\\/g,
+        va = new RegExp('\\\\([\\da-f]{1,6}' + ca + '?|(' + ca + ')|.)', 'ig'),
+        wa = function (a, b, c) {
+          var d = '0x' + b - 65536;
+          return d !== d || c
+            ? b
+            : 0 > d
+            ? String.fromCharCode(d + 65536)
+            : String.fromCharCode((d >> 10) | 55296, (1023 & d) | 56320);
+        },
+        xa = function () {
+          F();
+        };
       try {
         $.apply((X = _.call(O.childNodes)), O.childNodes),
           X[O.childNodes.length].nodeType;
@@ -1244,15 +1259,15 @@ if (
       (v = b.support = {}),
         (y = b.isXML =
           function (a) {
-            const b = a && (a.ownerDocument || a).documentElement;
-            return !!b && b.nodeName !== 'HTML';
+            var b = a && (a.ownerDocument || a).documentElement;
+            return !!b && 'HTML' !== b.nodeName;
           }),
         (F = b.setDocument =
           function (a) {
-            let b;
-            let c;
-            const d = a ? a.ownerDocument || a : O;
-            return d !== G && d.nodeType === 9 && d.documentElement
+            var b,
+              c,
+              d = a ? a.ownerDocument || a : O;
+            return d !== G && 9 === d.nodeType && d.documentElement
               ? ((G = d),
                 (H = d.documentElement),
                 (c = d.defaultView),
@@ -1280,42 +1295,42 @@ if (
                 })),
                 v.getById
                   ? ((w.find.ID = function (a, b) {
-                      if (typeof b.getElementById !== 'undefined' && I) {
-                        const c = b.getElementById(a);
+                      if ('undefined' != typeof b.getElementById && I) {
+                        var c = b.getElementById(a);
                         return c && c.parentNode ? [c] : [];
                       }
                     }),
                     (w.filter.ID = function (a) {
-                      const b = a.replace(va, wa);
+                      var b = a.replace(va, wa);
                       return function (a) {
                         return a.getAttribute('id') === b;
                       };
                     }))
                   : (delete w.find.ID,
                     (w.filter.ID = function (a) {
-                      const b = a.replace(va, wa);
+                      var b = a.replace(va, wa);
                       return function (a) {
-                        const c =
-                          typeof a.getAttributeNode !== 'undefined' &&
+                        var c =
+                          'undefined' != typeof a.getAttributeNode &&
                           a.getAttributeNode('id');
                         return c && c.value === b;
                       };
                     })),
                 (w.find.TAG = v.getElementsByTagName
                   ? function (a, b) {
-                      return typeof b.getElementsByTagName !== 'undefined'
+                      return 'undefined' != typeof b.getElementsByTagName
                         ? b.getElementsByTagName(a)
                         : v.qsa
                         ? b.querySelectorAll(a)
                         : void 0;
                     }
                   : function (a, b) {
-                      let c;
-                      const d = [];
-                      let e = 0;
-                      const f = b.getElementsByTagName(a);
-                      if (a === '*') {
-                        for (; (c = f[e++]); ) c.nodeType === 1 && d.push(c);
+                      var c,
+                        d = [],
+                        e = 0,
+                        f = b.getElementsByTagName(a);
+                      if ('*' === a) {
+                        for (; (c = f[e++]); ) 1 === c.nodeType && d.push(c);
                         return d;
                       }
                       return f;
@@ -1329,25 +1344,29 @@ if (
                 (J = []),
                 (v.qsa = ra.test(d.querySelectorAll)) &&
                   (e(function (a) {
-                    (H.appendChild(
-                      a
-                    ).innerHTML = `<a id='${N}'></a><select id='${N}-\f]' msallowcapture=''><option selected=''></option></select>`),
+                    (H.appendChild(a).innerHTML =
+                      "<a id='" +
+                      N +
+                      "'></a><select id='" +
+                      N +
+                      "-\f]' msallowcapture=''><option selected=''></option></select>"),
                       a.querySelectorAll("[msallowcapture^='']").length &&
-                        J.push(`[*^$]=${ca}*(?:''|"")`),
+                        J.push('[*^$]=' + ca + '*(?:\'\'|"")'),
                       a.querySelectorAll('[selected]').length ||
-                        J.push(`\\[${ca}*(?:value|${ba})`),
-                      a.querySelectorAll(`[id~=${N}-]`).length || J.push('~='),
+                        J.push('\\[' + ca + '*(?:value|' + ba + ')'),
+                      a.querySelectorAll('[id~=' + N + '-]').length ||
+                        J.push('~='),
                       a.querySelectorAll(':checked').length ||
                         J.push(':checked'),
-                      a.querySelectorAll(`a#${N}+*`).length ||
+                      a.querySelectorAll('a#' + N + '+*').length ||
                         J.push('.#.+[+~]');
                   }),
                   e(function (a) {
-                    const b = d.createElement('input');
+                    var b = d.createElement('input');
                     b.setAttribute('type', 'hidden'),
                       a.appendChild(b).setAttribute('name', 'D'),
                       a.querySelectorAll('[name=d]').length &&
-                        J.push(`name${ca}*[*^$|!~]?=`),
+                        J.push('name' + ca + '*[*^$|!~]?='),
                       a.querySelectorAll(':enabled').length ||
                         J.push(':enabled', ':disabled'),
                       a.querySelectorAll('*,:x'),
@@ -1372,13 +1391,13 @@ if (
                 (M =
                   b || ra.test(H.contains)
                     ? function (a, b) {
-                        const c = a.nodeType === 9 ? a.documentElement : a;
-                        const d = b && b.parentNode;
+                        var c = 9 === a.nodeType ? a.documentElement : a,
+                          d = b && b.parentNode;
                         return (
                           a === d ||
                           !(
                             !d ||
-                            d.nodeType !== 1 ||
+                            1 !== d.nodeType ||
                             !(c.contains
                               ? c.contains(d)
                               : a.compareDocumentPosition &&
@@ -1394,36 +1413,36 @@ if (
                 (U = b
                   ? function (a, b) {
                       if (a === b) return (E = !0), 0;
-                      let c =
+                      var c =
                         !a.compareDocumentPosition - !b.compareDocumentPosition;
-                      return (
-                        c ||
-                        ((c =
-                          (a.ownerDocument || a) === (b.ownerDocument || b)
-                            ? a.compareDocumentPosition(b)
-                            : 1),
-                        1 & c ||
-                        (!v.sortDetached && b.compareDocumentPosition(a) === c)
-                          ? a === d || (a.ownerDocument === O && M(O, a))
+                      return c
+                        ? c
+                        : ((c =
+                            (a.ownerDocument || a) === (b.ownerDocument || b)
+                              ? a.compareDocumentPosition(b)
+                              : 1),
+                          1 & c ||
+                          (!v.sortDetached &&
+                            b.compareDocumentPosition(a) === c)
+                            ? a === d || (a.ownerDocument === O && M(O, a))
+                              ? -1
+                              : b === d || (b.ownerDocument === O && M(O, b))
+                              ? 1
+                              : D
+                              ? aa(D, a) - aa(D, b)
+                              : 0
+                            : 4 & c
                             ? -1
-                            : b === d || (b.ownerDocument === O && M(O, b))
-                            ? 1
-                            : D
-                            ? aa(D, a) - aa(D, b)
-                            : 0
-                          : 4 & c
-                          ? -1
-                          : 1)
-                      );
+                            : 1);
                     }
                   : function (a, b) {
                       if (a === b) return (E = !0), 0;
-                      let c;
-                      let e = 0;
-                      const f = a.parentNode;
-                      const h = b.parentNode;
-                      const i = [a];
-                      const j = [b];
+                      var c,
+                        e = 0,
+                        f = a.parentNode,
+                        h = b.parentNode,
+                        i = [a],
+                        j = [b];
                       if (!f || !h)
                         return a === d
                           ? -1
@@ -1461,11 +1480,11 @@ if (
             !(!v.matchesSelector || !I || (K && K.test(c)) || (J && J.test(c))))
           )
             try {
-              const d = L.call(a, c);
+              var d = L.call(a, c);
               if (
                 d ||
                 v.disconnectedMatch ||
-                (a.document && a.document.nodeType !== 11)
+                (a.document && 11 !== a.document.nodeType)
               )
                 return d;
             } catch (a) {}
@@ -1476,9 +1495,9 @@ if (
         }),
         (b.attr = function (a, b) {
           (a.ownerDocument || a) !== G && F(a);
-          const c = w.attrHandle[b.toLowerCase()];
-          let d =
-            c && W.call(w.attrHandle, b.toLowerCase()) ? c(a, b, !I) : void 0;
+          var c = w.attrHandle[b.toLowerCase()],
+            d =
+              c && W.call(w.attrHandle, b.toLowerCase()) ? c(a, b, !I) : void 0;
           return void 0 !== d
             ? d
             : v.attributes || !I
@@ -1488,13 +1507,13 @@ if (
             : null;
         }),
         (b.error = function (a) {
-          throw new Error(`Syntax error, unrecognized expression: ${a}`);
+          throw new Error('Syntax error, unrecognized expression: ' + a);
         }),
         (b.uniqueSort = function (a) {
-          let b;
-          const c = [];
-          let d = 0;
-          let e = 0;
+          var b,
+            c = [],
+            d = 0,
+            e = 0;
           if (
             ((E = !v.detectDuplicates),
             (D = !v.sortStable && a.slice(0)),
@@ -1508,15 +1527,15 @@ if (
         }),
         (x = b.getText =
           function (a) {
-            let b;
-            let c = '';
-            let d = 0;
-            const e = a.nodeType;
+            var b,
+              c = '',
+              d = 0,
+              e = a.nodeType;
             if (e) {
-              if (e === 1 || e === 9 || e === 11) {
-                if (typeof a.textContent === 'string') return a.textContent;
+              if (1 === e || 9 === e || 11 === e) {
+                if ('string' == typeof a.textContent) return a.textContent;
                 for (a = a.firstChild; a; a = a.nextSibling) c += x(a);
-              } else if (e === 3 || e === 4) return a.nodeValue;
+              } else if (3 === e || 4 === e) return a.nodeValue;
             } else for (; (b = a[d++]); ) c += x(b);
             return c;
           }),
@@ -1534,30 +1553,30 @@ if (
               '~': { dir: 'previousSibling' },
             },
             preFilter: {
-              ATTR(a) {
+              ATTR: function (a) {
                 return (
                   (a[1] = a[1].replace(va, wa)),
                   (a[3] = (a[3] || a[4] || a[5] || '').replace(va, wa)),
-                  a[2] === '~=' && (a[3] = ` ${a[3]} `),
+                  '~=' === a[2] && (a[3] = ' ' + a[3] + ' '),
                   a.slice(0, 4)
                 );
               },
-              CHILD(a) {
+              CHILD: function (a) {
                 return (
                   (a[1] = a[1].toLowerCase()),
-                  a[1].slice(0, 3) === 'nth'
+                  'nth' === a[1].slice(0, 3)
                     ? (a[3] || b.error(a[0]),
                       (a[4] = +(a[4]
                         ? a[5] + (a[6] || 1)
-                        : 2 * (a[3] === 'even' || a[3] === 'odd'))),
-                      (a[5] = +(a[7] + a[8] || a[3] === 'odd')))
+                        : 2 * ('even' === a[3] || 'odd' === a[3]))),
+                      (a[5] = +(a[7] + a[8] || 'odd' === a[3])))
                     : a[3] && b.error(a[0]),
                   a
                 );
               },
-              PSEUDO(a) {
-                let b;
-                const c = !a[6] && a[2];
+              PSEUDO: function (a) {
+                var b,
+                  c = !a[6] && a[2];
                 return oa.CHILD.test(a[0])
                   ? null
                   : (a[3]
@@ -1571,9 +1590,9 @@ if (
               },
             },
             filter: {
-              TAG(a) {
-                const b = a.replace(va, wa).toLowerCase();
-                return a === '*'
+              TAG: function (a) {
+                var b = a.replace(va, wa).toLowerCase();
+                return '*' === a
                   ? function () {
                       return !0;
                     }
@@ -1581,63 +1600,63 @@ if (
                       return a.nodeName && a.nodeName.toLowerCase() === b;
                     };
               },
-              CLASS(a) {
-                let b = R[`${a} `];
+              CLASS: function (a) {
+                var b = R[a + ' '];
                 return (
                   b ||
-                  ((b = new RegExp(`(^|${ca})${a}(${ca}|$)`)) &&
+                  ((b = new RegExp('(^|' + ca + ')' + a + '(' + ca + '|$)')) &&
                     R(a, function (a) {
                       return b.test(
-                        (typeof a.className === 'string' && a.className) ||
-                          (typeof a.getAttribute !== 'undefined' &&
+                        ('string' == typeof a.className && a.className) ||
+                          ('undefined' != typeof a.getAttribute &&
                             a.getAttribute('class')) ||
                           ''
                       );
                     }))
                 );
               },
-              ATTR(a, c, d) {
+              ATTR: function (a, c, d) {
                 return function (e) {
-                  let f = b.attr(e, a);
-                  return f == null
-                    ? c === '!='
+                  var f = b.attr(e, a);
+                  return null == f
+                    ? '!=' === c
                     : !c ||
                         ((f += ''),
-                        c === '='
+                        '=' === c
                           ? f === d
-                          : c === '!='
+                          : '!=' === c
                           ? f !== d
-                          : c === '^='
-                          ? d && f.indexOf(d) === 0
-                          : c === '*='
+                          : '^=' === c
+                          ? d && 0 === f.indexOf(d)
+                          : '*=' === c
                           ? d && f.indexOf(d) > -1
-                          : c === '$='
+                          : '$=' === c
                           ? d && f.slice(-d.length) === d
-                          : c === '~='
-                          ? ` ${f.replace(ha, ' ')} `.indexOf(d) > -1
-                          : c === '|=' &&
-                            (f === d || f.slice(0, d.length + 1) === `${d}-`));
+                          : '~=' === c
+                          ? (' ' + f.replace(ha, ' ') + ' ').indexOf(d) > -1
+                          : '|=' === c &&
+                            (f === d || f.slice(0, d.length + 1) === d + '-'));
                 };
               },
-              CHILD(a, b, c, d, e) {
-                const f = a.slice(0, 3) !== 'nth';
-                const g = a.slice(-4) !== 'last';
-                const h = b === 'of-type';
-                return d === 1 && e === 0
+              CHILD: function (a, b, c, d, e) {
+                var f = 'nth' !== a.slice(0, 3),
+                  g = 'last' !== a.slice(-4),
+                  h = 'of-type' === b;
+                return 1 === d && 0 === e
                   ? function (a) {
                       return !!a.parentNode;
                     }
                   : function (b, c, i) {
-                      let j;
-                      let k;
-                      let l;
-                      let m;
-                      let n;
-                      let o;
-                      let p = f !== g ? 'nextSibling' : 'previousSibling';
-                      const q = b.parentNode;
-                      const r = h && b.nodeName.toLowerCase();
-                      const s = !i && !h;
+                      var j,
+                        k,
+                        l,
+                        m,
+                        n,
+                        o,
+                        p = f !== g ? 'nextSibling' : 'previousSibling',
+                        q = b.parentNode,
+                        r = h && b.nodeName.toLowerCase(),
+                        s = !i && !h;
                       if (q) {
                         if (f) {
                           for (; p; ) {
@@ -1645,10 +1664,10 @@ if (
                               if (
                                 h
                                   ? l.nodeName.toLowerCase() === r
-                                  : l.nodeType === 1
+                                  : 1 === l.nodeType
                               )
                                 return !1;
-                            o = p = a === 'only' && !o && 'nextSibling';
+                            o = p = 'only' === a && !o && 'nextSibling';
                           }
                           return !0;
                         }
@@ -1662,7 +1681,7 @@ if (
                             (l = (++n && l && l[p]) || (m = n = 0) || o.pop());
 
                           )
-                            if (l.nodeType === 1 && ++m && l === b) {
+                            if (1 === l.nodeType && ++m && l === b) {
                               k[a] = [P, n, m];
                               break;
                             }
@@ -1679,7 +1698,7 @@ if (
                               (++n && l && l[p]) || (m = n = 0) || o.pop()) &&
                             ((h
                               ? l.nodeName.toLowerCase() !== r
-                              : l.nodeType !== 1) ||
+                              : 1 !== l.nodeType) ||
                               !++m ||
                               (s && ((l[N] || (l[N] = {}))[a] = [P, m]),
                               l !== b));
@@ -1689,12 +1708,12 @@ if (
                       }
                     };
               },
-              PSEUDO(a, c) {
-                let e;
-                const f =
-                  w.pseudos[a] ||
-                  w.setFilters[a.toLowerCase()] ||
-                  b.error(`unsupported pseudo: ${a}`);
+              PSEUDO: function (a, c) {
+                var e,
+                  f =
+                    w.pseudos[a] ||
+                    w.setFilters[a.toLowerCase()] ||
+                    b.error('unsupported pseudo: ' + a);
                 return f[N]
                   ? f(c)
                   : f.length > 1
@@ -1712,9 +1731,9 @@ if (
             },
             pseudos: {
               not: d(function (a) {
-                const b = [];
-                const c = [];
-                const e = A(a.replace(ia, '$1'));
+                var b = [],
+                  c = [],
+                  e = A(a.replace(ia, '$1'));
                 return e[N]
                   ? d(function (a, b, c, d) {
                       for (var f, g = e(a, null, d, []), h = a.length; h--; )
@@ -1743,10 +1762,10 @@ if (
               }),
               lang: d(function (a) {
                 return (
-                  na.test(a || '') || b.error(`unsupported lang: ${a}`),
+                  na.test(a || '') || b.error('unsupported lang: ' + a),
                   (a = a.replace(va, wa).toLowerCase()),
                   function (b) {
-                    let c;
+                    var c;
                     do
                       if (
                         (c = I
@@ -1756,70 +1775,70 @@ if (
                       )
                         return (
                           (c = c.toLowerCase()),
-                          c === a || c.indexOf(`${a}-`) === 0
+                          c === a || 0 === c.indexOf(a + '-')
                         );
-                    while ((b = b.parentNode) && b.nodeType === 1);
+                    while ((b = b.parentNode) && 1 === b.nodeType);
                     return !1;
                   }
                 );
               }),
-              target(b) {
-                const c = a.location && a.location.hash;
+              target: function (b) {
+                var c = a.location && a.location.hash;
                 return c && c.slice(1) === b.id;
               },
-              root(a) {
+              root: function (a) {
                 return a === H;
               },
-              focus(a) {
+              focus: function (a) {
                 return (
                   a === G.activeElement &&
                   (!G.hasFocus || G.hasFocus()) &&
                   !!(a.type || a.href || ~a.tabIndex)
                 );
               },
-              enabled(a) {
+              enabled: function (a) {
                 return a.disabled === !1;
               },
-              disabled(a) {
+              disabled: function (a) {
                 return a.disabled === !0;
               },
-              checked(a) {
-                const b = a.nodeName.toLowerCase();
+              checked: function (a) {
+                var b = a.nodeName.toLowerCase();
                 return (
-                  (b === 'input' && !!a.checked) ||
-                  (b === 'option' && !!a.selected)
+                  ('input' === b && !!a.checked) ||
+                  ('option' === b && !!a.selected)
                 );
               },
-              selected(a) {
+              selected: function (a) {
                 return (
                   a.parentNode && a.parentNode.selectedIndex, a.selected === !0
                 );
               },
-              empty(a) {
+              empty: function (a) {
                 for (a = a.firstChild; a; a = a.nextSibling)
                   if (a.nodeType < 6) return !1;
                 return !0;
               },
-              parent(a) {
+              parent: function (a) {
                 return !w.pseudos.empty(a);
               },
-              header(a) {
+              header: function (a) {
                 return qa.test(a.nodeName);
               },
-              input(a) {
+              input: function (a) {
                 return pa.test(a.nodeName);
               },
-              button(a) {
-                const b = a.nodeName.toLowerCase();
-                return (b === 'input' && a.type === 'button') || b === 'button';
+              button: function (a) {
+                var b = a.nodeName.toLowerCase();
+                return ('input' === b && 'button' === a.type) || 'button' === b;
               },
-              text(a) {
-                let b;
+              text: function (a) {
+                var b;
                 return (
-                  a.nodeName.toLowerCase() === 'input' &&
-                  a.type === 'text' &&
-                  ((b = a.getAttribute('type')) == null ||
-                    b.toLowerCase() === 'text')
+                  'input' === a.nodeName.toLowerCase() &&
+                  'text' === a.type &&
+                  (null == (b = a.getAttribute('type')) ||
+                    'text' === b.toLowerCase())
                 );
               },
               first: j(function () {
@@ -1829,22 +1848,22 @@ if (
                 return [b - 1];
               }),
               eq: j(function (a, b, c) {
-                return [c < 0 ? c + b : c];
+                return [0 > c ? c + b : c];
               }),
               even: j(function (a, b) {
-                for (let c = 0; b > c; c += 2) a.push(c);
+                for (var c = 0; b > c; c += 2) a.push(c);
                 return a;
               }),
               odd: j(function (a, b) {
-                for (let c = 1; b > c; c += 2) a.push(c);
+                for (var c = 1; b > c; c += 2) a.push(c);
                 return a;
               }),
               lt: j(function (a, b, c) {
-                for (let d = c < 0 ? c + b : c; --d >= 0; ) a.push(d);
+                for (var d = 0 > c ? c + b : c; --d >= 0; ) a.push(d);
                 return a;
               }),
               gt: j(function (a, b, c) {
-                for (let d = c < 0 ? c + b : c; ++d < b; ) a.push(d);
+                for (var d = 0 > c ? c + b : c; ++d < b; ) a.push(d);
                 return a;
               }),
             },
@@ -1858,14 +1877,14 @@ if (
         (w.setFilters = new l()),
         (z = b.tokenize =
           function (a, c) {
-            let d;
-            let e;
-            let f;
-            let g;
-            let h;
-            let i;
-            let j;
-            const k = S[`${a} `];
+            var d,
+              e,
+              f,
+              g,
+              h,
+              i,
+              j,
+              k = S[a + ' '];
             if (k) return c ? 0 : k.slice(0);
             for (h = a, i = [], j = w.preFilter; h; ) {
               (!d || (e = ja.exec(h))) &&
@@ -1887,10 +1906,10 @@ if (
           }),
         (A = b.compile =
           function (a, b) {
-            let c;
-            const d = [];
-            const e = [];
-            let f = T[`${a} `];
+            var c,
+              d = [],
+              e = [],
+              f = T[a + ' '];
             if (!f) {
               for (b || (b = z(a)), c = b.length; c--; )
                 (f = s(b[c])), f[N] ? d.push(f) : e.push(f);
@@ -1900,20 +1919,20 @@ if (
           }),
         (B = b.select =
           function (a, b, c, d) {
-            let e;
-            let f;
-            let g;
-            let h;
-            let i;
-            const j = typeof a === 'function' && a;
-            const l = !d && z((a = j.selector || a));
-            if (((c = c || []), l.length === 1)) {
+            var e,
+              f,
+              g,
+              h,
+              i,
+              j = 'function' == typeof a && a,
+              l = !d && z((a = j.selector || a));
+            if (((c = c || []), 1 === l.length)) {
               if (
                 ((f = l[0] = l[0].slice(0)),
                 f.length > 2 &&
-                  (g = f[0]).type === 'ID' &&
+                  'ID' === (g = f[0]).type &&
                   v.getById &&
-                  b.nodeType === 9 &&
+                  9 === b.nodeType &&
                   I &&
                   w.relative[f[1].type])
               ) {
@@ -1955,32 +1974,32 @@ if (
         e(function (a) {
           return (
             (a.innerHTML = "<a href='#'></a>"),
-            a.firstChild.getAttribute('href') === '#'
+            '#' === a.firstChild.getAttribute('href')
           );
         }) ||
           f('type|href|height|width', function (a, b, c) {
             return c
               ? void 0
-              : a.getAttribute(b, b.toLowerCase() === 'type' ? 1 : 2);
+              : a.getAttribute(b, 'type' === b.toLowerCase() ? 1 : 2);
           }),
         (v.attributes &&
           e(function (a) {
             return (
               (a.innerHTML = '<input/>'),
               a.firstChild.setAttribute('value', ''),
-              a.firstChild.getAttribute('value') === ''
+              '' === a.firstChild.getAttribute('value')
             );
           })) ||
           f('value', function (a, b, c) {
-            return c || a.nodeName.toLowerCase() !== 'input'
+            return c || 'input' !== a.nodeName.toLowerCase()
               ? void 0
               : a.defaultValue;
           }),
         e(function (a) {
-          return a.getAttribute('disabled') == null;
+          return null == a.getAttribute('disabled');
         }) ||
           f(ba, function (a, b, c) {
-            let d;
+            var d;
             return c
               ? void 0
               : a[b] === !0
@@ -1999,32 +2018,32 @@ if (
       (_.text = ea.getText),
       (_.isXMLDoc = ea.isXML),
       (_.contains = ea.contains);
-    const fa = _.expr.match.needsContext;
-    const ga = /^<(\w+)\s*\/?>(?:<\/\1>|)$/;
-    var ha = /^.[^:#\[\.,]*$/;
+    var fa = _.expr.match.needsContext,
+      ga = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
+      ha = /^.[^:#\[\.,]*$/;
     (_.filter = function (a, b, c) {
-      const d = b[0];
+      var d = b[0];
       return (
-        c && (a = `:not(${a})`),
-        b.length === 1 && d.nodeType === 1
+        c && (a = ':not(' + a + ')'),
+        1 === b.length && 1 === d.nodeType
           ? _.find.matchesSelector(d, a)
             ? [d]
             : []
           : _.find.matches(
               a,
               _.grep(b, function (a) {
-                return a.nodeType === 1;
+                return 1 === a.nodeType;
               })
             )
       );
     }),
       _.fn.extend({
-        find(a) {
-          let b;
-          const c = this.length;
-          let d = [];
-          const e = this;
-          if (typeof a !== 'string')
+        find: function (a) {
+          var b,
+            c = this.length,
+            d = [],
+            e = this;
+          if ('string' != typeof a)
             return this.pushStack(
               _(a).filter(function () {
                 for (b = 0; c > b; b++) if (_.contains(e[b], this)) return !0;
@@ -2033,106 +2052,109 @@ if (
           for (b = 0; c > b; b++) _.find(a, e[b], d);
           return (
             (d = this.pushStack(c > 1 ? _.unique(d) : d)),
-            (d.selector = this.selector ? `${this.selector} ${a}` : a),
+            (d.selector = this.selector ? this.selector + ' ' + a : a),
             d
           );
         },
-        filter(a) {
+        filter: function (a) {
           return this.pushStack(d(this, a || [], !1));
         },
-        not(a) {
+        not: function (a) {
           return this.pushStack(d(this, a || [], !0));
         },
-        is(a) {
+        is: function (a) {
           return !!d(
             this,
-            typeof a === 'string' && fa.test(a) ? _(a) : a || [],
+            'string' == typeof a && fa.test(a) ? _(a) : a || [],
             !1
           ).length;
         },
       });
-    let ia;
-    const ja = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/;
-    const ka = (_.fn.init = function (a, b) {
-      let c;
-      let d;
-      if (!a) return this;
-      if (typeof a === 'string') {
-        if (
-          ((c =
-            a[0] === '<' && a[a.length - 1] === '>' && a.length >= 3
-              ? [null, a, null]
-              : ja.exec(a)),
-          !c || (!c[1] && b))
-        )
-          return !b || b.jquery
-            ? (b || ia).find(a)
-            : this.constructor(b).find(a);
-        if (c[1]) {
+    var ia,
+      ja = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
+      ka = (_.fn.init = function (a, b) {
+        var c, d;
+        if (!a) return this;
+        if ('string' == typeof a) {
           if (
-            ((b = b instanceof _ ? b[0] : b),
-            _.merge(
-              this,
-              _.parseHTML(c[1], b && b.nodeType ? b.ownerDocument || b : Z, !0)
-            ),
-            ga.test(c[1]) && _.isPlainObject(b))
+            ((c =
+              '<' === a[0] && '>' === a[a.length - 1] && a.length >= 3
+                ? [null, a, null]
+                : ja.exec(a)),
+            !c || (!c[1] && b))
           )
-            for (c in b)
-              _.isFunction(this[c]) ? this[c](b[c]) : this.attr(c, b[c]);
-          return this;
+            return !b || b.jquery
+              ? (b || ia).find(a)
+              : this.constructor(b).find(a);
+          if (c[1]) {
+            if (
+              ((b = b instanceof _ ? b[0] : b),
+              _.merge(
+                this,
+                _.parseHTML(
+                  c[1],
+                  b && b.nodeType ? b.ownerDocument || b : Z,
+                  !0
+                )
+              ),
+              ga.test(c[1]) && _.isPlainObject(b))
+            )
+              for (c in b)
+                _.isFunction(this[c]) ? this[c](b[c]) : this.attr(c, b[c]);
+            return this;
+          }
+          return (
+            (d = Z.getElementById(c[2])),
+            d && d.parentNode && ((this.length = 1), (this[0] = d)),
+            (this.context = Z),
+            (this.selector = a),
+            this
+          );
         }
-        return (
-          (d = Z.getElementById(c[2])),
-          d && d.parentNode && ((this.length = 1), (this[0] = d)),
-          (this.context = Z),
-          (this.selector = a),
-          this
-        );
-      }
-      return a.nodeType
-        ? ((this.context = this[0] = a), (this.length = 1), this)
-        : _.isFunction(a)
-        ? typeof ia.ready !== 'undefined'
-          ? ia.ready(a)
-          : a(_)
-        : (void 0 !== a.selector &&
-            ((this.selector = a.selector), (this.context = a.context)),
-          _.makeArray(a, this));
-    });
+        return a.nodeType
+          ? ((this.context = this[0] = a), (this.length = 1), this)
+          : _.isFunction(a)
+          ? 'undefined' != typeof ia.ready
+            ? ia.ready(a)
+            : a(_)
+          : (void 0 !== a.selector &&
+              ((this.selector = a.selector), (this.context = a.context)),
+            _.makeArray(a, this));
+      });
     (ka.prototype = _.fn), (ia = _(Z));
-    const la = /^(?:parents|prev(?:Until|All))/;
-    const ma = { children: !0, contents: !0, next: !0, prev: !0 };
+    var la = /^(?:parents|prev(?:Until|All))/,
+      ma = { children: !0, contents: !0, next: !0, prev: !0 };
     _.extend({
-      dir(a, b, c) {
-        for (var d = [], e = void 0 !== c; (a = a[b]) && a.nodeType !== 9; )
-          if (a.nodeType === 1) {
+      dir: function (a, b, c) {
+        for (var d = [], e = void 0 !== c; (a = a[b]) && 9 !== a.nodeType; )
+          if (1 === a.nodeType) {
             if (e && _(a).is(c)) break;
             d.push(a);
           }
         return d;
       },
-      sibling(a, b) {
+      sibling: function (a, b) {
         for (var c = []; a; a = a.nextSibling)
-          a.nodeType === 1 && a !== b && c.push(a);
+          1 === a.nodeType && a !== b && c.push(a);
         return c;
       },
     }),
       _.fn.extend({
-        has(a) {
-          const b = _(a, this);
-          const c = b.length;
+        has: function (a) {
+          var b = _(a, this),
+            c = b.length;
           return this.filter(function () {
-            for (let a = 0; c > a; a++) if (_.contains(this, b[a])) return !0;
+            for (var a = 0; c > a; a++) if (_.contains(this, b[a])) return !0;
           });
         },
-        closest(a, b) {
+        closest: function (a, b) {
           for (
             var c,
               d = 0,
               e = this.length,
               f = [],
               g =
-                fa.test(a) || typeof a !== 'string'
+                fa.test(a) || 'string' != typeof a
                   ? _(a, b || this.context)
                   : 0;
             e > d;
@@ -2143,77 +2165,77 @@ if (
                 c.nodeType < 11 &&
                 (g
                   ? g.index(c) > -1
-                  : c.nodeType === 1 && _.find.matchesSelector(c, a))
+                  : 1 === c.nodeType && _.find.matchesSelector(c, a))
               ) {
                 f.push(c);
                 break;
               }
           return this.pushStack(f.length > 1 ? _.unique(f) : f);
         },
-        index(a) {
+        index: function (a) {
           return a
-            ? typeof a === 'string'
+            ? 'string' == typeof a
               ? U.call(_(a), this[0])
               : U.call(this, a.jquery ? a[0] : a)
             : this[0] && this[0].parentNode
             ? this.first().prevAll().length
             : -1;
         },
-        add(a, b) {
+        add: function (a, b) {
           return this.pushStack(_.unique(_.merge(this.get(), _(a, b))));
         },
-        addBack(a) {
+        addBack: function (a) {
           return this.add(
-            a == null ? this.prevObject : this.prevObject.filter(a)
+            null == a ? this.prevObject : this.prevObject.filter(a)
           );
         },
       }),
       _.each(
         {
-          parent(a) {
-            const b = a.parentNode;
-            return b && b.nodeType !== 11 ? b : null;
+          parent: function (a) {
+            var b = a.parentNode;
+            return b && 11 !== b.nodeType ? b : null;
           },
-          parents(a) {
+          parents: function (a) {
             return _.dir(a, 'parentNode');
           },
-          parentsUntil(a, b, c) {
+          parentsUntil: function (a, b, c) {
             return _.dir(a, 'parentNode', c);
           },
-          next(a) {
+          next: function (a) {
             return e(a, 'nextSibling');
           },
-          prev(a) {
+          prev: function (a) {
             return e(a, 'previousSibling');
           },
-          nextAll(a) {
+          nextAll: function (a) {
             return _.dir(a, 'nextSibling');
           },
-          prevAll(a) {
+          prevAll: function (a) {
             return _.dir(a, 'previousSibling');
           },
-          nextUntil(a, b, c) {
+          nextUntil: function (a, b, c) {
             return _.dir(a, 'nextSibling', c);
           },
-          prevUntil(a, b, c) {
+          prevUntil: function (a, b, c) {
             return _.dir(a, 'previousSibling', c);
           },
-          siblings(a) {
+          siblings: function (a) {
             return _.sibling((a.parentNode || {}).firstChild, a);
           },
-          children(a) {
+          children: function (a) {
             return _.sibling(a.firstChild);
           },
-          contents(a) {
+          contents: function (a) {
             return a.contentDocument || _.merge([], a.childNodes);
           },
         },
         function (a, b) {
           _.fn[a] = function (c, d) {
-            let e = _.map(this, b, c);
+            var e = _.map(this, b, c);
             return (
-              a.slice(-5) !== 'Until' && (d = c),
-              d && typeof d === 'string' && (e = _.filter(d, e)),
+              'Until' !== a.slice(-5) && (d = c),
+              d && 'string' == typeof d && (e = _.filter(d, e)),
               this.length > 1 &&
                 (ma[a] || _.unique(e), la.test(a) && e.reverse()),
               this.pushStack(e)
@@ -2221,141 +2243,141 @@ if (
           };
         }
       );
-    var na = /\S+/g;
-    var oa = {};
+    var na = /\S+/g,
+      oa = {};
     (_.Callbacks = function (a) {
-      a = typeof a === 'string' ? oa[a] || f(a) : _.extend({}, a);
-      let b;
-      let c;
-      let d;
-      let e;
-      let g;
-      let h;
-      let i = [];
-      let j = !a.once && [];
-      var k = function (f) {
-        for (
-          b = a.memory && f, c = !0, h = e || 0, e = 0, g = i.length, d = !0;
-          i && g > h;
-          h++
-        )
-          if (i[h].apply(f[0], f[1]) === !1 && a.stopOnFalse) {
-            b = !1;
-            break;
-          }
-        (d = !1),
-          i && (j ? j.length && k(j.shift()) : b ? (i = []) : l.disable());
-      };
-      var l = {
-        add() {
-          if (i) {
-            const c = i.length;
-            !(function b(c) {
-              _.each(c, function (c, d) {
-                const e = _.type(d);
-                e === 'function'
-                  ? (a.unique && l.has(d)) || i.push(d)
-                  : d && d.length && e !== 'string' && b(d);
-              });
-            })(arguments),
-              d ? (g = i.length) : b && ((e = c), k(b));
-          }
-          return this;
+      a = 'string' == typeof a ? oa[a] || f(a) : _.extend({}, a);
+      var b,
+        c,
+        d,
+        e,
+        g,
+        h,
+        i = [],
+        j = !a.once && [],
+        k = function (f) {
+          for (
+            b = a.memory && f, c = !0, h = e || 0, e = 0, g = i.length, d = !0;
+            i && g > h;
+            h++
+          )
+            if (i[h].apply(f[0], f[1]) === !1 && a.stopOnFalse) {
+              b = !1;
+              break;
+            }
+          (d = !1),
+            i && (j ? j.length && k(j.shift()) : b ? (i = []) : l.disable());
         },
-        remove() {
-          return (
-            i &&
-              _.each(arguments, function (a, b) {
-                for (var c; (c = _.inArray(b, i, c)) > -1; )
-                  i.splice(c, 1), d && (g >= c && g--, h >= c && h--);
-              }),
-            this
-          );
-        },
-        has(a) {
-          return a ? _.inArray(a, i) > -1 : !(!i || !i.length);
-        },
-        empty() {
-          return (i = []), (g = 0), this;
-        },
-        disable() {
-          return (i = j = b = void 0), this;
-        },
-        disabled() {
-          return !i;
-        },
-        lock() {
-          return (j = void 0), b || l.disable(), this;
-        },
-        locked() {
-          return !j;
-        },
-        fireWith(a, b) {
-          return (
-            !i ||
-              (c && !j) ||
-              ((b = b || []),
-              (b = [a, b.slice ? b.slice() : b]),
-              d ? j.push(b) : k(b)),
-            this
-          );
-        },
-        fire() {
-          return l.fireWith(this, arguments), this;
-        },
-        fired() {
-          return !!c;
-        },
-      };
+        l = {
+          add: function () {
+            if (i) {
+              var c = i.length;
+              !(function b(c) {
+                _.each(c, function (c, d) {
+                  var e = _.type(d);
+                  'function' === e
+                    ? (a.unique && l.has(d)) || i.push(d)
+                    : d && d.length && 'string' !== e && b(d);
+                });
+              })(arguments),
+                d ? (g = i.length) : b && ((e = c), k(b));
+            }
+            return this;
+          },
+          remove: function () {
+            return (
+              i &&
+                _.each(arguments, function (a, b) {
+                  for (var c; (c = _.inArray(b, i, c)) > -1; )
+                    i.splice(c, 1), d && (g >= c && g--, h >= c && h--);
+                }),
+              this
+            );
+          },
+          has: function (a) {
+            return a ? _.inArray(a, i) > -1 : !(!i || !i.length);
+          },
+          empty: function () {
+            return (i = []), (g = 0), this;
+          },
+          disable: function () {
+            return (i = j = b = void 0), this;
+          },
+          disabled: function () {
+            return !i;
+          },
+          lock: function () {
+            return (j = void 0), b || l.disable(), this;
+          },
+          locked: function () {
+            return !j;
+          },
+          fireWith: function (a, b) {
+            return (
+              !i ||
+                (c && !j) ||
+                ((b = b || []),
+                (b = [a, b.slice ? b.slice() : b]),
+                d ? j.push(b) : k(b)),
+              this
+            );
+          },
+          fire: function () {
+            return l.fireWith(this, arguments), this;
+          },
+          fired: function () {
+            return !!c;
+          },
+        };
       return l;
     }),
       _.extend({
-        Deferred(a) {
-          const b = [
-            ['resolve', 'done', _.Callbacks('once memory'), 'resolved'],
-            ['reject', 'fail', _.Callbacks('once memory'), 'rejected'],
-            ['notify', 'progress', _.Callbacks('memory')],
-          ];
-          let c = 'pending';
-          var d = {
-            state() {
-              return c;
+        Deferred: function (a) {
+          var b = [
+              ['resolve', 'done', _.Callbacks('once memory'), 'resolved'],
+              ['reject', 'fail', _.Callbacks('once memory'), 'rejected'],
+              ['notify', 'progress', _.Callbacks('memory')],
+            ],
+            c = 'pending',
+            d = {
+              state: function () {
+                return c;
+              },
+              always: function () {
+                return e.done(arguments).fail(arguments), this;
+              },
+              then: function () {
+                var a = arguments;
+                return _.Deferred(function (c) {
+                  _.each(b, function (b, f) {
+                    var g = _.isFunction(a[b]) && a[b];
+                    e[f[1]](function () {
+                      var a = g && g.apply(this, arguments);
+                      a && _.isFunction(a.promise)
+                        ? a
+                            .promise()
+                            .done(c.resolve)
+                            .fail(c.reject)
+                            .progress(c.notify)
+                        : c[f[0] + 'With'](
+                            this === d ? c.promise() : this,
+                            g ? [a] : arguments
+                          );
+                    });
+                  }),
+                    (a = null);
+                }).promise();
+              },
+              promise: function (a) {
+                return null != a ? _.extend(a, d) : d;
+              },
             },
-            always() {
-              return e.done(arguments).fail(arguments), this;
-            },
-            then() {
-              let a = arguments;
-              return _.Deferred(function (c) {
-                _.each(b, function (b, f) {
-                  const g = _.isFunction(a[b]) && a[b];
-                  e[f[1]](function () {
-                    const a = g && g.apply(this, arguments);
-                    a && _.isFunction(a.promise)
-                      ? a
-                          .promise()
-                          .done(c.resolve)
-                          .fail(c.reject)
-                          .progress(c.notify)
-                      : c[`${f[0]}With`](
-                          this === d ? c.promise() : this,
-                          g ? [a] : arguments
-                        );
-                  });
-                }),
-                  (a = null);
-              }).promise();
-            },
-            promise(a) {
-              return a != null ? _.extend(a, d) : d;
-            },
-          };
-          var e = {};
+            e = {};
           return (
             (d.pipe = d.then),
             _.each(b, function (a, f) {
-              const g = f[2];
-              const h = f[3];
+              var g = f[2],
+                h = f[3];
               (d[f[1]] = g.add),
                 h &&
                   g.add(
@@ -2367,32 +2389,32 @@ if (
                   ),
                 (e[f[0]] = function () {
                   return (
-                    e[`${f[0]}With`](this === e ? d : this, arguments), this
+                    e[f[0] + 'With'](this === e ? d : this, arguments), this
                   );
                 }),
-                (e[`${f[0]}With`] = g.fireWith);
+                (e[f[0] + 'With'] = g.fireWith);
             }),
             d.promise(e),
             a && a.call(e, e),
             e
           );
         },
-        when(a) {
-          let b;
-          let c;
-          let d;
-          let e = 0;
-          const f = R.call(arguments);
-          const g = f.length;
-          let h = g !== 1 || (a && _.isFunction(a.promise)) ? g : 0;
-          const i = h === 1 ? a : _.Deferred();
-          const j = function (a, c, d) {
-            return function (e) {
-              (c[a] = this),
-                (d[a] = arguments.length > 1 ? R.call(arguments) : e),
-                d === b ? i.notifyWith(c, d) : --h || i.resolveWith(c, d);
+        when: function (a) {
+          var b,
+            c,
+            d,
+            e = 0,
+            f = R.call(arguments),
+            g = f.length,
+            h = 1 !== g || (a && _.isFunction(a.promise)) ? g : 0,
+            i = 1 === h ? a : _.Deferred(),
+            j = function (a, c, d) {
+              return function (e) {
+                (c[a] = this),
+                  (d[a] = arguments.length > 1 ? R.call(arguments) : e),
+                  d === b ? i.notifyWith(c, d) : --h || i.resolveWith(c, d);
+              };
             };
-          };
           if (g > 1)
             for (
               b = new Array(g), c = new Array(g), d = new Array(g);
@@ -2409,17 +2431,17 @@ if (
           return h || i.resolveWith(d, f), i.promise();
         },
       });
-    let pa;
+    var pa;
     (_.fn.ready = function (a) {
       return _.ready.promise().done(a), this;
     }),
       _.extend({
         isReady: !1,
         readyWait: 1,
-        holdReady(a) {
+        holdReady: function (a) {
           a ? _.readyWait++ : _.ready(!0);
         },
-        ready(a) {
+        ready: function (a) {
           (a === !0 ? --_.readyWait : _.isReady) ||
             ((_.isReady = !0),
             (a !== !0 && --_.readyWait > 0) ||
@@ -2432,7 +2454,7 @@ if (
         return (
           pa ||
             ((pa = _.Deferred()),
-            Z.readyState === 'complete'
+            'complete' === Z.readyState
               ? setTimeout(_.ready)
               : (Z.addEventListener('DOMContentLoaded', g, !1),
                 a.addEventListener('load', g, !1))),
@@ -2440,11 +2462,11 @@ if (
         );
       }),
       _.ready.promise();
-    const qa = (_.access = function (a, b, c, d, e, f, g) {
-      let h = 0;
-      const i = a.length;
-      let j = c == null;
-      if (_.type(c) === 'object') {
+    var qa = (_.access = function (a, b, c, d, e, f, g) {
+      var h = 0,
+        i = a.length,
+        j = null == c;
+      if ('object' === _.type(c)) {
         e = !0;
         for (h in c) _.access(a, b, h, c[h], !0, f, g);
       } else if (
@@ -2464,15 +2486,15 @@ if (
       return e ? a : j ? b.call(a) : i ? b(a[0], c) : f;
     });
     (_.acceptData = function (a) {
-      return a.nodeType === 1 || a.nodeType === 9 || !+a.nodeType;
+      return 1 === a.nodeType || 9 === a.nodeType || !+a.nodeType;
     }),
       (h.uid = 1),
       (h.accepts = _.acceptData),
       (h.prototype = {
-        key(a) {
+        key: function (a) {
           if (!h.accepts(a)) return 0;
-          const b = {};
-          let c = a[this.expando];
+          var b = {},
+            c = a[this.expando];
           if (!c) {
             c = h.uid++;
             try {
@@ -2483,32 +2505,32 @@ if (
           }
           return this.cache[c] || (this.cache[c] = {}), c;
         },
-        set(a, b, c) {
-          let d;
-          const e = this.key(a);
-          const f = this.cache[e];
-          if (typeof b === 'string') f[b] = c;
+        set: function (a, b, c) {
+          var d,
+            e = this.key(a),
+            f = this.cache[e];
+          if ('string' == typeof b) f[b] = c;
           else if (_.isEmptyObject(f)) _.extend(this.cache[e], b);
           else for (d in b) f[d] = b[d];
           return f;
         },
-        get(a, b) {
-          const c = this.cache[this.key(a)];
+        get: function (a, b) {
+          var c = this.cache[this.key(a)];
           return void 0 === b ? c : c[b];
         },
-        access(a, b, c) {
-          let d;
-          return void 0 === b || (b && typeof b === 'string' && void 0 === c)
+        access: function (a, b, c) {
+          var d;
+          return void 0 === b || (b && 'string' == typeof b && void 0 === c)
             ? ((d = this.get(a, b)),
               void 0 !== d ? d : this.get(a, _.camelCase(b)))
             : (this.set(a, b, c), void 0 !== c ? c : b);
         },
-        remove(a, b) {
-          let c;
-          let d;
-          let e;
-          const f = this.key(a);
-          const g = this.cache[f];
+        remove: function (a, b) {
+          var c,
+            d,
+            e,
+            f = this.key(a),
+            g = this.cache[f];
           if (void 0 === b) this.cache[f] = {};
           else {
             _.isArray(b)
@@ -2521,73 +2543,73 @@ if (
             for (; c--; ) delete g[d[c]];
           }
         },
-        hasData(a) {
+        hasData: function (a) {
           return !_.isEmptyObject(this.cache[a[this.expando]] || {});
         },
-        discard(a) {
+        discard: function (a) {
           a[this.expando] && delete this.cache[a[this.expando]];
         },
       });
-    var ra = new h();
-    var sa = new h();
-    var ta = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/;
-    var ua = /([A-Z])/g;
+    var ra = new h(),
+      sa = new h(),
+      ta = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
+      ua = /([A-Z])/g;
     _.extend({
-      hasData(a) {
+      hasData: function (a) {
         return sa.hasData(a) || ra.hasData(a);
       },
-      data(a, b, c) {
+      data: function (a, b, c) {
         return sa.access(a, b, c);
       },
-      removeData(a, b) {
+      removeData: function (a, b) {
         sa.remove(a, b);
       },
-      _data(a, b, c) {
+      _data: function (a, b, c) {
         return ra.access(a, b, c);
       },
-      _removeData(a, b) {
+      _removeData: function (a, b) {
         ra.remove(a, b);
       },
     }),
       _.fn.extend({
-        data(a, b) {
-          let c;
-          let d;
-          let e;
-          const f = this[0];
-          const g = f && f.attributes;
+        data: function (a, b) {
+          var c,
+            d,
+            e,
+            f = this[0],
+            g = f && f.attributes;
           if (void 0 === a) {
             if (
               this.length &&
-              ((e = sa.get(f)), f.nodeType === 1 && !ra.get(f, 'hasDataAttrs'))
+              ((e = sa.get(f)), 1 === f.nodeType && !ra.get(f, 'hasDataAttrs'))
             ) {
               for (c = g.length; c--; )
                 g[c] &&
                   ((d = g[c].name),
-                  d.indexOf('data-') === 0 &&
+                  0 === d.indexOf('data-') &&
                     ((d = _.camelCase(d.slice(5))), i(f, d, e[d])));
               ra.set(f, 'hasDataAttrs', !0);
             }
             return e;
           }
-          return typeof a === 'object'
+          return 'object' == typeof a
             ? this.each(function () {
                 sa.set(this, a);
               })
             : qa(
                 this,
                 function (b) {
-                  let c;
-                  const d = _.camelCase(a);
+                  var c,
+                    d = _.camelCase(a);
                   if (f && void 0 === b) {
                     if (((c = sa.get(f, a)), void 0 !== c)) return c;
                     if (((c = sa.get(f, d)), void 0 !== c)) return c;
                     if (((c = i(f, d, void 0)), void 0 !== c)) return c;
                   } else
                     this.each(function () {
-                      const c = sa.get(this, d);
+                      var c = sa.get(this, d);
                       sa.set(this, d, b),
-                        a.indexOf('-') !== -1 &&
+                        -1 !== a.indexOf('-') &&
                           void 0 !== c &&
                           sa.set(this, a, b);
                     });
@@ -2599,17 +2621,17 @@ if (
                 !0
               );
         },
-        removeData(a) {
+        removeData: function (a) {
           return this.each(function () {
             sa.remove(this, a);
           });
         },
       }),
       _.extend({
-        queue(a, b, c) {
-          let d;
+        queue: function (a, b, c) {
+          var d;
           return a
-            ? ((b = `${b || 'fx'}queue`),
+            ? ((b = (b || 'fx') + 'queue'),
               (d = ra.get(a, b)),
               c &&
                 (!d || _.isArray(c)
@@ -2618,90 +2640,90 @@ if (
               d || [])
             : void 0;
         },
-        dequeue(a, b) {
+        dequeue: function (a, b) {
           b = b || 'fx';
-          const c = _.queue(a, b);
-          let d = c.length;
-          let e = c.shift();
-          const f = _._queueHooks(a, b);
-          const g = function () {
-            _.dequeue(a, b);
-          };
-          e === 'inprogress' && ((e = c.shift()), d--),
+          var c = _.queue(a, b),
+            d = c.length,
+            e = c.shift(),
+            f = _._queueHooks(a, b),
+            g = function () {
+              _.dequeue(a, b);
+            };
+          'inprogress' === e && ((e = c.shift()), d--),
             e &&
-              (b === 'fx' && c.unshift('inprogress'),
+              ('fx' === b && c.unshift('inprogress'),
               delete f.stop,
               e.call(a, g, f)),
             !d && f && f.empty.fire();
         },
-        _queueHooks(a, b) {
-          const c = `${b}queueHooks`;
+        _queueHooks: function (a, b) {
+          var c = b + 'queueHooks';
           return (
             ra.get(a, c) ||
             ra.access(a, c, {
               empty: _.Callbacks('once memory').add(function () {
-                ra.remove(a, [`${b}queue`, c]);
+                ra.remove(a, [b + 'queue', c]);
               }),
             })
           );
         },
       }),
       _.fn.extend({
-        queue(a, b) {
-          let c = 2;
+        queue: function (a, b) {
+          var c = 2;
           return (
-            typeof a !== 'string' && ((b = a), (a = 'fx'), c--),
+            'string' != typeof a && ((b = a), (a = 'fx'), c--),
             arguments.length < c
               ? _.queue(this[0], a)
               : void 0 === b
               ? this
               : this.each(function () {
-                  const c = _.queue(this, a, b);
+                  var c = _.queue(this, a, b);
                   _._queueHooks(this, a),
-                    a === 'fx' && c[0] !== 'inprogress' && _.dequeue(this, a);
+                    'fx' === a && 'inprogress' !== c[0] && _.dequeue(this, a);
                 })
           );
         },
-        dequeue(a) {
+        dequeue: function (a) {
           return this.each(function () {
             _.dequeue(this, a);
           });
         },
-        clearQueue(a) {
+        clearQueue: function (a) {
           return this.queue(a || 'fx', []);
         },
-        promise(a, b) {
-          let c;
-          let d = 1;
-          const e = _.Deferred();
-          const f = this;
-          let g = this.length;
-          const h = function () {
-            --d || e.resolveWith(f, [f]);
-          };
+        promise: function (a, b) {
+          var c,
+            d = 1,
+            e = _.Deferred(),
+            f = this,
+            g = this.length,
+            h = function () {
+              --d || e.resolveWith(f, [f]);
+            };
           for (
-            typeof a !== 'string' && ((b = a), (a = void 0)), a = a || 'fx';
+            'string' != typeof a && ((b = a), (a = void 0)), a = a || 'fx';
             g--;
 
           )
-            (c = ra.get(f[g], `${a}queueHooks`)),
+            (c = ra.get(f[g], a + 'queueHooks')),
               c && c.empty && (d++, c.empty.add(h));
           return h(), e.promise(b);
         },
       });
-    const va = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source;
-    var wa = ['Top', 'Right', 'Bottom', 'Left'];
-    var xa = function (a, b) {
-      return (
-        (a = b || a),
-        _.css(a, 'display') === 'none' || !_.contains(a.ownerDocument, a)
-      );
-    };
-    var ya = /^(?:checkbox|radio)$/i;
+    var va = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+      wa = ['Top', 'Right', 'Bottom', 'Left'],
+      xa = function (a, b) {
+        return (
+          (a = b || a),
+          'none' === _.css(a, 'display') || !_.contains(a.ownerDocument, a)
+        );
+      },
+      ya = /^(?:checkbox|radio)$/i;
     !(function () {
-      const a = Z.createDocumentFragment();
-      const b = a.appendChild(Z.createElement('div'));
-      const c = Z.createElement('input');
+      var a = Z.createDocumentFragment(),
+        b = a.appendChild(Z.createElement('div')),
+        c = Z.createElement('input');
       c.setAttribute('type', 'radio'),
         c.setAttribute('checked', 'checked'),
         c.setAttribute('name', 't'),
@@ -2710,27 +2732,27 @@ if (
         (b.innerHTML = '<textarea>x</textarea>'),
         (Y.noCloneChecked = !!b.cloneNode(!0).lastChild.defaultValue);
     })();
-    const za = 'undefined';
+    var za = 'undefined';
     Y.focusinBubbles = 'onfocusin' in a;
-    const Aa = /^key/;
-    const Ba = /^(?:mouse|pointer|contextmenu)|click/;
-    const Ca = /^(?:focusinfocus|focusoutblur)$/;
-    const Da = /^([^.]*)(?:\.(.+)|)$/;
+    var Aa = /^key/,
+      Ba = /^(?:mouse|pointer|contextmenu)|click/,
+      Ca = /^(?:focusinfocus|focusoutblur)$/,
+      Da = /^([^.]*)(?:\.(.+)|)$/;
     (_.event = {
       global: {},
-      add(a, b, c, d, e) {
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        let k;
-        let l;
-        let m;
-        let n;
-        let o;
-        let p;
-        const q = ra.get(a);
+      add: function (a, b, c, d, e) {
+        var f,
+          g,
+          h,
+          i,
+          j,
+          k,
+          l,
+          m,
+          n,
+          o,
+          p,
+          q = ra.get(a);
         if (q)
           for (
             c.handler && ((f = c), (c = f.handler), (e = f.selector)),
@@ -2779,19 +2801,19 @@ if (
                 e ? m.splice(m.delegateCount++, 0, k) : m.push(k),
                 (_.event.global[n] = !0));
       },
-      remove(a, b, c, d, e) {
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        let k;
-        let l;
-        let m;
-        let n;
-        let o;
-        let p;
-        const q = ra.hasData(a) && ra.get(a);
+      remove: function (a, b, c, d, e) {
+        var f,
+          g,
+          h,
+          i,
+          j,
+          k,
+          l,
+          m,
+          n,
+          o,
+          p,
+          q = ra.hasData(a) && ra.get(a);
         if (q && (i = q.events)) {
           for (b = (b || '').match(na) || [''], j = b.length; j--; )
             if (
@@ -2806,7 +2828,7 @@ if (
                   m = i[n] || [],
                   h =
                     h[2] &&
-                    new RegExp(`(^|\\.)${o.join('\\.(?:.*\\.|)')}(\\.|$)`),
+                    new RegExp('(^|\\.)' + o.join('\\.(?:.*\\.|)') + '(\\.|$)'),
                   g = f = m.length;
                 f--;
 
@@ -2815,7 +2837,7 @@ if (
                   (!e && p !== k.origType) ||
                     (c && c.guid !== k.guid) ||
                     (h && !h.test(k.namespace)) ||
-                    (d && d !== k.selector && (d !== '**' || !k.selector)) ||
+                    (d && d !== k.selector && ('**' !== d || !k.selector)) ||
                     (m.splice(f, 1),
                     k.selector && m.delegateCount--,
                     l.remove && l.remove.call(a, k));
@@ -2828,34 +2850,34 @@ if (
           _.isEmptyObject(i) && (delete q.handle, ra.remove(a, 'events'));
         }
       },
-      trigger(b, c, d, e) {
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        let k;
-        let l;
-        const m = [d || Z];
-        let n = X.call(b, 'type') ? b.type : b;
-        let o = X.call(b, 'namespace') ? b.namespace.split('.') : [];
+      trigger: function (b, c, d, e) {
+        var f,
+          g,
+          h,
+          i,
+          j,
+          k,
+          l,
+          m = [d || Z],
+          n = X.call(b, 'type') ? b.type : b,
+          o = X.call(b, 'namespace') ? b.namespace.split('.') : [];
         if (
           ((g = h = d = d || Z),
-          d.nodeType !== 3 &&
-            d.nodeType !== 8 &&
+          3 !== d.nodeType &&
+            8 !== d.nodeType &&
             !Ca.test(n + _.event.triggered) &&
             (n.indexOf('.') >= 0 &&
               ((o = n.split('.')), (n = o.shift()), o.sort()),
-            (j = n.indexOf(':') < 0 && `on${n}`),
-            (b = b[_.expando] ? b : new _.Event(n, typeof b === 'object' && b)),
+            (j = n.indexOf(':') < 0 && 'on' + n),
+            (b = b[_.expando] ? b : new _.Event(n, 'object' == typeof b && b)),
             (b.isTrigger = e ? 2 : 3),
             (b.namespace = o.join('.')),
             (b.namespace_re = b.namespace
-              ? new RegExp(`(^|\\.)${o.join('\\.(?:.*\\.|)')}(\\.|$)`)
+              ? new RegExp('(^|\\.)' + o.join('\\.(?:.*\\.|)') + '(\\.|$)')
               : null),
             (b.result = void 0),
             b.target || (b.target = d),
-            (c = c == null ? [b] : _.makeArray(c, [b])),
+            (c = null == c ? [b] : _.makeArray(c, [b])),
             (l = _.event.special[n] || {}),
             e || !l.trigger || l.trigger.apply(d, c) !== !1))
         ) {
@@ -2898,17 +2920,17 @@ if (
           );
         }
       },
-      dispatch(a) {
+      dispatch: function (a) {
         a = _.event.fix(a);
-        let b;
-        let c;
-        let d;
-        let e;
-        let f;
-        let g = [];
-        const h = R.call(arguments);
-        const i = (ra.get(this, 'events') || {})[a.type] || [];
-        const j = _.event.special[a.type] || {};
+        var b,
+          c,
+          d,
+          e,
+          f,
+          g = [],
+          h = R.call(arguments),
+          i = (ra.get(this, 'events') || {})[a.type] || [],
+          j = _.event.special[a.type] || {};
         if (
           ((h[0] = a),
           (a.delegateTarget = this),
@@ -2936,20 +2958,20 @@ if (
           return j.postDispatch && j.postDispatch.call(this, a), a.result;
         }
       },
-      handlers(a, b) {
-        let c;
-        let d;
-        let e;
-        let f;
-        const g = [];
-        const h = b.delegateCount;
-        let i = a.target;
-        if (h && i.nodeType && (!a.button || a.type !== 'click'))
+      handlers: function (a, b) {
+        var c,
+          d,
+          e,
+          f,
+          g = [],
+          h = b.delegateCount,
+          i = a.target;
+        if (h && i.nodeType && (!a.button || 'click' !== a.type))
           for (; i !== this; i = i.parentNode || this)
-            if (i.disabled !== !0 || a.type !== 'click') {
+            if (i.disabled !== !0 || 'click' !== a.type) {
               for (d = [], c = 0; h > c; c++)
                 (f = b[c]),
-                  (e = `${f.selector} `),
+                  (e = f.selector + ' '),
                   void 0 === d[e] &&
                     (d[e] = f.needsContext
                       ? _(e, this).index(i) >= 0
@@ -2966,10 +2988,10 @@ if (
       fixHooks: {},
       keyHooks: {
         props: 'char charCode key keyCode'.split(' '),
-        filter(a, b) {
+        filter: function (a, b) {
           return (
-            a.which == null &&
-              (a.which = b.charCode != null ? b.charCode : b.keyCode),
+            null == a.which &&
+              (a.which = null != b.charCode ? b.charCode : b.keyCode),
             a
           );
         },
@@ -2979,14 +3001,14 @@ if (
           'button buttons clientX clientY offsetX offsetY pageX pageY screenX screenY toElement'.split(
             ' '
           ),
-        filter(a, b) {
-          let c;
-          let d;
-          let e;
-          const f = b.button;
+        filter: function (a, b) {
+          var c,
+            d,
+            e,
+            f = b.button;
           return (
-            a.pageX == null &&
-              b.clientX != null &&
+            null == a.pageX &&
+              null != b.clientX &&
               ((c = a.target.ownerDocument || Z),
               (d = c.documentElement),
               (e = c.body),
@@ -3005,14 +3027,14 @@ if (
           );
         },
       },
-      fix(a) {
+      fix: function (a) {
         if (a[_.expando]) return a;
-        let b;
-        let c;
-        let d;
-        const e = a.type;
-        const f = a;
-        let g = this.fixHooks[e];
+        var b,
+          c,
+          d,
+          e = a.type,
+          f = a,
+          g = this.fixHooks[e];
         for (
           g ||
             (this.fixHooks[e] = g =
@@ -3026,46 +3048,46 @@ if (
           (c = d[b]), (a[c] = f[c]);
         return (
           a.target || (a.target = Z),
-          a.target.nodeType === 3 && (a.target = a.target.parentNode),
+          3 === a.target.nodeType && (a.target = a.target.parentNode),
           g.filter ? g.filter(a, f) : a
         );
       },
       special: {
         load: { noBubble: !0 },
         focus: {
-          trigger() {
+          trigger: function () {
             return this !== l() && this.focus ? (this.focus(), !1) : void 0;
           },
           delegateType: 'focusin',
         },
         blur: {
-          trigger() {
+          trigger: function () {
             return this === l() && this.blur ? (this.blur(), !1) : void 0;
           },
           delegateType: 'focusout',
         },
         click: {
-          trigger() {
-            return this.type === 'checkbox' &&
+          trigger: function () {
+            return 'checkbox' === this.type &&
               this.click &&
               _.nodeName(this, 'input')
               ? (this.click(), !1)
               : void 0;
           },
-          _default(a) {
+          _default: function (a) {
             return _.nodeName(a.target, 'a');
           },
         },
         beforeunload: {
-          postDispatch(a) {
+          postDispatch: function (a) {
             void 0 !== a.result &&
               a.originalEvent &&
               (a.originalEvent.returnValue = a.result);
           },
         },
       },
-      simulate(a, b, c, d) {
-        const e = _.extend(new _.Event(), c, {
+      simulate: function (a, b, c, d) {
+        var e = _.extend(new _.Event(), c, {
           type: a,
           isSimulated: !0,
           originalEvent: {},
@@ -3097,18 +3119,18 @@ if (
         isDefaultPrevented: k,
         isPropagationStopped: k,
         isImmediatePropagationStopped: k,
-        preventDefault() {
-          const a = this.originalEvent;
+        preventDefault: function () {
+          var a = this.originalEvent;
           (this.isDefaultPrevented = j),
             a && a.preventDefault && a.preventDefault();
         },
-        stopPropagation() {
-          const a = this.originalEvent;
+        stopPropagation: function () {
+          var a = this.originalEvent;
           (this.isPropagationStopped = j),
             a && a.stopPropagation && a.stopPropagation();
         },
-        stopImmediatePropagation() {
-          const a = this.originalEvent;
+        stopImmediatePropagation: function () {
+          var a = this.originalEvent;
           (this.isImmediatePropagationStopped = j),
             a && a.stopImmediatePropagation && a.stopImmediatePropagation(),
             this.stopPropagation();
@@ -3125,11 +3147,11 @@ if (
           _.event.special[a] = {
             delegateType: b,
             bindType: b,
-            handle(a) {
-              let c;
-              const d = this;
-              const e = a.relatedTarget;
-              const f = a.handleObj;
+            handle: function (a) {
+              var c,
+                d = this,
+                e = a.relatedTarget,
+                f = a.handleObj;
               return (
                 (!e || (e !== d && !_.contains(d, e))) &&
                   ((a.type = f.origType),
@@ -3143,18 +3165,18 @@ if (
       ),
       Y.focusinBubbles ||
         _.each({ focus: 'focusin', blur: 'focusout' }, function (a, b) {
-          const c = function (a) {
+          var c = function (a) {
             _.event.simulate(b, a.target, _.event.fix(a), !0);
           };
           _.event.special[b] = {
-            setup() {
-              const d = this.ownerDocument || this;
-              const e = ra.access(d, b);
+            setup: function () {
+              var d = this.ownerDocument || this,
+                e = ra.access(d, b);
               e || d.addEventListener(a, c, !0), ra.access(d, b, (e || 0) + 1);
             },
-            teardown() {
-              const d = this.ownerDocument || this;
-              const e = ra.access(d, b) - 1;
+            teardown: function () {
+              var d = this.ownerDocument || this,
+                e = ra.access(d, b) - 1;
               e
                 ? ra.access(d, b, e)
                 : (d.removeEventListener(a, c, !0), ra.remove(d, b));
@@ -3162,19 +3184,18 @@ if (
           };
         }),
       _.fn.extend({
-        on(a, b, c, d, e) {
-          let f;
-          let g;
-          if (typeof a === 'object') {
-            typeof b !== 'string' && ((c = c || b), (b = void 0));
+        on: function (a, b, c, d, e) {
+          var f, g;
+          if ('object' == typeof a) {
+            'string' != typeof b && ((c = c || b), (b = void 0));
             for (g in a) this.on(g, b, c, a[g], e);
             return this;
           }
           if (
-            (c == null && d == null
+            (null == c && null == d
               ? ((d = b), (c = b = void 0))
-              : d == null &&
-                (typeof b === 'string'
+              : null == d &&
+                ('string' == typeof b
                   ? ((d = c), (c = void 0))
                   : ((d = c), (c = b), (b = void 0))),
             d === !1)
@@ -3182,7 +3203,7 @@ if (
             d = k;
           else if (!d) return this;
           return (
-            e === 1 &&
+            1 === e &&
               ((f = d),
               (d = function (a) {
                 return _().off(a), f.apply(this, arguments);
@@ -3193,76 +3214,75 @@ if (
             })
           );
         },
-        one(a, b, c, d) {
+        one: function (a, b, c, d) {
           return this.on(a, b, c, d, 1);
         },
-        off(a, b, c) {
-          let d;
-          let e;
+        off: function (a, b, c) {
+          var d, e;
           if (a && a.preventDefault && a.handleObj)
             return (
               (d = a.handleObj),
               _(a.delegateTarget).off(
-                d.namespace ? `${d.origType}.${d.namespace}` : d.origType,
+                d.namespace ? d.origType + '.' + d.namespace : d.origType,
                 d.selector,
                 d.handler
               ),
               this
             );
-          if (typeof a === 'object') {
+          if ('object' == typeof a) {
             for (e in a) this.off(e, b, a[e]);
             return this;
           }
           return (
-            (b === !1 || typeof b === 'function') && ((c = b), (b = void 0)),
+            (b === !1 || 'function' == typeof b) && ((c = b), (b = void 0)),
             c === !1 && (c = k),
             this.each(function () {
               _.event.remove(this, a, c, b);
             })
           );
         },
-        trigger(a, b) {
+        trigger: function (a, b) {
           return this.each(function () {
             _.event.trigger(a, b, this);
           });
         },
-        triggerHandler(a, b) {
-          const c = this[0];
+        triggerHandler: function (a, b) {
+          var c = this[0];
           return c ? _.event.trigger(a, b, c, !0) : void 0;
         },
       });
-    const Ea =
-      /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi;
-    const Fa = /<([\w:]+)/;
-    const Ga = /<|&#?\w+;/;
-    const Ha = /<(?:script|style|link)/i;
-    const Ia = /checked\s*(?:[^=]|=\s*.checked.)/i;
-    const Ja = /^$|\/(?:java|ecma)script/i;
-    var Ka = /^true\/(.*)/;
-    const La = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
-    const Ma = {
-      option: [1, "<select multiple='multiple'>", '</select>'],
-      thead: [1, '<table>', '</table>'],
-      col: [2, '<table><colgroup>', '</colgroup></table>'],
-      tr: [2, '<table><tbody>', '</tbody></table>'],
-      td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-      _default: [0, '', ''],
-    };
+    var Ea =
+        /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+      Fa = /<([\w:]+)/,
+      Ga = /<|&#?\w+;/,
+      Ha = /<(?:script|style|link)/i,
+      Ia = /checked\s*(?:[^=]|=\s*.checked.)/i,
+      Ja = /^$|\/(?:java|ecma)script/i,
+      Ka = /^true\/(.*)/,
+      La = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g,
+      Ma = {
+        option: [1, "<select multiple='multiple'>", '</select>'],
+        thead: [1, '<table>', '</table>'],
+        col: [2, '<table><colgroup>', '</colgroup></table>'],
+        tr: [2, '<table><tbody>', '</tbody></table>'],
+        td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
+        _default: [0, '', ''],
+      };
     (Ma.optgroup = Ma.option),
       (Ma.tbody = Ma.tfoot = Ma.colgroup = Ma.caption = Ma.thead),
       (Ma.th = Ma.td),
       _.extend({
-        clone(a, b, c) {
-          let d;
-          let e;
-          let f;
-          let g;
-          const h = a.cloneNode(!0);
-          const i = _.contains(a.ownerDocument, a);
+        clone: function (a, b, c) {
+          var d,
+            e,
+            f,
+            g,
+            h = a.cloneNode(!0),
+            i = _.contains(a.ownerDocument, a);
           if (
             !(
               Y.noCloneChecked ||
-              (a.nodeType !== 1 && a.nodeType !== 11) ||
+              (1 !== a.nodeType && 11 !== a.nodeType) ||
               _.isXMLDoc(a)
             )
           )
@@ -3281,7 +3301,7 @@ if (
             (g = r(h, 'script')), g.length > 0 && p(g, !i && r(a, 'script')), h
           );
         },
-        buildFragment(a, b, c, d) {
+        buildFragment: function (a, b, c, d) {
           for (
             var e,
               f,
@@ -3296,8 +3316,8 @@ if (
             n > m;
             m++
           )
-            if (((e = a[m]), e || e === 0))
-              if (_.type(e) === 'object') _.merge(l, e.nodeType ? [e] : e);
+            if (((e = a[m]), e || 0 === e))
+              if ('object' === _.type(e)) _.merge(l, e.nodeType ? [e] : e);
               else if (Ga.test(e)) {
                 for (
                   f = f || k.appendChild(b.createElement('div')),
@@ -3315,7 +3335,7 @@ if (
               } else l.push(b.createTextNode(e));
           for (k.textContent = '', m = 0; (e = l[m++]); )
             if (
-              (!d || _.inArray(e, d) === -1) &&
+              (!d || -1 === _.inArray(e, d)) &&
               ((i = _.contains(e.ownerDocument, e)),
               (f = r(k.appendChild(e), 'script')),
               i && p(f),
@@ -3324,7 +3344,7 @@ if (
               for (j = 0; (e = f[j++]); ) Ja.test(e.type || '') && c.push(e);
           return k;
         },
-        cleanData(a) {
+        cleanData: function (a) {
           for (
             var b, c, d, e, f = _.event.special, g = 0;
             void 0 !== (c = a[g]);
@@ -3344,16 +3364,16 @@ if (
         },
       }),
       _.fn.extend({
-        text(a) {
+        text: function (a) {
           return qa(
             this,
             function (a) {
               return void 0 === a
                 ? _.text(this)
                 : this.empty().each(function () {
-                    (this.nodeType === 1 ||
-                      this.nodeType === 11 ||
-                      this.nodeType === 9) &&
+                    (1 === this.nodeType ||
+                      11 === this.nodeType ||
+                      9 === this.nodeType) &&
                       (this.textContent = a);
                   });
             },
@@ -3362,77 +3382,77 @@ if (
             arguments.length
           );
         },
-        append() {
+        append: function () {
           return this.domManip(arguments, function (a) {
             if (
-              this.nodeType === 1 ||
-              this.nodeType === 11 ||
-              this.nodeType === 9
+              1 === this.nodeType ||
+              11 === this.nodeType ||
+              9 === this.nodeType
             ) {
-              const b = m(this, a);
+              var b = m(this, a);
               b.appendChild(a);
             }
           });
         },
-        prepend() {
+        prepend: function () {
           return this.domManip(arguments, function (a) {
             if (
-              this.nodeType === 1 ||
-              this.nodeType === 11 ||
-              this.nodeType === 9
+              1 === this.nodeType ||
+              11 === this.nodeType ||
+              9 === this.nodeType
             ) {
-              const b = m(this, a);
+              var b = m(this, a);
               b.insertBefore(a, b.firstChild);
             }
           });
         },
-        before() {
+        before: function () {
           return this.domManip(arguments, function (a) {
             this.parentNode && this.parentNode.insertBefore(a, this);
           });
         },
-        after() {
+        after: function () {
           return this.domManip(arguments, function (a) {
             this.parentNode &&
               this.parentNode.insertBefore(a, this.nextSibling);
           });
         },
-        remove(a, b) {
+        remove: function (a, b) {
           for (
             var c, d = a ? _.filter(a, this) : this, e = 0;
-            (c = d[e]) != null;
+            null != (c = d[e]);
             e++
           )
-            b || c.nodeType !== 1 || _.cleanData(r(c)),
+            b || 1 !== c.nodeType || _.cleanData(r(c)),
               c.parentNode &&
                 (b && _.contains(c.ownerDocument, c) && p(r(c, 'script')),
                 c.parentNode.removeChild(c));
           return this;
         },
-        empty() {
-          for (var a, b = 0; (a = this[b]) != null; b++)
-            a.nodeType === 1 && (_.cleanData(r(a, !1)), (a.textContent = ''));
+        empty: function () {
+          for (var a, b = 0; null != (a = this[b]); b++)
+            1 === a.nodeType && (_.cleanData(r(a, !1)), (a.textContent = ''));
           return this;
         },
-        clone(a, b) {
+        clone: function (a, b) {
           return (
-            (a = a != null && a),
-            (b = b == null ? a : b),
+            (a = null != a && a),
+            (b = null == b ? a : b),
             this.map(function () {
               return _.clone(this, a, b);
             })
           );
         },
-        html(a) {
+        html: function (a) {
           return qa(
             this,
             function (a) {
-              let b = this[0] || {};
-              let c = 0;
-              const d = this.length;
-              if (void 0 === a && b.nodeType === 1) return b.innerHTML;
+              var b = this[0] || {},
+                c = 0,
+                d = this.length;
+              if (void 0 === a && 1 === b.nodeType) return b.innerHTML;
               if (
-                typeof a === 'string' &&
+                'string' == typeof a &&
                 !Ha.test(a) &&
                 !Ma[(Fa.exec(a) || ['', ''])[1].toLowerCase()]
               ) {
@@ -3440,7 +3460,7 @@ if (
                 try {
                   for (; d > c; c++)
                     (b = this[c] || {}),
-                      b.nodeType === 1 &&
+                      1 === b.nodeType &&
                         (_.cleanData(r(b, !1)), (b.innerHTML = a));
                   b = 0;
                 } catch (a) {}
@@ -3452,8 +3472,8 @@ if (
             arguments.length
           );
         },
-        replaceWith() {
-          let a = arguments[0];
+        replaceWith: function () {
+          var a = arguments[0];
           return (
             this.domManip(arguments, function (b) {
               (a = this.parentNode),
@@ -3463,36 +3483,36 @@ if (
             a && (a.length || a.nodeType) ? this : this.remove()
           );
         },
-        detach(a) {
+        detach: function (a) {
           return this.remove(a, !0);
         },
-        domManip(a, b) {
+        domManip: function (a, b) {
           a = S.apply([], a);
-          let c;
-          let d;
-          let e;
-          let f;
-          let g;
-          let h;
-          let i = 0;
-          const j = this.length;
-          const k = this;
-          const l = j - 1;
-          const m = a[0];
-          const p = _.isFunction(m);
+          var c,
+            d,
+            e,
+            f,
+            g,
+            h,
+            i = 0,
+            j = this.length,
+            k = this,
+            l = j - 1,
+            m = a[0],
+            p = _.isFunction(m);
           if (
             p ||
-            (j > 1 && typeof m === 'string' && !Y.checkClone && Ia.test(m))
+            (j > 1 && 'string' == typeof m && !Y.checkClone && Ia.test(m))
           )
             return this.each(function (c) {
-              const d = k.eq(c);
+              var d = k.eq(c);
               p && (a[0] = m.call(this, c, d.html())), d.domManip(a, b);
             });
           if (
             j &&
             ((c = _.buildFragment(a, this[0].ownerDocument, !1, this)),
             (d = c.firstChild),
-            c.childNodes.length === 1 && (c = d),
+            1 === c.childNodes.length && (c = d),
             d)
           ) {
             for (e = _.map(r(c, 'script'), n), f = e.length; j > i; i++)
@@ -3535,47 +3555,47 @@ if (
           };
         }
       );
-    let Na;
-    var Oa = {};
-    var Pa = /^margin/;
-    var Qa = new RegExp(`^(${va})(?!px)[a-z%]+$`, 'i');
-    var Ra = function (b) {
-      return b.ownerDocument.defaultView.opener
-        ? b.ownerDocument.defaultView.getComputedStyle(b, null)
-        : a.getComputedStyle(b, null);
-    };
+    var Na,
+      Oa = {},
+      Pa = /^margin/,
+      Qa = new RegExp('^(' + va + ')(?!px)[a-z%]+$', 'i'),
+      Ra = function (b) {
+        return b.ownerDocument.defaultView.opener
+          ? b.ownerDocument.defaultView.getComputedStyle(b, null)
+          : a.getComputedStyle(b, null);
+      };
     !(function () {
       function b() {
         (g.style.cssText =
           '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:block;margin-top:1%;top:1%;border:1px;padding:1px;width:4px;position:absolute'),
           (g.innerHTML = ''),
           e.appendChild(f);
-        const b = a.getComputedStyle(g, null);
-        (c = b.top !== '1%'), (d = b.width === '4px'), e.removeChild(f);
+        var b = a.getComputedStyle(g, null);
+        (c = '1%' !== b.top), (d = '4px' === b.width), e.removeChild(f);
       }
-      let c;
-      let d;
-      var e = Z.documentElement;
-      var f = Z.createElement('div');
-      var g = Z.createElement('div');
+      var c,
+        d,
+        e = Z.documentElement,
+        f = Z.createElement('div'),
+        g = Z.createElement('div');
       g.style &&
         ((g.style.backgroundClip = 'content-box'),
         (g.cloneNode(!0).style.backgroundClip = ''),
-        (Y.clearCloneStyle = g.style.backgroundClip === 'content-box'),
+        (Y.clearCloneStyle = 'content-box' === g.style.backgroundClip),
         (f.style.cssText =
           'border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;position:absolute'),
         f.appendChild(g),
         a.getComputedStyle &&
           _.extend(Y, {
-            pixelPosition() {
+            pixelPosition: function () {
               return b(), c;
             },
-            boxSizingReliable() {
-              return d == null && b(), d;
+            boxSizingReliable: function () {
+              return null == d && b(), d;
             },
-            reliableMarginRight() {
-              let b;
-              const c = g.appendChild(Z.createElement('div'));
+            reliableMarginRight: function () {
+              var b,
+                c = g.appendChild(Z.createElement('div'));
               return (
                 (c.style.cssText = g.style.cssText =
                   '-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;margin:0;border:0;padding:0'),
@@ -3591,27 +3611,27 @@ if (
           }));
     })(),
       (_.swap = function (a, b, c, d) {
-        let e;
-        let f;
-        const g = {};
+        var e,
+          f,
+          g = {};
         for (f in b) (g[f] = a.style[f]), (a.style[f] = b[f]);
         e = c.apply(a, d || []);
         for (f in b) a.style[f] = g[f];
         return e;
       });
-    const Sa = /^(none|table(?!-c[ea]).+)/;
-    var Ta = new RegExp(`^(${va})(.*)$`, 'i');
-    const Ua = new RegExp(`^([+-])=(${va})`, 'i');
-    const Va = { position: 'absolute', visibility: 'hidden', display: 'block' };
-    const Wa = { letterSpacing: '0', fontWeight: '400' };
-    var Xa = ['Webkit', 'O', 'Moz', 'ms'];
+    var Sa = /^(none|table(?!-c[ea]).+)/,
+      Ta = new RegExp('^(' + va + ')(.*)$', 'i'),
+      Ua = new RegExp('^([+-])=(' + va + ')', 'i'),
+      Va = { position: 'absolute', visibility: 'hidden', display: 'block' },
+      Wa = { letterSpacing: '0', fontWeight: '400' },
+      Xa = ['Webkit', 'O', 'Moz', 'ms'];
     _.extend({
       cssHooks: {
         opacity: {
-          get(a, b) {
+          get: function (a, b) {
             if (b) {
-              const c = v(a, 'opacity');
-              return c === '' ? '1' : c;
+              var c = v(a, 'opacity');
+              return '' === c ? '1' : c;
             }
           },
         },
@@ -3631,13 +3651,13 @@ if (
         zoom: !0,
       },
       cssProps: { float: 'cssFloat' },
-      style(a, b, c, d) {
-        if (a && a.nodeType !== 3 && a.nodeType !== 8 && a.style) {
-          let e;
-          let f;
-          let g;
-          const h = _.camelCase(b);
-          const i = a.style;
+      style: function (a, b, c, d) {
+        if (a && 3 !== a.nodeType && 8 !== a.nodeType && a.style) {
+          var e,
+            f,
+            g,
+            h = _.camelCase(b),
+            i = a.style;
           return (
             (b = _.cssProps[h] || (_.cssProps[h] = x(i, h))),
             (g = _.cssHooks[b] || _.cssHooks[h]),
@@ -3646,17 +3666,17 @@ if (
                 ? e
                 : i[b]
               : ((f = typeof c),
-                f === 'string' &&
+                'string' === f &&
                   (e = Ua.exec(c)) &&
                   ((c = (e[1] + 1) * e[2] + parseFloat(_.css(a, b))),
                   (f = 'number')),
                 void (
-                  c != null &&
+                  null != c &&
                   c === c &&
-                  (f !== 'number' || _.cssNumber[h] || (c += 'px'),
+                  ('number' !== f || _.cssNumber[h] || (c += 'px'),
                   Y.clearCloneStyle ||
-                    c !== '' ||
-                    b.indexOf('background') !== 0 ||
+                    '' !== c ||
+                    0 !== b.indexOf('background') ||
                     (i[b] = 'inherit'),
                   (g && 'set' in g && void 0 === (c = g.set(a, c, d))) ||
                     (i[b] = c))
@@ -3664,18 +3684,18 @@ if (
           );
         }
       },
-      css(a, b, c, d) {
-        let e;
-        let f;
-        let g;
-        const h = _.camelCase(b);
+      css: function (a, b, c, d) {
+        var e,
+          f,
+          g,
+          h = _.camelCase(b);
         return (
           (b = _.cssProps[h] || (_.cssProps[h] = x(a.style, h))),
           (g = _.cssHooks[b] || _.cssHooks[h]),
           g && 'get' in g && (e = g.get(a, !0, c)),
           void 0 === e && (e = v(a, b, d)),
-          e === 'normal' && b in Wa && (e = Wa[b]),
-          c === '' || c
+          'normal' === e && b in Wa && (e = Wa[b]),
+          '' === c || c
             ? ((f = parseFloat(e)), c === !0 || _.isNumeric(f) ? f || 0 : e)
             : e
         );
@@ -3683,22 +3703,22 @@ if (
     }),
       _.each(['height', 'width'], function (a, b) {
         _.cssHooks[b] = {
-          get(a, c, d) {
+          get: function (a, c, d) {
             return c
-              ? Sa.test(_.css(a, 'display')) && a.offsetWidth === 0
+              ? Sa.test(_.css(a, 'display')) && 0 === a.offsetWidth
                 ? _.swap(a, Va, function () {
                     return A(a, b, d);
                   })
                 : A(a, b, d)
               : void 0;
           },
-          set(a, c, d) {
-            const e = d && Ra(a);
+          set: function (a, c, d) {
+            var e = d && Ra(a);
             return y(
               a,
               c,
               d
-                ? z(a, b, d, _.css(a, 'boxSizing', !1, e) === 'border-box', e)
+                ? z(a, b, d, 'border-box' === _.css(a, 'boxSizing', !1, e), e)
                 : 0
             );
           },
@@ -3711,10 +3731,10 @@ if (
       })),
       _.each({ margin: '', padding: '', border: 'Width' }, function (a, b) {
         (_.cssHooks[a + b] = {
-          expand(c) {
+          expand: function (c) {
             for (
-              var d = 0, e = {}, f = typeof c === 'string' ? c.split(' ') : [c];
-              d < 4;
+              var d = 0, e = {}, f = 'string' == typeof c ? c.split(' ') : [c];
+              4 > d;
               d++
             )
               e[a + wa[d] + b] = f[d] || f[d - 2] || f[0];
@@ -3724,14 +3744,14 @@ if (
           Pa.test(a) || (_.cssHooks[a + b].set = y);
       }),
       _.fn.extend({
-        css(a, b) {
+        css: function (a, b) {
           return qa(
             this,
             function (a, b, c) {
-              let d;
-              let e;
-              const f = {};
-              let g = 0;
+              var d,
+                e,
+                f = {},
+                g = 0;
               if (_.isArray(b)) {
                 for (d = Ra(a), e = b.length; e > g; g++)
                   f[b[g]] = _.css(a, b[g], !1, d);
@@ -3744,14 +3764,14 @@ if (
             arguments.length > 1
           );
         },
-        show() {
+        show: function () {
           return B(this, !0);
         },
-        hide() {
+        hide: function () {
           return B(this);
         },
-        toggle(a) {
-          return typeof a === 'boolean'
+        toggle: function (a) {
+          return 'boolean' == typeof a
             ? a
               ? this.show()
               : this.hide()
@@ -3763,7 +3783,7 @@ if (
       (_.Tween = C),
       (C.prototype = {
         constructor: C,
-        init(a, b, c, d, e, f) {
+        init: function (a, b, c, d, e, f) {
           (this.elem = a),
             (this.prop = c),
             (this.easing = e || 'swing'),
@@ -3772,13 +3792,13 @@ if (
             (this.end = d),
             (this.unit = f || (_.cssNumber[c] ? '' : 'px'));
         },
-        cur() {
-          const a = C.propHooks[this.prop];
+        cur: function () {
+          var a = C.propHooks[this.prop];
           return a && a.get ? a.get(this) : C.propHooks._default.get(this);
         },
-        run(a) {
-          let b;
-          const c = C.propHooks[this.prop];
+        run: function (a) {
+          var b,
+            c = C.propHooks[this.prop];
           return (
             this.options.duration
               ? (this.pos = b =
@@ -3801,18 +3821,18 @@ if (
       (C.prototype.init.prototype = C.prototype),
       (C.propHooks = {
         _default: {
-          get(a) {
-            let b;
-            return a.elem[a.prop] == null ||
-              (a.elem.style && a.elem.style[a.prop] != null)
-              ? ((b = _.css(a.elem, a.prop, '')), b && b !== 'auto' ? b : 0)
+          get: function (a) {
+            var b;
+            return null == a.elem[a.prop] ||
+              (a.elem.style && null != a.elem.style[a.prop])
+              ? ((b = _.css(a.elem, a.prop, '')), b && 'auto' !== b ? b : 0)
               : a.elem[a.prop];
           },
-          set(a) {
+          set: function (a) {
             _.fx.step[a.prop]
               ? _.fx.step[a.prop](a)
               : a.elem.style &&
-                (a.elem.style[_.cssProps[a.prop]] != null || _.cssHooks[a.prop])
+                (null != a.elem.style[_.cssProps[a.prop]] || _.cssHooks[a.prop])
               ? _.style(a.elem, a.prop, a.now + a.unit)
               : (a.elem[a.prop] = a.now);
           },
@@ -3820,65 +3840,66 @@ if (
       }),
       (C.propHooks.scrollTop = C.propHooks.scrollLeft =
         {
-          set(a) {
+          set: function (a) {
             a.elem.nodeType && a.elem.parentNode && (a.elem[a.prop] = a.now);
           },
         }),
       (_.easing = {
-        linear(a) {
+        linear: function (a) {
           return a;
         },
-        swing(a) {
+        swing: function (a) {
           return 0.5 - Math.cos(a * Math.PI) / 2;
         },
       }),
       (_.fx = C.prototype.init),
       (_.fx.step = {});
-    let Ya;
-    let Za;
-    var $a = /^(?:toggle|show|hide)$/;
-    const _a = new RegExp(`^(?:([+-])=|)(${va})([a-z%]*)$`, 'i');
-    const ab = /queueHooks$/;
-    var bb = [G];
-    var cb = {
-      '*': [
-        function (a, b) {
-          const c = this.createTween(a, b);
-          const d = c.cur();
-          let e = _a.exec(b);
-          let f = (e && e[3]) || (_.cssNumber[a] ? '' : 'px');
-          let g =
-            (_.cssNumber[a] || (f !== 'px' && +d)) && _a.exec(_.css(c.elem, a));
-          let h = 1;
-          let i = 20;
-          if (g && g[3] !== f) {
-            (f = f || g[3]), (e = e || []), (g = +d || 1);
-            do (h = h || '.5'), (g /= h), _.style(c.elem, a, g + f);
-            while (h !== (h = c.cur() / d) && h !== 1 && --i);
-          }
-          return (
-            e &&
-              ((g = c.start = +g || +d || 0),
-              (c.unit = f),
-              (c.end = e[1] ? g + (e[1] + 1) * e[2] : +e[2])),
-            c
-          );
-        },
-      ],
-    };
+    var Ya,
+      Za,
+      $a = /^(?:toggle|show|hide)$/,
+      _a = new RegExp('^(?:([+-])=|)(' + va + ')([a-z%]*)$', 'i'),
+      ab = /queueHooks$/,
+      bb = [G],
+      cb = {
+        '*': [
+          function (a, b) {
+            var c = this.createTween(a, b),
+              d = c.cur(),
+              e = _a.exec(b),
+              f = (e && e[3]) || (_.cssNumber[a] ? '' : 'px'),
+              g =
+                (_.cssNumber[a] || ('px' !== f && +d)) &&
+                _a.exec(_.css(c.elem, a)),
+              h = 1,
+              i = 20;
+            if (g && g[3] !== f) {
+              (f = f || g[3]), (e = e || []), (g = +d || 1);
+              do (h = h || '.5'), (g /= h), _.style(c.elem, a, g + f);
+              while (h !== (h = c.cur() / d) && 1 !== h && --i);
+            }
+            return (
+              e &&
+                ((g = c.start = +g || +d || 0),
+                (c.unit = f),
+                (c.end = e[1] ? g + (e[1] + 1) * e[2] : +e[2])),
+              c
+            );
+          },
+        ],
+      };
     (_.Animation = _.extend(I, {
-      tweener(a, b) {
+      tweener: function (a, b) {
         _.isFunction(a) ? ((b = a), (a = ['*'])) : (a = a.split(' '));
         for (var c, d = 0, e = a.length; e > d; d++)
           (c = a[d]), (cb[c] = cb[c] || []), cb[c].unshift(b);
       },
-      prefilter(a, b) {
+      prefilter: function (a, b) {
         b ? bb.unshift(a) : bb.push(a);
       },
     })),
       (_.speed = function (a, b, c) {
-        const d =
-          a && typeof a === 'object'
+        var d =
+          a && 'object' == typeof a
             ? _.extend({}, a)
             : {
                 complete: c || (!c && b) || (_.isFunction(a) && a),
@@ -3888,12 +3909,12 @@ if (
         return (
           (d.duration = _.fx.off
             ? 0
-            : typeof d.duration === 'number'
+            : 'number' == typeof d.duration
             ? d.duration
             : d.duration in _.fx.speeds
             ? _.fx.speeds[d.duration]
             : _.fx.speeds._default),
-          (d.queue == null || d.queue === !0) && (d.queue = 'fx'),
+          (null == d.queue || d.queue === !0) && (d.queue = 'fx'),
           (d.old = d.complete),
           (d.complete = function () {
             _.isFunction(d.old) && d.old.call(this),
@@ -3903,58 +3924,58 @@ if (
         );
       }),
       _.fn.extend({
-        fadeTo(a, b, c, d) {
+        fadeTo: function (a, b, c, d) {
           return this.filter(xa)
             .css('opacity', 0)
             .show()
             .end()
             .animate({ opacity: b }, a, c, d);
         },
-        animate(a, b, c, d) {
-          const e = _.isEmptyObject(a);
-          const f = _.speed(b, c, d);
-          const g = function () {
-            const b = I(this, _.extend({}, a), f);
-            (e || ra.get(this, 'finish')) && b.stop(!0);
-          };
+        animate: function (a, b, c, d) {
+          var e = _.isEmptyObject(a),
+            f = _.speed(b, c, d),
+            g = function () {
+              var b = I(this, _.extend({}, a), f);
+              (e || ra.get(this, 'finish')) && b.stop(!0);
+            };
           return (
             (g.finish = g),
             e || f.queue === !1 ? this.each(g) : this.queue(f.queue, g)
           );
         },
-        stop(a, b, c) {
-          const d = function (a) {
-            const b = a.stop;
+        stop: function (a, b, c) {
+          var d = function (a) {
+            var b = a.stop;
             delete a.stop, b(c);
           };
           return (
-            typeof a !== 'string' && ((c = b), (b = a), (a = void 0)),
+            'string' != typeof a && ((c = b), (b = a), (a = void 0)),
             b && a !== !1 && this.queue(a || 'fx', []),
             this.each(function () {
-              let b = !0;
-              let e = a != null && `${a}queueHooks`;
-              const f = _.timers;
-              const g = ra.get(this);
+              var b = !0,
+                e = null != a && a + 'queueHooks',
+                f = _.timers,
+                g = ra.get(this);
               if (e) g[e] && g[e].stop && d(g[e]);
               else for (e in g) g[e] && g[e].stop && ab.test(e) && d(g[e]);
               for (e = f.length; e--; )
                 f[e].elem !== this ||
-                  (a != null && f[e].queue !== a) ||
+                  (null != a && f[e].queue !== a) ||
                   (f[e].anim.stop(c), (b = !1), f.splice(e, 1));
               (b || !c) && _.dequeue(this, a);
             })
           );
         },
-        finish(a) {
+        finish: function (a) {
           return (
             a !== !1 && (a = a || 'fx'),
             this.each(function () {
-              let b;
-              const c = ra.get(this);
-              const d = c[`${a}queue`];
-              const e = c[`${a}queueHooks`];
-              const f = _.timers;
-              const g = d ? d.length : 0;
+              var b,
+                c = ra.get(this),
+                d = c[a + 'queue'],
+                e = c[a + 'queueHooks'],
+                f = _.timers,
+                g = d ? d.length : 0;
               for (
                 c.finish = !0,
                   _.queue(this, a, []),
@@ -3974,9 +3995,9 @@ if (
         },
       }),
       _.each(['toggle', 'show', 'hide'], function (a, b) {
-        const c = _.fn[b];
+        var c = _.fn[b];
         _.fn[b] = function (a, d, e) {
-          return a == null || typeof a === 'boolean'
+          return null == a || 'boolean' == typeof a
             ? c.apply(this, arguments)
             : this.animate(E(b, !0), a, d, e);
         };
@@ -3998,9 +4019,9 @@ if (
       ),
       (_.timers = []),
       (_.fx.tick = function () {
-        let a;
-        let b = 0;
-        const c = _.timers;
+        var a,
+          b = 0,
+          c = _.timers;
         for (Ya = _.now(); b < c.length; b++)
           (a = c[b]), a() || c[b] !== a || c.splice(b--, 1);
         c.length || _.fx.stop(), (Ya = void 0);
@@ -4021,7 +4042,7 @@ if (
           (a = _.fx ? _.fx.speeds[a] || a : a),
           (b = b || 'fx'),
           this.queue(b, function (b, c) {
-            const d = setTimeout(b, a);
+            var d = setTimeout(b, a);
             c.stop = function () {
               clearTimeout(d);
             };
@@ -4029,60 +4050,60 @@ if (
         );
       }),
       (function () {
-        let a = Z.createElement('input');
-        const b = Z.createElement('select');
-        const c = b.appendChild(Z.createElement('option'));
+        var a = Z.createElement('input'),
+          b = Z.createElement('select'),
+          c = b.appendChild(Z.createElement('option'));
         (a.type = 'checkbox'),
-          (Y.checkOn = a.value !== ''),
+          (Y.checkOn = '' !== a.value),
           (Y.optSelected = c.selected),
           (b.disabled = !0),
           (Y.optDisabled = !c.disabled),
           (a = Z.createElement('input')),
           (a.value = 't'),
           (a.type = 'radio'),
-          (Y.radioValue = a.value === 't');
+          (Y.radioValue = 't' === a.value);
       })();
-    let db;
-    let eb;
-    const fb = _.expr.attrHandle;
+    var db,
+      eb,
+      fb = _.expr.attrHandle;
     _.fn.extend({
-      attr(a, b) {
+      attr: function (a, b) {
         return qa(this, _.attr, a, b, arguments.length > 1);
       },
-      removeAttr(a) {
+      removeAttr: function (a) {
         return this.each(function () {
           _.removeAttr(this, a);
         });
       },
     }),
       _.extend({
-        attr(a, b, c) {
-          let d;
-          let e;
-          const f = a.nodeType;
-          if (a && f !== 3 && f !== 8 && f !== 2)
+        attr: function (a, b, c) {
+          var d,
+            e,
+            f = a.nodeType;
+          if (a && 3 !== f && 8 !== f && 2 !== f)
             return typeof a.getAttribute === za
               ? _.prop(a, b, c)
-              : ((f === 1 && _.isXMLDoc(a)) ||
+              : ((1 === f && _.isXMLDoc(a)) ||
                   ((b = b.toLowerCase()),
                   (d =
                     _.attrHooks[b] || (_.expr.match.bool.test(b) ? eb : db))),
                 void 0 === c
-                  ? d && 'get' in d && (e = d.get(a, b)) !== null
+                  ? d && 'get' in d && null !== (e = d.get(a, b))
                     ? e
-                    : ((e = _.find.attr(a, b)), e == null ? void 0 : e)
-                  : c !== null
+                    : ((e = _.find.attr(a, b)), null == e ? void 0 : e)
+                  : null !== c
                   ? d && 'set' in d && void 0 !== (e = d.set(a, c, b))
                     ? e
-                    : (a.setAttribute(b, `${c}`), c)
+                    : (a.setAttribute(b, c + ''), c)
                   : void _.removeAttr(a, b));
         },
-        removeAttr(a, b) {
-          let c;
-          let d;
-          let e = 0;
-          const f = b && b.match(na);
-          if (f && a.nodeType === 1)
+        removeAttr: function (a, b) {
+          var c,
+            d,
+            e = 0,
+            f = b && b.match(na);
+          if (f && 1 === a.nodeType)
             for (; (c = f[e++]); )
               (d = _.propFix[c] || c),
                 _.expr.match.bool.test(c) && (a[d] = !1),
@@ -4090,9 +4111,9 @@ if (
         },
         attrHooks: {
           type: {
-            set(a, b) {
-              if (!Y.radioValue && b === 'radio' && _.nodeName(a, 'input')) {
-                const c = a.value;
+            set: function (a, b) {
+              if (!Y.radioValue && 'radio' === b && _.nodeName(a, 'input')) {
+                var c = a.value;
                 return a.setAttribute('type', b), c && (a.value = c), b;
               }
             },
@@ -4100,31 +4121,30 @@ if (
         },
       }),
       (eb = {
-        set(a, b, c) {
+        set: function (a, b, c) {
           return b === !1 ? _.removeAttr(a, c) : a.setAttribute(c, c), c;
         },
       }),
       _.each(_.expr.match.bool.source.match(/\w+/g), function (a, b) {
-        const c = fb[b] || _.find.attr;
+        var c = fb[b] || _.find.attr;
         fb[b] = function (a, b, d) {
-          let e;
-          let f;
+          var e, f;
           return (
             d ||
               ((f = fb[b]),
               (fb[b] = e),
-              (e = c(a, b, d) != null ? b.toLowerCase() : null),
+              (e = null != c(a, b, d) ? b.toLowerCase() : null),
               (fb[b] = f)),
             e
           );
         };
       });
-    const gb = /^(?:input|select|textarea|button)$/i;
+    var gb = /^(?:input|select|textarea|button)$/i;
     _.fn.extend({
-      prop(a, b) {
+      prop: function (a, b) {
         return qa(this, _.prop, a, b, arguments.length > 1);
       },
-      removeProp(a) {
+      removeProp: function (a) {
         return this.each(function () {
           delete this[_.propFix[a] || a];
         });
@@ -4132,27 +4152,27 @@ if (
     }),
       _.extend({
         propFix: { for: 'htmlFor', class: 'className' },
-        prop(a, b, c) {
-          let d;
-          let e;
-          let f;
-          const g = a.nodeType;
-          if (a && g !== 3 && g !== 8 && g !== 2)
+        prop: function (a, b, c) {
+          var d,
+            e,
+            f,
+            g = a.nodeType;
+          if (a && 3 !== g && 8 !== g && 2 !== g)
             return (
-              (f = g !== 1 || !_.isXMLDoc(a)),
+              (f = 1 !== g || !_.isXMLDoc(a)),
               f && ((b = _.propFix[b] || b), (e = _.propHooks[b])),
               void 0 !== c
                 ? e && 'set' in e && void 0 !== (d = e.set(a, c, b))
                   ? d
                   : (a[b] = c)
-                : e && 'get' in e && (d = e.get(a, b)) !== null
+                : e && 'get' in e && null !== (d = e.get(a, b))
                 ? d
                 : a[b]
             );
         },
         propHooks: {
           tabIndex: {
-            get(a) {
+            get: function (a) {
               return a.hasAttribute('tabindex') || gb.test(a.nodeName) || a.href
                 ? a.tabIndex
                 : -1;
@@ -4162,8 +4182,8 @@ if (
       }),
       Y.optSelected ||
         (_.propHooks.selected = {
-          get(a) {
-            const b = a.parentNode;
+          get: function (a) {
+            var b = a.parentNode;
             return b && b.parentNode && b.parentNode.selectedIndex, null;
           },
         }),
@@ -4184,18 +4204,18 @@ if (
           _.propFix[this.toLowerCase()] = this;
         }
       );
-    const hb = /[\t\r\n\f]/g;
+    var hb = /[\t\r\n\f]/g;
     _.fn.extend({
-      addClass(a) {
-        let b;
-        let c;
-        let d;
-        let e;
-        let f;
-        let g;
-        const h = typeof a === 'string' && a;
-        let i = 0;
-        const j = this.length;
+      addClass: function (a) {
+        var b,
+          c,
+          d,
+          e,
+          f,
+          g,
+          h = 'string' == typeof a && a,
+          i = 0,
+          j = this.length;
         if (_.isFunction(a))
           return this.each(function (b) {
             _(this).addClass(a.call(this, b, this.className));
@@ -4205,25 +4225,27 @@ if (
             if (
               ((c = this[i]),
               (d =
-                c.nodeType === 1 &&
-                (c.className ? ` ${c.className} `.replace(hb, ' ') : ' ')))
+                1 === c.nodeType &&
+                (c.className
+                  ? (' ' + c.className + ' ').replace(hb, ' ')
+                  : ' ')))
             ) {
               for (f = 0; (e = b[f++]); )
-                d.indexOf(` ${e} `) < 0 && (d += `${e} `);
+                d.indexOf(' ' + e + ' ') < 0 && (d += e + ' ');
               (g = _.trim(d)), c.className !== g && (c.className = g);
             }
         return this;
       },
-      removeClass(a) {
-        let b;
-        let c;
-        let d;
-        let e;
-        let f;
-        let g;
-        const h = arguments.length === 0 || (typeof a === 'string' && a);
-        let i = 0;
-        const j = this.length;
+      removeClass: function (a) {
+        var b,
+          c,
+          d,
+          e,
+          f,
+          g,
+          h = 0 === arguments.length || ('string' == typeof a && a),
+          i = 0,
+          j = this.length;
         if (_.isFunction(a))
           return this.each(function (b) {
             _(this).removeClass(a.call(this, b, this.className));
@@ -4233,18 +4255,21 @@ if (
             if (
               ((c = this[i]),
               (d =
-                c.nodeType === 1 &&
-                (c.className ? ` ${c.className} `.replace(hb, ' ') : '')))
+                1 === c.nodeType &&
+                (c.className
+                  ? (' ' + c.className + ' ').replace(hb, ' ')
+                  : '')))
             ) {
               for (f = 0; (e = b[f++]); )
-                for (; d.indexOf(` ${e} `) >= 0; ) d = d.replace(` ${e} `, ' ');
+                for (; d.indexOf(' ' + e + ' ') >= 0; )
+                  d = d.replace(' ' + e + ' ', ' ');
               (g = a ? _.trim(d) : ''), c.className !== g && (c.className = g);
             }
         return this;
       },
-      toggleClass(a, b) {
-        const c = typeof a;
-        return typeof b === 'boolean' && c === 'string'
+      toggleClass: function (a, b) {
+        var c = typeof a;
+        return 'boolean' == typeof b && 'string' === c
           ? b
             ? this.addClass(a)
             : this.removeClass(a)
@@ -4254,7 +4279,7 @@ if (
                     _(this).toggleClass(a.call(this, c, this.className, b), b);
                   }
                 : function () {
-                    if (c === 'string')
+                    if ('string' === c)
                       for (
                         var b, d = 0, e = _(this), f = a.match(na) || [];
                         (b = f[d++]);
@@ -4262,7 +4287,7 @@ if (
                       )
                         e.hasClass(b) ? e.removeClass(b) : e.addClass(b);
                     else
-                      (c === za || c === 'boolean') &&
+                      (c === za || 'boolean' === c) &&
                         (this.className &&
                           ra.set(this, '__className__', this.className),
                         (this.className =
@@ -4272,36 +4297,36 @@ if (
                   }
             );
       },
-      hasClass(a) {
-        for (let b = ` ${a} `, c = 0, d = this.length; d > c; c++)
+      hasClass: function (a) {
+        for (var b = ' ' + a + ' ', c = 0, d = this.length; d > c; c++)
           if (
-            this[c].nodeType === 1 &&
-            ` ${this[c].className} `.replace(hb, ' ').indexOf(b) >= 0
+            1 === this[c].nodeType &&
+            (' ' + this[c].className + ' ').replace(hb, ' ').indexOf(b) >= 0
           )
             return !0;
         return !1;
       },
     });
-    const ib = /\r/g;
+    var ib = /\r/g;
     _.fn.extend({
-      val(a) {
-        let b;
-        let c;
-        let d;
-        const e = this[0];
+      val: function (a) {
+        var b,
+          c,
+          d,
+          e = this[0];
         return arguments.length
           ? ((d = _.isFunction(a)),
             this.each(function (c) {
-              let e;
-              this.nodeType === 1 &&
+              var e;
+              1 === this.nodeType &&
                 ((e = d ? a.call(this, c, _(this).val()) : a),
-                e == null
+                null == e
                   ? (e = '')
-                  : typeof e === 'number'
+                  : 'number' == typeof e
                   ? (e += '')
                   : _.isArray(e) &&
                     (e = _.map(e, function (a) {
-                      return a == null ? '' : `${a}`;
+                      return null == a ? '' : a + '';
                     })),
                 (b =
                   _.valHooks[this.type] ||
@@ -4314,29 +4339,29 @@ if (
             b && 'get' in b && void 0 !== (c = b.get(e, 'value'))
               ? c
               : ((c = e.value),
-                typeof c === 'string' ? c.replace(ib, '') : c == null ? '' : c))
+                'string' == typeof c ? c.replace(ib, '') : null == c ? '' : c))
           : void 0;
       },
     }),
       _.extend({
         valHooks: {
           option: {
-            get(a) {
-              const b = _.find.attr(a, 'value');
-              return b != null ? b : _.trim(_.text(a));
+            get: function (a) {
+              var b = _.find.attr(a, 'value');
+              return null != b ? b : _.trim(_.text(a));
             },
           },
           select: {
-            get(a) {
+            get: function (a) {
               for (
                 var b,
                   c,
                   d = a.options,
                   e = a.selectedIndex,
-                  f = a.type === 'select-one' || e < 0,
+                  f = 'select-one' === a.type || 0 > e,
                   g = f ? null : [],
                   h = f ? e + 1 : d.length,
-                  i = e < 0 ? h : f ? e : 0;
+                  i = 0 > e ? h : f ? e : 0;
                 h > i;
                 i++
               )
@@ -4346,7 +4371,7 @@ if (
                     (!c.selected && i !== e) ||
                     (Y.optDisabled
                       ? c.disabled
-                      : c.getAttribute('disabled') !== null) ||
+                      : null !== c.getAttribute('disabled')) ||
                     (c.parentNode.disabled &&
                       _.nodeName(c.parentNode, 'optgroup'))
                   ))
@@ -4356,7 +4381,7 @@ if (
                 }
               return g;
             },
-            set(a, b) {
+            set: function (a, b) {
               for (
                 var c, d, e = a.options, f = _.makeArray(b), g = e.length;
                 g--;
@@ -4371,7 +4396,7 @@ if (
       }),
       _.each(['radio', 'checkbox'], function () {
         (_.valHooks[this] = {
-          set(a, b) {
+          set: function (a, b) {
             return _.isArray(b)
               ? (a.checked = _.inArray(_(a).val(), b) >= 0)
               : void 0;
@@ -4379,7 +4404,7 @@ if (
         }),
           Y.checkOn ||
             (_.valHooks[this].get = function (a) {
-              return a.getAttribute('value') === null ? 'on' : a.value;
+              return null === a.getAttribute('value') ? 'on' : a.value;
             });
       }),
       _.each(
@@ -4395,33 +4420,32 @@ if (
         }
       ),
       _.fn.extend({
-        hover(a, b) {
+        hover: function (a, b) {
           return this.mouseenter(a).mouseleave(b || a);
         },
-        bind(a, b, c) {
+        bind: function (a, b, c) {
           return this.on(a, null, b, c);
         },
-        unbind(a, b) {
+        unbind: function (a, b) {
           return this.off(a, null, b);
         },
-        delegate(a, b, c, d) {
+        delegate: function (a, b, c, d) {
           return this.on(b, a, c, d);
         },
-        undelegate(a, b, c) {
-          return arguments.length === 1
+        undelegate: function (a, b, c) {
+          return 1 === arguments.length
             ? this.off(a, '**')
             : this.off(b, a || '**', c);
         },
       });
-    let jb = _.now();
-    const kb = /\?/;
+    var jb = _.now(),
+      kb = /\?/;
     (_.parseJSON = function (a) {
-      return JSON.parse(`${a}`);
+      return JSON.parse(a + '');
     }),
       (_.parseXML = function (a) {
-        let b;
-        let c;
-        if (!a || typeof a !== 'string') return null;
+        var b, c;
+        if (!a || 'string' != typeof a) return null;
         try {
           (c = new DOMParser()), (b = c.parseFromString(a, 'text/xml'));
         } catch (a) {
@@ -4429,22 +4453,22 @@ if (
         }
         return (
           (!b || b.getElementsByTagName('parsererror').length) &&
-            _.error(`Invalid XML: ${a}`),
+            _.error('Invalid XML: ' + a),
           b
         );
       });
-    const lb = /#.*$/;
-    const mb = /([?&])_=[^&]*/;
-    const nb = /^(.*?):[ \t]*([^\r\n]*)$/gm;
-    const ob = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/;
-    const pb = /^(?:GET|HEAD)$/;
-    const qb = /^\/\//;
-    const rb = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/;
-    const sb = {};
-    var tb = {};
-    const ub = '*/'.concat('*');
-    const vb = a.location.href;
-    const wb = rb.exec(vb.toLowerCase()) || [];
+    var lb = /#.*$/,
+      mb = /([?&])_=[^&]*/,
+      nb = /^(.*?):[ \t]*([^\r\n]*)$/gm,
+      ob = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
+      pb = /^(?:GET|HEAD)$/,
+      qb = /^\/\//,
+      rb = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/,
+      sb = {},
+      tb = {},
+      ub = '*/'.concat('*'),
+      vb = a.location.href,
+      wb = rb.exec(vb.toLowerCase()) || [];
     _.extend({
       active: 0,
       lastModified: {},
@@ -4478,26 +4502,26 @@ if (
         },
         flatOptions: { url: !0, context: !0 },
       },
-      ajaxSetup(a, b) {
+      ajaxSetup: function (a, b) {
         return b ? L(L(a, _.ajaxSettings), b) : L(_.ajaxSettings, a);
       },
       ajaxPrefilter: J(sb),
       ajaxTransport: J(tb),
-      ajax(a, b) {
+      ajax: function (a, b) {
         function c(a, b, c, g) {
-          let i;
-          let k;
-          let r;
-          let s;
-          let u;
-          let w = b;
-          t !== 2 &&
+          var i,
+            k,
+            r,
+            s,
+            u,
+            w = b;
+          2 !== t &&
             ((t = 2),
             h && clearTimeout(h),
             (d = void 0),
             (f = g || ''),
             (v.readyState = a > 0 ? 4 : 0),
-            (i = (a >= 200 && a < 300) || a === 304),
+            (i = (a >= 200 && 300 > a) || 304 === a),
             c && (s = M(l, v, c)),
             (s = N(l, s, v, i)),
             i
@@ -4506,14 +4530,14 @@ if (
                   u && (_.lastModified[e] = u),
                   (u = v.getResponseHeader('etag')),
                   u && (_.etag[e] = u)),
-                a === 204 || l.type === 'HEAD'
+                204 === a || 'HEAD' === l.type
                   ? (w = 'nocontent')
-                  : a === 304
+                  : 304 === a
                   ? (w = 'notmodified')
                   : ((w = s.state), (k = s.data), (r = s.error), (i = !r)))
-              : ((r = w), (a || !w) && ((w = 'error'), a < 0 && (a = 0))),
+              : ((r = w), (a || !w) && ((w = 'error'), 0 > a && (a = 0))),
             (v.status = a),
-            (v.statusText = `${b || w}`),
+            (v.statusText = (b || w) + ''),
             i ? o.resolveWith(m, [k, w, v]) : o.rejectWith(m, [v, w, r]),
             v.statusCode(q),
             (q = void 0),
@@ -4523,88 +4547,88 @@ if (
               (n.trigger('ajaxComplete', [v, l]),
               --_.active || _.event.trigger('ajaxStop')));
         }
-        typeof a === 'object' && ((b = a), (a = void 0)), (b = b || {});
-        let d;
-        let e;
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        let k;
-        var l = _.ajaxSetup({}, b);
-        var m = l.context || l;
-        var n = l.context && (m.nodeType || m.jquery) ? _(m) : _.event;
-        var o = _.Deferred();
-        var p = _.Callbacks('once memory');
-        var q = l.statusCode || {};
-        const r = {};
-        const s = {};
-        var t = 0;
-        let u = 'canceled';
-        var v = {
-          readyState: 0,
-          getResponseHeader(a) {
-            let b;
-            if (t === 2) {
-              if (!g)
-                for (g = {}; (b = nb.exec(f)); ) g[b[1].toLowerCase()] = b[2];
-              b = g[a.toLowerCase()];
-            }
-            return b == null ? null : b;
-          },
-          getAllResponseHeaders() {
-            return t === 2 ? f : null;
-          },
-          setRequestHeader(a, b) {
-            const c = a.toLowerCase();
-            return t || ((a = s[c] = s[c] || a), (r[a] = b)), this;
-          },
-          overrideMimeType(a) {
-            return t || (l.mimeType = a), this;
-          },
-          statusCode(a) {
-            let b;
-            if (a)
-              if (t < 2) for (b in a) q[b] = [q[b], a[b]];
-              else v.always(a[v.status]);
-            return this;
-          },
-          abort(a) {
-            const b = a || u;
-            return d && d.abort(b), c(0, b), this;
-          },
-        };
+        'object' == typeof a && ((b = a), (a = void 0)), (b = b || {});
+        var d,
+          e,
+          f,
+          g,
+          h,
+          i,
+          j,
+          k,
+          l = _.ajaxSetup({}, b),
+          m = l.context || l,
+          n = l.context && (m.nodeType || m.jquery) ? _(m) : _.event,
+          o = _.Deferred(),
+          p = _.Callbacks('once memory'),
+          q = l.statusCode || {},
+          r = {},
+          s = {},
+          t = 0,
+          u = 'canceled',
+          v = {
+            readyState: 0,
+            getResponseHeader: function (a) {
+              var b;
+              if (2 === t) {
+                if (!g)
+                  for (g = {}; (b = nb.exec(f)); ) g[b[1].toLowerCase()] = b[2];
+                b = g[a.toLowerCase()];
+              }
+              return null == b ? null : b;
+            },
+            getAllResponseHeaders: function () {
+              return 2 === t ? f : null;
+            },
+            setRequestHeader: function (a, b) {
+              var c = a.toLowerCase();
+              return t || ((a = s[c] = s[c] || a), (r[a] = b)), this;
+            },
+            overrideMimeType: function (a) {
+              return t || (l.mimeType = a), this;
+            },
+            statusCode: function (a) {
+              var b;
+              if (a)
+                if (2 > t) for (b in a) q[b] = [q[b], a[b]];
+                else v.always(a[v.status]);
+              return this;
+            },
+            abort: function (a) {
+              var b = a || u;
+              return d && d.abort(b), c(0, b), this;
+            },
+          };
         if (
           ((o.promise(v).complete = p.add),
           (v.success = v.done),
           (v.error = v.fail),
-          (l.url = `${a || l.url || vb}`
+          (l.url = ((a || l.url || vb) + '')
             .replace(lb, '')
-            .replace(qb, `${wb[1]}//`)),
+            .replace(qb, wb[1] + '//')),
           (l.type = b.method || b.type || l.method || l.type),
           (l.dataTypes = _.trim(l.dataType || '*')
             .toLowerCase()
             .match(na) || ['']),
-          l.crossDomain == null &&
+          null == l.crossDomain &&
             ((i = rb.exec(l.url.toLowerCase())),
             (l.crossDomain = !(
               !i ||
               (i[1] === wb[1] &&
                 i[2] === wb[2] &&
-                (i[3] || (i[1] === 'http:' ? '80' : '443')) ===
-                  (wb[3] || (wb[1] === 'http:' ? '80' : '443')))
+                (i[3] || ('http:' === i[1] ? '80' : '443')) ===
+                  (wb[3] || ('http:' === wb[1] ? '80' : '443')))
             ))),
           l.data &&
             l.processData &&
-            typeof l.data !== 'string' &&
+            'string' != typeof l.data &&
             (l.data = _.param(l.data, l.traditional)),
           K(sb, l, b, v),
-          t === 2)
+          2 === t)
         )
           return v;
         (j = _.event && l.global),
-          j && _.active++ === 0 && _.event.trigger('ajaxStart'),
+          j && 0 === _.active++ && _.event.trigger('ajaxStart'),
           (l.type = l.type.toUpperCase()),
           (l.hasContent = !pb.test(l.type)),
           (e = l.url),
@@ -4613,8 +4637,8 @@ if (
               ((e = l.url += (kb.test(e) ? '&' : '?') + l.data), delete l.data),
             l.cache === !1 &&
               (l.url = mb.test(e)
-                ? e.replace(mb, `$1_=${jb++}`)
-                : `${e + (kb.test(e) ? '&' : '?')}_=${jb++}`)),
+                ? e.replace(mb, '$1_=' + jb++)
+                : e + (kb.test(e) ? '&' : '?') + '_=' + jb++)),
           l.ifModified &&
             (_.lastModified[e] &&
               v.setRequestHeader('If-Modified-Since', _.lastModified[e]),
@@ -4625,11 +4649,11 @@ if (
             'Accept',
             l.dataTypes[0] && l.accepts[l.dataTypes[0]]
               ? l.accepts[l.dataTypes[0]] +
-                  (l.dataTypes[0] !== '*' ? `, ${ub}; q=0.01` : '')
+                  ('*' !== l.dataTypes[0] ? ', ' + ub + '; q=0.01' : '')
               : l.accepts['*']
           );
         for (k in l.headers) v.setRequestHeader(k, l.headers[k]);
-        if (l.beforeSend && (l.beforeSend.call(m, v, l) === !1 || t === 2))
+        if (l.beforeSend && (l.beforeSend.call(m, v, l) === !1 || 2 === t))
           return v.abort();
         u = 'abort';
         for (k in { success: 1, error: 1, complete: 1 }) v[k](l[k]);
@@ -4644,16 +4668,16 @@ if (
           try {
             (t = 1), d.send(r, c);
           } catch (a) {
-            if (!(t < 2)) throw a;
+            if (!(2 > t)) throw a;
             c(-1, a);
           }
         } else c(-1, 'No Transport');
         return v;
       },
-      getJSON(a, b, c) {
+      getJSON: function (a, b, c) {
         return _.get(a, b, c, 'json');
       },
-      getScript(a, b) {
+      getScript: function (a, b) {
         return _.get(a, void 0, b, 'script');
       },
     }),
@@ -4676,8 +4700,8 @@ if (
         });
       }),
       _.fn.extend({
-        wrapAll(a) {
-          let b;
+        wrapAll: function (a) {
+          var b;
           return _.isFunction(a)
             ? this.each(function (b) {
                 _(this).wrapAll(a.call(this, b));
@@ -4694,26 +4718,26 @@ if (
                   .append(this)),
               this);
         },
-        wrapInner(a) {
+        wrapInner: function (a) {
           return this.each(
             _.isFunction(a)
               ? function (b) {
                   _(this).wrapInner(a.call(this, b));
                 }
               : function () {
-                  const b = _(this);
-                  const c = b.contents();
+                  var b = _(this),
+                    c = b.contents();
                   c.length ? c.wrapAll(a) : b.append(a);
                 }
           );
         },
-        wrap(a) {
-          const b = _.isFunction(a);
+        wrap: function (a) {
+          var b = _.isFunction(a);
           return this.each(function (c) {
             _(this).wrapAll(b ? a.call(this, c) : a);
           });
         },
-        unwrap() {
+        unwrap: function () {
           return this.parent()
             .each(function () {
               _.nodeName(this, 'body') || _(this).replaceWith(this.childNodes);
@@ -4727,18 +4751,18 @@ if (
       (_.expr.filters.visible = function (a) {
         return !_.expr.filters.hidden(a);
       });
-    const xb = /%20/g;
-    var yb = /\[\]$/;
-    const zb = /\r?\n/g;
-    const Ab = /^(?:submit|button|image|reset|file)$/i;
-    const Bb = /^(?:input|select|textarea|keygen)/i;
+    var xb = /%20/g,
+      yb = /\[\]$/,
+      zb = /\r?\n/g,
+      Ab = /^(?:submit|button|image|reset|file)$/i,
+      Bb = /^(?:input|select|textarea|keygen)/i;
     (_.param = function (a, b) {
-      let c;
-      const d = [];
-      const e = function (a, b) {
-        (b = _.isFunction(b) ? b() : b == null ? '' : b),
-          (d[d.length] = `${encodeURIComponent(a)}=${encodeURIComponent(b)}`);
-      };
+      var c,
+        d = [],
+        e = function (a, b) {
+          (b = _.isFunction(b) ? b() : null == b ? '' : b),
+            (d[d.length] = encodeURIComponent(a) + '=' + encodeURIComponent(b));
+        };
       if (
         (void 0 === b && (b = _.ajaxSettings && _.ajaxSettings.traditional),
         _.isArray(a) || (a.jquery && !_.isPlainObject(a)))
@@ -4750,16 +4774,16 @@ if (
       return d.join('&').replace(xb, '+');
     }),
       _.fn.extend({
-        serialize() {
+        serialize: function () {
           return _.param(this.serializeArray());
         },
-        serializeArray() {
+        serializeArray: function () {
           return this.map(function () {
-            const a = _.prop(this, 'elements');
+            var a = _.prop(this, 'elements');
             return a ? _.makeArray(a) : this;
           })
             .filter(function () {
-              const a = this.type;
+              var a = this.type;
               return (
                 this.name &&
                 !_(this).is(':disabled') &&
@@ -4769,8 +4793,8 @@ if (
               );
             })
             .map(function (a, b) {
-              const c = _(this).val();
-              return c == null
+              var c = _(this).val();
+              return null == c
                 ? null
                 : _.isArray(c)
                 ? _.map(c, function (a) {
@@ -4786,24 +4810,24 @@ if (
           return new XMLHttpRequest();
         } catch (a) {}
       });
-    let Cb = 0;
-    const Db = {};
-    const Eb = { 0: 200, 1223: 204 };
-    let Fb = _.ajaxSettings.xhr();
+    var Cb = 0,
+      Db = {},
+      Eb = { 0: 200, 1223: 204 },
+      Fb = _.ajaxSettings.xhr();
     a.attachEvent &&
       a.attachEvent('onunload', function () {
-        for (const a in Db) Db[a]();
+        for (var a in Db) Db[a]();
       }),
       (Y.cors = !!Fb && 'withCredentials' in Fb),
       (Y.ajax = Fb = !!Fb),
       _.ajaxTransport(function (a) {
-        let b;
+        var b;
         return Y.cors || (Fb && !a.crossDomain)
           ? {
-              send(c, d) {
-                let e;
-                const f = a.xhr();
-                const g = ++Cb;
+              send: function (c, d) {
+                var e,
+                  f = a.xhr(),
+                  g = ++Cb;
                 if (
                   (f.open(a.type, a.url, a.async, a.username, a.password),
                   a.xhrFields)
@@ -4821,14 +4845,14 @@ if (
                     b &&
                       (delete Db[g],
                       (b = f.onload = f.onerror = null),
-                      a === 'abort'
+                      'abort' === a
                         ? f.abort()
-                        : a === 'error'
+                        : 'error' === a
                         ? d(f.status, f.statusText)
                         : d(
                             Eb[f.status] || f.status,
                             f.statusText,
-                            typeof f.responseText === 'string'
+                            'string' == typeof f.responseText
                               ? { text: f.responseText }
                               : void 0,
                             f.getAllResponseHeaders()
@@ -4844,7 +4868,7 @@ if (
                   if (b) throw a;
                 }
               },
-              abort() {
+              abort: function () {
                 b && b();
               },
             }
@@ -4867,10 +4891,9 @@ if (
       }),
       _.ajaxTransport('script', function (a) {
         if (a.crossDomain) {
-          let b;
-          let c;
+          var b, c;
           return {
-            send(d, e) {
+            send: function (d, e) {
               (b = _('<script>')
                 .prop({ async: !0, charset: a.scriptCharset, src: a.url })
                 .on(
@@ -4878,51 +4901,51 @@ if (
                   (c = function (a) {
                     b.remove(),
                       (c = null),
-                      a && e(a.type === 'error' ? 404 : 200, a.type);
+                      a && e('error' === a.type ? 404 : 200, a.type);
                   })
                 )),
                 Z.head.appendChild(b[0]);
             },
-            abort() {
+            abort: function () {
               c && c();
             },
           };
         }
       });
-    const Gb = [];
-    const Hb = /(=)\?(?=&|$)|\?\?/;
+    var Gb = [],
+      Hb = /(=)\?(?=&|$)|\?\?/;
     _.ajaxSetup({
       jsonp: 'callback',
-      jsonpCallback() {
-        const a = Gb.pop() || `${_.expando}_${jb++}`;
+      jsonpCallback: function () {
+        var a = Gb.pop() || _.expando + '_' + jb++;
         return (this[a] = !0), a;
       },
     }),
       _.ajaxPrefilter('json jsonp', function (b, c, d) {
-        let e;
-        let f;
-        let g;
-        const h =
-          b.jsonp !== !1 &&
-          (Hb.test(b.url)
-            ? 'url'
-            : typeof b.data === 'string' &&
-              !(b.contentType || '').indexOf(
-                'application/x-www-form-urlencoded'
-              ) &&
-              Hb.test(b.data) &&
-              'data');
-        return h || b.dataTypes[0] === 'jsonp'
+        var e,
+          f,
+          g,
+          h =
+            b.jsonp !== !1 &&
+            (Hb.test(b.url)
+              ? 'url'
+              : 'string' == typeof b.data &&
+                !(b.contentType || '').indexOf(
+                  'application/x-www-form-urlencoded'
+                ) &&
+                Hb.test(b.data) &&
+                'data');
+        return h || 'jsonp' === b.dataTypes[0]
           ? ((e = b.jsonpCallback =
               _.isFunction(b.jsonpCallback)
                 ? b.jsonpCallback()
                 : b.jsonpCallback),
             h
-              ? (b[h] = b[h].replace(Hb, `$1${e}`))
+              ? (b[h] = b[h].replace(Hb, '$1' + e))
               : b.jsonp !== !1 &&
-                (b.url += `${(kb.test(b.url) ? '&' : '?') + b.jsonp}=${e}`),
+                (b.url += (kb.test(b.url) ? '&' : '?') + b.jsonp + '=' + e),
             (b.converters['script json'] = function () {
-              return g || _.error(`${e} was not called`), g[0];
+              return g || _.error(e + ' was not called'), g[0];
             }),
             (b.dataTypes[0] = 'json'),
             (f = a[e]),
@@ -4939,29 +4962,29 @@ if (
           : void 0;
       }),
       (_.parseHTML = function (a, b, c) {
-        if (!a || typeof a !== 'string') return null;
-        typeof b === 'boolean' && ((c = b), (b = !1)), (b = b || Z);
-        let d = ga.exec(a);
-        const e = !c && [];
+        if (!a || 'string' != typeof a) return null;
+        'boolean' == typeof b && ((c = b), (b = !1)), (b = b || Z);
+        var d = ga.exec(a),
+          e = !c && [];
         return d
           ? [b.createElement(d[1])]
           : ((d = _.buildFragment([a], b, e)),
             e && e.length && _(e).remove(),
             _.merge([], d.childNodes));
       });
-    const Ib = _.fn.load;
+    var Ib = _.fn.load;
     (_.fn.load = function (a, b, c) {
-      if (typeof a !== 'string' && Ib) return Ib.apply(this, arguments);
-      let d;
-      let e;
-      let f;
-      const g = this;
-      const h = a.indexOf(' ');
+      if ('string' != typeof a && Ib) return Ib.apply(this, arguments);
+      var d,
+        e,
+        f,
+        g = this,
+        h = a.indexOf(' ');
       return (
         h >= 0 && ((d = _.trim(a.slice(h))), (a = a.slice(0, h))),
         _.isFunction(b)
           ? ((c = b), (b = void 0))
-          : b && typeof b === 'object' && (e = 'POST'),
+          : b && 'object' == typeof b && (e = 'POST'),
         g.length > 0 &&
           _.ajax({ url: a, type: e, dataType: 'html', data: b })
             .done(function (a) {
@@ -4997,48 +5020,48 @@ if (
           return a === b.elem;
         }).length;
       });
-    const Jb = a.document.documentElement;
+    var Jb = a.document.documentElement;
     (_.offset = {
-      setOffset(a, b, c) {
-        let d;
-        let e;
-        let f;
-        let g;
-        let h;
-        let i;
-        let j;
-        const k = _.css(a, 'position');
-        const l = _(a);
-        const m = {};
-        k === 'static' && (a.style.position = 'relative'),
+      setOffset: function (a, b, c) {
+        var d,
+          e,
+          f,
+          g,
+          h,
+          i,
+          j,
+          k = _.css(a, 'position'),
+          l = _(a),
+          m = {};
+        'static' === k && (a.style.position = 'relative'),
           (h = l.offset()),
           (f = _.css(a, 'top')),
           (i = _.css(a, 'left')),
           (j =
-            (k === 'absolute' || k === 'fixed') &&
+            ('absolute' === k || 'fixed' === k) &&
             (f + i).indexOf('auto') > -1),
           j
             ? ((d = l.position()), (g = d.top), (e = d.left))
             : ((g = parseFloat(f) || 0), (e = parseFloat(i) || 0)),
           _.isFunction(b) && (b = b.call(a, c, h)),
-          b.top != null && (m.top = b.top - h.top + g),
-          b.left != null && (m.left = b.left - h.left + e),
+          null != b.top && (m.top = b.top - h.top + g),
+          null != b.left && (m.left = b.left - h.left + e),
           'using' in b ? b.using.call(a, m) : l.css(m);
       },
     }),
       _.fn.extend({
-        offset(a) {
+        offset: function (a) {
           if (arguments.length)
             return void 0 === a
               ? this
               : this.each(function (b) {
                   _.offset.setOffset(this, a, b);
                 });
-          let b;
-          let c;
-          const d = this[0];
-          let e = { top: 0, left: 0 };
-          const f = d && d.ownerDocument;
+          var b,
+            c,
+            d = this[0],
+            e = { top: 0, left: 0 },
+            f = d && d.ownerDocument;
           return f
             ? ((b = f.documentElement),
               _.contains(b, d)
@@ -5052,14 +5075,14 @@ if (
                 : e)
             : void 0;
         },
-        position() {
+        position: function () {
           if (this[0]) {
-            let a;
-            let b;
-            const c = this[0];
-            let d = { top: 0, left: 0 };
+            var a,
+              b,
+              c = this[0],
+              d = { top: 0, left: 0 };
             return (
-              _.css(c, 'position') === 'fixed'
+              'fixed' === _.css(c, 'position')
                 ? (b = c.getBoundingClientRect())
                 : ((a = this.offsetParent()),
                   (b = this.offset()),
@@ -5073,11 +5096,11 @@ if (
             );
           }
         },
-        offsetParent() {
+        offsetParent: function () {
           return this.map(function () {
             for (
               var a = this.offsetParent || Jb;
-              a && !_.nodeName(a, 'html') && _.css(a, 'position') === 'static';
+              a && !_.nodeName(a, 'html') && 'static' === _.css(a, 'position');
 
             )
               a = a.offsetParent;
@@ -5088,12 +5111,12 @@ if (
       _.each(
         { scrollLeft: 'pageXOffset', scrollTop: 'pageYOffset' },
         function (b, c) {
-          const d = c === 'pageYOffset';
+          var d = 'pageYOffset' === c;
           _.fn[b] = function (e) {
             return qa(
               this,
               function (b, e, f) {
-                const g = P(b);
+                var g = P(b);
                 return void 0 === f
                   ? g
                     ? g[c]
@@ -5113,31 +5136,31 @@ if (
       _.each(['top', 'left'], function (a, b) {
         _.cssHooks[b] = w(Y.pixelPosition, function (a, c) {
           return c
-            ? ((c = v(a, b)), Qa.test(c) ? `${_(a).position()[b]}px` : c)
+            ? ((c = v(a, b)), Qa.test(c) ? _(a).position()[b] + 'px' : c)
             : void 0;
         });
       }),
       _.each({ Height: 'height', Width: 'width' }, function (a, b) {
         _.each(
-          { padding: `inner${a}`, content: b, '': `outer${a}` },
+          { padding: 'inner' + a, content: b, '': 'outer' + a },
           function (c, d) {
             _.fn[d] = function (d, e) {
-              const f = arguments.length && (c || typeof d !== 'boolean');
-              const g = c || (d === !0 || e === !0 ? 'margin' : 'border');
+              var f = arguments.length && (c || 'boolean' != typeof d),
+                g = c || (d === !0 || e === !0 ? 'margin' : 'border');
               return qa(
                 this,
                 function (b, c, d) {
-                  let e;
+                  var e;
                   return _.isWindow(b)
-                    ? b.document.documentElement[`client${a}`]
-                    : b.nodeType === 9
+                    ? b.document.documentElement['client' + a]
+                    : 9 === b.nodeType
                     ? ((e = b.documentElement),
                       Math.max(
-                        b.body[`scroll${a}`],
-                        e[`scroll${a}`],
-                        b.body[`offset${a}`],
-                        e[`offset${a}`],
-                        e[`client${a}`]
+                        b.body['scroll' + a],
+                        e['scroll' + a],
+                        b.body['offset' + a],
+                        e['offset' + a],
+                        e['client' + a]
                       ))
                     : void 0 === d
                     ? _.css(b, c, g)
@@ -5156,13 +5179,13 @@ if (
         return this.length;
       }),
       (_.fn.andSelf = _.fn.addBack),
-      typeof define === 'function' &&
+      'function' == typeof define &&
         define.amd &&
         define('jquery', [], function () {
           return _;
         });
-    const Kb = a.jQuery;
-    const Lb = a.$;
+    var Kb = a.jQuery,
+      Lb = a.$;
     return (
       (_.noConflict = function (b) {
         return (
@@ -5176,42 +5199,54 @@ if (
   (function (a, b, c) {
     function d(a) {
       function b(b) {
-        let c;
-        return b === 0
+        var c;
+        return 0 === b
           ? ''
           : ((b = b || 1),
             (c = a.substring(h + 1, h + b + 1)),
-            c === '' ? k : c);
+            '' === c ? k : c);
       }
-      let d;
-      let e;
-      let f;
-      var h = 0;
-      let i = 1;
-      let j = 1;
-      var k = c;
+      var d,
+        e,
+        f,
+        h = 0,
+        i = 1,
+        j = 1,
+        k = c;
       return (
         (a = a.replace(/\r\n/g, '\n').replace(/\r/g, '\n')),
         (d = a.length),
         (e = d > 0 ? a.charAt(0) : k),
         {
-          toString() {
-            return `length: ${d}, index: ${h}, line: ${i}, column: ${j}, current: [${e}]`;
+          toString: function () {
+            return (
+              'length: ' +
+              d +
+              ', index: ' +
+              h +
+              ', line: ' +
+              i +
+              ', column: ' +
+              j +
+              ', current: [' +
+              e +
+              ']'
+            );
           },
-          peek(a) {
+          peek: function (a) {
             return b(a);
           },
-          substring() {
+          substring: function () {
             return a.substring(h);
           },
-          peekSubstring() {
+          peekSubstring: function () {
             return a.substring(h + 1);
           },
-          read(a) {
-            let c;
-            let l;
-            const m = b(a);
-            return m === ''
+          read: function (a) {
+            var c,
+              l,
+              m = b(a);
+            return '' === m
               ? m
               : (m !== k
                   ? ((h += m.length),
@@ -5222,41 +5257,41 @@ if (
                       .replace(/[^\n]/g, '').length),
                     c > 0 && ((i += c), (j = 1)),
                     (l = g(m)),
-                    l === '\n' && (f = !0),
+                    '\n' === l && (f = !0),
                     (e = l))
                   : ((h = d), (e = k)),
                 m);
           },
-          text() {
+          text: function () {
             return a;
           },
-          getLine() {
+          getLine: function () {
             return i;
           },
-          getColumn() {
+          getColumn: function () {
             return j;
           },
-          isEof() {
+          isEof: function () {
             return h >= d;
           },
-          isSol() {
-            return j === 1;
+          isSol: function () {
+            return 1 === j;
           },
-          isSolWs() {
-            let b;
-            let c = h;
-            if (j === 1) return !0;
-            for (; (b = a.charAt(--c)) !== ''; ) {
-              if (b === '\n') return !0;
+          isSolWs: function () {
+            var b,
+              c = h;
+            if (1 === j) return !0;
+            for (; '' !== (b = a.charAt(--c)); ) {
+              if ('\n' === b) return !0;
               if (!/\s/.test(b)) return !1;
             }
             return !0;
           },
-          isEol() {
+          isEol: function () {
             return f;
           },
           EOF: k,
-          current() {
+          current: function () {
             return e;
           },
         }
@@ -5267,21 +5302,21 @@ if (
       return (b.prototype = a), new b();
     }
     function f(a, b) {
-      let c;
+      var c;
       for (c = 0; c < b.length; c++) a.appendChild(b[c]);
     }
     function g(a) {
       return a.charAt ? a.charAt(a.length - 1) : a[a.length - 1];
     }
     function h(a, b, c) {
-      let d;
+      var d;
       if (a.indexOf && !c) return a.indexOf(b) >= 0;
       for (d = 0; d < a.length; d++) {
         if (a[d] === b) return !0;
         if (
           c &&
-          typeof a[d] === 'string' &&
-          typeof b === 'string' &&
+          'string' == typeof a[d] &&
+          'string' == typeof b &&
           a[d].toUpperCase() === b.toUpperCase()
         )
           return !0;
@@ -5289,7 +5324,7 @@ if (
       return !1;
     }
     function i(a, b) {
-      let c;
+      var c;
       if (!b) return a;
       for (c in b) a[c] = b[c];
       return a;
@@ -5304,11 +5339,11 @@ if (
       return (
         (d = d.slice(0)),
         function (f) {
-          let g;
-          let i;
-          let j;
-          let k = a;
-          for (b === 1 && d.reverse(), g = 0; g < d.length; g++)
+          var g,
+            i,
+            j,
+            k = a;
+          for (1 === b && d.reverse(), g = 0; g < d.length; g++)
             if (((j = f[k + g * b]), (i = d[d.length - 1 - g]), j === c)) {
               if (i.optional === c || !i.optional) return !1;
               k -= b;
@@ -5358,12 +5393,12 @@ if (
       };
     }
     function n(a, b, c, d) {
-      let e;
-      let f;
-      let g;
-      let h = a.reader.current();
-      const i = a.reader.getLine();
-      const j = a.reader.getColumn();
+      var e,
+        f,
+        g,
+        h = a.reader.current(),
+        i = a.reader.getLine(),
+        j = a.reader.getColumn();
       if (
         ((b = b || []),
         a.language.caseInsensitive && (h = h.toUpperCase()),
@@ -5385,42 +5420,42 @@ if (
       return null;
     }
     function o(a, b, d, e) {
-      let f;
-      let g = 1;
+      var f,
+        g = 1;
       for (d = d || 1; (f = a[b + d * g++]); ) if (!e(f)) return f;
       return c;
     }
     function p(a, b, c) {
-      let d;
-      let e;
-      let f;
-      const g = {};
+      var d,
+        e,
+        f,
+        g = {};
       for (d = 0; d < a.length; d++)
         (e = c ? a[d].toUpperCase() : a[d]),
           (f = e.charAt(0)),
           g[f] || (g[f] = []),
           g[f].push({
             value: e,
-            regex: new RegExp(`^${k(e)}${b}`, c ? 'i' : ''),
+            regex: new RegExp('^' + k(e) + b, c ? 'i' : ''),
           });
       return g;
     }
     function q(a) {
-      let b;
-      let c;
-      const d = a.reader.current();
-      const e = a.reader.getLine();
-      const f = a.reader.getColumn();
-      let g = !0;
+      var b,
+        c,
+        d = a.reader.current(),
+        e = a.reader.getLine(),
+        f = a.reader.getColumn(),
+        g = !0;
       if (/\d/.test(d))
-        (b = d), d === '0' && a.reader.peek() !== '.' && (g = !1);
+        (b = d), '0' === d && '.' !== a.reader.peek() && (g = !1);
       else {
-        if (d !== '.' || !/\d/.test(a.reader.peek())) return null;
+        if ('.' !== d || !/\d/.test(a.reader.peek())) return null;
         (b = d + a.reader.read()), (g = !1);
       }
       for (; (c = a.reader.peek()) !== a.reader.EOF; ) {
         if (!/[A-Za-z0-9]/.test(c)) {
-          if (c === '.' && g && /\d$/.test(a.reader.peek(2))) {
+          if ('.' === c && g && /\d$/.test(a.reader.peek(2))) {
             (b += a.reader.read()), (g = !1);
             continue;
           }
@@ -5431,40 +5466,40 @@ if (
       return a.createToken('number', b, e, f);
     }
     function r(a, b, c) {
-      let d;
-      const e = E[a] || [];
+      var d,
+        e = E[a] || [];
       for (d = 0; d < e.length; d++) e[d].call(b, c);
     }
     function s(a) {
       this.options = i(j(B), a);
     }
-    let t;
-    let u;
-    const v = !1;
-    const w = v ? '\r' : '\n';
-    const x = function () {
-      return null;
-    };
-    let y = 0;
-    const z = 'plaintext';
-    const A = 'sunlight-';
-    var B = { tabWidth: 4, classPrefix: A, showWhitespace: !1, maxHeight: !1 };
-    const C = {};
-    let D = {};
-    var E = {
-      beforeHighlightNode: [],
-      beforeHighlight: [],
-      beforeTokenize: [],
-      afterTokenize: [],
-      beforeAnalyze: [],
-      afterAnalyze: [],
-      afterHighlight: [],
-      afterHighlightNode: [],
-    };
+    var t,
+      u,
+      v = !1,
+      w = v ? '\r' : '\n',
+      x = function () {
+        return null;
+      },
+      y = 0,
+      z = 'plaintext',
+      A = 'sunlight-',
+      B = { tabWidth: 4, classPrefix: A, showWhitespace: !1, maxHeight: !1 },
+      C = {},
+      D = {},
+      E = {
+        beforeHighlightNode: [],
+        beforeHighlight: [],
+        beforeTokenize: [],
+        afterTokenize: [],
+        beforeAnalyze: [],
+        afterAnalyze: [],
+        afterHighlight: [],
+        afterHighlightNode: [],
+      };
     (t = (function () {
       function a(a) {
         return function (c) {
-          const d = b.createElement('span');
+          var d = b.createElement('span');
           return (
             (d.className = c.options.classPrefix + a),
             d.appendChild(c.createTextNode(c.tokens[c.index])),
@@ -5473,17 +5508,17 @@ if (
         };
       }
       return {
-        handleToken(b) {
+        handleToken: function (b) {
           return a(b.tokens[b.index].name)(b);
         },
-        handle_default(a) {
+        handle_default: function (a) {
           return a.addNode(a.createTextNode(a.tokens[a.index]));
         },
-        handle_ident(b) {
-          const c = function (c, d) {
-            let e;
+        handle_ident: function (b) {
+          var c = function (c, d) {
+            var e;
             for (c = c || [], e = 0; e < c.length; e++)
-              if (typeof c[e] === 'function') {
+              if ('function' == typeof c[e]) {
                 if (c[e](b)) return a('named-ident')(b);
               } else if (d && d(c[e])(b.tokens)) return a('named-ident')(b);
             return !1;
@@ -5516,7 +5551,7 @@ if (
         embeddedLanguages: {},
       }),
       (u = (function () {
-        let a = null;
+        var a = null;
         return (
           (a =
             b.defaultView && b.defaultView.getComputedStyle
@@ -5531,15 +5566,15 @@ if (
       })()),
       (s.prototype = (function () {
         function a(a, b) {
-          const c = a[2] || [];
-          const d = a[1].length;
-          const e = typeof a[1] === 'string' ? new RegExp(k(a[1])) : a[1].regex;
-          const f = a[3] || !1;
+          var c = a[2] || [],
+            d = a[1].length,
+            e = 'string' == typeof a[1] ? new RegExp(k(a[1])) : a[1].regex,
+            f = a[3] || !1;
           return function (a, g, h, i, j, k) {
             function l(b) {
-              let f;
-              let g;
-              const i = a.reader.current();
+              var f,
+                g,
+                i = a.reader.current();
               for (g = 0; g < c.length; g++)
                 if (
                   ((f = (b ? i : '') + a.reader.peek(c[g].length - b)),
@@ -5569,8 +5604,7 @@ if (
           };
         }
         function e(a) {
-          let b;
-          let c;
+          var b, c;
           for (b = 0; b < a.language.embeddedLanguages.length; b++)
             if (
               C[a.language.embeddedLanguages[b].language] &&
@@ -5584,8 +5618,8 @@ if (
             }
         }
         function h(a) {
-          let b;
-          const c = g(a.embeddedLanguageStack);
+          var b,
+            c = g(a.embeddedLanguageStack);
           c &&
             c.switchBack(a) &&
             ((a.language = C[c.parentLanguage]),
@@ -5594,29 +5628,29 @@ if (
             (b.oldItems = {}));
         }
         function l(a, b, f, g) {
-          let i;
-          let k;
-          let l;
-          let m = [];
+          var i,
+            k,
+            l,
+            m = [];
           for (
             r('beforeTokenize', this, { code: a, language: b }),
               i = {
                 reader: d(a),
                 language: b,
                 items: j(b.contextItems),
-                token(a) {
+                token: function (a) {
                   return m[a];
                 },
-                getAllTokens() {
+                getAllTokens: function () {
                   return m.slice(0);
                 },
-                count() {
+                count: function () {
                   return m.length;
                 },
                 options: g,
                 embeddedLanguageStack: [],
                 defaultData: { text: '', line: 1, column: 1 },
-                createToken(a, b, c, d) {
+                createToken: function (a, b, c, d) {
                   return {
                     name: a,
                     line: c,
@@ -5637,8 +5671,8 @@ if (
           )
             e(i),
               (l = s(i)),
-              l !== null &&
-                (i.defaultData.text !== '' &&
+              null !== l &&
+                ('' !== i.defaultData.text &&
                   (m.push(
                     i.createToken(
                       'default',
@@ -5652,7 +5686,7 @@ if (
               h(i),
               i.reader.read();
           return (
-            i.defaultData.text !== '' &&
+            '' !== i.defaultData.text &&
               m.push(
                 i.createToken(
                   'default',
@@ -5666,35 +5700,34 @@ if (
           );
         }
         function m(a, c, d) {
-          let e = [];
-          const f = (function () {
-            let a;
-            let b;
-            return (
-              d.showWhitespace
-                ? ((a = String.fromCharCode(183)),
-                  (b =
-                    new Array(d.tabWidth).join(String.fromCharCode(8212)) +
-                    String.fromCharCode(8594)))
-                : ((a = String.fromCharCode(160)),
-                  (b = new Array(d.tabWidth + 1).join(a))),
-              function (c) {
-                for (
-                  var e, f, g, h, i = c.value.split(' ').join(a);
-                  (e = i.indexOf('\t')) >= 0;
+          var e = [],
+            f = (function () {
+              var a, b;
+              return (
+                d.showWhitespace
+                  ? ((a = String.fromCharCode(183)),
+                    (b =
+                      new Array(d.tabWidth).join(String.fromCharCode(8212)) +
+                      String.fromCharCode(8594)))
+                  : ((a = String.fromCharCode(160)),
+                    (b = new Array(d.tabWidth + 1).join(a))),
+                function (c) {
+                  for (
+                    var e, f, g, h, i = c.value.split(' ').join(a);
+                    (e = i.indexOf('\t')) >= 0;
 
-                )
-                  (f = i.lastIndexOf(w, e)),
-                    (g = f === -1 ? e : e - f - 1),
-                    (h = d.tabWidth - (g % d.tabWidth)),
-                    (i =
-                      i.substring(0, e) +
-                      b.substring(d.tabWidth - h) +
-                      i.substring(e + 1));
-                return i;
-              }
-            );
-          })();
+                  )
+                    (f = i.lastIndexOf(w, e)),
+                      (g = f === -1 ? e : e - f - 1),
+                      (h = d.tabWidth - (g % d.tabWidth)),
+                      (i =
+                        i.substring(0, e) +
+                        b.substring(d.tabWidth - h) +
+                        i.substring(e + 1));
+                  return i;
+                }
+              );
+            })();
           return {
             tokens: (c.tokens || []).concat(a.getAllTokens()),
             index: c.index ? c.index + 1 : 0,
@@ -5702,24 +5735,24 @@ if (
             getAnalyzer: x,
             options: d,
             continuation: a.continuation,
-            addNode(a) {
+            addNode: function (a) {
               e.push(a);
             },
-            createTextNode(a) {
+            createTextNode: function (a) {
               return b.createTextNode(f(a));
             },
-            getNodes() {
+            getNodes: function () {
               return e;
             },
-            resetNodes() {
+            resetNodes: function () {
               e = [];
             },
             items: a.items,
           };
         }
         function o(a, b, d) {
-          let e;
-          let f = C[b];
+          var e,
+            f = C[b];
           return (
             (d = d || {}),
             f === c && (f = C[z]),
@@ -5735,18 +5768,11 @@ if (
           );
         }
         function p(a) {
-          const c = b.createElement('span');
+          var c = b.createElement('span');
           return (c.className = a.options.classPrefix + a.language.name), c;
         }
         function q(a, b) {
-          let c;
-          let d;
-          let e;
-          let g;
-          let h;
-          let i;
-          let j;
-          let k;
+          var c, d, e, g, h, i, j, k;
           if (
             (r('beforeAnalyze', this, { analyzerContext: a }),
             a.tokens.length > 0)
@@ -5769,7 +5795,7 @@ if (
                   (e = p(a))),
                 (a.index = g),
                 (h = a.tokens[g].name),
-                (i = `handle_${h}`),
+                (i = 'handle_' + h),
                 (k = a.getAnalyzer.call(a) || a.language.analyzer),
                 k[i] ? k[i](a) : k.handleToken(a);
             for (
@@ -5792,11 +5818,10 @@ if (
             return n(a, a.language.keywords, 'keyword');
           }
           function e(a) {
-            let b;
-            let d;
+            var b, d;
             if (a.language.customTokens === c) return null;
             for (b in a.language.customTokens)
-              if (((d = n(a, a.language.customTokens[b], b)), d !== null))
+              if (((d = n(a, a.language.customTokens[b], b)), null !== d))
                 return d;
             return null;
           }
@@ -5804,7 +5829,7 @@ if (
             return n(a, a.language.operators, 'operator');
           }
           function g(a) {
-            const b = a.reader.current();
+            var b = a.reader.current();
             return a.language.punctuation.test(k(b))
               ? a.createToken(
                   'punctuation',
@@ -5815,10 +5840,10 @@ if (
               : null;
           }
           function h(a) {
-            let c;
-            let d;
-            const e = a.reader.getLine();
-            const f = a.reader.getColumn();
+            var c,
+              d,
+              e = a.reader.getLine(),
+              f = a.reader.getColumn();
             if (!b(a)) return null;
             for (
               c = a.reader.current();
@@ -5831,7 +5856,7 @@ if (
           }
           function i(a) {
             return (
-              a.defaultData.text === '' &&
+              '' === a.defaultData.text &&
                 ((a.defaultData.line = a.reader.getLine()),
                 (a.defaultData.column = a.reader.getColumn())),
               (a.defaultData.text += a.reader.current()),
@@ -5839,15 +5864,15 @@ if (
             );
           }
           function j(b) {
-            let c;
-            let d;
-            let e;
-            let f;
-            let g;
-            let h;
-            let i;
-            let j;
-            const k = b.reader.current();
+            var c,
+              d,
+              e,
+              f,
+              g,
+              h,
+              i,
+              j,
+              k = b.reader.current();
             for (c in b.language.scopes)
               for (d = b.language.scopes[c], e = 0; e < d.length; e++)
                 if (
@@ -5869,9 +5894,9 @@ if (
             return a.language.numberParser(a);
           }
           function m(a) {
-            let b;
-            let d;
-            const e = a.language.customParseRules;
+            var b,
+              d,
+              e = a.language.customParseRules;
             if (e === c) return null;
             for (b = 0; b < e.length; b++) if ((d = e[b](a))) return d;
             return null;
@@ -5892,45 +5917,41 @@ if (
         })();
         return {
           matchSunlightNode: (function () {
-            let a;
+            var a;
             return function (b) {
               return (
                 a ||
                   (a = new RegExp(
-                    `(?:\\s|^)${this.options.classPrefix}highlight-(\\S+)(?:\\s|$)`
+                    '(?:\\s|^)' +
+                      this.options.classPrefix +
+                      'highlight-(\\S+)(?:\\s|$)'
                   )),
                 a.exec(b.className)
               );
             };
           })(),
           isAlreadyHighlighted: (function () {
-            let a;
+            var a;
             return function (b) {
               return (
                 a ||
                   (a = new RegExp(
-                    `(?:\\s|^)${this.options.classPrefix}highlighted(?:\\s|$)`
+                    '(?:\\s|^)' +
+                      this.options.classPrefix +
+                      'highlighted(?:\\s|$)'
                   )),
                 a.test(b.className)
               );
             };
           })(),
-          highlight(a, b) {
+          highlight: function (a, b) {
             return o.call(this, a, b);
           },
           highlightNode: function a(c) {
-            let d;
-            let e;
-            let f;
-            let g;
-            let h;
-            let i;
-            let j;
-            let k;
-            let l;
+            var d, e, f, g, h, i, j, k, l;
             if (
               !this.isAlreadyHighlighted(c) &&
-              (d = this.matchSunlightNode(c)) !== null
+              null !== (d = this.matchSunlightNode(c))
             ) {
               for (
                 e = d[1],
@@ -5940,7 +5961,7 @@ if (
                 g < c.childNodes.length;
                 g++
               )
-                if (c.childNodes[g].nodeType === 3)
+                if (3 === c.childNodes[g].nodeType)
                   for (
                     j = o.call(this, c.childNodes[g].nodeValue, e, j),
                       y++,
@@ -5953,14 +5974,14 @@ if (
                   )
                     c.insertBefore(h[i], h[i - 1].nextSibling);
                 else
-                  c.childNodes[g].nodeType === 1 &&
+                  1 === c.childNodes[g].nodeType &&
                     a.call(this, c.childNodes[g]);
-              (c.className += ` ${this.options.classPrefix}highlighted`),
-                u(c, 'display') === 'block' &&
+              (c.className += ' ' + this.options.classPrefix + 'highlighted'),
+                'block' === u(c, 'display') &&
                   ((k = b.createElement('div')),
-                  (k.className = `${this.options.classPrefix}container`),
+                  (k.className = this.options.classPrefix + 'container'),
                   (l = b.createElement('div')),
-                  (l.className = `${this.options.classPrefix}code-container`),
+                  (l.className = this.options.classPrefix + 'code-container'),
                   this.options.maxHeight !== !1 &&
                     ((l.style.overflowY = 'auto'),
                     (l.style.maxHeight =
@@ -5986,20 +6007,18 @@ if (
       (a.Sunlight = {
         version: '1.22.0',
         Highlighter: s,
-        createAnalyzer() {
+        createAnalyzer: function () {
           return e(t);
         },
         globalOptions: B,
-        highlightAll(a) {
-          let c;
-          const d = new s(a);
-          const e = b.getElementsByTagName('*');
+        highlightAll: function (a) {
+          var c,
+            d = new s(a),
+            e = b.getElementsByTagName('*');
           for (c = 0; c < e.length; c++) d.highlightNode(e[c]);
         },
-        registerLanguage(a, b) {
-          let c;
-          let d;
-          let e;
+        registerLanguage: function (a, b) {
+          var c, d, e;
           if (!a)
             throw 'Languages must be registered with an identifier, e.g. "php" for PHP';
           (b = i(i({}, D), b)),
@@ -6022,11 +6041,11 @@ if (
             });
           (b.embeddedLanguages = d), (C[b.name] = b);
         },
-        isRegistered(a) {
+        isRegistered: function (a) {
           return C[a] !== c;
         },
-        bind(a, b) {
-          if (!E[a]) throw `Unknown event "${a}"`;
+        bind: function (a, b) {
+          if (!E[a]) throw 'Unknown event "' + a + '"';
           E[a].push(b);
         },
         util: {
@@ -6040,20 +6059,20 @@ if (
           createHashMap: p,
           createBetweenRule: m,
           createProceduralRule: l,
-          getNextNonWsToken(a, b) {
+          getNextNonWsToken: function (a, b) {
             return o(a, b, 1, function (a) {
-              return a.name === 'default';
+              return 'default' === a.name;
             });
           },
-          getPreviousNonWsToken(a, b) {
+          getPreviousNonWsToken: function (a, b) {
             return o(a, b, -1, function (a) {
-              return a.name === 'default';
+              return 'default' === a.name;
             });
           },
-          getNextWhile(a, b, c) {
+          getNextWhile: function (a, b, c) {
             return o(a, b, 1, c);
           },
-          getPreviousWhile(a, b, c) {
+          getPreviousWhile: function (a, b, c) {
             return o(a, b, -1, c);
           },
           whitespace: { token: 'default', optional: !0 },
@@ -6069,11 +6088,11 @@ if (
     function c(a) {
       for (var b, c = a.count(); (b = a.token(--c)); ) {
         if (
-          b.name === 'operator' &&
-          (b.value === '>' || b.value === '/>' || b.value === '</')
+          'operator' === b.name &&
+          ('>' === b.value || '/>' === b.value || '</' === b.value)
         )
           return !1;
-        if (b.name === 'tagName' || b.name === 'xmlOpenTag') return !0;
+        if ('tagName' === b.name || 'xmlOpenTag' === b.name) return !0;
       }
       return !1;
     }
@@ -6090,7 +6109,7 @@ if (
         doctype: [['<!DOCTYPE', '>']],
       },
       punctuation: /(?!x)x/,
-      numberParser() {},
+      numberParser: function () {},
       customTokens: {
         xmlOpenTag: { values: ['<?xml'], boundary: '' },
         xmlCloseTag: { values: ['?>'], boundary: '' },
@@ -6102,17 +6121,17 @@ if (
       },
       customParseRules: [
         function (b) {
-          let c;
-          let d;
-          const e = b.reader.current();
-          let f = e;
-          const g = b.reader.getLine();
-          const h = b.reader.getColumn();
+          var c,
+            d,
+            e = b.reader.current(),
+            f = e,
+            g = b.reader.getLine(),
+            h = b.reader.getColumn();
           if (!/[A-Za-z_]/.test(e)) return null;
           if (
             ((c = b.token(b.count() - 1)),
             !c ||
-              c.name !== 'operator' ||
+              'operator' !== c.name ||
               !a.util.contains(['<', '</'], c.value))
           )
             return null;
@@ -6121,12 +6140,12 @@ if (
           return b.createToken('tagName', f, g, h);
         },
         function (a) {
-          let b;
-          let d;
-          const e = a.reader.current();
-          const f = a.reader.getLine();
-          const g = a.reader.getColumn();
-          if (e !== '"' && e !== "'") return null;
+          var b,
+            d,
+            e = a.reader.current(),
+            f = a.reader.getLine(),
+            g = a.reader.getColumn();
+          if ('"' !== e && "'" !== e) return null;
           if (!c(a)) return null;
           for (
             b = e;
@@ -6136,12 +6155,12 @@ if (
           return a.createToken('string', b, f, g);
         },
         function (a) {
-          let b;
-          let d;
-          const e = a.reader.current();
-          let f = 1;
-          const g = a.reader.getLine();
-          const h = a.reader.getColumn();
+          var b,
+            d,
+            e = a.reader.current(),
+            f = 1,
+            g = a.reader.getLine(),
+            h = a.reader.getColumn();
           if (!/[A-Za-z_]/.test(e)) return null;
           if (!c(a)) return null;
           for (b = a.reader.peek(); b.length === f; ) {
@@ -6158,14 +6177,14 @@ if (
           return null;
         },
         function (a) {
-          let b;
-          const c = a.reader.current();
-          let d = 1;
-          const e = a.reader.getLine();
-          const f = a.reader.getColumn();
-          if (c !== '&') return null;
+          var b,
+            c = a.reader.current(),
+            d = 1,
+            e = a.reader.getLine(),
+            f = a.reader.getColumn();
+          if ('&' !== c) return null;
           for (b = a.reader.peek(d); b.length === d; ) {
-            if (b.charAt(b.length - 1) === ';')
+            if (';' === b.charAt(b.length - 1))
               return a.createToken('entity', c + a.reader.read(d), e, f);
             if (!/[A-Za-z0-9]$/.test(b)) break;
             b = a.reader.peek(++d);
@@ -6173,14 +6192,14 @@ if (
           return null;
         },
         function (a) {
-          let b;
-          let c = '<%--';
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          if (a.reader.current() !== '<' || a.reader.peek(3) !== '%--')
+          var b,
+            c = '<%--',
+            d = a.reader.getLine(),
+            e = a.reader.getColumn();
+          if ('<' !== a.reader.current() || '%--' !== a.reader.peek(3))
             return null;
           for (a.reader.read(3); (b = a.reader.peek()); ) {
-            if (a.reader.peek(4) === '--%>') {
+            if ('--%>' === a.reader.peek(4)) {
               c += a.reader.read(4);
               break;
             }
@@ -6191,88 +6210,88 @@ if (
       ],
       embeddedLanguages: {
         css: {
-          switchTo(a) {
-            let b;
-            let c = a.token(a.count() - 1);
+          switchTo: function (a) {
+            var b,
+              c = a.token(a.count() - 1);
             if (!c || a.reader.current() + a.reader.peek(6) === '</style')
               return !1;
-            if (c.name !== 'operator' || c.value !== '>') return !1;
+            if ('operator' !== c.name || '>' !== c.value) return !1;
             for (b = a.count() - 1; (c = a.token(--b)); )
-              if (c.name === 'tagName') {
+              if ('tagName' === c.name) {
                 if (
-                  c.value === 'style' &&
+                  'style' === c.value &&
                   ((c = a.token(--b)),
-                  c && c.name === 'operator' && c.value === '<')
+                  c && 'operator' === c.name && '<' === c.value)
                 )
                   return !0;
                 break;
               }
             return !1;
           },
-          switchBack(a) {
-            return a.reader.peek(7) === '</style';
+          switchBack: function (a) {
+            return '</style' === a.reader.peek(7);
           },
         },
         javascript: {
-          switchTo(a) {
-            let b;
-            let c = a.token(a.count() - 1);
+          switchTo: function (a) {
+            var b,
+              c = a.token(a.count() - 1);
             if (!c || a.reader.current() + a.reader.peek(7) === '</script')
               return !1;
-            if (c.name !== 'operator' || c.value !== '>') return !1;
+            if ('operator' !== c.name || '>' !== c.value) return !1;
             for (b = a.count() - 1; (c = a.token(--b)); )
-              if (c.name === 'tagName') {
+              if ('tagName' === c.name) {
                 if (
-                  c.value === 'script' &&
+                  'script' === c.value &&
                   ((c = a.token(--b)),
-                  c && c.name === 'operator' && c.value === '<')
+                  c && 'operator' === c.name && '<' === c.value)
                 )
                   return !0;
                 break;
               }
             return !1;
           },
-          switchBack(a) {
-            return a.reader.peek(8) === '</script';
+          switchBack: function (a) {
+            return '</script' === a.reader.peek(8);
           },
         },
         php: {
-          switchTo(a) {
-            const b = a.reader.peek(4);
+          switchTo: function (a) {
+            var b = a.reader.peek(4);
             return (
-              a.reader.current() === '<' &&
-              (b === '?php' || /^\?(?!xml)/.test(b))
+              '<' === a.reader.current() &&
+              ('?php' === b || /^\?(?!xml)/.test(b))
             );
           },
-          switchBack(a) {
-            const b = a.token(a.count() - 1);
-            return b && b.name === 'closeTag';
+          switchBack: function (a) {
+            var b = a.token(a.count() - 1);
+            return b && 'closeTag' === b.name;
           },
         },
         csharp: {
-          switchTo(a) {
-            const b = a.token(a.count() - 1);
-            return b && b.name === 'aspOpenTag';
+          switchTo: function (a) {
+            var b = a.token(a.count() - 1);
+            return b && 'aspOpenTag' === b.name;
           },
-          switchBack(a) {
-            return a.reader.peek(2) === '%>';
+          switchBack: function (a) {
+            return '%>' === a.reader.peek(2);
           },
         },
         scala: {
-          switchTo(a) {
+          switchTo: function (a) {
             return (
               !!a.options.enableScalaXmlInterpolation &&
-              a.reader.current() === '{'
+              '{' === a.reader.current()
             );
           },
-          switchBack(a) {
-            const b = a.token(a.count() - 1);
-            if (b.name === 'punctuation')
-              if (b.value === '{') a.items.scalaBracketNestingLevel++;
+          switchBack: function (a) {
+            var b = a.token(a.count() - 1);
+            if ('punctuation' === b.name)
+              if ('{' === b.value) a.items.scalaBracketNestingLevel++;
               else if (
-                b.value === '}' &&
+                '}' === b.value &&
                 (a.items.scalaBracketNestingLevel--,
-                a.items.scalaBracketNestingLevel === 0)
+                0 === a.items.scalaBracketNestingLevel)
               )
                 return !0;
             return !1;
@@ -6285,7 +6304,7 @@ if (
   })(this.Sunlight),
   (function (a, b) {
     a.fn.sunlight = function (a) {
-      const c = new b.Sunlight.Highlighter(a);
+      var c = new b.Sunlight.Highlighter(a);
       return (
         this.each(function () {
           c.highlightNode(this);
@@ -6424,25 +6443,25 @@ if (
       },
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          const d = a.reader.current();
-          const e = a.reader.getLine();
-          const f = a.reader.getColumn();
-          let g = 0;
-          let h = 0;
-          if (d !== '#') return null;
+          var b,
+            c,
+            d = a.reader.current(),
+            e = a.reader.getLine(),
+            f = a.reader.getColumn(),
+            g = 0,
+            h = 0;
+          if ('#' !== d) return null;
           for (b = a.reader.peek(), c = d; g > 0 || h > 0 || !/\s/.test(b); )
-            b === ')' && g > 0 && g--,
-              b === ']' && h > 0 && h--,
-              b === '(' && g++,
-              b === '[' && h++,
+            ')' === b && g > 0 && g--,
+              ']' === b && h > 0 && h--,
+              '(' === b && g++,
+              '[' === b && h++,
               (c += a.reader.read()),
               (b = a.reader.peek());
           return a.createToken('constant', c, e, f);
         },
         (function () {
-          const b = [
+          var b = [
             'BCC',
             'BCS',
             'BEQ',
@@ -6455,16 +6474,16 @@ if (
             'JSR',
           ];
           return function (c) {
-            let d;
-            let e;
-            let f;
-            const g = c.reader.getLine();
-            const h = c.reader.getColumn();
+            var d,
+              e,
+              f,
+              g = c.reader.getLine(),
+              h = c.reader.getColumn();
             if (!/[A-Za-z]/.test(c.reader.current())) return null;
             if (
               ((d = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count())),
               (!d ||
-                d.name !== 'keyword' ||
+                'keyword' !== d.name ||
                 !a.util.contains(b, d.value, !0)) &&
                 c.count() > 0 &&
                 !/\n$/.test(c.defaultData.text))
@@ -6481,16 +6500,16 @@ if (
         })(),
       ],
       caseInsensitive: !0,
-      numberParser(a) {
-        let b;
-        let c;
-        const d = a.reader.current();
-        const e = a.reader.getLine();
-        const f = a.reader.getColumn();
+      numberParser: function (a) {
+        var b,
+          c,
+          d = a.reader.current(),
+          e = a.reader.getLine(),
+          f = a.reader.getColumn();
         if (/\d/.test(d))
-          (b = d), a.reader.peek() === '.' && (b += a.reader.read());
+          (b = d), '.' === a.reader.peek() && (b += a.reader.read());
         else {
-          if (d !== '$' && d !== '%') return null;
+          if ('$' !== d && '%' !== d) return null;
           b = d + a.reader.read();
         }
         for (
@@ -6613,7 +6632,7 @@ if (
       },
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'Array',
               'Boolean',
@@ -6642,23 +6661,20 @@ if (
             !1
           );
           return function (c) {
-            let d;
-            let e;
-            let f;
-            let g;
+            var d, e, f, g;
             if (!/[A-Za-z]/.test(c.reader.current())) return null;
             if (
               ((d = c.token(c.count() - 1)),
               d &&
-                ((d.name === 'keyword' && d.value === 'new') ||
-                  (d.name === 'operator' && d.value === ':')))
+                (('keyword' === d.name && 'new' === d.value) ||
+                  ('operator' === d.name && ':' === d.value)))
             )
               return null;
             if (((e = a.util.matchWord(c, b, 'globalFunction', !0)), !e))
               return null;
             for (g = e.value.length; (f = c.reader.peek(g)) && f.length === g; )
               if (!/\s$/.test(f)) {
-                if (a.util.last(f) === '(')
+                if ('(' === a.util.last(f))
                   return (
                     (e.line = c.reader.getLine()),
                     (e.column = c.reader.getColumn()),
@@ -6671,27 +6687,27 @@ if (
           };
         })(),
         function (c) {
-          let d;
-          let e;
-          let f;
-          const g = c.reader.peek();
-          let h = '/';
-          const i = c.reader.getLine();
-          const j = c.reader.getColumn();
-          if (c.reader.current() !== '/' || g === '/' || g === '*') return null;
+          var d,
+            e,
+            f,
+            g = c.reader.peek(),
+            h = '/',
+            i = c.reader.getLine(),
+            j = c.reader.getColumn();
+          if ('/' !== c.reader.current() || '/' === g || '*' === g) return null;
           if (
             ((d = (function () {
-              const d = c.token(c.count() - 1);
-              let e = null;
+              var d = c.token(c.count() - 1),
+                e = null;
               return (
-                c.defaultData.text !== '' &&
+                '' !== c.defaultData.text &&
                   (e = c.createToken('default', c.defaultData.text)),
                 e || (e = d),
                 e === b ||
-                  (e.name === 'default' && e.value.indexOf('\n') > -1) ||
+                  ('default' === e.name && e.value.indexOf('\n') > -1) ||
                   (!a.util.contains(['keyword', 'ident', 'number'], d.name) &&
                     !(
-                      d.name === 'punctuation' &&
+                      'punctuation' === d.name &&
                       !a.util.contains(['(', '{', '[', ',', ';'], d.value)
                     ))
               );
@@ -6700,8 +6716,8 @@ if (
           )
             return null;
           for (; c.reader.peek() !== c.reader.EOF; )
-            if (((e = c.reader.peek(2)), e !== '\\/' && e !== '\\\\')) {
-              if (((h += f = c.reader.read()), f === '/')) break;
+            if (((e = c.reader.peek(2)), '\\/' !== e && '\\\\' !== e)) {
+              if (((h += f = c.reader.read()), '/' === f)) break;
             } else h += c.reader.read(2);
           for (
             ;
@@ -6718,24 +6734,24 @@ if (
       namedIdentRules: {
         custom: [
           function (c) {
-            let d;
-            let e;
-            let f;
-            const g = a.util.getNextNonWsToken(c.tokens, c.index);
-            if (g && g.name === 'operator' && g.value === '.') return !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(c.tokens, c.index);
+            if (g && 'operator' === g.name && '.' === g.value) return !1;
             for (e = c.index, f = c.tokens[e]; (d = c.tokens[--e]) !== b; ) {
               if (
-                d.name === 'keyword' &&
+                'keyword' === d.name &&
                 a.util.contains(['new', 'is', 'instanceof', 'import'], d.value)
               )
                 return !0;
-              if (d.name !== 'default')
-                if (d.name !== 'ident') {
-                  if (d.name !== 'operator' || d.value !== '.') break;
-                  if (f && f.name !== 'ident') return !1;
+              if ('default' !== d.name)
+                if ('ident' !== d.name) {
+                  if ('operator' !== d.name || '.' !== d.value) break;
+                  if (f && 'ident' !== f.name) return !1;
                   f = d;
                 } else {
-                  if (f && f.name === 'ident') return !1;
+                  if (f && 'ident' === f.name) return !1;
                   f = d;
                 }
             }
@@ -7273,15 +7289,15 @@ if (
       },
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          let d;
-          let e;
-          let f = '';
+          var b,
+            c,
+            d,
+            e,
+            f = '';
           if (
             !a.reader.isSolWs() ||
-            a.reader.current() !== ':' ||
-            a.reader.peek() === ':'
+            ':' !== a.reader.current() ||
+            ':' === a.reader.peek()
           )
             return null;
           for (
@@ -7296,22 +7312,22 @@ if (
           )
             (f += a.reader.read()),
               d || ((d = a.reader.getLine()), (e = a.reader.getColumn()));
-          return f === '' ? null : [b, a.createToken('label', f, d, e)];
+          return '' === f ? null : [b, a.createToken('label', f, d, e)];
         },
         function (b) {
-          let c;
-          let d;
-          const e = a.util.createProceduralRule(
-            b.count() - 1,
-            -1,
-            [
-              { token: 'keyword', values: ['goto'] },
-              { token: 'operator', values: [':'], optional: !0 },
-            ],
-            !0
-          );
-          const f = b.reader.getLine();
-          const g = b.reader.getColumn();
+          var c,
+            d,
+            e = a.util.createProceduralRule(
+              b.count() - 1,
+              -1,
+              [
+                { token: 'keyword', values: ['goto'] },
+                { token: 'operator', values: [':'], optional: !0 },
+              ],
+              !0
+            ),
+            f = b.reader.getLine(),
+            g = b.reader.getColumn();
           if (!e(b.getAllTokens())) return null;
           for (
             d = b.reader.current();
@@ -7322,7 +7338,7 @@ if (
           return b.createToken('label', d, f, g);
         },
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'assoc',
               'attrib',
@@ -7437,20 +7453,20 @@ if (
             !0
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'keyword', !0);
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'keyword', !0);
             if (!f) return null;
             if (!c.reader.isSolWs())
               for (e = c.count(); (d = c.token(--e)); ) {
                 if (
-                  d.name === 'keyword' &&
+                  'keyword' === d.name &&
                   a.util.contains(['echo', 'title', 'set'], d.value)
                 )
                   return null;
-                if (d.name === 'operator' && d.value === '=') return null;
-                if (d.name === 'operator' && d.value === '|') break;
-                if (d.name === 'default' && d.value.indexOf('\n') >= 0) break;
+                if ('operator' === d.name && '=' === d.value) return null;
+                if ('operator' === d.name && '|' === d.value) break;
+                if ('default' === d.name && d.value.indexOf('\n') >= 0) break;
               }
             return c.reader.read(f.value.length - 1), f;
           };
@@ -7497,35 +7513,35 @@ if (
   (function (a, b) {
     if (a === b || a.registerLanguage === b)
       throw 'Include sunlight.js before including language files';
-    const c = [
-      'int',
-      'char',
-      'void',
-      'long',
-      'signed',
-      'unsigned',
-      'double',
-      'bool',
-      'typename',
-      'class',
-      'short',
-      'wchar_t',
-      'struct',
-    ];
-    const d = [
-      'int',
-      'char',
-      'void',
-      'long',
-      'signed',
-      'unsigned',
-      'double',
-      'bool',
-      'typename',
-      'class',
-      'short',
-      'wchar_t',
-    ];
+    var c = [
+        'int',
+        'char',
+        'void',
+        'long',
+        'signed',
+        'unsigned',
+        'double',
+        'bool',
+        'typename',
+        'class',
+        'short',
+        'wchar_t',
+        'struct',
+      ],
+      d = [
+        'int',
+        'char',
+        'void',
+        'long',
+        'signed',
+        'unsigned',
+        'double',
+        'bool',
+        'typename',
+        'class',
+        'short',
+        'wchar_t',
+      ];
     a.registerLanguage('cpp', {
       keywords: [
         'and',
@@ -7649,7 +7665,7 @@ if (
       namedIdentRules: {
         custom: [
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'operator', values: ['*', '**'] },
@@ -7666,28 +7682,30 @@ if (
               ],
             ];
             return function (c) {
-              let d;
-              let e;
-              const f = (function (d) {
-                for (let e = 0; e < b.length; e++)
-                  if (a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d))
-                    return !0;
-                return !1;
-              })(c.tokens);
+              var d,
+                e,
+                f = (function (d) {
+                  for (var e = 0; e < b.length; e++)
+                    if (
+                      a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
+                    )
+                      return !0;
+                  return !1;
+                })(c.tokens);
               if (!f) return !1;
               for (e = c.index; (d = c.tokens[--e]); ) {
                 if (
-                  d.name === 'punctuation' &&
-                  (d.value === ';' || d.value === '{')
+                  'punctuation' === d.name &&
+                  (';' === d.value || '{' === d.value)
                 )
                   return !0;
-                if (d.name === 'operator' && d.value === '=') return !1;
+                if ('operator' === d.name && '=' === d.value) return !1;
               }
               return !1;
             };
           })(),
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'punctuation', values: [')'] },
@@ -7704,43 +7722,45 @@ if (
               ],
             ];
             return function (c) {
-              let d;
-              let e;
-              let f;
-              const g = (function (d) {
-                for (let e = 0; e < b.length; e++)
-                  if (a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d))
-                    return !0;
-                return !1;
-              })(c.tokens);
+              var d,
+                e,
+                f,
+                g = (function (d) {
+                  for (var e = 0; e < b.length; e++)
+                    if (
+                      a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
+                    )
+                      return !0;
+                  return !1;
+                })(c.tokens);
               if (!g) return !1;
               for (e = c.index; (d = c.tokens[--e]); )
-                if (d.name === 'punctuation' && d.value === '(')
+                if ('punctuation' === d.name && '(' === d.value)
                   return (
                     (f = a.util.getPreviousNonWsToken(c.tokens, e)),
-                    !f || f.name !== 'keyword'
+                    !f || 'keyword' !== f.name
                   );
               return !1;
             };
           })(),
           function (c) {
-            let e;
-            let f;
-            let g = c.index;
-            const h = a.util.getPreviousNonWsToken(c.tokens, c.index);
-            let i = !1;
-            if (!h || h.name === 'keyword') return !1;
+            var e,
+              f,
+              g = c.index,
+              h = a.util.getPreviousNonWsToken(c.tokens, c.index),
+              i = !1;
+            if (!h || 'keyword' === h.name) return !1;
             for (f = [0, 0]; (e = c.tokens[--g]) !== b; ) {
-              if (e.name === 'keyword' && e.value === 'class') return !1;
-              if (e.name !== 'operator') {
+              if ('keyword' === e.name && 'class' === e.value) return !1;
+              if ('operator' !== e.name) {
                 if (
                   !(
-                    (e.name === 'keyword' && a.util.contains(d, e.value)) ||
-                    e.name === 'default' ||
-                    (e.name === 'punctuation' && e.value === ',')
+                    ('keyword' === e.name && a.util.contains(d, e.value)) ||
+                    'default' === e.name ||
+                    ('punctuation' === e.name && ',' === e.value)
                   )
                 ) {
-                  if (e.name !== 'ident') break;
+                  if ('ident' !== e.name) break;
                   i = !0;
                 }
               } else
@@ -7751,7 +7771,7 @@ if (
                     break;
                   case '>':
                   case '>>':
-                    if (f[0] === 0) return !1;
+                    if (0 === f[0]) return !1;
                     f[1] += e.value.length;
                     break;
                   case '.':
@@ -7760,21 +7780,21 @@ if (
                     return !1;
                 }
             }
-            if (!i || f[0] === 0) return !1;
+            if (!i || 0 === f[0]) return !1;
             for (g = c.index; (e = c.tokens[++g]) !== b; ) {
               if (
-                e.name === 'operator' &&
-                (e.value === '>' || e.value === '>>')
+                'operator' === e.name &&
+                ('>' === e.value || '>>' === e.value)
               )
                 return !0;
               if (
                 !(
-                  (e.name === 'keyword' && a.util.contains(d, e.value)) ||
-                  (e.name === 'operator' &&
+                  ('keyword' === e.name && a.util.contains(d, e.value)) ||
+                  ('operator' === e.name &&
                     a.util.contains(['<', '<<', '>', '>>'], e.value)) ||
-                  (e.name === 'punctuation' && e.value === ',') ||
-                  e.name === 'ident' ||
-                  e.name === 'default'
+                  ('punctuation' === e.name && ',' === e.value) ||
+                  'ident' === e.name ||
+                  'default' === e.name
                 )
               )
                 return !1;
@@ -7782,33 +7802,33 @@ if (
             return !1;
           },
           function (e) {
-            let f;
-            let g;
-            let h = a.util.getPreviousNonWsToken(e.tokens, e.index);
+            var f,
+              g,
+              h = a.util.getPreviousNonWsToken(e.tokens, e.index);
             if (
               h !== b &&
-              (h.name === 'ident' ||
-                (h.name === 'keyword' &&
+              ('ident' === h.name ||
+                ('keyword' === h.name &&
                   a.util.contains(
                     c.concat(['string', 'object', 'void']),
                     h.value
                   )) ||
-                (h.name === 'operator' && h.value === '.'))
+                ('operator' === h.name && '.' === h.value))
             )
               return !1;
             if (
               ((h = a.util.getNextNonWsToken(e.tokens, e.index)),
-              !h || h.name !== 'operator' || h.value !== '<')
+              !h || 'operator' !== h.name || '<' !== h.value)
             )
               return !1;
             for (f = e.index, g = [0, 0]; (h = e.tokens[++f]) !== b; )
-              if (h.name !== 'operator') {
+              if ('operator' !== h.name) {
                 if (
                   !(
-                    h.name === 'default' ||
-                    h.name === 'ident' ||
-                    (h.name === 'keyword' && a.util.contains(d, h.value)) ||
-                    (h.name === 'punctuation' && h.value === ',')
+                    'default' === h.name ||
+                    'ident' === h.name ||
+                    ('keyword' === h.name && a.util.contains(d, h.value)) ||
+                    ('punctuation' === h.name && ',' === h.value)
                   )
                 )
                   return !1;
@@ -7834,22 +7854,22 @@ if (
             return (
               g[0] === g[1] &&
               ((h = e.tokens[++f]),
-              !(!h || (h.name !== 'default' && h.name !== 'ident')) &&
+              !(!h || ('default' !== h.name && 'ident' !== h.name)) &&
                 !(
-                  h.name === 'default' &&
-                  ((h = e.tokens[++f]), !h || h.name !== 'ident')
+                  'default' === h.name &&
+                  ((h = e.tokens[++f]), !h || 'ident' !== h.name)
                 ))
             );
           },
           function (b) {
-            let c;
-            let d;
-            const e = a.util.getPreviousNonWsToken(b.tokens, b.index);
-            if (!e || e.name !== 'keyword' || e.value !== 'class') return !1;
+            var c,
+              d,
+              e = a.util.getPreviousNonWsToken(b.tokens, b.index);
+            if (!e || 'keyword' !== e.name || 'class' !== e.value) return !1;
             for (d = b.index; (c = b.tokens[++d]); ) {
-              if (c.name === 'punctuation' && c.value === '{') return !0;
+              if ('punctuation' === c.name && '{' === c.value) return !0;
               if (
-                c.name === 'operator' &&
+                'operator' === c.name &&
                 a.util.contains(['>', '>>'], c.value)
               )
                 return !1;
@@ -7934,30 +7954,30 @@ if (
   })(this.Sunlight),
   (function (a, b) {
     function c(a) {
-      const b = /^T([A-Z0-9]\w*)?$/;
+      var b = /^T([A-Z0-9]\w*)?$/;
       return function (c) {
         return !b.test(c.tokens[c.index].value) && a(c);
       };
     }
     if (a === b || a.registerLanguage === b)
       throw 'Include sunlight.js before including language files';
-    const d = [
-      'int',
-      'bool',
-      'double',
-      'float',
-      'char',
-      'byte',
-      'sbyte',
-      'uint',
-      'long',
-      'ulong',
-      'char',
-      'decimal',
-      'short',
-      'ushort',
-    ];
-    const e = d.concat(['in', 'out', 'string', 'object']);
+    var d = [
+        'int',
+        'bool',
+        'double',
+        'float',
+        'char',
+        'byte',
+        'sbyte',
+        'uint',
+        'long',
+        'ulong',
+        'char',
+        'decimal',
+        'short',
+        'ushort',
+      ],
+      e = d.concat(['in', 'out', 'string', 'object']);
     a.registerLanguage('csharp', {
       keywords: d.concat([
         'extern alias',
@@ -8037,12 +8057,12 @@ if (
       ]),
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          const d = 'xmlDocCommentMeta';
-          const e = 'xmlDocCommentContent';
-          const f = { line: 0, column: 0, value: '', name: null };
-          if (a.reader.current() !== '/' || a.reader.peek(2) !== '//')
+          var b,
+            c,
+            d = 'xmlDocCommentMeta',
+            e = 'xmlDocCommentContent',
+            f = { line: 0, column: 0, value: '', name: null };
+          if ('/' !== a.reader.current() || '//' !== a.reader.peek(2))
             return null;
           for (
             b = [
@@ -8052,10 +8072,10 @@ if (
             (c = a.reader.peek()) !== a.reader.EOF;
 
           )
-            if (c !== '<' || f.name === d)
-              if (c !== '>' || f.name !== d) {
-                if (c === '\n') break;
-                f.name === null &&
+            if ('<' !== c || f.name === d)
+              if ('>' !== c || f.name !== d) {
+                if ('\n' === c) break;
+                null === f.name &&
                   ((f.name = e),
                   (f.line = a.reader.getLine()),
                   (f.column = a.reader.getColumn())),
@@ -8066,7 +8086,7 @@ if (
                   (f.name = null),
                   (f.value = '');
             else
-              f.value !== '' &&
+              '' !== f.value &&
                 b.push(a.createToken(f.name, f.value, f.line, f.column)),
                 (f.line = a.reader.getLine()),
                 (f.column = a.reader.getColumn()),
@@ -8079,13 +8099,13 @@ if (
           );
         },
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          let g = !1;
-          const h = b.reader.getLine();
-          const i = b.reader.getColumn();
+          var c,
+            d,
+            e,
+            f,
+            g = !1,
+            h = b.reader.getLine(),
+            i = b.reader.getColumn();
           if (!/^(get|set)\b/.test(b.reader.current() + b.reader.peek(3)))
             return null;
           if (
@@ -8115,23 +8135,23 @@ if (
             : null;
         },
         function (a) {
-          let c;
-          let d;
-          let e;
-          let f;
-          let g;
-          let h;
-          let i;
-          const j = a.reader.getLine();
-          const k = a.reader.getColumn();
+          var c,
+            d,
+            e,
+            f,
+            g,
+            h,
+            i,
+            j = a.reader.getLine(),
+            k = a.reader.getColumn();
           if (!/^value\b/.test(a.reader.current() + a.reader.peek(5)))
             return null;
           for (c = 'value'.length, d = a.reader.peek(c); d.length === c; ) {
             if (!/\s$/.test(d)) {
               if (
                 ((i = a.reader.peek(c + 1)),
-                d.charAt(d.length - 1) === '=' &&
-                  i.charAt(i.length - 1) !== '=')
+                '=' === d.charAt(d.length - 1) &&
+                  '=' !== i.charAt(i.length - 1))
               )
                 return null;
               e = !0;
@@ -8142,9 +8162,9 @@ if (
           if (!e) return null;
           (g = a.count() - 1), (h = [0, 0]);
           a: for (; (f = a.token(g--)) !== b; )
-            if (f.name === 'punctuation')
-              f.value === '{' ? h[0]++ : f.value === '}' && h[1]++;
-            else if (f.name === 'keyword')
+            if ('punctuation' === f.name)
+              '{' === f.value ? h[0]++ : '}' === f.value && h[1]++;
+            else if ('keyword' === f.name)
               switch (f.value) {
                 case 'set':
                   break a;
@@ -8180,23 +8200,23 @@ if (
         custom: [
           c(function (a) {
             for (var c, d, e = a.index, f = !1; (c = a.tokens[--e]) !== b; ) {
-              if (c.name === 'punctuation' && c.value === '{') return !1;
-              if (c.name === 'keyword' && c.value === 'case') return !1;
+              if ('punctuation' === c.name && '{' === c.value) return !1;
+              if ('keyword' === c.name && 'case' === c.value) return !1;
               if (
-                c.name === 'keyword' &&
-                (c.value === 'class' || c.value === 'where')
+                'keyword' === c.name &&
+                ('class' === c.value || 'where' === c.value)
               ) {
                 if (
                   ((d =
-                    a.tokens[e + 1].name === 'default'
+                    'default' === a.tokens[e + 1].name
                       ? a.tokens[e + 2]
                       : a.tokens[e + 1]),
-                  d.name === 'punctuation' && d.value === ',')
+                  'punctuation' === d.name && ',' === d.value)
                 )
                   continue;
                 break;
               }
-              c.name === 'operator' && c.value === ':' && (f = !0);
+              'operator' === c.name && ':' === c.value && (f = !0);
             }
             return !!f;
           }),
@@ -8206,8 +8226,8 @@ if (
               (d = c.tokens[--f]) !== b;
 
             ) {
-              if (d.name === 'keyword' && d.value === 'class') return !1;
-              if (d.name === 'operator') {
+              if ('keyword' === d.name && 'class' === d.value) return !1;
+              if ('operator' === d.name) {
                 switch (d.value) {
                   case '<':
                   case '<<':
@@ -8215,7 +8235,7 @@ if (
                     continue;
                   case '>':
                   case '>>':
-                    if (h[0] === 0) return !1;
+                    if (0 === h[0]) return !1;
                     h[1] += d.value.length;
                     continue;
                 }
@@ -8223,30 +8243,30 @@ if (
               }
               if (
                 !(
-                  (d.name === 'keyword' && a.util.contains(e, d.value)) ||
-                  d.name === 'default' ||
-                  (d.name === 'punctuation' && d.value === ',')
+                  ('keyword' === d.name && a.util.contains(e, d.value)) ||
+                  'default' === d.name ||
+                  ('punctuation' === d.name && ',' === d.value)
                 )
               ) {
-                if (d.name !== 'ident') break;
+                if ('ident' !== d.name) break;
                 g = !0;
               }
             }
-            if (!g || h[0] === 0) return !1;
+            if (!g || 0 === h[0]) return !1;
             for (f = c.index; (d = c.tokens[++f]) !== b; ) {
               if (
-                d.name === 'operator' &&
-                (d.value === '>' || d.value === '>>')
+                'operator' === d.name &&
+                ('>' === d.value || '>>' === d.value)
               )
                 return !0;
               if (
                 !(
-                  (d.name === 'keyword' && a.util.contains(e, d.value)) ||
-                  (d.name === 'operator' &&
+                  ('keyword' === d.name && a.util.contains(e, d.value)) ||
+                  ('operator' === d.name &&
                     a.util.contains(['<', '<<', '>', '>>'], d.value)) ||
-                  (d.name === 'punctuation' && d.value === ',') ||
-                  d.name === 'ident' ||
-                  d.name === 'default'
+                  ('punctuation' === d.name && ',' === d.value) ||
+                  'ident' === d.name ||
+                  'default' === d.name
                 )
               )
                 return !1;
@@ -8254,33 +8274,33 @@ if (
             return !1;
           }),
           c(function (c) {
-            let f;
-            let g;
-            let h = a.util.getPreviousNonWsToken(c.tokens, c.index);
+            var f,
+              g,
+              h = a.util.getPreviousNonWsToken(c.tokens, c.index);
             if (
               h !== b &&
-              (h.name === 'ident' ||
-                (h.name === 'keyword' &&
+              ('ident' === h.name ||
+                ('keyword' === h.name &&
                   a.util.contains(
                     d.concat(['string', 'object', 'void']),
                     h.value
                   )) ||
-                (h.name === 'operator' && h.value === '.'))
+                ('operator' === h.name && '.' === h.value))
             )
               return !1;
             if (
               ((h = a.util.getNextNonWsToken(c.tokens, c.index)),
-              !h || h.name !== 'operator' || h.value !== '<')
+              !h || 'operator' !== h.name || '<' !== h.value)
             )
               return !1;
             for (f = c.index, g = [0, 0]; (h = c.tokens[++f]) !== b; )
-              if (h.name !== 'operator') {
+              if ('operator' !== h.name) {
                 if (
                   !(
-                    h.name === 'default' ||
-                    h.name === 'ident' ||
-                    (h.name === 'keyword' && a.util.contains(e, h.value)) ||
-                    (h.name === 'punctuation' && h.value === ',')
+                    'default' === h.name ||
+                    'ident' === h.name ||
+                    ('keyword' === h.name && a.util.contains(e, h.value)) ||
+                    ('punctuation' === h.name && ',' === h.value)
                   )
                 )
                   return !1;
@@ -8306,96 +8326,96 @@ if (
             return (
               g[0] === g[1] &&
               ((h = c.tokens[++f]),
-              !(!h || (h.name !== 'default' && h.name !== 'ident')) &&
+              !(!h || ('default' !== h.name && 'ident' !== h.name)) &&
                 !(
-                  h.name === 'default' &&
-                  ((h = c.tokens[++f]), !h || h.name !== 'ident')
+                  'default' === h.name &&
+                  ((h = c.tokens[++f]), !h || 'ident' !== h.name)
                 ))
             );
           }),
           function (b) {
-            let c;
-            const d = a.util.getPreviousNonWsToken(b.tokens, b.index);
+            var c,
+              d = a.util.getPreviousNonWsToken(b.tokens, b.index);
             return (
-              !(!d || d.name !== 'keyword' || d.value !== 'using') &&
+              !(!d || 'keyword' !== d.name || 'using' !== d.value) &&
               ((c = a.util.getNextNonWsToken(b.tokens, b.index)),
-              !(!c || c.name !== 'operator' || c.value !== '='))
+              !(!c || 'operator' !== c.name || '=' !== c.value))
             );
           },
           c(function (c) {
-            let d;
-            let e;
-            let f;
-            let g = a.util.getNextNonWsToken(c.tokens, c.index);
-            let h = !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(c.tokens, c.index),
+              h = !1;
             if (
               g &&
-              g.name === 'operator' &&
-              (g.value === '=' || g.value === '.')
+              'operator' === g.name &&
+              ('=' === g.value || '.' === g.value)
             )
               return !1;
             for (d = c.index, e = [0, 0], h = !1; (g = c.tokens[--d]) !== b; )
-              if (g.name === 'punctuation') {
-                if (g.value === '[') {
+              if ('punctuation' === g.name) {
+                if ('[' === g.value) {
                   e[0]++;
                   continue;
                 }
-                if (g.value === ']') {
+                if (']' === g.value) {
                   e[1]++;
                   continue;
                 }
                 if (
-                  (g.value === ',' && (h = !0),
-                  g.value === '{' || g.value === '}' || g.value === ';')
+                  (',' === g.value && (h = !0),
+                  '{' === g.value || '}' === g.value || ';' === g.value)
                 )
                   break;
               }
-            if (e[0] === 0 || e[0] === e[1]) return !1;
+            if (0 === e[0] || e[0] === e[1]) return !1;
             for (d = c.index, f = -1; (g = c.tokens[++d]) !== b; )
-              if (g.name === 'punctuation') {
-                if (g.value === '[') {
+              if ('punctuation' === g.name) {
+                if ('[' === g.value) {
                   e[0]++;
                   continue;
                 }
-                if (g.value === ']') {
+                if (']' === g.value) {
                   (f = d), e[1]++;
                   continue;
                 }
-                if (g.value === '{' || g.value === '}' || g.value === ';')
+                if ('{' === g.value || '}' === g.value || ';' === g.value)
                   break;
               }
             return (
               !(f < 0 || e[0] !== e[1]) &&
               ((g = a.util.getNextNonWsToken(c.tokens, f)),
-              !(!g || (g.name !== 'keyword' && g.name !== 'ident')))
+              !(!g || ('keyword' !== g.name && 'ident' !== g.name)))
             );
           }),
           c(function (c) {
-            let d;
-            let e;
-            let f;
-            const g = a.util.getNextNonWsToken(c.tokens, c.index);
-            if (g && g.name === 'operator' && g.value === '.') return !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(c.tokens, c.index);
+            if (g && 'operator' === g.name && '.' === g.value) return !1;
             for (e = c.index, f = c.tokens[e]; (d = c.tokens[--e]) !== b; ) {
               if (
-                d.name === 'keyword' &&
-                (d.value === 'new' || d.value === 'is')
+                'keyword' === d.name &&
+                ('new' === d.value || 'is' === d.value)
               )
                 return !0;
-              if (d.name !== 'default')
-                if (d.name !== 'ident') {
-                  if (d.name !== 'operator' || d.value !== '.') break;
-                  if (f && f.name !== 'ident') return !1;
+              if ('default' !== d.name)
+                if ('ident' !== d.name) {
+                  if ('operator' !== d.name || '.' !== d.value) break;
+                  if (f && 'ident' !== f.name) return !1;
                   f = d;
                 } else {
-                  if (f && f.name === 'ident') return !1;
+                  if (f && 'ident' === f.name) return !1;
                   f = d;
                 }
             }
             return !1;
           }),
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'punctuation', values: [')'] },
@@ -8410,39 +8430,41 @@ if (
               ],
             ];
             return c(function (c) {
-              let d;
-              let e;
-              let f;
-              const g = (function (d) {
-                for (let e = 0; e < b.length; e++)
-                  if (a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d))
-                    return !0;
-                return !1;
-              })(c.tokens);
+              var d,
+                e,
+                f,
+                g = (function (d) {
+                  for (var e = 0; e < b.length; e++)
+                    if (
+                      a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
+                    )
+                      return !0;
+                  return !1;
+                })(c.tokens);
               if (!g) return !1;
               for (e = c.index; (d = c.tokens[--e]); )
-                if (d.name === 'punctuation' && d.value === '(')
+                if ('punctuation' === d.name && '(' === d.value)
                   return (
                     (f = a.util.getPreviousNonWsToken(c.tokens, e)),
-                    !f || f.name !== 'keyword'
+                    !f || 'keyword' !== f.name
                   );
               return !1;
             });
           })(),
           function (b) {
-            let c;
-            let d;
-            const e = a.util.getNextNonWsToken(b.tokens, b.index);
-            if (!e || e.name !== 'punctuation' || e.value !== ';') return !1;
+            var c,
+              d,
+              e = a.util.getNextNonWsToken(b.tokens, b.index);
+            if (!e || 'punctuation' !== e.name || ';' !== e.value) return !1;
             for (d = b.index; (c = b.tokens[--d]); )
               if (
-                c.name !== 'ident' &&
-                c.name !== 'default' &&
-                (c.name !== 'operator' || c.value !== '.')
+                'ident' !== c.name &&
+                'default' !== c.name &&
+                ('operator' !== c.name || '.' !== c.value)
               )
                 return (
-                  c.name === 'operator' &&
-                  c.value === '=' &&
+                  'operator' === c.name &&
+                  '=' === c.value &&
                   a.util.createProceduralRule(d - 1, -1, [
                     { token: 'keyword', values: ['using'] },
                     { token: 'default' },
@@ -8453,47 +8475,47 @@ if (
             return !1;
           },
           c(function (b) {
-            let c;
-            const d = [
-              [
-                {
-                  token: 'keyword',
-                  values: [
-                    'class',
-                    'interface',
-                    'event',
-                    'struct',
-                    'enum',
-                    'delegate',
-                    'public',
-                    'private',
-                    'protected',
-                    'internal',
-                    'static',
-                    'virtual',
-                    'sealed',
-                    'params',
-                  ],
-                },
-                a.util.whitespace,
+            var c,
+              d = [
+                [
+                  {
+                    token: 'keyword',
+                    values: [
+                      'class',
+                      'interface',
+                      'event',
+                      'struct',
+                      'enum',
+                      'delegate',
+                      'public',
+                      'private',
+                      'protected',
+                      'internal',
+                      'static',
+                      'virtual',
+                      'sealed',
+                      'params',
+                    ],
+                  },
+                  a.util.whitespace,
+                ],
+                [
+                  { token: 'keyword', values: ['typeof', 'default'] },
+                  a.util.whitespace,
+                  { token: 'punctuation', values: ['('] },
+                  a.util.whitespace,
+                ],
+                [{ token: 'keyword', values: ['as'] }, a.util.whitespace],
               ],
-              [
-                { token: 'keyword', values: ['typeof', 'default'] },
-                a.util.whitespace,
-                { token: 'punctuation', values: ['('] },
-                a.util.whitespace,
-              ],
-              [{ token: 'keyword', values: ['as'] }, a.util.whitespace],
-            ];
-            const e = [
-              [
-                a.util.whitespace,
-                { token: 'punctuation', values: ['['] },
-                a.util.whitespace,
-                { token: 'punctuation', values: [']'] },
-              ],
-              [{ token: 'default' }, { token: 'ident' }],
-            ];
+              e = [
+                [
+                  a.util.whitespace,
+                  { token: 'punctuation', values: ['['] },
+                  a.util.whitespace,
+                  { token: 'punctuation', values: [']'] },
+                ],
+                [{ token: 'default' }, { token: 'ident' }],
+              ];
             for (c = 0; c < d.length; c++)
               if (
                 a.util.createProceduralRule(b.index - 1, -1, d[c], !1)(b.tokens)
@@ -8556,14 +8578,14 @@ if (
       for (
         var c, d, e = a.count(), f = '', g = !0, h = 1;
         (c = a.token(--e)) !== b &&
-        (c.name !== 'punctuation' || c.value !== '}');
+        ('punctuation' !== c.name || '}' !== c.value);
 
       )
-        if (c.name === 'punctuation' && c.value === '{') return null;
+        if ('punctuation' === c.name && '{' === c.value) return null;
       for (d = a.reader.peek(); d.length === h; ) {
         if (((letter = d.charAt(d.length - 1)), /[^\w-]$/.test(d))) {
-          if (((g = !1), letter === '{')) break;
-          if (letter === ';') return null;
+          if (((g = !1), '{' === letter)) break;
+          if (';' === letter) return null;
         }
         g && (f += letter), (d = a.reader.peek(++h));
       }
@@ -9001,7 +9023,7 @@ if (
       ],
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'matrix',
               'translate',
@@ -9035,17 +9057,17 @@ if (
             !0
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'function', !0);
-            if (f === null) return null;
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'function', !0);
+            if (null === f) return null;
             for (
               d = f.value.length, e = c.reader.peek(d);
               e.length === d && e !== c.reader.EOF;
 
             ) {
               if (!/\s$/.test(e)) {
-                if (e.charAt(e.length - 1) === '(')
+                if ('(' === e.charAt(e.length - 1))
                   return c.reader.read(f.value.length - 1), f;
                 break;
               }
@@ -9055,7 +9077,7 @@ if (
           };
         })(),
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'root',
               'nth-child',
@@ -9098,14 +9120,14 @@ if (
             !0
           );
           return function (c) {
-            const d = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
-            return d && d.name === 'operator' && d.value === ':'
+            var d = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
+            return d && 'operator' === d.name && ':' === d.value
               ? a.util.matchWord(c, b, 'pseudoClass')
               : null;
           };
         })(),
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'before',
               'after',
@@ -9119,20 +9141,20 @@ if (
             !0
           );
           return function (c) {
-            const d = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
-            return d && d.name === 'operator' && d.value === '::'
+            var d = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
+            return d && 'operator' === d.name && '::' === d.value
               ? a.util.matchWord(c, b, 'pseudoElement')
               : null;
           };
         })(),
         function (a) {
-          let b;
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          return a.reader.current() !== '.'
+          var b,
+            d = a.reader.getLine(),
+            e = a.reader.getColumn();
+          return '.' !== a.reader.current()
             ? null
             : ((b = c(a)),
-              b === null
+              null === b
                 ? null
                 : (a.reader.read(b.length),
                   [
@@ -9141,18 +9163,18 @@ if (
                   ]));
         },
         function (b) {
-          let d;
-          let e;
-          const f = b.reader.current();
-          const g = b.reader.getLine();
-          const h = b.reader.getColumn();
+          var d,
+            e,
+            f = b.reader.current(),
+            g = b.reader.getLine(),
+            h = b.reader.getColumn();
           return /[A-Za-z_]/.test(f)
             ? ((d = a.util.getPreviousNonWsToken(b.getAllTokens(), b.count())),
               !d ||
-              d.name !== 'operator' ||
-              (d.value !== ':' && d.value !== '::')
+              'operator' !== d.name ||
+              (':' !== d.value && '::' !== d.value)
                 ? ((e = c(b)),
-                  e === null
+                  null === e
                     ? null
                     : (b.reader.read(e.length),
                       b.createToken('element', f + e, g, h)))
@@ -9160,21 +9182,21 @@ if (
             : null;
         },
         function (a) {
-          let b;
-          let c;
-          let d = 1;
-          let e = '#';
-          let f = !0;
-          const g = a.reader.getLine();
-          const h = a.reader.getColumn();
-          if (a.reader.current() !== '#') return null;
+          var b,
+            c,
+            d = 1,
+            e = '#',
+            f = !0,
+            g = a.reader.getLine(),
+            h = a.reader.getColumn();
+          if ('#' !== a.reader.current()) return null;
           for (
             b = a.reader.peek();
             b.length === d &&
-            ((c = b.charAt(b.length - 1)), c !== '}' && c !== ';');
+            ((c = b.charAt(b.length - 1)), '}' !== c && ';' !== c);
 
           ) {
-            if (c === '{') return null;
+            if ('{' === c) return null;
             f && /[A-Fa-f0-9]/.test(c) ? (e += c) : (f = !1),
               (b = a.reader.peek(++d));
           }
@@ -9183,22 +9205,22 @@ if (
           );
         },
       ],
-      numberParser(a) {
-        let b;
-        let c;
-        const d = a.reader.current();
-        const e = a.reader.getLine();
-        const f = a.reader.getColumn();
-        let g = !0;
+      numberParser: function (a) {
+        var b,
+          c,
+          d = a.reader.current(),
+          e = a.reader.getLine(),
+          f = a.reader.getColumn(),
+          g = !0;
         if (/\d/.test(d))
-          (b = d), d === '0' && a.reader.peek() !== '.' && (g = !1);
+          (b = d), '0' === d && '.' !== a.reader.peek() && (g = !1);
         else {
-          if (d !== '.' || !/\d/.test(a.reader.peek())) return null;
+          if ('.' !== d || !/\d/.test(a.reader.peek())) return null;
           (b = d + a.reader.read()), (g = !1);
         }
         for (; (c = a.reader.peek()) !== a.reader.EOF; ) {
           if (!/[A-Za-z0-9%]/.test(c)) {
-            if (c === '.' && g && /\d$/.test(a.reader.peek(2))) {
+            if ('.' === c && g && /\d$/.test(a.reader.peek(2))) {
               (b += a.reader.read()), (g = !1);
               continue;
             }
@@ -9319,14 +9341,14 @@ if (
       ],
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          let d;
-          const e = a.reader.getLine();
-          const f = a.reader.getColumn();
-          let g = 0;
-          let h = !1;
-          let i = 1;
+          var b,
+            c,
+            d,
+            e = a.reader.getLine(),
+            f = a.reader.getColumn(),
+            g = 0,
+            h = !1,
+            i = 1;
           if (!/[A-Za-z_]/.test(a.reader.current())) return null;
           for (
             ;
@@ -9345,7 +9367,7 @@ if (
           if (!h && !/^[A-Z_]/.test(c)) return null;
           if ((a.reader.read(c.length - 1), (g = 1), h)) {
             for (; (b = a.reader.peek(++g)) && b.length === g; ) {
-              if (((d = b.charAt(b.length - 1)), i === 0)) {
+              if (((d = b.charAt(b.length - 1)), 0 === i)) {
                 for (; (b = a.reader.peek(++g)) && b.length === g; )
                   if (!/\s$/.test(b)) {
                     if (/->$/.test(a.reader.peek(g + 1)))
@@ -9357,7 +9379,7 @@ if (
                   }
                 break;
               }
-              d === '(' ? i++ : d === ')' && i--;
+              '(' === d ? i++ : ')' === d && i--;
             }
             return a.createToken('function', c, e, f);
           }
@@ -9479,24 +9501,24 @@ if (
       ],
       customParseRules: [
         function (a) {
-          const b = a.reader.peek();
-          let c = 2;
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          return a.reader.current() !== "'" && b !== "'"
+          var b = a.reader.peek(),
+            c = 2,
+            d = a.reader.getLine(),
+            e = a.reader.getColumn();
+          return "'" !== a.reader.current() && "'" !== b
             ? null
-            : (b && b === '\\' && c++,
+            : (b && '\\' === b && c++,
               /'$/.test(a.reader.peek(c))
-                ? a.createToken('char', `'${a.reader.read(c)}`, d, e)
+                ? a.createToken('char', "'" + a.reader.read(c), d, e)
                 : null);
         },
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f = 0;
-          const g = b.reader.getLine();
-          const h = b.reader.getColumn();
+          var c,
+            d,
+            e,
+            f = 0,
+            g = b.reader.getLine(),
+            h = b.reader.getColumn();
           if (!/[A-Za-z_]/.test(b.reader.current())) return null;
           for (
             ;
@@ -9507,7 +9529,7 @@ if (
             ((d = b.reader.current() + c.substring(0, c.length - 1)),
             (e = b.token(b.count() - 1)),
             e &&
-              e.name === 'keyword' &&
+              'keyword' === e.name &&
               a.util.contains(['class', 'newtype', 'data', 'type'], e.value))
           )
             return (
@@ -9837,7 +9859,7 @@ if (
       },
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'AuthnProviderAlias',
               'Directory',
@@ -9860,13 +9882,13 @@ if (
             !1
           );
           return function (c) {
-            let d;
-            let e;
-            let f = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
+            var d,
+              e,
+              f = a.util.getPreviousNonWsToken(c.getAllTokens(), c.count());
             if (
               !f ||
-              f.name !== 'operator' ||
-              (f.value !== '<' && f.value !== '</')
+              'operator' !== f.name ||
+              ('<' !== f.value && '</' !== f.value)
             )
               return !1;
             if (((f = a.util.matchWord(c, b, 'context', !0)), !f)) return null;
@@ -9882,13 +9904,13 @@ if (
           };
         })(),
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          const g = b.reader.current();
-          const h = b.reader.getLine();
-          const i = b.reader.getColumn();
+          var c,
+            d,
+            e,
+            f,
+            g = b.reader.current(),
+            h = b.reader.getLine(),
+            i = b.reader.getColumn();
           if (/[\s\n]/.test(g)) return null;
           if (
             ((c = b.getAllTokens()),
@@ -9897,9 +9919,9 @@ if (
           )
             return null;
           if (
-            (d.name !== 'keyword' || d.value !== 'RewriteRule') &&
+            ('keyword' !== d.name || 'RewriteRule' !== d.value) &&
             ((d = a.util.getPreviousNonWsToken(c, b.count() - 1)),
-            !d || d.name !== 'keyword' || d.value !== 'RewriteCond')
+            !d || 'keyword' !== d.name || 'RewriteCond' !== d.value)
           )
             return null;
           for (
@@ -9911,7 +9933,7 @@ if (
           return b.createToken('regexLiteral', e, h, i);
         },
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'AcceptFilter',
               'AcceptMutex',
@@ -10328,24 +10350,24 @@ if (
   })(this.Sunlight),
   (function (a, b) {
     function c(a) {
-      const b = /^T([A-Z0-9]\w*)?$/;
+      var b = /^T([A-Z0-9]\w*)?$/;
       return function (c) {
         return !b.test(c.tokens[c.index].value) && a(c);
       };
     }
     if (a === b || a.registerLanguage === b)
       throw 'Include sunlight.js before including language files';
-    const d = [
-      'boolean',
-      'byte',
-      'char',
-      'double',
-      'float',
-      'int',
-      'long',
-      'short',
-    ];
-    const e = d.concat(['extends']);
+    var d = [
+        'boolean',
+        'byte',
+        'char',
+        'double',
+        'float',
+        'int',
+        'long',
+        'short',
+      ],
+      e = d.concat(['extends']);
     a.registerLanguage('java', {
       keywords: [
         'abstract',
@@ -10423,16 +10445,16 @@ if (
               (d = c.tokens[--f]) !== b;
 
             ) {
-              if (d.name === 'keyword' && d.value === 'class') return !1;
-              if (d.name !== 'operator') {
+              if ('keyword' === d.name && 'class' === d.value) return !1;
+              if ('operator' !== d.name) {
                 if (
                   !(
-                    (d.name === 'keyword' && a.util.contains(e, d.value)) ||
-                    d.name === 'default' ||
-                    (d.name === 'punctuation' && d.value === ',')
+                    ('keyword' === d.name && a.util.contains(e, d.value)) ||
+                    'default' === d.name ||
+                    ('punctuation' === d.name && ',' === d.value)
                   )
                 ) {
-                  if (d.name !== 'ident') break;
+                  if ('ident' !== d.name) break;
                   g = !0;
                 }
               } else
@@ -10443,7 +10465,7 @@ if (
                     break;
                   case '>':
                   case '>>':
-                    if (h[0] === 0) return !1;
+                    if (0 === h[0]) return !1;
                     h[1] += d.value.length;
                     break;
                   case '.':
@@ -10454,21 +10476,21 @@ if (
                     return !1;
                 }
             }
-            if (!g || h[0] === 0) return !1;
+            if (!g || 0 === h[0]) return !1;
             for (f = c.index; (d = c.tokens[++f]) !== b; ) {
               if (
-                d.name === 'operator' &&
-                (d.value === '>' || d.value === '>>')
+                'operator' === d.name &&
+                ('>' === d.value || '>>' === d.value)
               )
                 return !0;
               if (
                 !(
-                  (d.name === 'keyword' && a.util.contains(e, d.value)) ||
-                  (d.name === 'operator' &&
+                  ('keyword' === d.name && a.util.contains(e, d.value)) ||
+                  ('operator' === d.name &&
                     a.util.contains(['<', '<<', '>', '>>'], d.value)) ||
-                  (d.name === 'punctuation' && d.value === ',') ||
-                  d.name === 'ident' ||
-                  d.name === 'default'
+                  ('punctuation' === d.name && ',' === d.value) ||
+                  'ident' === d.name ||
+                  'default' === d.name
                 )
               )
                 return !1;
@@ -10476,30 +10498,30 @@ if (
             return !1;
           }),
           c(function (c) {
-            let f;
-            let g;
-            let h = a.util.getPreviousNonWsToken(c.tokens, c.index);
+            var f,
+              g,
+              h = a.util.getPreviousNonWsToken(c.tokens, c.index);
             if (
               h !== b &&
-              (h.name === 'ident' ||
-                (h.name === 'keyword' &&
+              ('ident' === h.name ||
+                ('keyword' === h.name &&
                   a.util.contains(d.concat(['void']), h.value)) ||
-                (h.name === 'operator' && h.value === '.'))
+                ('operator' === h.name && '.' === h.value))
             )
               return !1;
             if (
               ((h = a.util.getNextNonWsToken(c.tokens, c.index)),
-              !h || h.name !== 'operator' || h.value !== '<')
+              !h || 'operator' !== h.name || '<' !== h.value)
             )
               return !1;
             for (f = c.index, g = [0, 0]; (h = c.tokens[++f]) !== b; )
-              if (h.name !== 'operator') {
+              if ('operator' !== h.name) {
                 if (
                   !(
-                    h.name === 'default' ||
-                    h.name === 'ident' ||
-                    (h.name === 'keyword' && a.util.contains(e, h.value)) ||
-                    (h.name === 'punctuation' && h.value === ',')
+                    'default' === h.name ||
+                    'ident' === h.name ||
+                    ('keyword' === h.name && a.util.contains(e, h.value)) ||
+                    ('punctuation' === h.name && ',' === h.value)
                   )
                 )
                   return !1;
@@ -10528,41 +10550,41 @@ if (
             return (
               g[0] === g[1] &&
               ((h = c.tokens[++f]),
-              !(!h || (h.name !== 'default' && h.name !== 'ident')) &&
+              !(!h || ('default' !== h.name && 'ident' !== h.name)) &&
                 !(
-                  h.name === 'default' &&
-                  ((h = c.tokens[++f]), !h || h.name !== 'ident')
+                  'default' === h.name &&
+                  ((h = c.tokens[++f]), !h || 'ident' !== h.name)
                 ))
             );
           }),
           c(function (c) {
-            let d;
-            let e;
-            let f;
-            const g = a.util.getNextNonWsToken(c.tokens, c.index);
-            if (g && g.name === 'operator' && g.value === '.') return !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(c.tokens, c.index);
+            if (g && 'operator' === g.name && '.' === g.value) return !1;
             for (e = c.index, f = c.tokens[e]; (d = c.tokens[--e]) !== b; ) {
               if (
-                d.name === 'keyword' &&
-                (d.value === 'new' ||
-                  d.value === 'import' ||
-                  d.value === 'instanceof')
+                'keyword' === d.name &&
+                ('new' === d.value ||
+                  'import' === d.value ||
+                  'instanceof' === d.value)
               )
                 return !0;
-              if (d.name !== 'default')
-                if (d.name !== 'ident') {
-                  if (d.name !== 'operator' || d.value !== '.') break;
-                  if (f && f.name !== 'ident') return !1;
+              if ('default' !== d.name)
+                if ('ident' !== d.name) {
+                  if ('operator' !== d.name || '.' !== d.value) break;
+                  if (f && 'ident' !== f.name) return !1;
                   f = d;
                 } else {
-                  if (f && f.name === 'ident') return !1;
+                  if (f && 'ident' === f.name) return !1;
                   f = d;
                 }
             }
             return !1;
           }),
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'punctuation', values: [')'] },
@@ -10577,74 +10599,79 @@ if (
               ],
             ];
             return c(function (c) {
-              let d;
-              let e;
-              let f;
-              const g = (function (d) {
-                for (let e = 0; e < b.length; e++)
-                  if (a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d))
-                    return !0;
-                return !1;
-              })(c.tokens);
+              var d,
+                e,
+                f,
+                g = (function (d) {
+                  for (var e = 0; e < b.length; e++)
+                    if (
+                      a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
+                    )
+                      return !0;
+                  return !1;
+                })(c.tokens);
               if (!g) return !1;
               for (e = c.index; (d = c.tokens[--e]); )
-                if (d.name === 'punctuation' && d.value === '(')
+                if ('punctuation' === d.name && '(' === d.value)
                   return (
                     (f = a.util.getPreviousNonWsToken(c.tokens, e)),
-                    !f || f.name !== 'keyword'
+                    !f || 'keyword' !== f.name
                   );
               return !1;
             });
           })(),
           c(function (b) {
-            let c;
-            const d = [
-              [
-                { token: 'ident' },
-                a.util.whitespace,
-                { token: 'keyword', values: ['extends', 'implements'] },
-                a.util.whitespace,
+            var c,
+              d = [
+                [
+                  { token: 'ident' },
+                  a.util.whitespace,
+                  { token: 'keyword', values: ['extends', 'implements'] },
+                  a.util.whitespace,
+                ],
+                [
+                  {
+                    token: 'keyword',
+                    values: [
+                      'class',
+                      'interface',
+                      'enum',
+                      'public',
+                      'private',
+                      'protected',
+                      'static',
+                      'final',
+                    ],
+                  },
+                  a.util.whitespace,
+                ],
+                [
+                  { token: 'keyword', values: ['extends'] },
+                  { token: 'default' },
+                  { token: 'ident' },
+                  { token: 'default' },
+                  { token: 'operator', values: ['&'] },
+                  { token: 'default' },
+                ],
               ],
-              [
+              e = [
+                [
+                  a.util.whitespace,
+                  { token: 'punctuation', values: ['['] },
+                  a.util.whitespace,
+                  { token: 'punctuation', values: [']'] },
+                ],
+                [{ token: 'default' }, { token: 'ident' }],
+              ],
+              f = [
                 {
-                  token: 'keyword',
-                  values: [
-                    'class',
-                    'interface',
-                    'enum',
-                    'public',
-                    'private',
-                    'protected',
-                    'static',
-                    'final',
-                  ],
+                  opener: {
+                    token: 'keyword',
+                    values: ['implements', 'throws'],
+                  },
+                  closer: { token: 'punctuation', values: ['{'] },
                 },
-                a.util.whitespace,
-              ],
-              [
-                { token: 'keyword', values: ['extends'] },
-                { token: 'default' },
-                { token: 'ident' },
-                { token: 'default' },
-                { token: 'operator', values: ['&'] },
-                { token: 'default' },
-              ],
-            ];
-            const e = [
-              [
-                a.util.whitespace,
-                { token: 'punctuation', values: ['['] },
-                a.util.whitespace,
-                { token: 'punctuation', values: [']'] },
-              ],
-              [{ token: 'default' }, { token: 'ident' }],
-            ];
-            const f = [
-              {
-                opener: { token: 'keyword', values: ['implements', 'throws'] },
-                closer: { token: 'punctuation', values: ['{'] },
-              },
-            ];
+              ];
             for (c = 0; c < d.length; c++)
               if (
                 a.util.createProceduralRule(b.index - 1, -1, d[c], !1)(b.tokens)
@@ -10832,28 +10859,28 @@ if (
       },
       customParseRules: [
         function (c) {
-          let d;
-          let e;
-          let f;
-          const g = c.reader.peek();
-          let h = '/';
-          const i = c.reader.getLine();
-          const j = c.reader.getColumn();
-          let k = !1;
-          if (c.reader.current() !== '/' || g === '/' || g === '*') return null;
+          var d,
+            e,
+            f,
+            g = c.reader.peek(),
+            h = '/',
+            i = c.reader.getLine(),
+            j = c.reader.getColumn(),
+            k = !1;
+          if ('/' !== c.reader.current() || '/' === g || '*' === g) return null;
           if (
             ((d = (function () {
-              const d = c.token(c.count() - 1);
-              let e = null;
+              var d = c.token(c.count() - 1),
+                e = null;
               return (
-                c.defaultData.text !== '' &&
+                '' !== c.defaultData.text &&
                   (e = c.createToken('default', c.defaultData.text)),
                 e || (e = d),
                 e === b ||
-                  (e.name === 'default' && e.value.indexOf('\n') > -1) ||
+                  ('default' === e.name && e.value.indexOf('\n') > -1) ||
                   (!a.util.contains(['keyword', 'ident', 'number'], d.name) &&
                     !(
-                      d.name === 'punctuation' &&
+                      'punctuation' === d.name &&
                       !a.util.contains(['(', '{', '[', ',', ';'], d.value)
                     ))
               );
@@ -10862,12 +10889,12 @@ if (
           )
             return null;
           for (; c.reader.peek() !== c.reader.EOF; )
-            if (((e = c.reader.peek(2)), e !== '\\/' && e !== '\\\\'))
-              if (e !== '\\[' && e !== '\\]') {
+            if (((e = c.reader.peek(2)), '\\/' !== e && '\\\\' !== e))
+              if ('\\[' !== e && '\\]' !== e) {
                 if (
-                  (f === '[' ? (k = !0) : f === ']' && (k = !1),
+                  ('[' === f ? (k = !0) : ']' === f && (k = !1),
                   (h += f = c.reader.read()),
-                  f === '/' && !k)
+                  '/' === f && !k)
                 )
                   break;
               } else h += c.reader.read(2);
@@ -10935,12 +10962,12 @@ if (
   })(this.Sunlight),
   (function (a, b) {
     function c(b, c) {
-      const e = a.util.createHashMap(b, d, !1);
+      var e = a.util.createHashMap(b, d, !1);
       return function (b) {
-        const d = a.util.getPreviousNonWsToken(b.getAllTokens(), b.count());
+        var d = a.util.getPreviousNonWsToken(b.getAllTokens(), b.count());
         return d
-          ? d.name !== 'punctuation' ||
-            (d.value !== '(' && (d.name !== 'operator' || d.value !== "#'"))
+          ? 'punctuation' !== d.name ||
+            ('(' !== d.value && ('operator' !== d.name || "#'" !== d.value))
             ? null
             : a.util.matchWord(b, e, c)
           : null;
@@ -11126,10 +11153,10 @@ if (
       },
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          let d = 0;
-          if (a.reader.current() !== '#') return null;
+          var b,
+            c,
+            d = 0;
+          if ('#' !== a.reader.current()) return null;
           for (; (b = a.reader.peek(++d)) !== a.reader.EOF && b.length === d; )
             if (!/\d$/.test(b)) {
               if (/[AR]$/i.test(b)) break;
@@ -11139,7 +11166,7 @@ if (
             ? null
             : ((c = a.createToken(
                 'operator',
-                `#${b}`,
+                '#' + b,
                 a.reader.getLine(),
                 a.reader.getColumn()
               )),
@@ -11147,16 +11174,16 @@ if (
               c);
         },
         function (a) {
-          let b;
-          let c;
-          let d;
-          const e = a.reader.getLine();
-          const f = a.reader.getColumn();
-          if (a.defaultData.text !== '' || /\s/.test(a.reader.current()))
+          var b,
+            c,
+            d,
+            e = a.reader.getLine(),
+            f = a.reader.getColumn();
+          if ('' !== a.defaultData.text || /\s/.test(a.reader.current()))
             return null;
           if (
             ((b = a.getAllTokens()[a.count() - 1]),
-            !b || b.name !== 'operator' || b.value !== '#\\')
+            !b || 'operator' !== b.name || '#\\' !== b.value)
           )
             return null;
           for (
@@ -11168,39 +11195,39 @@ if (
           return a.createToken('ident', d, e, f);
         },
         function (b) {
-          let c;
-          let d;
-          let e = '*';
-          const f = b.reader.getLine();
-          const g = b.reader.getColumn();
-          if (b.reader.current() !== '*') return null;
+          var c,
+            d,
+            e = '*',
+            f = b.reader.getLine(),
+            g = b.reader.getColumn();
+          if ('*' !== b.reader.current()) return null;
           if (
             ((c = a.util.getPreviousNonWsToken(b.getAllTokens(), b.count())),
-            c && c.name === 'punctuation' && c.value === '(')
+            c && 'punctuation' === c.name && '(' === c.value)
           )
             return null;
           if (/[\s\*\)\(]/.test(b.reader.peek())) return null;
           for (
             ;
             (d = b.reader.peek()) !== b.reader.EOF &&
-            ((e += b.reader.read()), d !== '*');
+            ((e += b.reader.read()), '*' !== d);
 
           );
           return b.createToken('variable', e, f, g);
         },
         (function () {
-          const a = new RegExp(d);
+          var a = new RegExp(d);
           return function (b) {
-            let c;
-            let d;
-            let e;
-            const f = b.reader.getLine();
-            const g = b.reader.getColumn();
-            if (b.defaultData.text !== '' || a.test(b.reader.current()))
+            var c,
+              d,
+              e,
+              f = b.reader.getLine(),
+              g = b.reader.getColumn();
+            if ('' !== b.defaultData.text || a.test(b.reader.current()))
               return null;
             if (
               ((c = b.getAllTokens()[b.count() - 1]),
-              !c || c.name !== 'operator' || c.value !== "#'")
+              !c || 'operator' !== c.name || "#'" !== c.value)
             )
               return null;
             for (
@@ -12077,7 +12104,7 @@ if (
       namedIdentRules: {
         custom: [
           (function () {
-            const b = [
+            var b = [
               'defmacro',
               'defmethod',
               'defpackage',
@@ -12093,11 +12120,11 @@ if (
               'define-setf-method',
             ];
             return function (c) {
-              const d = a.util.getPreviousNonWsToken(c.tokens, c.index);
-              const e = c.tokens[c.index].value;
+              var d = a.util.getPreviousNonWsToken(c.tokens, c.index),
+                e = c.tokens[c.index].value;
               return (
                 d &&
-                  d.name === 'macro' &&
+                  'macro' === d.name &&
                   a.util.contains(b, d.value) &&
                   c.items.userDefinedFunctions.push(e),
                 a.util.contains(c.items.userDefinedFunctions, e)
@@ -12175,7 +12202,7 @@ if (
       },
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'assert',
               'collectgarbage',
@@ -12208,33 +12235,33 @@ if (
             '\\b'
           );
           return function (c) {
-            const d = c.token(c.count() - 1);
-            return d && d.name === 'operator' && d.value === '.'
+            var d = c.token(c.count() - 1);
+            return d && 'operator' === d.name && '.' === d.value
               ? null
               : a.util.matchWord(c, b, 'function');
           };
         })(),
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             ['close', 'flush', 'lines', 'read', 'seek', 'setvbuf', 'write'],
             '\\b'
           );
           return function (c) {
-            const d = c.token(c.count() - 1);
-            return d && d.name === 'operator' && d.value === ':'
+            var d = c.token(c.count() - 1);
+            return d && 'operator' === d.name && ':' === d.value
               ? a.util.matchWord(c, b, 'function')
               : null;
           };
         })(),
         function (a) {
-          let b;
-          let c;
-          let d;
-          let e = 0;
-          let f = 0;
-          const g = a.reader.getLine();
-          const h = a.reader.getColumn();
-          if (a.reader.current() !== '[') return null;
+          var b,
+            c,
+            d,
+            e = 0,
+            f = 0,
+            g = a.reader.getLine(),
+            h = a.reader.getColumn();
+          if ('[' !== a.reader.current()) return null;
           for (; (b = a.reader.peek(++f)) && b.length === f; )
             if (!/=$/.test(b)) {
               if (!/\[$/.test(b)) return null;
@@ -12242,13 +12269,13 @@ if (
               break;
             }
           for (
-            c = `[${b}`,
+            c = '[' + b,
               a.reader.read(b.length),
-              d = `]${new Array(e + 1).join('=')}]`;
+              d = ']' + new Array(e + 1).join('=') + ']';
             (b = a.reader.peek());
 
           ) {
-            if (b === ']' && a.reader.peek(d.length) === d) {
+            if (']' === b && a.reader.peek(d.length) === d) {
               c += a.reader.read(d.length);
               break;
             }
@@ -12262,7 +12289,7 @@ if (
       namedIdentRules: {
         custom: [
           (function () {
-            const b = [
+            var b = [
               'coroutine',
               'package',
               'string',
@@ -12273,11 +12300,11 @@ if (
               'debug',
             ];
             return function (c) {
-              let d;
+              var d;
               return (
                 !!a.util.contains(b, c.tokens[c.index].value) &&
                 ((d = a.util.getNextNonWsToken(c.tokens, c.index)),
-                d && (d.name !== 'operator' || d.value !== ':'))
+                d && ('operator' !== d.name || ':' !== d.value))
               );
             };
           })(),
@@ -12573,7 +12600,7 @@ if (
       ],
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'abs',
               'acos',
@@ -12794,17 +12821,17 @@ if (
             !0
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'function', !0);
-            if (f === null) return null;
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'function', !0);
+            if (null === f) return null;
             for (
               d = f.value.length, e = c.reader.peek(d);
               e.length === d && e !== c.reader.EOF;
 
             ) {
               if (!/\s$/.test(e)) {
-                if (e.charAt(e.length - 1) === '(')
+                if ('(' === e.charAt(e.length - 1))
                   return c.reader.read(f.value.length - 1), f;
                 break;
               }
@@ -12889,7 +12916,7 @@ if (
       },
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'server',
               'location',
@@ -12906,9 +12933,9 @@ if (
             !1
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'context', !0);
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'context', !0);
             if (!f) return null;
             for (
               e = f.value.length;
@@ -12922,25 +12949,25 @@ if (
           };
         })(),
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          const g = b.reader.current();
-          let h = !1;
-          let i = g;
-          const j = b.reader.getLine();
-          const k = b.reader.getColumn();
+          var c,
+            d,
+            e,
+            f,
+            g = b.reader.current(),
+            h = !1,
+            i = g,
+            j = b.reader.getLine(),
+            k = b.reader.getColumn();
           if (/[\s\n]/.test(g)) return null;
           for (d = b.count() - 1; (c = b.token(d--)) !== b.reader.EOF; ) {
             if (
-              c.name === 'regexLiteral' ||
-              (c.name === 'punctuation' &&
-                (c.value === '{' || c.value === '}' || c.value === ';'))
+              'regexLiteral' === c.name ||
+              ('punctuation' === c.name &&
+                ('{' === c.value || '}' === c.value || ';' === c.value))
             )
               return null;
             if (
-              c.name === 'operator' &&
+              'operator' === c.name &&
               a.util.contains(['^~', '~', '~*'], c.value)
             ) {
               if (
@@ -12948,16 +12975,16 @@ if (
                   b.getAllTokens(),
                   d,
                   function (a) {
-                    return a.name === 'default' || a.name === 'comment';
+                    return 'default' === a.name || 'comment' === a.name;
                   }
                 )),
-                f.name === 'context' && f.value === 'location')
+                'context' === f.name && 'location' === f.value)
               ) {
                 h = !0;
                 break;
               }
-            } else if (c.name === 'keyword' && c.value === 'server_name') {
-              if (g !== '~') return null;
+            } else if ('keyword' === c.name && 'server_name' === c.value) {
+              if ('~' !== g) return null;
               h = !0;
               break;
             }
@@ -12968,7 +12995,7 @@ if (
           return b.createToken('regexLiteral', i, j, k);
         },
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'daemon',
               'env',
@@ -13356,18 +13383,18 @@ if (
             !1
           );
           return function (c) {
-            let d;
-            const e = a.util.matchWord(c, b, 'keyword', !0);
+            var d,
+              e = a.util.matchWord(c, b, 'keyword', !0);
             return e
               ? ((d = a.util.getPreviousWhile(
                   c.getAllTokens(),
                   c.count(),
                   function (a) {
-                    return a.name === 'default' || a.name === 'comment';
+                    return 'default' === a.name || 'comment' === a.name;
                   }
                 )),
                 !d ||
-                (d.name === 'punctuation' &&
+                ('punctuation' === d.name &&
                   a.util.contains(['{', '}', ';'], d.value))
                   ? (c.reader.read(e.value.length - 1), e)
                   : null)
@@ -13537,16 +13564,7 @@ if (
       },
       customParseRules: [
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          let g;
-          let h;
-          let i;
-          let j;
-          let k;
-          let l;
+          var c, d, e, f, g, h, i, j, k, l;
           if (!b.language.identFirstLetter.test(b.reader.current()))
             return null;
           for (
@@ -13564,13 +13582,13 @@ if (
 
           )
             if (!/\s$/.test(c)) {
-              if (((g = /([\]:])$/.exec(c)), g === null)) return null;
-              f = g[1] === ':' && !/::$/.test(b.reader.peek(d + 1));
+              if (((g = /([\]:])$/.exec(c)), null === g)) return null;
+              f = ':' === g[1] && !/::$/.test(b.reader.peek(d + 1));
               break;
             }
           for (h = 0, i = 0, k = b.count(), l = 1; (j = b.token(--k)); ) {
             if (l > 1 && !f) return null;
-            if (j.name === 'punctuation')
+            if ('punctuation' === j.name)
               switch (j.value) {
                 case ';':
                 case '{':
@@ -13583,7 +13601,7 @@ if (
                   h++;
                   break;
                 case '[':
-                  if (i === 0 && h === 0)
+                  if (0 === i && 0 === h)
                     return l >= 1
                       ? ((j = b.createToken(
                           f && l > 1
@@ -13601,12 +13619,12 @@ if (
                 case ']':
                   i++;
               }
-            i === 0 && h === 0 && j.name === 'default' && l++;
+            0 === i && 0 === h && 'default' === j.name && l++;
           }
           return null;
         },
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'getter',
               'setter',
@@ -13620,23 +13638,23 @@ if (
             '\\b'
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'keyword', !0);
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'keyword', !0);
             if (!f) return null;
             for (e = c.count(); (d = c.token(--e)); )
-              if (d.name === 'punctuation') {
-                if (d.value === '(')
+              if ('punctuation' === d.name) {
+                if ('(' === d.value)
                   return (
                     (d = a.util.getPreviousNonWsToken(c.getAllTokens(), e)),
-                    d && d.name === 'keyword' && d.value === '@property'
+                    d && 'keyword' === d.name && '@property' === d.value
                       ? ((f.line = c.reader.getLine()),
                         (f.column = c.reader.getColumn()),
                         c.reader.read(f.value.length - 1),
                         f)
                       : null
                   );
-                if (d.value === ';') return null;
+                if (';' === d.value) return null;
               }
             return null;
           };
@@ -13647,25 +13665,23 @@ if (
       namedIdentRules: {
         custom: [
           function (b) {
-            const c = /^(NS|CG).+$/;
-            const d = a.util.getNextNonWsToken(b.tokens, b.index);
+            var c = /^(NS|CG).+$/,
+              d = a.util.getNextNonWsToken(b.tokens, b.index);
             return (
               c.test(b.tokens[b.index].value) &&
-              (!d || d.name !== 'punctuation' || d.value !== '(')
+              (!d || 'punctuation' !== d.name || '(' !== d.value)
             );
           },
           function (b) {
-            const c = a.util.getNextNonWsToken(b.tokens, b.index);
+            var c = a.util.getNextNonWsToken(b.tokens, b.index);
             return (
               c &&
-              c.name === 'messageDestination' &&
-              (c.value === 'class' || c.value === 'alloc')
+              'messageDestination' === c.name &&
+              ('class' === c.value || 'alloc' === c.value)
             );
           },
           function (b) {
-            let c;
-            let d;
-            let e;
+            var c, d, e;
             if (
               !a.util.createProceduralRule(b.index + 1, 1, [
                 { token: 'default' },
@@ -13683,7 +13699,7 @@ if (
             )
               return !1;
             for (d = b.index, e = 0; (c = b.tokens[--d]); )
-              if (c.name === 'punctuation')
+              if ('punctuation' === c.name)
                 switch (c.value) {
                   case '[':
                     return !1;
@@ -13691,7 +13707,7 @@ if (
                   case ',':
                     return !0;
                   case '(':
-                    if (e === 0) return !0;
+                    if (0 === e) return !0;
                     e++;
                     break;
                   case ')':
@@ -13700,7 +13716,7 @@ if (
             return !0;
           },
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'operator', values: ['*', '**'] },
@@ -13717,14 +13733,10 @@ if (
               ],
             ];
             return function (c) {
-              let d;
-              let e;
-              let f;
-              let g;
-              let h;
+              var d, e, f, g, h;
               if (
                 ((d = (function (d) {
-                  let e;
+                  var e;
                   for (e = 0; e < b.length; e++)
                     if (
                       a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
@@ -13737,19 +13749,19 @@ if (
                 return !1;
               for (e = !1, f = !1, h = c.index; (g = c.tokens[--h]); ) {
                 if (
-                  g.name === 'punctuation' &&
-                  (g.value === ';' || g.value === '{')
+                  'punctuation' === g.name &&
+                  (';' === g.value || '{' === g.value)
                 )
                   return e || !f;
-                g.name === 'operator' && g.value === '='
+                'operator' === g.name && '=' === g.value
                   ? (f = !0)
-                  : g.name === 'keyword' && g.value === '@property' && (e = !0);
+                  : 'keyword' === g.name && '@property' === g.value && (e = !0);
               }
               return !1;
             };
           })(),
           (function () {
-            const b = [
+            var b = [
               [
                 a.util.whitespace,
                 { token: 'punctuation', values: [')'] },
@@ -13782,13 +13794,10 @@ if (
               ],
             ];
             return function (c) {
-              let d;
-              let e;
-              let f;
-              let g;
+              var d, e, f, g;
               if (
                 ((g = (function (d) {
-                  let e;
+                  var e;
                   for (e = 0; e < b.length; e++)
                     if (
                       a.util.createProceduralRule(c.index + 1, 1, b[e], !1)(d)
@@ -13800,11 +13809,11 @@ if (
               )
                 return !1;
               for (e = c.index; (d = c.tokens[--e]); )
-                if (d.name === 'punctuation' && d.value === '(') {
+                if ('punctuation' === d.name && '(' === d.value) {
                   if ((f = a.util.getPreviousNonWsToken(c.tokens, e))) {
-                    if (f.name === 'ident') return !1;
+                    if ('ident' === f.name) return !1;
                     if (
-                      f.name === 'keyword' &&
+                      'keyword' === f.name &&
                       a.util.contains(['if', 'while'], f.value)
                     )
                       return !1;
@@ -13815,18 +13824,18 @@ if (
             };
           })(),
           function (c) {
-            let d;
-            let e;
-            let f;
-            let g;
-            let h = c.index;
+            var d,
+              e,
+              f,
+              g,
+              h = c.index;
             if (
               ((g = a.util.getPreviousNonWsToken(c.tokens, c.index)),
-              !g || g.name === 'keyword')
+              !g || 'keyword' === g.name)
             )
               return !1;
             for (e = !1, f = [0, 0]; (d = c.tokens[--h]) !== b; ) {
-              if (d.name === 'operator')
+              if ('operator' === d.name)
                 switch (d.value) {
                   case '<':
                   case '<<':
@@ -13834,7 +13843,7 @@ if (
                     continue;
                   case '>':
                   case '>>':
-                    if (f[0] === 0) return !1;
+                    if (0 === f[0]) return !1;
                     f[1] += d.value.length;
                     continue;
                   case '.':
@@ -13843,13 +13852,13 @@ if (
                     continue;
                 }
               if (
-                d.name !== 'default' &&
-                (d.name !== 'punctuation' || d.value !== ',')
+                'default' !== d.name &&
+                ('punctuation' !== d.name || ',' !== d.value)
               ) {
                 if (
                   !(
-                    d.name === 'ident' ||
-                    (d.name === 'keyword' &&
+                    'ident' === d.name ||
+                    ('keyword' === d.name &&
                       a.util.contains(['id', 'static_cast'], d.value))
                   )
                 )
@@ -13857,23 +13866,23 @@ if (
                 e = !0;
               }
             }
-            if (!e || f[0] === 0) return !1;
+            if (!e || 0 === f[0]) return !1;
             for (h = c.index; (d = c.tokens[++h]) !== b; ) {
               if (
-                d.name === 'operator' &&
-                (d.value === '>' || d.value === '>>')
+                'operator' === d.name &&
+                ('>' === d.value || '>>' === d.value)
               )
                 return !0;
               if (
                 !(
-                  (d.name === 'operator' &&
+                  ('operator' === d.name &&
                     a.util.contains(
                       ['<', '<<', '>', '>>', '::', '*'],
                       d.value
                     )) ||
-                  (d.name === 'punctuation' && d.value === ',') ||
-                  d.name === 'ident' ||
-                  d.name === 'default'
+                  ('punctuation' === d.name && ',' === d.value) ||
+                  'ident' === d.name ||
+                  'default' === d.name
                 )
               )
                 return !1;
@@ -13881,25 +13890,25 @@ if (
             return !1;
           },
           function (c) {
-            let d;
-            let e;
-            let f = a.util.getPreviousNonWsToken(c.tokens, c.index);
+            var d,
+              e,
+              f = a.util.getPreviousNonWsToken(c.tokens, c.index);
             if (
               f !== b &&
-              (f.name === 'ident' || (f.name === 'operator' && f.value === '.'))
+              ('ident' === f.name || ('operator' === f.name && '.' === f.value))
             )
               return !1;
             if (
               ((f = a.util.getNextNonWsToken(c.tokens, c.index)),
-              !f || f.name !== 'operator' || f.value !== '<')
+              !f || 'operator' !== f.name || '<' !== f.value)
             )
               return !1;
             for (d = c.index, e = [0, 0]; (f = c.tokens[++d]) !== b; )
-              if (f.name !== 'operator') {
+              if ('operator' !== f.name) {
                 if (
-                  f.name !== 'default' &&
-                  f.name !== 'ident' &&
-                  (f.name !== 'punctuation' || f.value !== ',')
+                  'default' !== f.name &&
+                  'ident' !== f.name &&
+                  ('punctuation' !== f.name || ',' !== f.value)
                 )
                   return !1;
               } else {
@@ -13924,10 +13933,10 @@ if (
             return (
               e[0] === e[1] &&
               ((f = c.tokens[++d]),
-              !(!f || (f.name !== 'default' && f.name !== 'ident')) &&
+              !(!f || ('default' !== f.name && 'ident' !== f.name)) &&
                 !(
-                  f.name === 'default' &&
-                  ((f = c.tokens[++d]), !f || f.name !== 'ident')
+                  'default' === f.name &&
+                  ((f = c.tokens[++d]), !f || 'ident' !== f.name)
                 ))
             );
           },
@@ -14011,10 +14020,10 @@ if (
   })(this.Sunlight),
   (function (a, b) {
     function c(c) {
-      const d = c.token(c.count() - 1);
-      let e = null;
+      var d = c.token(c.count() - 1),
+        e = null;
       return (
-        c.defaultData.text !== '' &&
+        '' !== c.defaultData.text &&
           (e = c.createToken('default', c.defaultData.text)),
         e || (e = d),
         e === b ||
@@ -14023,7 +14032,7 @@ if (
             d.name
           ) &&
             !(
-              d.name === 'punctuation' &&
+              'punctuation' === d.name &&
               !a.util.contains(['(', '{', '[', ',', ';'], d.value)
             ))
       );
@@ -14038,13 +14047,13 @@ if (
       return c;
     }
     function e(b, c, d) {
-      let e;
-      let f;
-      const g = c;
-      let h = c;
-      const i = a.util.contains(['[', '(', '{'], g);
-      let j = g;
-      let k = 1;
+      var e,
+        f,
+        g = c,
+        h = c,
+        i = a.util.contains(['[', '(', '{'], g),
+        j = g,
+        k = 1;
       switch (c) {
         case '[':
           h = ']';
@@ -14056,7 +14065,7 @@ if (
           h = '}';
       }
       for (; b.reader.peek() !== b.reader.EOF; )
-        if (((e = b.reader.peek(2)), e !== `\\${h}` && e !== '\\\\')) {
+        if (((e = b.reader.peek(2)), e !== '\\' + h && '\\\\' !== e)) {
           if (((f = b.reader.read()), f === g && i)) k++;
           else if (f === h && --k <= 0) {
             (i || d) && (j += f);
@@ -14473,29 +14482,29 @@ if (
       },
       customParseRules: [
         function (b) {
-          let g;
-          let h;
-          let i;
-          let j;
-          let k;
-          let l = !1;
-          let m = '';
-          const n = b.reader.getLine();
-          const o = b.reader.getColumn();
+          var g,
+            h,
+            i,
+            j,
+            k,
+            l = !1,
+            m = '',
+            n = b.reader.getLine(),
+            o = b.reader.getColumn();
           if (!c(b)) return null;
           if (
             ((g = b.reader.current()),
             (h = b.reader.peek()),
-            g === '/' || g === '?')
+            '/' === g || '?' === g)
           )
             i = g;
-          else if (g === 'm' || g === 'y' || g === 's') {
+          else if ('m' === g || 'y' === g || 's' === g) {
             if (!(j = f(b, 1))) return null;
-            (m = g + j.value), (i = j.delimiter), (l = g === 'y' || g === 's');
+            (m = g + j.value), (i = j.delimiter), (l = 'y' === g || 's' === g);
           } else {
-            if ((g !== 't' && g !== 'q') || h !== 'r') return null;
+            if (('t' !== g && 'q' !== g) || 'r' !== h) return null;
             if (!(j = f(b, 2))) return null;
-            (l = g === 't'), (m = g + j.value), (i = j.delimiter);
+            (l = 't' === g), (m = g + j.value), (i = j.delimiter);
           }
           for (
             m += e(b, i, !l),
@@ -14512,31 +14521,31 @@ if (
           return b.createToken('regexLiteral', m, n, o);
         },
         function (a) {
-          let b;
-          let c = 'q';
-          let d = 1;
-          const f = a.reader.getLine();
-          const g = a.reader.getColumn();
-          return a.reader.current() !== 'q'
+          var b,
+            c = 'q',
+            d = 1,
+            f = a.reader.getLine(),
+            g = a.reader.getColumn();
+          return 'q' !== a.reader.current()
             ? null
             : ((b = a.reader.peek()),
-              (b !== 'q' && b !== 'w' && b != 'x') || d++,
+              ('q' !== b && 'w' !== b && 'x' != b) || d++,
               /[A-Za-z0-9]$/.test(a.reader.peek(d))
                 ? null
                 : ((c += a.reader.read(d - 1) + e(a, a.reader.read(), !0)),
                   a.createToken('rawString', c, f, g)));
         },
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          const g = b.reader.getLine();
-          const h = b.reader.getColumn();
-          let i = '<<';
-          let j = '';
-          let k = '';
-          if (b.reader.current() !== '<' || b.reader.peek() !== '<')
+          var c,
+            d,
+            e,
+            f,
+            g = b.reader.getLine(),
+            h = b.reader.getColumn(),
+            i = '<<',
+            j = '',
+            k = '';
+          if ('<' !== b.reader.current() || '<' !== b.reader.peek())
             return null;
           if (
             ((c = a.util.getPreviousNonWsToken(
@@ -14544,30 +14553,30 @@ if (
               b.count() - 1
             )),
             c &&
-              (c.name === 'ident' ||
-                c.name === 'number' ||
-                c.name === 'string'))
+              ('ident' === c.name ||
+                'number' === c.name ||
+                'string' === c.name))
           )
             return null;
           for (
             b.reader.read(2),
               d = b.reader.current(),
-              d === '-' &&
+              '-' === d &&
                 (b.reader.read(), (i += d), (d = b.reader.current())),
               a.util.contains(['"', "'", '`'], d) ? (k = d) : (j = d),
               i += d;
             (e = b.reader.peek()) !== b.reader.EOF &&
-            !(e === '\n' || (k === '' && /\W/.test(e)));
+            !('\n' === e || ('' === k && /\W/.test(e)));
 
           )
             if (
-              e === '\\' &&
+              '\\' === e &&
               ((f = b.reader.peek(2)),
-              k !== '' && a.util.contains([`\\${k}`, '\\\\'], f))
+              '' !== k && a.util.contains(['\\' + k, '\\\\'], f))
             )
               (i += f), (j += b.reader.read(2));
             else {
-              if (((i += b.reader.read()), k !== '' && e === k)) break;
+              if (((i += b.reader.read()), '' !== k && e === k)) break;
               j += e;
             }
           return (
@@ -14576,14 +14585,14 @@ if (
           );
         },
         function (a) {
-          let b;
-          let c;
-          let d;
-          let e;
-          let f;
-          const g = [];
-          if (a.items.heredocQueue.length === 0) return null;
-          if (a.defaultData.text.replace(/[^\n]/g, '').length === 0)
+          var b,
+            c,
+            d,
+            e,
+            f,
+            g = [];
+          if (0 === a.items.heredocQueue.length) return null;
+          if (0 === a.defaultData.text.replace(/[^\n]/g, '').length)
             return null;
           for (
             e = a.reader.current();
@@ -14599,7 +14608,7 @@ if (
             ) {
               if (
                 ((f = a.reader.peek(b.length + 2)),
-                f === `\n${b}` || f === `\n${b}\n`)
+                f === '\n' + b || f === '\n' + b + '\n')
               ) {
                 e += a.reader.read(b.length + 2);
                 break;
@@ -14611,15 +14620,15 @@ if (
           return g.length > 0 ? g : null;
         },
         function (a) {
-          let b;
-          let c = '=';
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          let f = !1;
-          if (a.reader.current() !== '=' || !a.reader.isSol()) return null;
+          var b,
+            c = '=',
+            d = a.reader.getLine(),
+            e = a.reader.getColumn(),
+            f = !1;
+          if ('=' !== a.reader.current() || !a.reader.isSol()) return null;
           for (; (b = a.reader.peek()) !== a.reader.EOF; )
-            if (f || a.reader.peek(5) !== '\n=cut') {
-              if (f && b === '\n') break;
+            if (f || '\n=cut' !== a.reader.peek(5)) {
+              if (f && '\n' === b) break;
               c += a.reader.read();
             } else (f = !0), (c += a.reader.read(5));
           return a.createToken('docComment', c, d, e);
@@ -17895,27 +17904,27 @@ if (
       },
       customParseRules: [
         function (a) {
-          let b;
-          let c = '<<<';
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          let f = '';
-          let g = !1;
-          if (a.reader.current() !== '<' || a.reader.peek(2) !== '<<')
+          var b,
+            c = '<<<',
+            d = a.reader.getLine(),
+            e = a.reader.getColumn(),
+            f = '',
+            g = !1;
+          if ('<' !== a.reader.current() || '<<' !== a.reader.peek(2))
             return null;
           for (
             a.reader.read(2), b = a.reader.peek();
-            b !== a.reader.EOF && b !== '\n';
+            b !== a.reader.EOF && '\n' !== b;
 
           )
             (c += a.reader.read()),
-              b !== "'" ? (f += a.reader.current()) : (g = !0),
+              "'" !== b ? (f += a.reader.current()) : (g = !0),
               (b = a.reader.peek());
           if (b !== a.reader.EOF) {
             for (
               c += a.reader.read();
               a.reader.peek() !== a.reader.EOF &&
-              a.reader.peek(f.length + 2) !== `\n${f};`;
+              a.reader.peek(f.length + 2) !== '\n' + f + ';';
 
             )
               c += a.reader.read();
@@ -17930,55 +17939,55 @@ if (
       namedIdentRules: {
         custom: [
           function (b) {
-            let c;
-            const d = a.util.getPreviousNonWsToken(b.tokens, b.index);
+            var c,
+              d = a.util.getPreviousNonWsToken(b.tokens, b.index);
             return (
-              !(!d || d.name !== 'keyword' || d.value !== 'new') &&
+              !(!d || 'keyword' !== d.name || 'new' !== d.value) &&
               ((c = a.util.getNextNonWsToken(b.tokens, b.index)),
-              !c || c.name !== 'operator' || c.value !== '\\')
+              !c || 'operator' !== c.name || '\\' !== c.value)
             );
           },
           function (b) {
-            let c;
-            let d;
-            const e = a.util.getNextNonWsToken(b.tokens, b.index);
+            var c,
+              d,
+              e = a.util.getNextNonWsToken(b.tokens, b.index);
             if (
               !e ||
-              e.name !== 'punctuation' ||
-              (e.value !== ';' && e.value !== ',')
+              'punctuation' !== e.name ||
+              (';' !== e.value && ',' !== e.value)
             )
               return !1;
             for (d = b.index; (c = b.tokens[--d]); )
               if (
                 !(
-                  c.name === 'ident' ||
-                  c.name === 'default' ||
-                  (c.name === 'operator' && c.value === '\\') ||
-                  (c.name === 'punctuation' && c.value === ',')
+                  'ident' === c.name ||
+                  'default' === c.name ||
+                  ('operator' === c.name && '\\' === c.value) ||
+                  ('punctuation' === c.name && ',' === c.value)
                 )
               )
-                return c.name === 'keyword' && c.value === 'use';
+                return 'keyword' === c.name && 'use' === c.value;
             return !1;
           },
           function (b) {
-            let d;
-            let e;
-            let f;
-            const g = a.util.getNextNonWsToken(b.tokens, b.index);
-            if (g && g.name === 'operator' && g.value === '\\') return !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(b.tokens, b.index);
+            if (g && 'operator' === g.name && '\\' === g.value) return !1;
             for (e = b.index, f = b.tokens[e]; (d = b.tokens[--e]) !== c; ) {
               if (
-                d.name === 'keyword' &&
-                (d.value === 'new' || d.value === 'instanceof')
+                'keyword' === d.name &&
+                ('new' === d.value || 'instanceof' === d.value)
               )
                 return !0;
-              if (d.name !== 'default')
-                if (d.name !== 'ident') {
-                  if (d.name !== 'operator' || d.value !== '\\') break;
-                  if (f && f.name !== 'ident') return !1;
+              if ('default' !== d.name)
+                if ('ident' !== d.name) {
+                  if ('operator' !== d.name || '\\' !== d.value) break;
+                  if (f && 'ident' !== f.name) return !1;
                   f = d;
                 } else {
-                  if (f && f.name === 'ident') return !1;
+                  if (f && 'ident' === f.name) return !1;
                   f = d;
                 }
             }
@@ -18072,73 +18081,73 @@ if (
       },
       customParseRules: [
         (function () {
-          const b = [
-            '-not',
-            '-band',
-            '-bor',
-            'bnot',
-            '-replace',
-            '-ireplace',
-            '-creplace',
-            '-and',
-            '-or',
-            '-isnot',
-            '-is',
-            '-as',
-            '-F',
-            '-lt',
-            '-le',
-            '-gt',
-            '-ge',
-            '-eq',
-            '-ne',
-            '-contains',
-            '-notcontains',
-            '-like',
-            '-notlike',
-            '-match',
-            '-notmatch',
-          ];
-          const c = [
-            'elseif',
-            'begin',
-            'function',
-            'for',
-            'foreach',
-            'return',
-            'else',
-            'trap',
-            'while',
-            'using',
-            'do',
-            'data',
-            'dynamicparam',
-            'class',
-            'define',
-            'until',
-            'end',
-            'break',
-            'if',
-            'throw',
-            'param',
-            'continue',
-            'finally',
-            'in',
-            'switch',
-            'exit',
-            'filter',
-            'from',
-            'try',
-            'process',
-            'var',
-            'catch',
-          ];
+          var b = [
+              '-not',
+              '-band',
+              '-bor',
+              'bnot',
+              '-replace',
+              '-ireplace',
+              '-creplace',
+              '-and',
+              '-or',
+              '-isnot',
+              '-is',
+              '-as',
+              '-F',
+              '-lt',
+              '-le',
+              '-gt',
+              '-ge',
+              '-eq',
+              '-ne',
+              '-contains',
+              '-notcontains',
+              '-like',
+              '-notlike',
+              '-match',
+              '-notmatch',
+            ],
+            c = [
+              'elseif',
+              'begin',
+              'function',
+              'for',
+              'foreach',
+              'return',
+              'else',
+              'trap',
+              'while',
+              'using',
+              'do',
+              'data',
+              'dynamicparam',
+              'class',
+              'define',
+              'until',
+              'end',
+              'break',
+              'if',
+              'throw',
+              'param',
+              'continue',
+              'finally',
+              'in',
+              'switch',
+              'exit',
+              'filter',
+              'from',
+              'try',
+              'process',
+              'var',
+              'catch',
+            ];
           return function (d) {
-            let e;
-            let f;
-            let g = d.reader.current();
-            const h = d.reader.getLine();
-            const i = d.reader.getColumn();
+            var e,
+              f,
+              g = d.reader.current(),
+              h = d.reader.getLine(),
+              i = d.reader.getColumn();
             if (
               !/[A-Za-z_-]/.test(d.reader.current()) ||
               !/[\w-]/.test(d.reader.peek())
@@ -18151,7 +18160,7 @@ if (
                 ? 'specialOperator'
                 : a.util.contains(c, g)
                 ? 'keyword'
-                : g.charAt(0) === '-'
+                : '-' === g.charAt(0)
                 ? 'switch'
                 : 'ident'),
               d.createToken(f, g, h, i)
@@ -18159,52 +18168,52 @@ if (
           };
         })(),
         (function () {
-          const b = /[!@#%&,\.\s]/;
-          const c = [
-            '$$',
-            '$?',
-            '$^',
-            '$_',
-            '$ARGS',
-            '$CONSOLEFILENAME',
-            '$ERROR',
-            '$EVENT',
-            '$EVENTSUBSCRIBER',
-            '$EXECUTIONCONTEXT',
-            '$FALSE',
-            '$FOREACH',
-            '$HOME',
-            '$HOST',
-            '$INPUT',
-            '$LASTEXITCODE',
-            '$MATCHES',
-            '$MYINVOCATION',
-            '$NESTEDPROMPTLEVEL',
-            '$NULL',
-            '$PID',
-            '$PROFILE',
-            '$PSBOUNDPARAMETERS',
-            '$PSCMDLET',
-            '$PSCULTURE',
-            '$PSDEBUGCONTEXT',
-            '$PSHOME',
-            '$PSSCRIPTROOT',
-            '$PSUICULTURE',
-            '$PSVERSIONTABLE',
-            '$PWD',
-            '$SENDER',
-            '$SHELLID',
-            '$SOURCEARGS',
-            '$SOURCEEVENTARGS',
-            '$THIS',
-            '$TRUE',
-          ];
+          var b = /[!@#%&,\.\s]/,
+            c = [
+              '$$',
+              '$?',
+              '$^',
+              '$_',
+              '$ARGS',
+              '$CONSOLEFILENAME',
+              '$ERROR',
+              '$EVENT',
+              '$EVENTSUBSCRIBER',
+              '$EXECUTIONCONTEXT',
+              '$FALSE',
+              '$FOREACH',
+              '$HOME',
+              '$HOST',
+              '$INPUT',
+              '$LASTEXITCODE',
+              '$MATCHES',
+              '$MYINVOCATION',
+              '$NESTEDPROMPTLEVEL',
+              '$NULL',
+              '$PID',
+              '$PROFILE',
+              '$PSBOUNDPARAMETERS',
+              '$PSCMDLET',
+              '$PSCULTURE',
+              '$PSDEBUGCONTEXT',
+              '$PSHOME',
+              '$PSSCRIPTROOT',
+              '$PSUICULTURE',
+              '$PSVERSIONTABLE',
+              '$PWD',
+              '$SENDER',
+              '$SHELLID',
+              '$SOURCEARGS',
+              '$SOURCEEVENTARGS',
+              '$THIS',
+              '$TRUE',
+            ];
           return function (d) {
-            let e;
-            let f = '$';
-            const g = d.reader.getLine();
-            const h = d.reader.getColumn();
-            if (d.reader.current() !== '$' || b.test(d.reader.peek()))
+            var e,
+              f = '$',
+              g = d.reader.getLine(),
+              h = d.reader.getColumn();
+            if ('$' !== d.reader.current() || b.test(d.reader.peek()))
               return null;
             for (; (e = d.reader.peek()) && !b.test(e); ) f += d.reader.read();
             return d.createToken(
@@ -18221,27 +18230,27 @@ if (
       namedIdentRules: {
         custom: [
           function (b) {
-            let c = b.tokens[b.index - 1];
+            var c = b.tokens[b.index - 1];
             return (
               !c ||
-              (c.name === 'default' && c.value.indexOf(a.util.eol) >= 0
+              ('default' === c.name && c.value.indexOf(a.util.eol) >= 0
                 ? ((c = b.tokens[b.index - 2]),
-                  !c || c.name !== 'operator' || c.value !== '`')
+                  !c || 'operator' !== c.name || '`' !== c.value)
                 : ((c = a.util.getPreviousNonWsToken(b.tokens, b.index)),
                   !(
                     !c ||
                     !(
-                      (c.name === 'operator' && c.value === '=') ||
-                      (c.name === 'punctuation' && c.value === '{')
+                      ('operator' === c.name && '=' === c.value) ||
+                      ('punctuation' === c.name && '{' === c.value)
                     )
                   )))
             );
           },
           function (b) {
-            let c;
-            const d = a.util.getNextNonWsToken(b.tokens, b.index);
+            var c,
+              d = a.util.getNextNonWsToken(b.tokens, b.index);
             return (
-              (!d || d.name !== 'operator' || d.value !== '.') &&
+              (!d || 'operator' !== d.name || '.' !== d.value) &&
               ((c = a.util.createBetweenRule(
                 b.index,
                 { token: 'punctuation', values: ['['] },
@@ -18744,26 +18753,26 @@ if (
       },
       customParseRules: [
         function (c) {
-          let d;
-          let e;
-          let f;
-          let g = '/';
-          const h = c.reader.getLine();
-          const i = c.reader.getColumn();
-          if (c.reader.current() !== '/') return null;
+          var d,
+            e,
+            f,
+            g = '/',
+            h = c.reader.getLine(),
+            i = c.reader.getColumn();
+          if ('/' !== c.reader.current()) return null;
           if (
             ((d = (function () {
-              const d = c.token(c.count() - 1);
-              let e = null;
+              var d = c.token(c.count() - 1),
+                e = null;
               return (
-                c.defaultData.text !== '' &&
+                '' !== c.defaultData.text &&
                   (e = c.createToken('default', c.defaultData.text)),
                 e || (e = d),
                 e === b ||
-                  (e.name === 'default' && e.value.indexOf('\n') > -1) ||
+                  ('default' === e.name && e.value.indexOf('\n') > -1) ||
                   (!a.util.contains(['keyword', 'ident', 'number'], d.name) &&
                     !(
-                      d.name === 'punctuation' &&
+                      'punctuation' === d.name &&
                       !a.util.contains(['(', '{', '[', ','], d.value)
                     ))
               );
@@ -18772,8 +18781,8 @@ if (
           )
             return null;
           for (; c.reader.peek() !== c.reader.EOF; )
-            if (((e = c.reader.peek(2)), e !== '\\/' && e !== '\\\\')) {
-              if (((g += f = c.reader.read()), f === '/')) break;
+            if (((e = c.reader.peek(2)), '\\/' !== e && '\\\\' !== e)) {
+              if (((g += f = c.reader.read()), '/' === f)) break;
             } else g += c.reader.read(2);
           for (
             ;
@@ -18785,21 +18794,21 @@ if (
           return c.createToken('regexLiteral', g, h, i);
         },
         function (a) {
-          let b;
-          let c;
-          let d;
-          let e = a.count();
-          let f = 0;
-          const g = e - 1;
-          if (a.reader.current() !== ':' || !/[a-zA-Z_]/.test(a.reader.peek()))
+          var b,
+            c,
+            d,
+            e = a.count(),
+            f = 0,
+            g = e - 1;
+          if (':' !== a.reader.current() || !/[a-zA-Z_]/.test(a.reader.peek()))
             return null;
           for (; (b = a.token(--e)); )
-            if (b.name === 'operator') {
-              if (f === 0) {
-                if (b.value === '?' && e < g) return null;
-                if (b.value === ':') break;
+            if ('operator' === b.name) {
+              if (0 === f) {
+                if ('?' === b.value && e < g) return null;
+                if (':' === b.value) break;
               }
-            } else if (b.name === 'punctuation')
+            } else if ('punctuation' === b.name)
               switch (b.value) {
                 case '(':
                   f--;
@@ -18807,12 +18816,12 @@ if (
                 case ')':
                   f++;
               }
-            else if (b.name === 'default' && /\n/.test(b.value)) {
+            else if ('default' === b.name && /\n/.test(b.value)) {
               if (
                 ((c = a.token(e - 1)),
                 c &&
-                  (c.name === 'operator' ||
-                    (c.name === 'punctuation' && c.value === ',')))
+                  ('operator' === c.name ||
+                    ('punctuation' === c.name && ',' === c.value)))
               )
                 continue;
               break;
@@ -18830,16 +18839,16 @@ if (
           );
         },
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          const g = b.reader.getLine();
-          const h = b.reader.getColumn();
-          let i = '<<';
-          let j = '';
-          let k = '';
-          if (b.reader.current() !== '<' || !/<[\w'"`-]/.test(b.reader.peek(2)))
+          var c,
+            d,
+            e,
+            f,
+            g = b.reader.getLine(),
+            h = b.reader.getColumn(),
+            i = '<<',
+            j = '',
+            k = '';
+          if ('<' !== b.reader.current() || !/<[\w'"`-]/.test(b.reader.peek(2)))
             return null;
           if (
             ((c = b.token(b.count() - 1)),
@@ -18849,22 +18858,22 @@ if (
           for (
             b.reader.read(2),
               d = b.reader.current(),
-              d === '-' &&
+              '-' === d &&
                 (b.reader.read(), (i += d), (j += d), (d = b.reader.current())),
               a.util.contains(['"', "'", '`'], d) ? (k = d) : (j += d),
               i += d;
             (e = b.reader.peek()) !== b.reader.EOF &&
-            !(e === '\n' || (k === '' && /\W/.test(e)));
+            !('\n' === e || ('' === k && /\W/.test(e)));
 
           )
             if (
-              e === '\\' &&
+              '\\' === e &&
               ((f = b.reader.peek(2)),
-              k !== '' && a.util.contains([`\\${k}`, '\\\\'], f))
+              '' !== k && a.util.contains(['\\' + k, '\\\\'], f))
             )
               (i += f), (j += b.reader.read(2));
             else {
-              if (((i += b.reader.read()), k !== '' && e === k)) break;
+              if (((i += b.reader.read()), '' !== k && e === k)) break;
               j += e;
             }
           return (
@@ -18873,16 +18882,16 @@ if (
           );
         },
         function (b) {
-          let c;
-          let d;
-          let e;
-          let f;
-          let g;
-          const h = [];
-          let i = b.reader.current();
-          let j = !1;
-          if (b.items.heredocQueue.length === 0) return null;
-          if (b.defaultData.text.replace(/[^\n]/g, '').length === 0)
+          var c,
+            d,
+            e,
+            f,
+            g,
+            h = [],
+            i = b.reader.current(),
+            j = !1;
+          if (0 === b.items.heredocQueue.length) return null;
+          if (0 === b.defaultData.text.replace(/[^\n]/g, '').length)
             return null;
           for (
             ;
@@ -18891,16 +18900,16 @@ if (
           ) {
             for (
               c = b.items.heredocQueue.shift(),
-                c.charAt(0) === '-' && ((c = c.substring(1)), (j = !0)),
+                '-' === c.charAt(0) && ((c = c.substring(1)), (j = !0)),
                 d = b.reader.getLine(),
                 e = b.reader.getColumn(),
                 f = new RegExp(
-                  `^\\n${j ? '[ \\t]*' : ''}${a.util.regexEscape(c)}\\n`
+                  '^\\n' + (j ? '[ \\t]*' : '') + a.util.regexEscape(c) + '\\n'
                 );
               b.reader.peek() !== b.reader.EOF;
 
             ) {
-              if (((g = f.exec(b.reader.peekSubstring())), g !== null)) {
+              if (((g = f.exec(b.reader.peekSubstring())), null !== g)) {
                 i += b.reader.read(g[0].length);
                 break;
               }
@@ -18911,18 +18920,18 @@ if (
           return h.length > 0 ? h : null;
         },
         function (b) {
-          let c;
-          let d;
-          let e = '%';
-          let f = 1;
-          let g = !1;
-          const h = b.reader.getLine();
-          const i = b.reader.getColumn();
-          if (b.reader.current() !== '%') return null;
+          var c,
+            d,
+            e = '%',
+            f = 1,
+            g = !1,
+            h = b.reader.getLine(),
+            i = b.reader.getColumn();
+          if ('%' !== b.reader.current()) return null;
           if (
             ((c = b.reader.peek()),
-            (c !== 'q' && c !== 'Q' && c !== 'r') ||
-              (f++, c === 'r' && (g = !0)),
+            ('q' !== c && 'Q' !== c && 'r' !== c) ||
+              (f++, 'r' === c && (g = !0)),
             /[A-Za-z0-9=]$/.test(b.reader.peek(f)))
           )
             return null;
@@ -18938,8 +18947,8 @@ if (
           }
           for (; (c = b.reader.peek()) !== b.reader.EOF; )
             if (
-              c === '\\' &&
-              a.util.contains([`\\${d}`, '\\\\'], b.reader.peek(2))
+              '\\' === c &&
+              a.util.contains(['\\' + d, '\\\\'], b.reader.peek(2))
             )
               e += b.reader.read(2);
             else if (((e += b.reader.read()), c === d)) break;
@@ -18954,20 +18963,20 @@ if (
           return b.createToken(g ? 'regexLiteral' : 'rawString', e, h, i);
         },
         function (a) {
-          let b;
-          let c = '=begin';
-          const d = a.reader.getLine();
-          const e = a.reader.getColumn();
-          let f = !1;
+          var b,
+            c = '=begin',
+            d = a.reader.getLine(),
+            e = a.reader.getColumn(),
+            f = !1;
           if (
             !a.reader.isSol() ||
-            a.reader.current() !== '=' ||
-            a.reader.peek(5) !== 'begin'
+            '=' !== a.reader.current() ||
+            'begin' !== a.reader.peek(5)
           )
             return null;
           for (a.reader.read(5); (b = a.reader.peek()) !== a.reader.EOF; )
-            if (f || a.reader.peek(5) !== '\n=end') {
-              if (f && b === '\n') break;
+            if (f || '\n=end' !== a.reader.peek(5)) {
+              if (f && '\n' === b) break;
               c += a.reader.read();
             } else (f = !0), (c += a.reader.read(5));
           return a.createToken('docComment', c, d, e);
@@ -19111,26 +19120,26 @@ if (
       ],
       embeddedLanguages: {
         xml: {
-          switchTo(b) {
-            let c;
+          switchTo: function (b) {
+            var c;
             return (
               !(
-                b.reader.current() !== '<' || !/[\w!?]/.test(b.reader.peek())
+                '<' !== b.reader.current() || !/[\w!?]/.test(b.reader.peek())
               ) &&
-              (b.defaultData.text !== '' ||
+              ('' !== b.defaultData.text ||
                 ((c = b.token(b.count() - 1)),
                 c &&
-                  c.name === 'punctuation' &&
+                  'punctuation' === c.name &&
                   a.util.contains(['(', '{'], c.value)))
             );
           },
-          switchBack(a) {
-            const b = a.token(a.count() - 1);
+          switchBack: function (a) {
+            var b = a.token(a.count() - 1);
             if (!b) return !1;
-            if (b.name === 'tagName')
+            if ('tagName' === b.name)
               a.items.literalXmlOpenTag ||
                 (a.items.literalXmlOpenTag = b.value);
-            else if (b.name === 'operator')
+            else if ('operator' === b.name)
               switch (b.value) {
                 case '<':
                   a.items.literalXmlNestingLevel++;
@@ -19141,8 +19150,8 @@ if (
               }
             return !(
               !a.items.literalXmlOpenTag ||
-              a.items.literalXmlNestingLevel !== 0 ||
-              (b.value !== '>' && b.value !== '/>')
+              0 !== a.items.literalXmlNestingLevel ||
+              ('>' !== b.value && '/>' !== b.value)
             );
           },
         },
@@ -19164,29 +19173,29 @@ if (
       identAfterFirstLetter: /\w/,
       customParseRules: [
         function (a) {
-          const b = a.reader.getLine();
-          const c = a.reader.getColumn();
-          if (a.reader.current() !== "'") return !1;
-          const d = /^(\w+)(?!')/i.exec(a.reader.peekSubstring());
+          var b = a.reader.getLine(),
+            c = a.reader.getColumn();
+          if ("'" !== a.reader.current()) return !1;
+          var d = /^(\w+)(?!')/i.exec(a.reader.peekSubstring());
           return (
             !!d &&
             (a.reader.read(d[1].length),
-            a.createToken('symbolLiteral', `'${d[1]}`, b, c))
+            a.createToken('symbolLiteral', "'" + d[1], b, c))
           );
         },
         function (b) {
-          let c;
-          let d;
-          let e = b.reader.current();
-          const f = b.reader.getLine();
-          const g = b.reader.getColumn();
-          if (b.defaultData.text === '') return !1;
+          var c,
+            d,
+            e = b.reader.current(),
+            f = b.reader.getLine(),
+            g = b.reader.getColumn();
+          if ('' === b.defaultData.text) return !1;
           if (!/[A-Za-z]/.test(b.reader.current())) return !1;
           if (
             ((c = b.token(b.count() - 1)),
-            b.defaultData.text === '' ||
+            '' === b.defaultData.text ||
               !c ||
-              c.name !== 'keyword' ||
+              'keyword' !== c.name ||
               !a.util.contains(['class', 'type', 'trait', 'object'], c.value))
           )
             return !1;
@@ -19199,7 +19208,7 @@ if (
       namedIdentRules: {
         custom: [
           (function () {
-            const b = [
+            var b = [
               'Nil',
               'Nothing',
               'Unit',
@@ -19223,9 +19232,9 @@ if (
               'Boolean',
             ];
             return function (c) {
-              const d = a.util.getNextNonWsToken(c.tokens, c.index);
+              var d = a.util.getNextNonWsToken(c.tokens, c.index);
               return (
-                (!d || d.name !== 'operator' || d.value !== '.') &&
+                (!d || 'operator' !== d.name || '.' !== d.value) &&
                 a.util.contains(b, c.tokens[c.index].value)
               );
             };
@@ -19237,60 +19246,60 @@ if (
             );
           },
           function (c) {
-            let d;
-            let e;
-            let f;
-            const g = a.util.getNextNonWsToken(c.tokens, c.index);
-            if (g && g.name === 'operator' && g.value === '.') return !1;
+            var d,
+              e,
+              f,
+              g = a.util.getNextNonWsToken(c.tokens, c.index);
+            if (g && 'operator' === g.name && '.' === g.value) return !1;
             for (e = c.index, f = c.tokens[e]; (d = c.tokens[--e]) !== b; ) {
-              if (d.name === 'keyword' && d.value === 'new') return !0;
-              if (d.name !== 'default')
-                if (d.name !== 'ident') {
-                  if (d.name !== 'operator' || d.value !== '.') break;
-                  if (f && f.name !== 'ident') return !1;
+              if ('keyword' === d.name && 'new' === d.value) return !0;
+              if ('default' !== d.name)
+                if ('ident' !== d.name) {
+                  if ('operator' !== d.name || '.' !== d.value) break;
+                  if (f && 'ident' !== f.name) return !1;
                   f = d;
                 } else {
-                  if (f && f.name === 'ident') return !1;
+                  if (f && 'ident' === f.name) return !1;
                   f = d;
                 }
             }
             return !1;
           },
           (function () {
-            const b = [
-              [
+            var b = [
+                [
+                  {
+                    token: 'keyword',
+                    values: [
+                      'class',
+                      'object',
+                      'extends',
+                      'new',
+                      'type',
+                      'trait',
+                    ],
+                  },
+                  { token: 'default' },
+                ],
+                [{ token: 'operator', values: [':'] }, a.util.whitespace],
+                [{ token: 'operator', values: ['#'] }],
+                [
+                  { token: 'keyword', values: ['type'] },
+                  { token: 'default' },
+                  { token: 'ident' },
+                  a.util.whitespace,
+                  { token: 'operator', values: ['='] },
+                  a.util.whitespace,
+                ],
+              ],
+              c = [
                 {
-                  token: 'keyword',
-                  values: [
-                    'class',
-                    'object',
-                    'extends',
-                    'new',
-                    'type',
-                    'trait',
-                  ],
+                  opener: { token: 'punctuation', values: ['['] },
+                  closer: { token: 'punctuation', values: [']'] },
                 },
-                { token: 'default' },
-              ],
-              [{ token: 'operator', values: [':'] }, a.util.whitespace],
-              [{ token: 'operator', values: ['#'] }],
-              [
-                { token: 'keyword', values: ['type'] },
-                { token: 'default' },
-                { token: 'ident' },
-                a.util.whitespace,
-                { token: 'operator', values: ['='] },
-                a.util.whitespace,
-              ],
-            ];
-            const c = [
-              {
-                opener: { token: 'punctuation', values: ['['] },
-                closer: { token: 'punctuation', values: [']'] },
-              },
-            ];
+              ];
             return function (d) {
-              let e;
+              var e;
               if (/^[A-Z]([A-Z0-9]\w*)?$/.test(d.tokens[d.index].value))
                 return !1;
               for (e = 0; e < b.length; e++)
@@ -19373,7 +19382,7 @@ if (
     }),
       (a.globalOptions.enableScalaXmlInterpolation = !1),
       a.bind('beforeHighlight', function (a) {
-        a.language.name === 'scala' &&
+        'scala' === a.language.name &&
           (this.options.enableScalaXmlInterpolation = !0);
       }),
       a.bind('afterHighlight', function (a) {
@@ -19614,7 +19623,7 @@ if (
       ],
       customParseRules: [
         (function () {
-          const b = a.util.createHashMap(
+          var b = a.util.createHashMap(
             [
               'encryptbykey',
               'decryptbykey',
@@ -19867,17 +19876,17 @@ if (
             !0
           );
           return function (c) {
-            let d;
-            let e;
-            const f = a.util.matchWord(c, b, 'function', !0);
-            if (f === null) return null;
+            var d,
+              e,
+              f = a.util.matchWord(c, b, 'function', !0);
+            if (null === f) return null;
             for (
               d = f.value.length, e = c.reader.peek(d);
               e.length === d && e !== c.reader.EOF;
 
             ) {
               if (!/\s$/.test(e)) {
-                if (e.charAt(e.length - 1) === '(')
+                if ('(' === e.charAt(e.length - 1))
                   return c.reader.read(f.value.length - 1), f;
                 break;
               }
@@ -20193,12 +20202,12 @@ if (
       },
       customParseRules: [
         function (a) {
-          let b;
-          let c;
-          let d;
-          const e = 'xmlDocCommentMeta';
-          const f = 'xmlDocCommentContent';
-          if (a.reader.current() !== "'" || a.reader.peek(2) !== "''")
+          var b,
+            c,
+            d,
+            e = 'xmlDocCommentMeta',
+            f = 'xmlDocCommentContent';
+          if ("'" !== a.reader.current() || "''" !== a.reader.peek(2))
             return null;
           for (
             b = [
@@ -20209,10 +20218,10 @@ if (
             (c = a.reader.peek()) !== a.reader.EOF;
 
           )
-            if (c !== '<' || d.name === e)
-              if (c !== '>' || d.name !== e) {
-                if (c === '\n') break;
-                d.name === null &&
+            if ('<' !== c || d.name === e)
+              if ('>' !== c || d.name !== e) {
+                if ('\n' === c) break;
+                null === d.name &&
                   ((d.name = f),
                   (d.line = a.reader.getLine()),
                   (d.column = a.reader.getColumn())),
@@ -20223,7 +20232,7 @@ if (
                   (d.name = null),
                   (d.value = '');
             else
-              d.value !== '' &&
+              '' !== d.value &&
                 b.push(a.createToken(d.name, d.value, d.line, d.column)),
                 (d.line = a.reader.getLine()),
                 (d.column = a.reader.getColumn()),
@@ -20236,32 +20245,32 @@ if (
           );
         },
         function (a) {
-          let b;
-          const c = a.reader.getLine();
-          const d = a.reader.getColumn();
-          let e = '[';
-          if (a.reader.current() !== '[') return null;
+          var b,
+            c = a.reader.getLine(),
+            d = a.reader.getColumn(),
+            e = '[';
+          if ('[' !== a.reader.current()) return null;
           for (
             b = a.reader.read();
-            b !== a.reader.EOF && ((e += b), b !== ']');
+            b !== a.reader.EOF && ((e += b), ']' !== b);
 
           )
             b = a.reader.read();
           return a.createToken('escapedKeyword', e, c, d);
         },
         (function () {
-          const b = a.util.createHashMap(['New', 'GetType'], '\\b');
+          var b = a.util.createHashMap(['New', 'GetType'], '\\b');
           return function (c) {
-            let d;
-            const e = a.util.matchWord(c, b, 'keyword');
+            var d,
+              e = a.util.matchWord(c, b, 'keyword');
             return e
               ? ((d = a.util.getPreviousNonWsToken(
                   c.getAllTokens(),
                   c.count()
                 )),
                 d &&
-                  ((d.name === 'operator' && d.value === '.') ||
-                    (d.name === 'keyword' && d.value === 'Sub')) &&
+                  (('operator' === d.name && '.' === d.value) ||
+                    ('keyword' === d.name && 'Sub' === d.value)) &&
                   (e.name = 'ident'),
                 e)
               : null;
@@ -20273,34 +20282,34 @@ if (
       namedIdentRules: {
         custom: [
           function (c) {
-            let d;
-            const e = a.util.getNextNonWsToken(c.tokens, c.index);
-            let f = c.index;
-            const g = [0, 0];
-            let h = -1;
+            var d,
+              e = a.util.getNextNonWsToken(c.tokens, c.index),
+              f = c.index,
+              g = [0, 0],
+              h = -1;
             if (
               e &&
-              e.name === 'operator' &&
-              (e.value === '=' || e.value === '.')
+              'operator' === e.name &&
+              ('=' === e.value || '.' === e.value)
             )
               return !1;
             for (; (d = c.tokens[--f]) !== b; )
-              if (d.name === 'operator')
-                d.value === '<' ? g[0]++ : d.value === '>' && g[1]++;
+              if ('operator' === d.name)
+                '<' === d.value ? g[0]++ : '>' === d.value && g[1]++;
               else if (
-                d.name === 'keyword' &&
+                'keyword' === d.name &&
                 a.util.contains(
                   ['Public', 'Class', 'Protected', 'Private', 'Friend'],
                   d.value
                 )
               )
                 break;
-            if (g[0] === 0 || g[0] === g[1]) return !1;
+            if (0 === g[0] || g[0] === g[1]) return !1;
             for (f = c.index; (d = c.tokens[++f]) !== b; )
-              if (d.name === 'operator')
-                d.value === '<' ? g[0]++ : d.value === '>' && ((h = f), g[1]++);
+              if ('operator' === d.name)
+                '<' === d.value ? g[0]++ : '>' === d.value && ((h = f), g[1]++);
               else if (
-                d.name === 'keyword' &&
+                'keyword' === d.name &&
                 a.util.contains(
                   [
                     'Public',
@@ -20317,13 +20326,13 @@ if (
             return (
               !(h < 0 || g[0] !== g[1]) &&
               ((d = a.util.getNextNonWsToken(c.tokens, h)),
-              !(!d || (d.name !== 'keyword' && d.name !== 'ident')))
+              !(!d || ('keyword' !== d.name && 'ident' !== d.name)))
             );
           },
           function (b) {
-            let c;
-            let d = b.index;
-            let e = 1;
+            var c,
+              d = b.index,
+              e = 1;
             if (
               !a.util.createProceduralRule(b.index - 1, -1, [
                 { token: 'punctuation', values: [','] },
@@ -20332,29 +20341,29 @@ if (
             )
               return !1;
             for (; (c = b.tokens[--d]); )
-              if (c.name === 'punctuation' && c.value === '(') {
-                if ((e--, e === 0))
+              if ('punctuation' === c.name && '(' === c.value) {
+                if ((e--, 0 === e))
                   return (
                     (c = b.tokens[--d]),
                     !(
                       !c ||
-                      c.name !== 'keyword' ||
+                      'keyword' !== c.name ||
                       !a.util.contains(
                         ['CType', 'DirectCast', 'TryCast'],
                         c.value
                       )
                     )
                   );
-              } else c.name === 'punctuation' && c.value === ')' && e++;
+              } else 'punctuation' === c.name && ')' === c.value && e++;
             return !1;
           },
           function (b) {
-            let c;
-            const d = a.util.getPreviousNonWsToken(b.tokens, b.index);
-            let e = b.index;
-            if (d && d.name === 'operator' && d.value === '.') return !1;
+            var c,
+              d = a.util.getPreviousNonWsToken(b.tokens, b.index),
+              e = b.index;
+            if (d && 'operator' === d.name && '.' === d.value) return !1;
             for (; (c = b.tokens[--e]); )
-              if (c.name === 'keyword')
+              if ('keyword' === c.name)
                 switch (c.value) {
                   case 'Class':
                   case 'New':
@@ -20364,39 +20373,39 @@ if (
                   default:
                     return !1;
                 }
-              else if (c.name === 'default' && c.value.indexOf(a.util.eol) >= 0)
+              else if ('default' === c.name && c.value.indexOf(a.util.eol) >= 0)
                 return !1;
             return !1;
           },
           function (b) {
-            let c;
-            let d = b.index;
-            const e = (function () {
-              for (; (c = b.tokens[--d]); )
-                if (c.name === 'punctuation')
-                  switch (c.value) {
-                    case '(':
-                    case ')':
-                      return !1;
-                    case '{':
-                      return (
-                        (c = a.util.getPreviousNonWsToken(b.tokens, d)),
-                        !(!c || c.name !== 'keyword' || c.value !== 'As')
-                      );
-                  }
-                else if (
-                  c.name === 'keyword' &&
-                  a.util.contains(
-                    ['Public', 'Protected', 'Friend', 'Private', 'End'],
-                    c.value
+            var c,
+              d = b.index,
+              e = (function () {
+                for (; (c = b.tokens[--d]); )
+                  if ('punctuation' === c.name)
+                    switch (c.value) {
+                      case '(':
+                      case ')':
+                        return !1;
+                      case '{':
+                        return (
+                          (c = a.util.getPreviousNonWsToken(b.tokens, d)),
+                          !(!c || 'keyword' !== c.name || 'As' !== c.value)
+                        );
+                    }
+                  else if (
+                    'keyword' === c.name &&
+                    a.util.contains(
+                      ['Public', 'Protected', 'Friend', 'Private', 'End'],
+                      c.value
+                    )
                   )
-                )
-                  return !1;
-              return !1;
-            })();
+                    return !1;
+                return !1;
+              })();
             if (!e) return !1;
             for (d = b.index; (c = b.tokens[++d]); )
-              if (c.name === 'punctuation')
+              if ('punctuation' === c.name)
                 switch (c.value) {
                   case '}':
                     return !0;
@@ -20437,23 +20446,23 @@ if (
           ],
         ],
       },
-      numberParser(a) {
-        let b;
-        let c;
-        const d = a.reader.current();
-        const e = a.reader.getLine();
-        const f = a.reader.getColumn();
-        let g = !0;
-        if (d === '&' && /[Hh][A-Fa-f0-9]/.test(a.reader.peek(2)))
+      numberParser: function (a) {
+        var b,
+          c,
+          d = a.reader.current(),
+          e = a.reader.getLine(),
+          f = a.reader.getColumn(),
+          g = !0;
+        if ('&' === d && /[Hh][A-Fa-f0-9]/.test(a.reader.peek(2)))
           (b = d + a.reader.read(2)), (g = !1);
         else if (/\d/.test(d)) b = d;
         else {
-          if (d !== '.' || !/\d/.test(a.reader.peek())) return null;
+          if ('.' !== d || !/\d/.test(a.reader.peek())) return null;
           (b = d + a.reader.read()), (g = !1);
         }
         for (; (c = a.reader.peek()) !== a.reader.EOF; ) {
           if (!/[A-Za-z0-9]/.test(c)) {
-            if (c === '.' && g && /\d$/.test(a.reader.peek(2))) {
+            if ('.' === c && g && /\d$/.test(a.reader.peek(2))) {
               (b += a.reader.read()), (g = !1);
               continue;
             }
@@ -20495,7 +20504,7 @@ if (
   (function (a, b, c) {
     function d(a) {
       return function (c) {
-        const d = b.createElement('a');
+        var d = b.createElement('a');
         (d.className = c.options.classPrefix + c.tokens[c.index].name),
           d.setAttribute('href', a(c.tokens[c.index].value)),
           d.appendChild(c.createTextNode(c.tokens[c.index])),
@@ -20503,47 +20512,48 @@ if (
       };
     }
     if (a === c) throw 'Include sunlight.js before including plugin files';
-    const e = {
+    var e = {
       php: {
-        function(a) {
-          return `http://php.net/${a}`;
+        function: function (a) {
+          return 'http://php.net/' + a;
         },
-        languageConstruct(a) {
-          return `http://php.net/${a}`;
+        languageConstruct: function (a) {
+          return 'http://php.net/' + a;
         },
       },
       ruby: {
-        function(a) {
-          return `http://www.ruby-doc.org/docs/ruby-doc-bundle/Manual/man-1.4/function.html#${a
-            .replace(/!/g, '_bang')
-            .replace(/\?/g, '_p')}`;
+        function: function (a) {
+          return (
+            'http://www.ruby-doc.org/docs/ruby-doc-bundle/Manual/man-1.4/function.html#' +
+            a.replace(/!/g, '_bang').replace(/\?/g, '_p')
+          );
         },
       },
       python: {
-        function(a) {
-          return `http://docs.python.org/py3k/library/functions.html#${a}`;
+        function: function (a) {
+          return 'http://docs.python.org/py3k/library/functions.html#' + a;
         },
       },
       perl: {
-        function(a) {
-          return `http://perldoc.perl.org/functions/${a}.html`;
+        function: function (a) {
+          return 'http://perldoc.perl.org/functions/' + a + '.html';
         },
       },
       lua: {
-        function(a) {
-          return `http://www.lua.org/manual/5.1/manual.html#pdf-${a}`;
+        function: function (a) {
+          return 'http://www.lua.org/manual/5.1/manual.html#pdf-' + a;
         },
       },
     };
     a.bind('beforeAnalyze', function (b) {
       this.options.enableDocLinks &&
         (b.analyzerContext.getAnalyzer = function () {
-          let c;
-          let f;
-          const g = e[this.language.name];
+          var c,
+            f,
+            g = e[this.language.name];
           if (g) {
             c = a.util.clone(b.analyzerContext.language.analyzer);
-            for (f in g) g.hasOwnProperty(f) && (c[`handle_${f}`] = d(g[f]));
+            for (f in g) g.hasOwnProperty(f) && (c['handle_' + f] = d(g[f]));
             return c;
           }
         });
@@ -20552,9 +20562,9 @@ if (
   })(this.Sunlight, document),
   (function (a, b, c) {
     function d(a) {
-      const b = (function a(b) {
+      var b = (function a(b) {
         return b.lastChild
-          ? b.lastChild.nodeType === 3
+          ? 3 === b.lastChild.nodeType
             ? b.lastChild
             : a(b.lastChild)
           : null;
@@ -20563,19 +20573,11 @@ if (
     }
     if (a === c) throw 'Include sunlight.js before including plugin files';
     a.bind('afterHighlightNode', function (c) {
-      let e;
-      let f;
-      let g;
-      let h;
-      let i;
-      let j;
-      let k;
-      let l;
-      let m;
+      var e, f, g, h, i, j, k, l, m;
       if (
         this.options.lineNumbers &&
-        (this.options.lineNumbers !== 'automatic' ||
-          a.util.getComputedStyle(c.node, 'display') === 'block')
+        ('automatic' !== this.options.lineNumbers ||
+          'block' === a.util.getComputedStyle(c.node, 'display'))
       ) {
         for (
           e = b.createElement('pre'),
@@ -20583,26 +20585,29 @@ if (
             i = this.options.lineHighlight.length > 0,
             i &&
               ((g = b.createElement('div')),
-              (g.className = `${this.options.classPrefix}line-highlight-overlay`)),
-            e.className = `${this.options.classPrefix}line-number-margin`,
+              (g.className =
+                this.options.classPrefix + 'line-highlight-overlay')),
+            e.className = this.options.classPrefix + 'line-number-margin',
             k = b.createTextNode(a.util.eol),
             j = this.options.lineNumberStart;
           j <= this.options.lineNumberStart + f;
           j++
         )
           (l = b.createElement('a')),
-            (m = `${
-              c.node.id ? c.node.id : this.options.classPrefix + c.count
-            }-line-${j}`),
+            (m =
+              (c.node.id ? c.node.id : this.options.classPrefix + c.count) +
+              '-line-' +
+              j),
             l.setAttribute('name', m),
-            l.setAttribute('href', `#${m}`),
+            l.setAttribute('href', '#' + m),
             l.appendChild(b.createTextNode(j)),
             e.appendChild(l),
             e.appendChild(k.cloneNode(!1)),
             i &&
               ((h = b.createElement('div')),
               a.util.contains(this.options.lineHighlight, j) &&
-                (h.className = `${this.options.classPrefix}line-highlight-active`),
+                (h.className =
+                  this.options.classPrefix + 'line-highlight-active'),
               g.appendChild(h));
         c.codeContainer.insertBefore(e, c.codeContainer.firstChild),
           i && c.codeContainer.appendChild(g),
@@ -20616,7 +20621,7 @@ if (
   })(this.Sunlight, document),
   (function (sunlight, document, undefined) {
     function createLink(a, b, c) {
-      const d = document.createElement('a');
+      var d = document.createElement('a');
       return (
         d.setAttribute('href', a),
         d.setAttribute('title', b),
@@ -20625,33 +20630,23 @@ if (
       );
     }
     function getTextRecursive(a) {
-      let b = '';
-      let c = 0;
-      if (a.nodeType === 3) return a.nodeValue;
+      var b = '',
+        c = 0;
+      if (3 === a.nodeType) return a.nodeValue;
       for (b = '', c = 0; c < a.childNodes.length; c++)
         b += getTextRecursive(a.childNodes[c]);
       return b;
     }
     if (sunlight === undefined)
       throw 'Include sunlight.js before including plugin files';
-    const ieVersion = eval('0 /*@cc_on+ScriptEngineMajorVersion()@*/');
+    var ieVersion = eval('0 /*@cc_on+ScriptEngineMajorVersion()@*/');
     sunlight.bind('afterHighlightNode', function (a) {
-      let b;
-      let c;
-      let d;
-      let e;
-      let f;
-      let g;
-      let h;
-      let i;
-      let j;
-      let k;
-      let l;
+      var b, c, d, e, f, g, h, i, j, k, l;
       (ieVersion && ieVersion < 7) ||
         !this.options.showMenu ||
-        sunlight.util.getComputedStyle(a.node, 'display') !== 'block' ||
+        'block' !== sunlight.util.getComputedStyle(a.node, 'display') ||
         ((b = document.createElement('div')),
-        (b.className = `${this.options.classPrefix}menu`),
+        (b.className = this.options.classPrefix + 'menu'),
         (c =
           'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41Ljg3O4BdAAAAl0lEQVQ4jWP4P9n9PyWYgTYGzAr+///Q9P//Ty/HjhfEETDg1oH/YPDgNKbm4wsIuGBO+H84WJJKhhd2dkA0v3tEZhjcPQox4MVN7P7fUEHAgM112DX++Qkx+PEFMqPxwSmIAQenkWHAvCicAUucAbCAfX2PQCCCEtDGKkz86RXEgL39BAwAKcAFbh/6/39GIL3yAj0NAAB+LQeDCZ9tvgAAAABJRU5ErkJggg=='),
         (d = document.createElement('ul')),
@@ -20659,13 +20654,10 @@ if (
         (f = String.fromCharCode(8212)),
         (g = createLink('#', 'collapse code block', f)),
         (g.onclick = (function () {
-          const b = sunlight.util.getComputedStyle(a.codeContainer, 'height');
-          const c = sunlight.util.getComputedStyle(
-            a.codeContainer,
-            'overflowY'
-          );
+          var b = sunlight.util.getComputedStyle(a.codeContainer, 'height'),
+            c = sunlight.util.getComputedStyle(a.codeContainer, 'overflowY');
           return function () {
-            const d =
+            var d =
               sunlight.util.getComputedStyle(a.codeContainer, 'height') !== b;
             return (
               this.replaceChild(
@@ -20674,7 +20666,7 @@ if (
               ),
               this.setAttribute(
                 'title',
-                `${d ? 'collapse' : 'expand'} clode block`
+                (d ? 'collapse' : 'expand') + ' clode block'
               ),
               (a.codeContainer.style.height = d ? b : '0px'),
               (a.codeContainer.style.overflowY = d ? c : 'hidden'),
@@ -20686,9 +20678,9 @@ if (
         (h = document.createElement('li')),
         (i = createLink('#', 'view raw code', 'raw')),
         (i.onclick = (function () {
-          let b;
+          var b;
           return function () {
-            let c;
+            var c;
             return (
               b
                 ? (b.parentNode.removeChild(b),
@@ -20703,10 +20695,10 @@ if (
                   (b = document.createElement('textarea')),
                   (b.value = c),
                   b.setAttribute('readonly', 'readonly'),
-                  (b.style.width = `${
+                  (b.style.width =
                     parseInt(sunlight.util.getComputedStyle(a.node, 'width')) -
-                    5
-                  }px`),
+                    5 +
+                    'px'),
                   (b.style.height = sunlight.util.getComputedStyle(
                     a.node,
                     'height'
@@ -20733,7 +20725,7 @@ if (
           'Sunlight: JavaScript syntax highlighter by Tommy Montgomery'
         )),
         (l = document.createElement('img')),
-        l.setAttribute('src', `data:image/png;base64,${c}`),
+        l.setAttribute('src', 'data:image/png;base64,' + c),
         l.setAttribute('alt', 'about'),
         k.appendChild(l),
         j.appendChild(k),
@@ -20748,45 +20740,48 @@ if (
       (sunlight.globalOptions.autoCollapse = !1);
   })(this.Sunlight, document),
   (function (a) {
-    typeof define === 'function' && define.amd
+    'use strict';
+    'function' == typeof define && define.amd
       ? define(['jquery'], a)
-      : typeof module !== 'undefined' && module.exports
+      : 'undefined' != typeof module && module.exports
       ? (module.exports = a(require('jquery')))
       : a(jQuery);
   })(function (a) {
+    'use strict';
     function b(b) {
       return (
         !b.nodeName ||
-        a.inArray(b.nodeName.toLowerCase(), [
-          'iframe',
-          '#document',
-          'html',
-          'body',
-        ]) !== -1
+        -1 !==
+          a.inArray(b.nodeName.toLowerCase(), [
+            'iframe',
+            '#document',
+            'html',
+            'body',
+          ])
       );
     }
     function c(b) {
       return a.isFunction(b) || a.isPlainObject(b) ? b : { top: b, left: b };
     }
-    const d = (a.scrollTo = function (b, c, d) {
+    var d = (a.scrollTo = function (b, c, d) {
       return a(window).scrollTo(b, c, d);
     });
     return (
       (d.defaults = { axis: 'xy', duration: 0, limit: !0 }),
       (a.fn.scrollTo = function (e, f, g) {
-        typeof f === 'object' && ((g = f), (f = 0)),
-          typeof g === 'function' && (g = { onAfter: g }),
-          e === 'max' && (e = 9e9),
+        'object' == typeof f && ((g = f), (f = 0)),
+          'function' == typeof g && (g = { onAfter: g }),
+          'max' === e && (e = 9e9),
           (g = a.extend({}, d.defaults, g)),
           (f = f || g.duration);
-        const h = g.queue && g.axis.length > 1;
+        var h = g.queue && 1 < g.axis.length;
         return (
           h && (f /= 2),
           (g.offset = c(g.offset)),
           (g.over = c(g.over)),
           this.each(function () {
             function i(b) {
-              const c = a.extend({}, g, {
+              var c = a.extend({}, g, {
                 queue: !0,
                 duration: f,
                 complete:
@@ -20797,13 +20792,13 @@ if (
               });
               m.animate(o, c);
             }
-            if (e !== null) {
-              let j;
-              const k = b(this);
-              var l = k ? this.contentWindow || window : this;
-              var m = a(l);
-              var n = e;
-              var o = {};
+            if (null !== e) {
+              var j,
+                k = b(this),
+                l = k ? this.contentWindow || window : this,
+                m = a(l),
+                n = e,
+                o = {};
               switch (typeof n) {
                 case 'number':
                 case 'string':
@@ -20813,34 +20808,35 @@ if (
                   }
                   n = k ? a(n) : a(n, l);
                 case 'object':
-                  if (n.length === 0) return;
+                  if (0 === n.length) return;
                   (n.is || n.style) && (j = (n = a(n)).offset());
               }
-              const p = (a.isFunction(g.offset) && g.offset(l, n)) || g.offset;
+              var p = (a.isFunction(g.offset) && g.offset(l, n)) || g.offset;
               a.each(g.axis.split(''), function (a, b) {
-                let c = b === 'x' ? 'Left' : 'Top';
-                const e = c.toLowerCase();
-                const f = `scroll${c}`;
-                const q = m[f]();
-                const r = d.max(l, b);
+                var c = 'x' === b ? 'Left' : 'Top',
+                  e = c.toLowerCase(),
+                  f = 'scroll' + c,
+                  q = m[f](),
+                  r = d.max(l, b);
                 j
                   ? ((o[f] = j[e] + (k ? 0 : q - m.offset()[e])),
                     g.margin &&
-                      ((o[f] -= parseInt(n.css(`margin${c}`), 10) || 0),
-                      (o[f] -= parseInt(n.css(`border${c}Width`), 10) || 0)),
+                      ((o[f] -= parseInt(n.css('margin' + c), 10) || 0),
+                      (o[f] -=
+                        parseInt(n.css('border' + c + 'Width'), 10) || 0)),
                     (o[f] += p[e] || 0),
                     g.over[e] &&
-                      (o[f] += n[b === 'x' ? 'width' : 'height']() * g.over[e]))
+                      (o[f] += n['x' === b ? 'width' : 'height']() * g.over[e]))
                   : ((c = n[e]),
                     (o[f] =
-                      c.slice && c.slice(-1) === '%'
+                      c.slice && '%' === c.slice(-1)
                         ? (parseFloat(c) / 100) * r
                         : c)),
                   g.limit &&
                     /^\d+$/.test(o[f]) &&
-                    (o[f] = o[f] <= 0 ? 0 : Math.min(o[f], r)),
+                    (o[f] = 0 >= o[f] ? 0 : Math.min(o[f], r)),
                   !a &&
-                    g.axis.length > 1 &&
+                    1 < g.axis.length &&
                     (q === o[f]
                       ? (o = {})
                       : h && (i(g.onAfterFirst), (o = {})));
@@ -20851,25 +20847,25 @@ if (
         );
       }),
       (d.max = function (c, d) {
-        var e = d === 'x' ? 'Width' : 'Height';
-        const f = `scroll${e}`;
+        var e = 'x' === d ? 'Width' : 'Height',
+          f = 'scroll' + e;
         if (!b(c)) return c[f] - a(c)[e.toLowerCase()]();
-        var e = `client${e}`;
-        var g = c.ownerDocument || c.document;
-        const h = g.documentElement;
-        var g = g.body;
+        var e = 'client' + e,
+          g = c.ownerDocument || c.document,
+          h = g.documentElement,
+          g = g.body;
         return Math.max(h[f], g[f]) - Math.min(h[e], g[e]);
       }),
       (a.Tween.propHooks.scrollLeft = a.Tween.propHooks.scrollTop =
         {
-          get(b) {
+          get: function (b) {
             return a(b.elem)[b.prop]();
           },
-          set(b) {
-            const c = this.get(b);
+          set: function (b) {
+            var c = this.get(b);
             if (b.options.interrupt && b._last && b._last !== c)
               return a(b.elem).stop();
-            const d = Math.round(b.now);
+            var d = Math.round(b.now);
             c !== d && (a(b.elem)[b.prop](d), (b._last = this.get(b)));
           },
         }),
@@ -20877,16 +20873,16 @@ if (
     );
   }),
   (function (a) {
-    typeof define === 'function' && define.amd
+    'function' == typeof define && define.amd
       ? define(['jquery'], a)
       : a(jQuery);
   })(function (a) {
     function b(b, c, d) {
-      const e = c.hash.slice(1);
-      const f = document.getElementById(e) || document.getElementsByName(e)[0];
+      var e = c.hash.slice(1),
+        f = document.getElementById(e) || document.getElementsByName(e)[0];
       if (f) {
         b && b.preventDefault();
-        const g = a(d.target);
+        var g = a(d.target);
         if (
           !(
             (d.lock && g.is(':animated')) ||
@@ -20894,14 +20890,14 @@ if (
           )
         ) {
           if ((d.stop && g.stop(!0), d.hash)) {
-            const h = f.id === e ? 'id' : 'name';
-            const i = a('<a> </a>')
-              .attr(h, e)
-              .css({
-                position: 'absolute',
-                top: a(window).scrollTop(),
-                left: a(window).scrollLeft(),
-              });
+            var h = f.id === e ? 'id' : 'name',
+              i = a('<a> </a>')
+                .attr(h, e)
+                .css({
+                  position: 'absolute',
+                  top: a(window).scrollTop(),
+                  left: a(window).scrollLeft(),
+                });
             (f[h] = ''),
               a('body').prepend(i),
               (location.hash = c.hash),
@@ -20912,10 +20908,10 @@ if (
         }
       }
     }
-    const c = location.href.replace(/#.*/, '');
-    const d = (a.localScroll = function (b) {
-      a('body').localScroll(b);
-    });
+    var c = location.href.replace(/#.*/, ''),
+      d = (a.localScroll = function (b) {
+        a('body').localScroll(b);
+      });
     return (
       (d.defaults = {
         duration: 1e3,
@@ -20955,14 +20951,15 @@ if (
       d
     );
   }),
-  typeof jQuery === 'undefined')
+  'undefined' == typeof jQuery)
 )
   throw new Error("Bootstrap's JavaScript requires jQuery");
 +(function (a) {
-  const b = a.fn.jquery.split(' ')[0].split('.');
+  'use strict';
+  var b = a.fn.jquery.split(' ')[0].split('.');
   if (
     (b[0] < 2 && b[1] < 9) ||
-    (b[0] == 1 && b[1] == 9 && b[2] < 1) ||
+    (1 == b[0] && 9 == b[1] && b[2] < 1) ||
     b[0] > 2
   )
     throw new Error(
@@ -20970,24 +20967,25 @@ if (
     );
 })(jQuery),
   +(function (a) {
+    'use strict';
     function b() {
-      const a = document.createElement('bootstrap');
-      const b = {
-        WebkitTransition: 'webkitTransitionEnd',
-        MozTransition: 'transitionend',
-        OTransition: 'oTransitionEnd otransitionend',
-        transition: 'transitionend',
-      };
-      for (const c in b) if (void 0 !== a.style[c]) return { end: b[c] };
+      var a = document.createElement('bootstrap'),
+        b = {
+          WebkitTransition: 'webkitTransitionEnd',
+          MozTransition: 'transitionend',
+          OTransition: 'oTransitionEnd otransitionend',
+          transition: 'transitionend',
+        };
+      for (var c in b) if (void 0 !== a.style[c]) return { end: b[c] };
       return !1;
     }
     (a.fn.emulateTransitionEnd = function (b) {
-      let c = !1;
-      const d = this;
+      var c = !1,
+        d = this;
       a(this).one('bsTransitionEnd', function () {
         c = !0;
       });
-      const e = function () {
+      var e = function () {
         c || a(d).trigger(a.support.transition.end);
       };
       return setTimeout(e, b), this;
@@ -20998,7 +20996,7 @@ if (
             (a.event.special.bsTransitionEnd = {
               bindType: a.support.transition.end,
               delegateType: a.support.transition.end,
-              handle(b) {
+              handle: function (b) {
                 return a(b.target).is(this)
                   ? b.handleObj.handler.apply(this, arguments)
                   : void 0;
@@ -21007,26 +21005,27 @@ if (
       });
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const c = a(this);
-        let e = c.data('bs.alert');
+        var c = a(this),
+          e = c.data('bs.alert');
         e || c.data('bs.alert', (e = new d(this))),
-          typeof b === 'string' && e[b].call(c);
+          'string' == typeof b && e[b].call(c);
       });
     }
-    const c = '[data-dismiss="alert"]';
-    var d = function (b) {
-      a(b).on('click', c, this.close);
-    };
+    var c = '[data-dismiss="alert"]',
+      d = function (b) {
+        a(b).on('click', c, this.close);
+      };
     (d.VERSION = '3.3.6'),
       (d.TRANSITION_DURATION = 150),
       (d.prototype.close = function (b) {
         function c() {
           g.detach().trigger('closed.bs.alert').remove();
         }
-        const e = a(this);
-        let f = e.attr('data-target');
+        var e = a(this),
+          f = e.attr('data-target');
         f || ((f = e.attr('href')), (f = f && f.replace(/.*(?=#[^\s]*$)/, '')));
         var g = a(f);
         b && b.preventDefault(),
@@ -21040,7 +21039,7 @@ if (
                   .emulateTransitionEnd(d.TRANSITION_DURATION)
               : c());
       });
-    const e = a.fn.alert;
+    var e = a.fn.alert;
     (a.fn.alert = b),
       (a.fn.alert.Constructor = d),
       (a.fn.alert.noConflict = function () {
@@ -21049,13 +21048,14 @@ if (
       a(document).on('click.bs.alert.data-api', c, d.prototype.close);
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.button');
-        const f = typeof b === 'object' && b;
+        var d = a(this),
+          e = d.data('bs.button'),
+          f = 'object' == typeof b && b;
         e || d.data('bs.button', (e = new c(this, f))),
-          b == 'toggle' ? e.toggle() : b && e.setState(b);
+          'toggle' == b ? e.toggle() : b && e.setState(b);
       });
     }
     var c = function (b, d) {
@@ -21066,16 +21066,16 @@ if (
     (c.VERSION = '3.3.6'),
       (c.DEFAULTS = { loadingText: 'loading...' }),
       (c.prototype.setState = function (b) {
-        const c = 'disabled';
-        const d = this.$element;
-        const e = d.is('input') ? 'val' : 'html';
-        const f = d.data();
+        var c = 'disabled',
+          d = this.$element,
+          e = d.is('input') ? 'val' : 'html',
+          f = d.data();
         (b += 'Text'),
-          f.resetText == null && d.data('resetText', d[e]()),
+          null == f.resetText && d.data('resetText', d[e]()),
           setTimeout(
             a.proxy(function () {
-              d[e](f[b] == null ? this.options[b] : f[b]),
-                b == 'loadingText'
+              d[e](null == f[b] ? this.options[b] : f[b]),
+                'loadingText' == b
                   ? ((this.isLoading = !0), d.addClass(c).attr(c, c))
                   : this.isLoading &&
                     ((this.isLoading = !1), d.removeClass(c).removeAttr(c));
@@ -21084,15 +21084,15 @@ if (
           );
       }),
       (c.prototype.toggle = function () {
-        let a = !0;
-        const b = this.$element.closest('[data-toggle="buttons"]');
+        var a = !0,
+          b = this.$element.closest('[data-toggle="buttons"]');
         if (b.length) {
-          const c = this.$element.find('input');
-          c.prop('type') == 'radio'
+          var c = this.$element.find('input');
+          'radio' == c.prop('type')
             ? (c.prop('checked') && (a = !1),
               b.find('.active').removeClass('active'),
               this.$element.addClass('active'))
-            : c.prop('type') == 'checkbox' &&
+            : 'checkbox' == c.prop('type') &&
               (c.prop('checked') !== this.$element.hasClass('active') &&
                 (a = !1),
               this.$element.toggleClass('active')),
@@ -21102,7 +21102,7 @@ if (
           this.$element.attr('aria-pressed', !this.$element.hasClass('active')),
             this.$element.toggleClass('active');
       });
-    const d = a.fn.button;
+    var d = a.fn.button;
     (a.fn.button = b),
       (a.fn.button.Constructor = c),
       (a.fn.button.noConflict = function () {
@@ -21113,7 +21113,7 @@ if (
           'click.bs.button.data-api',
           '[data-toggle^="button"]',
           function (c) {
-            let d = a(c.target);
+            var d = a(c.target);
             d.hasClass('btn') || (d = d.closest('.btn')),
               b.call(d, 'toggle'),
               a(c.target).is('input[type="radio"]') ||
@@ -21132,19 +21132,15 @@ if (
         );
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.carousel');
-        const f = a.extend(
-          {},
-          c.DEFAULTS,
-          d.data(),
-          typeof b === 'object' && b
-        );
-        const g = typeof b === 'string' ? b : f.slide;
+        var d = a(this),
+          e = d.data('bs.carousel'),
+          f = a.extend({}, c.DEFAULTS, d.data(), 'object' == typeof b && b),
+          g = 'string' == typeof b ? b : f.slide;
         e || d.data('bs.carousel', (e = new c(this, f))),
-          typeof b === 'number'
+          'number' == typeof b
             ? e.to(b)
             : g
             ? e[g]()
@@ -21162,7 +21158,7 @@ if (
         (this.$items = null),
         this.options.keyboard &&
           this.$element.on('keydown.bs.carousel', a.proxy(this.keydown, this)),
-        this.options.pause == 'hover' &&
+        'hover' == this.options.pause &&
           !('ontouchstart' in document.documentElement) &&
           this.$element
             .on('mouseenter.bs.carousel', a.proxy(this.pause, this))
@@ -21206,21 +21202,21 @@ if (
         );
       }),
       (c.prototype.getItemForDirection = function (a, b) {
-        const c = this.getItemIndex(b);
-        const d =
-          (a == 'prev' && c === 0) ||
-          (a == 'next' && c == this.$items.length - 1);
+        var c = this.getItemIndex(b),
+          d =
+            ('prev' == a && 0 === c) ||
+            ('next' == a && c == this.$items.length - 1);
         if (d && !this.options.wrap) return b;
-        const e = a == 'prev' ? -1 : 1;
-        const f = (c + e) % this.$items.length;
+        var e = 'prev' == a ? -1 : 1,
+          f = (c + e) % this.$items.length;
         return this.$items.eq(f);
       }),
       (c.prototype.to = function (a) {
-        const b = this;
-        const c = this.getItemIndex(
-          (this.$active = this.$element.find('.item.active'))
-        );
-        return a > this.$items.length - 1 || a < 0
+        var b = this,
+          c = this.getItemIndex(
+            (this.$active = this.$element.find('.item.active'))
+          );
+        return a > this.$items.length - 1 || 0 > a
           ? void 0
           : this.sliding
           ? this.$element.one('slid.bs.carousel', function () {
@@ -21247,26 +21243,23 @@ if (
         return this.sliding ? void 0 : this.slide('prev');
       }),
       (c.prototype.slide = function (b, d) {
-        const e = this.$element.find('.item.active');
-        const f = d || this.getItemForDirection(b, e);
-        const g = this.interval;
-        const h = b == 'next' ? 'left' : 'right';
-        const i = this;
+        var e = this.$element.find('.item.active'),
+          f = d || this.getItemForDirection(b, e),
+          g = this.interval,
+          h = 'next' == b ? 'left' : 'right',
+          i = this;
         if (f.hasClass('active')) return (this.sliding = !1);
-        const j = f[0];
-        const k = a.Event('slide.bs.carousel', {
-          relatedTarget: j,
-          direction: h,
-        });
+        var j = f[0],
+          k = a.Event('slide.bs.carousel', { relatedTarget: j, direction: h });
         if ((this.$element.trigger(k), !k.isDefaultPrevented())) {
           if (
             ((this.sliding = !0), g && this.pause(), this.$indicators.length)
           ) {
             this.$indicators.find('.active').removeClass('active');
-            const l = a(this.$indicators.children()[this.getItemIndex(f)]);
+            var l = a(this.$indicators.children()[this.getItemIndex(f)]);
             l && l.addClass('active');
           }
-          const m = a.Event('slid.bs.carousel', {
+          var m = a.Event('slid.bs.carousel', {
             relatedTarget: j,
             direction: h,
           });
@@ -21295,22 +21288,22 @@ if (
           );
         }
       });
-    const d = a.fn.carousel;
+    var d = a.fn.carousel;
     (a.fn.carousel = b),
       (a.fn.carousel.Constructor = c),
       (a.fn.carousel.noConflict = function () {
         return (a.fn.carousel = d), this;
       });
-    const e = function (c) {
-      let d;
-      const e = a(this);
-      const f = a(
-        e.attr('data-target') ||
-          ((d = e.attr('href')) && d.replace(/.*(?=#[^\s]+$)/, ''))
-      );
+    var e = function (c) {
+      var d,
+        e = a(this),
+        f = a(
+          e.attr('data-target') ||
+            ((d = e.attr('href')) && d.replace(/.*(?=#[^\s]+$)/, ''))
+        );
       if (f.hasClass('carousel')) {
-        const g = a.extend({}, f.data(), e.data());
-        const h = e.attr('data-slide-to');
+        var g = a.extend({}, f.data(), e.data()),
+          h = e.attr('data-slide-to');
         h && (g.interval = !1),
           b.call(f, g),
           h && f.data('bs.carousel').to(h),
@@ -21322,39 +21315,39 @@ if (
       .on('click.bs.carousel.data-api', '[data-slide-to]', e),
       a(window).on('load', function () {
         a('[data-ride="carousel"]').each(function () {
-          const c = a(this);
+          var c = a(this);
           b.call(c, c.data());
         });
       });
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
-      let c;
-      const d =
-        b.attr('data-target') ||
-        ((c = b.attr('href')) && c.replace(/.*(?=#[^\s]+$)/, ''));
+      var c,
+        d =
+          b.attr('data-target') ||
+          ((c = b.attr('href')) && c.replace(/.*(?=#[^\s]+$)/, ''));
       return a(d);
     }
     function c(b) {
       return this.each(function () {
-        const c = a(this);
-        let e = c.data('bs.collapse');
-        const f = a.extend(
-          {},
-          d.DEFAULTS,
-          c.data(),
-          typeof b === 'object' && b
-        );
+        var c = a(this),
+          e = c.data('bs.collapse'),
+          f = a.extend({}, d.DEFAULTS, c.data(), 'object' == typeof b && b);
         !e && f.toggle && /show|hide/.test(b) && (f.toggle = !1),
           e || c.data('bs.collapse', (e = new d(this, f))),
-          typeof b === 'string' && e[b]();
+          'string' == typeof b && e[b]();
       });
     }
     var d = function (b, c) {
       (this.$element = a(b)),
         (this.options = a.extend({}, d.DEFAULTS, c)),
         (this.$trigger = a(
-          `[data-toggle="collapse"][href="#${b.id}"],[data-toggle="collapse"][data-target="#${b.id}"]`
+          '[data-toggle="collapse"][href="#' +
+            b.id +
+            '"],[data-toggle="collapse"][data-target="#' +
+            b.id +
+            '"]'
         )),
         (this.transitioning = null),
         this.options.parent
@@ -21366,15 +21359,15 @@ if (
       (d.TRANSITION_DURATION = 350),
       (d.DEFAULTS = { toggle: !0 }),
       (d.prototype.dimension = function () {
-        const a = this.$element.hasClass('width');
+        var a = this.$element.hasClass('width');
         return a ? 'width' : 'height';
       }),
       (d.prototype.show = function () {
         if (!this.transitioning && !this.$element.hasClass('in')) {
-          let b;
-          const e =
-            this.$parent &&
-            this.$parent.children('.panel').children('.in, .collapsing');
+          var b,
+            e =
+              this.$parent &&
+              this.$parent.children('.panel').children('.in, .collapsing');
           if (
             !(
               e &&
@@ -21382,12 +21375,12 @@ if (
               ((b = e.data('bs.collapse')), b && b.transitioning)
             )
           ) {
-            const f = a.Event('show.bs.collapse');
+            var f = a.Event('show.bs.collapse');
             if ((this.$element.trigger(f), !f.isDefaultPrevented())) {
               e &&
                 e.length &&
                 (c.call(e, 'hide'), b || e.data('bs.collapse', null));
-              const g = this.dimension();
+              var g = this.dimension();
               this.$element
                 .removeClass('collapse')
                 .addClass('collapsing')
@@ -21397,7 +21390,7 @@ if (
                   .removeClass('collapsed')
                   .attr('aria-expanded', !0),
                 (this.transitioning = 1);
-              const h = function () {
+              var h = function () {
                 this.$element
                   .removeClass('collapsing')
                   .addClass('collapse in')
@@ -21406,7 +21399,7 @@ if (
                   this.$element.trigger('shown.bs.collapse');
               };
               if (!a.support.transition) return h.call(this);
-              const i = a.camelCase(['scroll', g].join('-'));
+              var i = a.camelCase(['scroll', g].join('-'));
               this.$element
                 .one('bsTransitionEnd', a.proxy(h, this))
                 .emulateTransitionEnd(d.TRANSITION_DURATION)
@@ -21417,9 +21410,9 @@ if (
       }),
       (d.prototype.hide = function () {
         if (!this.transitioning && this.$element.hasClass('in')) {
-          const b = a.Event('hide.bs.collapse');
+          var b = a.Event('hide.bs.collapse');
           if ((this.$element.trigger(b), !b.isDefaultPrevented())) {
-            const c = this.dimension();
+            var c = this.dimension();
             this.$element[c](this.$element[c]())[0].offsetHeight,
               this.$element
                 .addClass('collapsing')
@@ -21427,7 +21420,7 @@ if (
                 .attr('aria-expanded', !1),
               this.$trigger.addClass('collapsed').attr('aria-expanded', !1),
               (this.transitioning = 1);
-            const e = function () {
+            var e = function () {
               (this.transitioning = 0),
                 this.$element
                   .removeClass('collapsing')
@@ -21448,22 +21441,24 @@ if (
       (d.prototype.getParent = function () {
         return a(this.options.parent)
           .find(
-            `[data-toggle="collapse"][data-parent="${this.options.parent}"]`
+            '[data-toggle="collapse"][data-parent="' +
+              this.options.parent +
+              '"]'
           )
           .each(
             a.proxy(function (c, d) {
-              const e = a(d);
+              var e = a(d);
               this.addAriaAndCollapsedClass(b(e), e);
             }, this)
           )
           .end();
       }),
       (d.prototype.addAriaAndCollapsedClass = function (a, b) {
-        const c = a.hasClass('in');
+        var c = a.hasClass('in');
         a.attr('aria-expanded', c),
           b.toggleClass('collapsed', !c).attr('aria-expanded', c);
       });
-    const e = a.fn.collapse;
+    var e = a.fn.collapse;
     (a.fn.collapse = c),
       (a.fn.collapse.Constructor = d),
       (a.fn.collapse.noConflict = function () {
@@ -21473,34 +21468,35 @@ if (
         'click.bs.collapse.data-api',
         '[data-toggle="collapse"]',
         function (d) {
-          const e = a(this);
+          var e = a(this);
           e.attr('data-target') || d.preventDefault();
-          const f = b(e);
-          const g = f.data('bs.collapse');
-          const h = g ? 'toggle' : e.data();
+          var f = b(e),
+            g = f.data('bs.collapse'),
+            h = g ? 'toggle' : e.data();
           c.call(f, h);
         }
       );
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
-      let c = b.attr('data-target');
+      var c = b.attr('data-target');
       c ||
         ((c = b.attr('href')),
         (c = c && /#[A-Za-z]/.test(c) && c.replace(/.*(?=#[^\s]*$)/, '')));
-      const d = c && a(c);
+      var d = c && a(c);
       return d && d.length ? d : b.parent();
     }
     function c(c) {
-      (c && c.which === 3) ||
+      (c && 3 === c.which) ||
         (a(e).remove(),
         a(f).each(function () {
-          const d = a(this);
-          const e = b(d);
-          const f = { relatedTarget: this };
+          var d = a(this),
+            e = b(d),
+            f = { relatedTarget: this };
           e.hasClass('open') &&
             ((c &&
-              c.type == 'click' &&
+              'click' == c.type &&
               /input|textarea/i.test(c.target.tagName) &&
               a.contains(e[0], c.target)) ||
               (e.trigger((c = a.Event('hide.bs.dropdown', f))),
@@ -21513,23 +21509,23 @@ if (
     }
     function d(b) {
       return this.each(function () {
-        const c = a(this);
-        let d = c.data('bs.dropdown');
+        var c = a(this),
+          d = c.data('bs.dropdown');
         d || c.data('bs.dropdown', (d = new g(this))),
-          typeof b === 'string' && d[b].call(c);
+          'string' == typeof b && d[b].call(c);
       });
     }
-    var e = '.dropdown-backdrop';
-    var f = '[data-toggle="dropdown"]';
-    var g = function (b) {
-      a(b).on('click.bs.dropdown', this.toggle);
-    };
+    var e = '.dropdown-backdrop',
+      f = '[data-toggle="dropdown"]',
+      g = function (b) {
+        a(b).on('click.bs.dropdown', this.toggle);
+      };
     (g.VERSION = '3.3.6'),
       (g.prototype.toggle = function (d) {
-        const e = a(this);
+        var e = a(this);
         if (!e.is('.disabled, :disabled')) {
-          const f = b(e);
-          const g = f.hasClass('open');
+          var f = b(e),
+            g = f.hasClass('open');
           if ((c(), !g)) {
             'ontouchstart' in document.documentElement &&
               !f.closest('.navbar-nav').length &&
@@ -21537,7 +21533,7 @@ if (
                 .addClass('dropdown-backdrop')
                 .insertAfter(a(this))
                 .on('click', c);
-            const h = { relatedTarget: this };
+            var h = { relatedTarget: this };
             if (
               (f.trigger((d = a.Event('show.bs.dropdown', h))),
               d.isDefaultPrevented())
@@ -21554,31 +21550,31 @@ if (
           /(38|40|27|32)/.test(c.which) &&
           !/input|textarea/i.test(c.target.tagName)
         ) {
-          const d = a(this);
+          var d = a(this);
           if (
             (c.preventDefault(),
             c.stopPropagation(),
             !d.is('.disabled, :disabled'))
           ) {
-            const e = b(d);
-            const g = e.hasClass('open');
-            if ((!g && c.which != 27) || (g && c.which == 27))
+            var e = b(d),
+              g = e.hasClass('open');
+            if ((!g && 27 != c.which) || (g && 27 == c.which))
               return (
-                c.which == 27 && e.find(f).trigger('focus'), d.trigger('click')
+                27 == c.which && e.find(f).trigger('focus'), d.trigger('click')
               );
-            const h = ' li:not(.disabled):visible a';
-            const i = e.find(`.dropdown-menu${h}`);
+            var h = ' li:not(.disabled):visible a',
+              i = e.find('.dropdown-menu' + h);
             if (i.length) {
-              let j = i.index(c.target);
-              c.which == 38 && j > 0 && j--,
-                c.which == 40 && j < i.length - 1 && j++,
+              var j = i.index(c.target);
+              38 == c.which && j > 0 && j--,
+                40 == c.which && j < i.length - 1 && j++,
                 ~j || (j = 0),
                 i.eq(j).trigger('focus');
             }
           }
         }
       });
-    const h = a.fn.dropdown;
+    var h = a.fn.dropdown;
     (a.fn.dropdown = d),
       (a.fn.dropdown.Constructor = g),
       (a.fn.dropdown.noConflict = function () {
@@ -21598,18 +21594,14 @@ if (
         );
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b, d) {
       return this.each(function () {
-        const e = a(this);
-        let f = e.data('bs.modal');
-        const g = a.extend(
-          {},
-          c.DEFAULTS,
-          e.data(),
-          typeof b === 'object' && b
-        );
+        var e = a(this),
+          f = e.data('bs.modal'),
+          g = a.extend({}, c.DEFAULTS, e.data(), 'object' == typeof b && b);
         f || e.data('bs.modal', (f = new c(this, g))),
-          typeof b === 'string' ? f[b](d) : g.show && f.show(d);
+          'string' == typeof b ? f[b](d) : g.show && f.show(d);
       });
     }
     var c = function (b, c) {
@@ -21638,8 +21630,8 @@ if (
         return this.isShown ? this.hide() : this.show(a);
       }),
       (c.prototype.show = function (b) {
-        const d = this;
-        const e = a.Event('show.bs.modal', { relatedTarget: b });
+        var d = this,
+          e = a.Event('show.bs.modal', { relatedTarget: b });
         this.$element.trigger(e),
           this.isShown ||
             e.isDefaultPrevented() ||
@@ -21660,14 +21652,14 @@ if (
               });
             }),
             this.backdrop(function () {
-              const e = a.support.transition && d.$element.hasClass('fade');
+              var e = a.support.transition && d.$element.hasClass('fade');
               d.$element.parent().length || d.$element.appendTo(d.$body),
                 d.$element.show().scrollTop(0),
                 d.adjustDialog(),
                 e && d.$element[0].offsetWidth,
                 d.$element.addClass('in'),
                 d.enforceFocus();
-              const f = a.Event('shown.bs.modal', { relatedTarget: b });
+              var f = a.Event('shown.bs.modal', { relatedTarget: b });
               e
                 ? d.$dialog
                     .one('bsTransitionEnd', function () {
@@ -21715,7 +21707,7 @@ if (
           ? this.$element.on(
               'keydown.dismiss.bs.modal',
               a.proxy(function (a) {
-                a.which == 27 && this.hide();
+                27 == a.which && this.hide();
               }, this)
             )
           : this.isShown || this.$element.off('keydown.dismiss.bs.modal');
@@ -21726,7 +21718,7 @@ if (
           : a(window).off('resize.bs.modal');
       }),
       (c.prototype.hideModal = function () {
-        const a = this;
+        var a = this;
         this.$element.hide(),
           this.backdrop(function () {
             a.$body.removeClass('modal-open'),
@@ -21739,13 +21731,13 @@ if (
         this.$backdrop && this.$backdrop.remove(), (this.$backdrop = null);
       }),
       (c.prototype.backdrop = function (b) {
-        const d = this;
-        const e = this.$element.hasClass('fade') ? 'fade' : '';
+        var d = this,
+          e = this.$element.hasClass('fade') ? 'fade' : '';
         if (this.isShown && this.options.backdrop) {
-          const f = a.support.transition && e;
+          var f = a.support.transition && e;
           if (
             ((this.$backdrop = a(document.createElement('div'))
-              .addClass(`modal-backdrop ${e}`)
+              .addClass('modal-backdrop ' + e)
               .appendTo(this.$body)),
             this.$element.on(
               'click.dismiss.bs.modal',
@@ -21754,7 +21746,7 @@ if (
                   ? void (this.ignoreBackdropClick = !1)
                   : void (
                       a.target === a.currentTarget &&
-                      (this.options.backdrop == 'static'
+                      ('static' == this.options.backdrop
                         ? this.$element[0].focus()
                         : this.hide())
                     );
@@ -21772,7 +21764,7 @@ if (
             : b();
         } else if (!this.isShown && this.$backdrop) {
           this.$backdrop.removeClass('in');
-          const g = function () {
+          var g = function () {
             d.removeBackdrop(), b && b();
           };
           a.support.transition && this.$element.hasClass('fade')
@@ -21786,7 +21778,7 @@ if (
         this.adjustDialog();
       }),
       (c.prototype.adjustDialog = function () {
-        const a =
+        var a =
           this.$element[0].scrollHeight > document.documentElement.clientHeight;
         this.$element.css({
           paddingLeft: !this.bodyIsOverflowing && a ? this.scrollbarWidth : '',
@@ -21797,16 +21789,16 @@ if (
         this.$element.css({ paddingLeft: '', paddingRight: '' });
       }),
       (c.prototype.checkScrollbar = function () {
-        let a = window.innerWidth;
+        var a = window.innerWidth;
         if (!a) {
-          const b = document.documentElement.getBoundingClientRect();
+          var b = document.documentElement.getBoundingClientRect();
           a = b.right - Math.abs(b.left);
         }
         (this.bodyIsOverflowing = document.body.clientWidth < a),
           (this.scrollbarWidth = this.measureScrollbar());
       }),
       (c.prototype.setScrollbar = function () {
-        const a = parseInt(this.$body.css('padding-right') || 0, 10);
+        var a = parseInt(this.$body.css('padding-right') || 0, 10);
         (this.originalBodyPad = document.body.style.paddingRight || ''),
           this.bodyIsOverflowing &&
             this.$body.css('padding-right', a + this.scrollbarWidth);
@@ -21815,12 +21807,12 @@ if (
         this.$body.css('padding-right', this.originalBodyPad);
       }),
       (c.prototype.measureScrollbar = function () {
-        const a = document.createElement('div');
+        var a = document.createElement('div');
         (a.className = 'modal-scrollbar-measure'), this.$body.append(a);
-        const b = a.offsetWidth - a.clientWidth;
+        var b = a.offsetWidth - a.clientWidth;
         return this.$body[0].removeChild(a), b;
       });
-    const d = a.fn.modal;
+    var d = a.fn.modal;
     (a.fn.modal = b),
       (a.fn.modal.Constructor = c),
       (a.fn.modal.noConflict = function () {
@@ -21830,14 +21822,14 @@ if (
         'click.bs.modal.data-api',
         '[data-toggle="modal"]',
         function (c) {
-          const d = a(this);
-          const e = d.attr('href');
-          const f = a(
-            d.attr('data-target') || (e && e.replace(/.*(?=#[^\s]+$)/, ''))
-          );
-          const g = f.data('bs.modal')
-            ? 'toggle'
-            : a.extend({ remote: !/#/.test(e) && e }, f.data(), d.data());
+          var d = a(this),
+            e = d.attr('href'),
+            f = a(
+              d.attr('data-target') || (e && e.replace(/.*(?=#[^\s]+$)/, ''))
+            ),
+            g = f.data('bs.modal')
+              ? 'toggle'
+              : a.extend({ remote: !/#/.test(e) && e }, f.data(), d.data());
           d.is('a') && c.preventDefault(),
             f.one('show.bs.modal', function (a) {
               a.isDefaultPrevented() ||
@@ -21850,14 +21842,15 @@ if (
       );
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.tooltip');
-        const f = typeof b === 'object' && b;
+        var d = a(this),
+          e = d.data('bs.tooltip'),
+          f = 'object' == typeof b && b;
         (e || !/destroy|hide/.test(b)) &&
           (e || d.data('bs.tooltip', (e = new c(this, f))),
-          typeof b === 'string' && e[b]());
+          'string' == typeof b && e[b]());
       });
     }
     var c = function (a, b) {
@@ -21903,26 +21896,28 @@ if (
             !this.options.selector)
         )
           throw new Error(
-            `\`selector\` option must be specified when initializing ${this.type} on the window.document object!`
+            '`selector` option must be specified when initializing ' +
+              this.type +
+              ' on the window.document object!'
           );
-        for (let e = this.options.trigger.split(' '), f = e.length; f--; ) {
-          const g = e[f];
-          if (g == 'click')
+        for (var e = this.options.trigger.split(' '), f = e.length; f--; ) {
+          var g = e[f];
+          if ('click' == g)
             this.$element.on(
-              `click.${this.type}`,
+              'click.' + this.type,
               this.options.selector,
               a.proxy(this.toggle, this)
             );
-          else if (g != 'manual') {
-            const h = g == 'hover' ? 'mouseenter' : 'focusin';
-            const i = g == 'hover' ? 'mouseleave' : 'focusout';
+          else if ('manual' != g) {
+            var h = 'hover' == g ? 'mouseenter' : 'focusin',
+              i = 'hover' == g ? 'mouseleave' : 'focusout';
             this.$element.on(
-              `${h}.${this.type}`,
+              h + '.' + this.type,
               this.options.selector,
               a.proxy(this.enter, this)
             ),
               this.$element.on(
-                `${i}.${this.type}`,
+                i + '.' + this.type,
                 this.options.selector,
                 a.proxy(this.leave, this)
               );
@@ -21942,14 +21937,14 @@ if (
         return (
           (b = a.extend({}, this.getDefaults(), this.$element.data(), b)),
           b.delay &&
-            typeof b.delay === 'number' &&
+            'number' == typeof b.delay &&
             (b.delay = { show: b.delay, hide: b.delay }),
           b
         );
       }),
       (c.prototype.getDelegateOptions = function () {
-        const b = {};
-        const c = this.getDefaults();
+        var b = {},
+          c = this.getDefaults();
         return (
           this._options &&
             a.each(this._options, function (a, d) {
@@ -21959,116 +21954,116 @@ if (
         );
       }),
       (c.prototype.enter = function (b) {
-        let c =
+        var c =
           b instanceof this.constructor
             ? b
-            : a(b.currentTarget).data(`bs.${this.type}`);
+            : a(b.currentTarget).data('bs.' + this.type);
         return (
           c ||
             ((c = new this.constructor(
               b.currentTarget,
               this.getDelegateOptions()
             )),
-            a(b.currentTarget).data(`bs.${this.type}`, c)),
+            a(b.currentTarget).data('bs.' + this.type, c)),
           b instanceof a.Event &&
-            (c.inState[b.type == 'focusin' ? 'focus' : 'hover'] = !0),
-          c.tip().hasClass('in') || c.hoverState == 'in'
+            (c.inState['focusin' == b.type ? 'focus' : 'hover'] = !0),
+          c.tip().hasClass('in') || 'in' == c.hoverState
             ? void (c.hoverState = 'in')
             : (clearTimeout(c.timeout),
               (c.hoverState = 'in'),
               c.options.delay && c.options.delay.show
                 ? void (c.timeout = setTimeout(function () {
-                    c.hoverState == 'in' && c.show();
+                    'in' == c.hoverState && c.show();
                   }, c.options.delay.show))
                 : c.show())
         );
       }),
       (c.prototype.isInStateTrue = function () {
-        for (const a in this.inState) if (this.inState[a]) return !0;
+        for (var a in this.inState) if (this.inState[a]) return !0;
         return !1;
       }),
       (c.prototype.leave = function (b) {
-        let c =
+        var c =
           b instanceof this.constructor
             ? b
-            : a(b.currentTarget).data(`bs.${this.type}`);
+            : a(b.currentTarget).data('bs.' + this.type);
         return (
           c ||
             ((c = new this.constructor(
               b.currentTarget,
               this.getDelegateOptions()
             )),
-            a(b.currentTarget).data(`bs.${this.type}`, c)),
+            a(b.currentTarget).data('bs.' + this.type, c)),
           b instanceof a.Event &&
-            (c.inState[b.type == 'focusout' ? 'focus' : 'hover'] = !1),
+            (c.inState['focusout' == b.type ? 'focus' : 'hover'] = !1),
           c.isInStateTrue()
             ? void 0
             : (clearTimeout(c.timeout),
               (c.hoverState = 'out'),
               c.options.delay && c.options.delay.hide
                 ? void (c.timeout = setTimeout(function () {
-                    c.hoverState == 'out' && c.hide();
+                    'out' == c.hoverState && c.hide();
                   }, c.options.delay.hide))
                 : c.hide())
         );
       }),
       (c.prototype.show = function () {
-        const b = a.Event(`show.bs.${this.type}`);
+        var b = a.Event('show.bs.' + this.type);
         if (this.hasContent() && this.enabled) {
           this.$element.trigger(b);
-          const d = a.contains(
+          var d = a.contains(
             this.$element[0].ownerDocument.documentElement,
             this.$element[0]
           );
           if (b.isDefaultPrevented() || !d) return;
-          const e = this;
-          const f = this.tip();
-          const g = this.getUID(this.type);
+          var e = this,
+            f = this.tip(),
+            g = this.getUID(this.type);
           this.setContent(),
             f.attr('id', g),
             this.$element.attr('aria-describedby', g),
             this.options.animation && f.addClass('fade');
-          let h =
-            typeof this.options.placement === 'function'
-              ? this.options.placement.call(this, f[0], this.$element[0])
-              : this.options.placement;
-          const i = /\s?auto?\s?/i;
-          const j = i.test(h);
+          var h =
+              'function' == typeof this.options.placement
+                ? this.options.placement.call(this, f[0], this.$element[0])
+                : this.options.placement,
+            i = /\s?auto?\s?/i,
+            j = i.test(h);
           j && (h = h.replace(i, '') || 'top'),
             f
               .detach()
               .css({ top: 0, left: 0, display: 'block' })
               .addClass(h)
-              .data(`bs.${this.type}`, this),
+              .data('bs.' + this.type, this),
             this.options.container
               ? f.appendTo(this.options.container)
               : f.insertAfter(this.$element),
-            this.$element.trigger(`inserted.bs.${this.type}`);
-          const k = this.getPosition();
-          const l = f[0].offsetWidth;
-          const m = f[0].offsetHeight;
+            this.$element.trigger('inserted.bs.' + this.type);
+          var k = this.getPosition(),
+            l = f[0].offsetWidth,
+            m = f[0].offsetHeight;
           if (j) {
-            const n = h;
-            const o = this.getPosition(this.$viewport);
+            var n = h,
+              o = this.getPosition(this.$viewport);
             (h =
-              h == 'bottom' && k.bottom + m > o.bottom
+              'bottom' == h && k.bottom + m > o.bottom
                 ? 'top'
-                : h == 'top' && k.top - m < o.top
+                : 'top' == h && k.top - m < o.top
                 ? 'bottom'
-                : h == 'right' && k.right + l > o.width
+                : 'right' == h && k.right + l > o.width
                 ? 'left'
-                : h == 'left' && k.left - l < o.left
+                : 'left' == h && k.left - l < o.left
                 ? 'right'
                 : h),
               f.removeClass(n).addClass(h);
           }
-          const p = this.getCalculatedOffset(h, k, l, m);
+          var p = this.getCalculatedOffset(h, k, l, m);
           this.applyPlacement(p, h);
-          const q = function () {
-            const a = e.hoverState;
-            e.$element.trigger(`shown.bs.${e.type}`),
+          var q = function () {
+            var a = e.hoverState;
+            e.$element.trigger('shown.bs.' + e.type),
               (e.hoverState = null),
-              a == 'out' && e.leave(e);
+              'out' == a && e.leave(e);
           };
           a.support.transition && this.$tip.hasClass('fade')
             ? f
@@ -22078,11 +22073,11 @@ if (
         }
       }),
       (c.prototype.applyPlacement = function (b, c) {
-        const d = this.tip();
-        const e = d[0].offsetWidth;
-        const f = d[0].offsetHeight;
-        let g = parseInt(d.css('margin-top'), 10);
-        let h = parseInt(d.css('margin-left'), 10);
+        var d = this.tip(),
+          e = d[0].offsetWidth,
+          f = d[0].offsetHeight,
+          g = parseInt(d.css('margin-top'), 10),
+          h = parseInt(d.css('margin-left'), 10);
         isNaN(g) && (g = 0),
           isNaN(h) && (h = 0),
           (b.top += g),
@@ -22091,7 +22086,7 @@ if (
             d[0],
             a.extend(
               {
-                using(a) {
+                using: function (a) {
                   d.css({ top: Math.round(a.top), left: Math.round(a.left) });
                 },
               },
@@ -22100,38 +22095,38 @@ if (
             0
           ),
           d.addClass('in');
-        const i = d[0].offsetWidth;
-        const j = d[0].offsetHeight;
-        c == 'top' && j != f && (b.top = b.top + f - j);
-        const k = this.getViewportAdjustedDelta(c, b, i, j);
+        var i = d[0].offsetWidth,
+          j = d[0].offsetHeight;
+        'top' == c && j != f && (b.top = b.top + f - j);
+        var k = this.getViewportAdjustedDelta(c, b, i, j);
         k.left ? (b.left += k.left) : (b.top += k.top);
-        const l = /top|bottom/.test(c);
-        const m = l ? 2 * k.left - e + i : 2 * k.top - f + j;
-        const n = l ? 'offsetWidth' : 'offsetHeight';
+        var l = /top|bottom/.test(c),
+          m = l ? 2 * k.left - e + i : 2 * k.top - f + j,
+          n = l ? 'offsetWidth' : 'offsetHeight';
         d.offset(b), this.replaceArrow(m, d[0][n], l);
       }),
       (c.prototype.replaceArrow = function (a, b, c) {
         this.arrow()
-          .css(c ? 'left' : 'top', `${50 * (1 - a / b)}%`)
+          .css(c ? 'left' : 'top', 50 * (1 - a / b) + '%')
           .css(c ? 'top' : 'left', '');
       }),
       (c.prototype.setContent = function () {
-        const a = this.tip();
-        const b = this.getTitle();
+        var a = this.tip(),
+          b = this.getTitle();
         a.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](b),
           a.removeClass('fade in top bottom left right');
       }),
       (c.prototype.hide = function (b) {
         function d() {
-          e.hoverState != 'in' && f.detach(),
+          'in' != e.hoverState && f.detach(),
             e.$element
               .removeAttr('aria-describedby')
-              .trigger(`hidden.bs.${e.type}`),
+              .trigger('hidden.bs.' + e.type),
             b && b();
         }
-        var e = this;
-        var f = a(this.$tip);
-        const g = a.Event(`hide.bs.${this.type}`);
+        var e = this,
+          f = a(this.$tip),
+          g = a.Event('hide.bs.' + this.type);
         return (
           this.$element.trigger(g),
           g.isDefaultPrevented()
@@ -22147,9 +22142,8 @@ if (
         );
       }),
       (c.prototype.fixTitle = function () {
-        const a = this.$element;
-        (a.attr('title') ||
-          typeof a.attr('data-original-title') !== 'string') &&
+        var a = this.$element;
+        (a.attr('title') || 'string' != typeof a.attr('data-original-title')) &&
           a
             .attr('data-original-title', a.attr('title') || '')
             .attr('title', '');
@@ -22159,48 +22153,48 @@ if (
       }),
       (c.prototype.getPosition = function (b) {
         b = b || this.$element;
-        const c = b[0];
-        const d = c.tagName == 'BODY';
-        let e = c.getBoundingClientRect();
-        e.width == null &&
+        var c = b[0],
+          d = 'BODY' == c.tagName,
+          e = c.getBoundingClientRect();
+        null == e.width &&
           (e = a.extend({}, e, {
             width: e.right - e.left,
             height: e.bottom - e.top,
           }));
-        const f = d ? { top: 0, left: 0 } : b.offset();
-        const g = {
-          scroll: d
-            ? document.documentElement.scrollTop || document.body.scrollTop
-            : b.scrollTop(),
-        };
-        const h = d
-          ? { width: a(window).width(), height: a(window).height() }
-          : null;
+        var f = d ? { top: 0, left: 0 } : b.offset(),
+          g = {
+            scroll: d
+              ? document.documentElement.scrollTop || document.body.scrollTop
+              : b.scrollTop(),
+          },
+          h = d
+            ? { width: a(window).width(), height: a(window).height() }
+            : null;
         return a.extend({}, e, g, h, f);
       }),
       (c.prototype.getCalculatedOffset = function (a, b, c, d) {
-        return a == 'bottom'
+        return 'bottom' == a
           ? { top: b.top + b.height, left: b.left + b.width / 2 - c / 2 }
-          : a == 'top'
+          : 'top' == a
           ? { top: b.top - d, left: b.left + b.width / 2 - c / 2 }
-          : a == 'left'
+          : 'left' == a
           ? { top: b.top + b.height / 2 - d / 2, left: b.left - c }
           : { top: b.top + b.height / 2 - d / 2, left: b.left + b.width };
       }),
       (c.prototype.getViewportAdjustedDelta = function (a, b, c, d) {
-        const e = { top: 0, left: 0 };
+        var e = { top: 0, left: 0 };
         if (!this.$viewport) return e;
-        const f = (this.options.viewport && this.options.viewport.padding) || 0;
-        const g = this.getPosition(this.$viewport);
+        var f = (this.options.viewport && this.options.viewport.padding) || 0,
+          g = this.getPosition(this.$viewport);
         if (/right|left/.test(a)) {
-          const h = b.top - f - g.scroll;
-          const i = b.top + f - g.scroll + d;
+          var h = b.top - f - g.scroll,
+            i = b.top + f - g.scroll + d;
           h < g.top
             ? (e.top = g.top - h)
             : i > g.top + g.height && (e.top = g.top + g.height - i);
         } else {
-          const j = b.left - f;
-          const k = b.left + f + c;
+          var j = b.left - f,
+            k = b.left + f + c;
           j < g.left
             ? (e.left = g.left - j)
             : k > g.right && (e.left = g.left + g.width - k);
@@ -22208,12 +22202,12 @@ if (
         return e;
       }),
       (c.prototype.getTitle = function () {
-        let a;
-        const b = this.$element;
-        const c = this.options;
+        var a,
+          b = this.$element,
+          c = this.options;
         return (a =
           b.attr('data-original-title') ||
-          (typeof c.title === 'function' ? c.title.call(b[0]) : c.title));
+          ('function' == typeof c.title ? c.title.call(b[0]) : c.title));
       }),
       (c.prototype.getUID = function (a) {
         do a += ~~(1e6 * Math.random());
@@ -22223,10 +22217,11 @@ if (
       (c.prototype.tip = function () {
         if (
           !this.$tip &&
-          ((this.$tip = a(this.options.template)), this.$tip.length != 1)
+          ((this.$tip = a(this.options.template)), 1 != this.$tip.length)
         )
           throw new Error(
-            `${this.type} \`template\` option must consist of exactly 1 top-level element!`
+            this.type +
+              ' `template` option must consist of exactly 1 top-level element!'
           );
         return this.$tip;
       }),
@@ -22243,15 +22238,15 @@ if (
         this.enabled = !this.enabled;
       }),
       (c.prototype.toggle = function (b) {
-        let c = this;
+        var c = this;
         b &&
-          ((c = a(b.currentTarget).data(`bs.${this.type}`)),
+          ((c = a(b.currentTarget).data('bs.' + this.type)),
           c ||
             ((c = new this.constructor(
               b.currentTarget,
               this.getDelegateOptions()
             )),
-            a(b.currentTarget).data(`bs.${this.type}`, c))),
+            a(b.currentTarget).data('bs.' + this.type, c))),
           b
             ? ((c.inState.click = !c.inState.click),
               c.isInStateTrue() ? c.enter(c) : c.leave(c))
@@ -22260,17 +22255,17 @@ if (
             : c.enter(c);
       }),
       (c.prototype.destroy = function () {
-        const a = this;
+        var a = this;
         clearTimeout(this.timeout),
           this.hide(function () {
-            a.$element.off(`.${a.type}`).removeData(`bs.${a.type}`),
+            a.$element.off('.' + a.type).removeData('bs.' + a.type),
               a.$tip && a.$tip.detach(),
               (a.$tip = null),
               (a.$arrow = null),
               (a.$viewport = null);
           });
       });
-    const d = a.fn.tooltip;
+    var d = a.fn.tooltip;
     (a.fn.tooltip = b),
       (a.fn.tooltip.Constructor = c),
       (a.fn.tooltip.noConflict = function () {
@@ -22278,14 +22273,15 @@ if (
       });
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.popover');
-        const f = typeof b === 'object' && b;
+        var d = a(this),
+          e = d.data('bs.popover'),
+          f = 'object' == typeof b && b;
         (e || !/destroy|hide/.test(b)) &&
           (e || d.data('bs.popover', (e = new c(this, f))),
-          typeof b === 'string' && e[b]());
+          'string' == typeof b && e[b]());
       });
     }
     var c = function (a, b) {
@@ -22306,9 +22302,9 @@ if (
         return c.DEFAULTS;
       }),
       (c.prototype.setContent = function () {
-        const a = this.tip();
-        const b = this.getTitle();
-        const c = this.getContent();
+        var a = this.tip(),
+          b = this.getTitle(),
+          c = this.getContent();
         a.find('.popover-title')[this.options.html ? 'html' : 'text'](b),
           a
             .find('.popover-content')
@@ -22317,7 +22313,7 @@ if (
             .end()
             [
               this.options.html
-                ? typeof c === 'string'
+                ? 'string' == typeof c
                   ? 'html'
                   : 'append'
                 : 'text'
@@ -22329,17 +22325,17 @@ if (
         return this.getTitle() || this.getContent();
       }),
       (c.prototype.getContent = function () {
-        const a = this.$element;
-        const b = this.options;
+        var a = this.$element,
+          b = this.options;
         return (
           a.attr('data-content') ||
-          (typeof b.content === 'function' ? b.content.call(a[0]) : b.content)
+          ('function' == typeof b.content ? b.content.call(a[0]) : b.content)
         );
       }),
       (c.prototype.arrow = function () {
         return (this.$arrow = this.$arrow || this.tip().find('.arrow'));
       });
-    const d = a.fn.popover;
+    var d = a.fn.popover;
     (a.fn.popover = b),
       (a.fn.popover.Constructor = c),
       (a.fn.popover.noConflict = function () {
@@ -22347,11 +22343,12 @@ if (
       });
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(c, d) {
       (this.$body = a(document.body)),
         (this.$scrollElement = a(a(c).is(document.body) ? window : c)),
         (this.options = a.extend({}, b.DEFAULTS, d)),
-        (this.selector = `${this.options.target || ''} .nav li > a`),
+        (this.selector = (this.options.target || '') + ' .nav li > a'),
         (this.offsets = []),
         (this.targets = []),
         (this.activeTarget = null),
@@ -22365,11 +22362,11 @@ if (
     }
     function c(c) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.scrollspy');
-        const f = typeof c === 'object' && c;
+        var d = a(this),
+          e = d.data('bs.scrollspy'),
+          f = 'object' == typeof c && c;
         e || d.data('bs.scrollspy', (e = new b(this, f))),
-          typeof c === 'string' && e[c]();
+          'string' == typeof c && e[c]();
       });
     }
     (b.VERSION = '3.3.6'),
@@ -22384,9 +22381,9 @@ if (
         );
       }),
       (b.prototype.refresh = function () {
-        const b = this;
-        let c = 'offset';
-        let d = 0;
+        var b = this,
+          c = 'offset',
+          d = 0;
         (this.offsets = []),
           (this.targets = []),
           (this.scrollHeight = this.getScrollHeight()),
@@ -22395,9 +22392,9 @@ if (
           this.$body
             .find(this.selector)
             .map(function () {
-              const b = a(this);
-              const e = b.data('target') || b.attr('href');
-              const f = /^#./.test(e) && a(e);
+              var b = a(this),
+                e = b.data('target') || b.attr('href'),
+                f = /^#./.test(e) && a(e);
               return (
                 (f && f.length && f.is(':visible') && [[f[c]().top + d, e]]) ||
                 null
@@ -22411,13 +22408,13 @@ if (
             });
       }),
       (b.prototype.process = function () {
-        let a;
-        const b = this.$scrollElement.scrollTop() + this.options.offset;
-        const c = this.getScrollHeight();
-        const d = this.options.offset + c - this.$scrollElement.height();
-        const e = this.offsets;
-        const f = this.targets;
-        const g = this.activeTarget;
+        var a,
+          b = this.$scrollElement.scrollTop() + this.options.offset,
+          c = this.getScrollHeight(),
+          d = this.options.offset + c - this.$scrollElement.height(),
+          e = this.offsets,
+          f = this.targets,
+          g = this.activeTarget;
         if ((this.scrollHeight != c && this.refresh(), b >= d))
           return g != (a = f[f.length - 1]) && this.activate(a);
         if (g && b < e[0]) return (this.activeTarget = null), this.clear();
@@ -22429,8 +22426,16 @@ if (
       }),
       (b.prototype.activate = function (b) {
         (this.activeTarget = b), this.clear();
-        const c = `${this.selector}[data-target="${b}"],${this.selector}[href="${b}"]`;
-        let d = a(c).parents('li').addClass('active');
+        var c =
+            this.selector +
+            '[data-target="' +
+            b +
+            '"],' +
+            this.selector +
+            '[href="' +
+            b +
+            '"]',
+          d = a(c).parents('li').addClass('active');
         d.parent('.dropdown-menu').length &&
           (d = d.closest('li.dropdown').addClass('active')),
           d.trigger('activate.bs.scrollspy');
@@ -22440,7 +22445,7 @@ if (
           .parentsUntil(this.options.target, '.active')
           .removeClass('active');
       });
-    const d = a.fn.scrollspy;
+    var d = a.fn.scrollspy;
     (a.fn.scrollspy = c),
       (a.fn.scrollspy.Constructor = b),
       (a.fn.scrollspy.noConflict = function () {
@@ -22448,18 +22453,19 @@ if (
       }),
       a(window).on('load.bs.scrollspy.data-api', function () {
         a('[data-spy="scroll"]').each(function () {
-          const b = a(this);
+          var b = a(this);
           c.call(b, b.data());
         });
       });
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.tab');
+        var d = a(this),
+          e = d.data('bs.tab');
         e || d.data('bs.tab', (e = new c(this))),
-          typeof b === 'string' && e[b]();
+          'string' == typeof b && e[b]();
       });
     }
     var c = function (b) {
@@ -22468,23 +22474,23 @@ if (
     (c.VERSION = '3.3.6'),
       (c.TRANSITION_DURATION = 150),
       (c.prototype.show = function () {
-        const b = this.element;
-        const c = b.closest('ul:not(.dropdown-menu)');
-        let d = b.data('target');
+        var b = this.element,
+          c = b.closest('ul:not(.dropdown-menu)'),
+          d = b.data('target');
         if (
           (d ||
             ((d = b.attr('href')), (d = d && d.replace(/.*(?=#[^\s]*$)/, ''))),
           !b.parent('li').hasClass('active'))
         ) {
-          const e = c.find('.active:last a');
-          const f = a.Event('hide.bs.tab', { relatedTarget: b[0] });
-          const g = a.Event('show.bs.tab', { relatedTarget: e[0] });
+          var e = c.find('.active:last a'),
+            f = a.Event('hide.bs.tab', { relatedTarget: b[0] }),
+            g = a.Event('show.bs.tab', { relatedTarget: e[0] });
           if (
             (e.trigger(f),
             b.trigger(g),
             !g.isDefaultPrevented() && !f.isDefaultPrevented())
           ) {
-            const h = a(d);
+            var h = a(d);
             this.activate(b.closest('li'), c),
               this.activate(h, h.parent(), function () {
                 e.trigger({ type: 'hidden.bs.tab', relatedTarget: b[0] }),
@@ -22516,11 +22522,11 @@ if (
                 .attr('aria-expanded', !0),
             e && e();
         }
-        var g = d.find('> .active');
-        var h =
-          e &&
-          a.support.transition &&
-          ((g.length && g.hasClass('fade')) || !!d.find('> .fade').length);
+        var g = d.find('> .active'),
+          h =
+            e &&
+            a.support.transition &&
+            ((g.length && g.hasClass('fade')) || !!d.find('> .fade').length);
         g.length && h
           ? g
               .one('bsTransitionEnd', f)
@@ -22528,13 +22534,13 @@ if (
           : f(),
           g.removeClass('in');
       });
-    const d = a.fn.tab;
+    var d = a.fn.tab;
     (a.fn.tab = b),
       (a.fn.tab.Constructor = c),
       (a.fn.tab.noConflict = function () {
         return (a.fn.tab = d), this;
       });
-    const e = function (c) {
+    var e = function (c) {
       c.preventDefault(), b.call(a(this), 'show');
     };
     a(document)
@@ -22542,13 +22548,14 @@ if (
       .on('click.bs.tab.data-api', '[data-toggle="pill"]', e);
   })(jQuery),
   +(function (a) {
+    'use strict';
     function b(b) {
       return this.each(function () {
-        const d = a(this);
-        let e = d.data('bs.affix');
-        const f = typeof b === 'object' && b;
+        var d = a(this),
+          e = d.data('bs.affix'),
+          f = 'object' == typeof b && b;
         e || d.data('bs.affix', (e = new c(this, f))),
-          typeof b === 'string' && e[b]();
+          'string' == typeof b && e[b]();
       });
     }
     var c = function (b, d) {
@@ -22569,26 +22576,26 @@ if (
       (c.RESET = 'affix affix-top affix-bottom'),
       (c.DEFAULTS = { offset: 0, target: window }),
       (c.prototype.getState = function (a, b, c, d) {
-        const e = this.$target.scrollTop();
-        const f = this.$element.offset();
-        const g = this.$target.height();
-        if (c != null && this.affixed == 'top') return c > e && 'top';
-        if (this.affixed == 'bottom')
-          return c != null
+        var e = this.$target.scrollTop(),
+          f = this.$element.offset(),
+          g = this.$target.height();
+        if (null != c && 'top' == this.affixed) return c > e && 'top';
+        if ('bottom' == this.affixed)
+          return null != c
             ? !(e + this.unpin <= f.top) && 'bottom'
             : !(a - d >= e + g) && 'bottom';
-        const h = this.affixed == null;
-        const i = h ? e : f.top;
-        const j = h ? g : b;
-        return c != null && c >= e
+        var h = null == this.affixed,
+          i = h ? e : f.top,
+          j = h ? g : b;
+        return null != c && c >= e
           ? 'top'
-          : d != null && i + j >= a - d && 'bottom';
+          : null != d && i + j >= a - d && 'bottom';
       }),
       (c.prototype.getPinnedOffset = function () {
         if (this.pinnedOffset) return this.pinnedOffset;
         this.$element.removeClass(c.RESET).addClass('affix');
-        const a = this.$target.scrollTop();
-        const b = this.$element.offset();
+        var a = this.$target.scrollTop(),
+          b = this.$element.offset();
         return (this.pinnedOffset = b.top - a);
       }),
       (c.prototype.checkPositionWithEventLoop = function () {
@@ -22596,31 +22603,31 @@ if (
       }),
       (c.prototype.checkPosition = function () {
         if (this.$element.is(':visible')) {
-          const b = this.$element.height();
-          const d = this.options.offset;
-          let e = d.top;
-          let f = d.bottom;
-          const g = Math.max(a(document).height(), a(document.body).height());
-          typeof d !== 'object' && (f = e = d),
-            typeof e === 'function' && (e = d.top(this.$element)),
-            typeof f === 'function' && (f = d.bottom(this.$element));
-          const h = this.getState(g, b, e, f);
+          var b = this.$element.height(),
+            d = this.options.offset,
+            e = d.top,
+            f = d.bottom,
+            g = Math.max(a(document).height(), a(document.body).height());
+          'object' != typeof d && (f = e = d),
+            'function' == typeof e && (e = d.top(this.$element)),
+            'function' == typeof f && (f = d.bottom(this.$element));
+          var h = this.getState(g, b, e, f);
           if (this.affixed != h) {
-            this.unpin != null && this.$element.css('top', '');
-            const i = `affix${h ? `-${h}` : ''}`;
-            const j = a.Event(`${i}.bs.affix`);
+            null != this.unpin && this.$element.css('top', '');
+            var i = 'affix' + (h ? '-' + h : ''),
+              j = a.Event(i + '.bs.affix');
             if ((this.$element.trigger(j), j.isDefaultPrevented())) return;
             (this.affixed = h),
-              (this.unpin = h == 'bottom' ? this.getPinnedOffset() : null),
+              (this.unpin = 'bottom' == h ? this.getPinnedOffset() : null),
               this.$element
                 .removeClass(c.RESET)
                 .addClass(i)
-                .trigger(`${i.replace('affix', 'affixed')}.bs.affix`);
+                .trigger(i.replace('affix', 'affixed') + '.bs.affix');
           }
-          h == 'bottom' && this.$element.offset({ top: g - b - f });
+          'bottom' == h && this.$element.offset({ top: g - b - f });
         }
       });
-    const d = a.fn.affix;
+    var d = a.fn.affix;
     (a.fn.affix = b),
       (a.fn.affix.Constructor = c),
       (a.fn.affix.noConflict = function () {
@@ -22628,11 +22635,11 @@ if (
       }),
       a(window).on('load', function () {
         a('[data-spy="affix"]').each(function () {
-          const c = a(this);
-          const d = c.data();
+          var c = a(this),
+            d = c.data();
           (d.offset = d.offset || {}),
-            d.offsetBottom != null && (d.offset.bottom = d.offsetBottom),
-            d.offsetTop != null && (d.offset.top = d.offsetTop),
+            null != d.offsetBottom && (d.offset.bottom = d.offsetBottom),
+            null != d.offsetTop && (d.offset.top = d.offsetTop),
             b.call(c, d);
         });
       });

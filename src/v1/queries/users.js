@@ -1,7 +1,7 @@
 const { Users } = require('../../../database/database_name/models');
 
 class UserQueries {
-   table() {
+  table() {
     return Users;
   }
 

@@ -12,9 +12,9 @@ window.SearcherDisplay = (function ($) {
    * This method creates the quick text search entry in navigation menu and wires all required events.
    */
   SearcherDisplay.prototype._displayQuickSearch = function () {
-    const quickSearch = $(document.createElement('iframe'));
-    const body = $('body');
-    const self = this;
+    var quickSearch = $(document.createElement('iframe')),
+      body = $('body'),
+      self = this;
 
     quickSearch.attr('src', 'quicksearch.html');
     quickSearch.css('width', '0px');
@@ -23,19 +23,19 @@ window.SearcherDisplay = (function ($) {
     body.append(quickSearch);
 
     $(window).on('message', function (msg) {
-      const msgData = msg.originalEvent.data;
+      var msgData = msg.originalEvent.data;
 
       if (msgData.msgid != 'docstrap.quicksearch.done') {
         return;
       }
 
-      const results = msgData.results || [];
+      var results = msgData.results || [];
 
       self._displaySearchResults(results);
     });
 
     function startSearch() {
-      const searchTerms = $('#search-input').prop('value');
+      var searchTerms = $('#search-input').prop('value');
       if (searchTerms) {
         quickSearch[0].contentWindow.postMessage(
           {
@@ -64,16 +64,16 @@ window.SearcherDisplay = (function ($) {
    * This method displays the quick text search results in a modal dialog.
    */
   SearcherDisplay.prototype._displaySearchResults = function (results) {
-    const resultsHolder = $($('#searchResults').find('.modal-body'));
-    const fragment = document.createDocumentFragment();
-    const resultsList = document.createElement('ul');
+    var resultsHolder = $($('#searchResults').find('.modal-body')),
+      fragment = document.createDocumentFragment(),
+      resultsList = document.createElement('ul');
 
     resultsHolder.empty();
 
-    for (let idx = 0; idx < results.length; idx++) {
-      const result = results[idx];
-      const item = document.createElement('li');
-      const link = document.createElement('a');
+    for (var idx = 0; idx < results.length; idx++) {
+      var result = results[idx],
+        item = document.createElement('li'),
+        link = document.createElement('a');
 
       link.href = result.id;
       link.innerHTML = result.title;

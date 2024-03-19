@@ -1,18 +1,18 @@
 (function ($) {
-  let navbarHeight;
-  let initialised = false;
-  let navbarOffset;
+  var navbarHeight;
+  var initialised = false;
+  var navbarOffset;
 
   function elOffset($el) {
     return $el.offset().top - (navbarHeight + navbarOffset);
   }
 
   function scrollToHash(duringPageLoad) {
-    const elScrollToId = location.hash.replace(/^#/, '');
-    let $el;
+    var elScrollToId = location.hash.replace(/^#/, '');
+    var $el;
 
     function doScroll() {
-      const offsetTop = elOffset($el);
+      var offsetTop = elOffset($el);
       window.scrollTo(window.pageXOffset || window.scrollX, offsetTop);
     }
 
@@ -50,43 +50,42 @@
   }
 
   $.catchAnchorLinks = function (options) {
-    const opts = $.extend({}, jQuery.fn.toc.defaults, options);
+    var opts = $.extend({}, jQuery.fn.toc.defaults, options);
     init(opts);
   };
 
   $.fn.toc = function (options) {
-    const self = this;
-    const opts = $.extend({}, jQuery.fn.toc.defaults, options);
+    var self = this;
+    var opts = $.extend({}, jQuery.fn.toc.defaults, options);
 
-    const container = $(opts.container);
-    const tocs = [];
-    const headings = $(opts.selectors, container);
-    let headingOffsets = [];
-    const activeClassName = 'active';
-    const ANCHOR_PREFIX = '__anchor';
-    let maxScrollTo;
-    let visibleHeight;
-    const headerHeight = 10; // so if the header is readable, its counted as shown
+    var container = $(opts.container);
+    var tocs = [];
+    var headings = $(opts.selectors, container);
+    var headingOffsets = [];
+    var activeClassName = 'active';
+    var ANCHOR_PREFIX = '__anchor';
+    var maxScrollTo;
+    var visibleHeight;
+    var headerHeight = 10; // so if the header is readable, its counted as shown
     init();
 
-    const scrollTo = function (e) {
+    var scrollTo = function (e) {
       e.preventDefault();
-      let target = $(e.target);
+      var target = $(e.target);
       if (target.prop('tagName').toLowerCase() !== 'a') {
         target = target.parent();
       }
-      const elScrollToId =
-        target.attr('href').replace(/^#/, '') + ANCHOR_PREFIX;
-      const $el = $(document.getElementById(elScrollToId));
+      var elScrollToId = target.attr('href').replace(/^#/, '') + ANCHOR_PREFIX;
+      var $el = $(document.getElementById(elScrollToId));
 
-      const offsetTop = Math.min(maxScrollTo, elOffset($el));
+      var offsetTop = Math.min(maxScrollTo, elOffset($el));
 
       $('body,html').animate(
         { scrollTop: offsetTop },
         400,
         'swing',
         function () {
-          location.hash = `#${elScrollToId}`;
+          location.hash = '#' + elScrollToId;
         }
       );
 
@@ -94,13 +93,13 @@
       target.addClass(activeClassName);
     };
 
-    const calcHadingOffsets = function () {
+    var calcHadingOffsets = function () {
       maxScrollTo = $('body').height() - $(window).height();
       visibleHeight = $(window).height() - navbarHeight;
       headingOffsets = [];
       headings.each(function (i, heading) {
-        const anchorSpan = $(heading).prev('span');
-        let top = 0;
+        var anchorSpan = $(heading).prev('span');
+        var top = 0;
         if (anchorSpan.length) {
           top = elOffset(anchorSpan);
         }
@@ -109,8 +108,8 @@
     };
 
     //highlight on scroll
-    let timeout;
-    const highlightOnScroll = function (e) {
+    var timeout;
+    var highlightOnScroll = function (e) {
       if (!tocs.length) {
         return;
       }
@@ -118,10 +117,10 @@
         clearTimeout(timeout);
       }
       timeout = setTimeout(function () {
-        const top = $(window).scrollTop();
-        let highlighted;
-        for (let i = headingOffsets.length - 1; i >= 0; i--) {
-          const isActive = tocs[i].hasClass(activeClassName);
+        var top = $(window).scrollTop(),
+          highlighted;
+        for (var i = headingOffsets.length - 1; i >= 0; i--) {
+          var isActive = tocs[i].hasClass(activeClassName);
           // at the end of the page, allow any shown header
           if (
             isActive &&
@@ -161,22 +160,22 @@
 
     return this.each(function () {
       //build TOC
-      const el = $(this);
-      const ul = $('<div class="list-group">');
+      var el = $(this);
+      var ul = $('<div class="list-group">');
 
       headings.each(function (i, heading) {
-        const $h = $(heading);
+        var $h = $(heading);
 
-        const anchor = $('<span/>')
+        var anchor = $('<span/>')
           .attr('id', opts.anchorName(i, heading, opts.prefix) + ANCHOR_PREFIX)
           .insertBefore($h);
 
-        const span = $('<span/>').text(opts.headerText(i, heading, $h));
+        var span = $('<span/>').text(opts.headerText(i, heading, $h));
 
         //build TOC item
-        const a = $('<a class="list-group-item"/>')
+        var a = $('<a class="list-group-item"/>')
           .append(span)
-          .attr('href', `#${opts.anchorName(i, heading, opts.prefix)}`)
+          .attr('href', '#' + opts.anchorName(i, heading, opts.prefix))
           .bind('click', function (e) {
             scrollTo(e);
             el.trigger('selected', $(this).attr('href'));
@@ -199,17 +198,17 @@
     selectors: 'h1,h2,h3',
     smoothScrolling: true,
     prefix: 'toc',
-    onHighlight() {},
+    onHighlight: function () {},
     highlightOnScroll: true,
     navbarOffset: 0,
-    anchorName(i, heading, prefix) {
+    anchorName: function (i, heading, prefix) {
       return prefix + i;
     },
-    headerText(i, heading, $heading) {
+    headerText: function (i, heading, $heading) {
       return $heading.text();
     },
-    itemClass(i, heading, $heading, prefix) {
-      return `${prefix}-${$heading[0].tagName.toLowerCase()}`;
+    itemClass: function (i, heading, $heading, prefix) {
+      return prefix + '-' + $heading[0].tagName.toLowerCase();
     },
   };
 })(jQuery);
