@@ -6,7 +6,7 @@ const port = process.env.MYSQL_PORT;
 const host = process.env.MYSQL_HOST;
 const username = process.env.MYSQL_USER;
 const password = process.env.MYSQL_PASSWORD;
-const database = process.env.MYSQL_DBNAME_AUDIOBEE_DB;
+const database = process.env.MYSQL_DB_NAME;
 
 module.exports = {
   development: {
@@ -19,7 +19,7 @@ module.exports = {
     dialectOptions: {
       bigNumberStrings: true,
     },
-    logging: false,
+    logging: true,
   },
   production: {
     username,
@@ -31,6 +31,6 @@ module.exports = {
     dialectOptions: {
       bigNumberStrings: true,
     },
-    logging: false,
+    logging: true,
   },
 };

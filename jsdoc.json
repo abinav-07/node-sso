@@ -2,7 +2,7 @@
   "plugins": [],
   "recurseDepth": 10,
   "source": {
-    "include": ["controllers"],
+    "include": ["src/v1/controllers"],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|out)"
   },
@@ -14,7 +14,7 @@
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,
-    "systemName": "Backend Struct",
+    "systemName": "Single Sign On",
     "footer": "",
     "copyright": "",
     "includeDate": true,
