@@ -61,16 +61,16 @@ global.WEBAPP_DB = require('./database/database_name/models');
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(
-//   rateLimit({
-//     // How long to remember requests for (1 minute)
-//     windowMs: 60 * 1000,
-//     // How many requests to allow
-//     max: 5,
-//     // Message to display
-//     message: 'You exceeded the 5 request mark.',
-//   })
-// );
+app.use(
+  rateLimit({
+    // How long to remember requests for (1 minute)
+    windowMs: 60 * 1000,
+    // How many requests to allow
+    max: 5,
+    // Message to display
+    message: 'You exceeded the 5 request mark.',
+  })
+);
 
 //Routes
 require('./src/v1/routes')(app);

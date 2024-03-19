@@ -1,10 +1,9 @@
 /* eslint-disable prefer-destructuring */
 const dotenv = require('dotenv');
-const { UnauthorizedException } = require('../../../exceptions/httpsException');
+const { default: axios } = require('axios');
 
 //Queries
 const UserQueries = require('../queries/users');
-const { default: axios } = require('axios');
 const { OAuthSignIn } = require('../controllers/user/authentication');
 
 
@@ -29,7 +28,7 @@ const checkOAuthToken = async(req, res, next) => {
      **/ 
 
     // i) Check expiry time and token in Database 
-    const checkUser=await UserQueries.getUser({token:token})
+    const checkUser=await UserQueries.getUser({token})
 
     // If user not 
     if(!checkUser || checkUser?.token_expiry_time<new Date()){
@@ -45,7 +44,7 @@ const checkOAuthToken = async(req, res, next) => {
      const response = await axios.post(`${AUTH_SERVER_URL}/oauth/verify-token`, { },{
       headers,
      });
-     
+
      // If no response 
     if(response.status!==200){
       throw "Invalid token"

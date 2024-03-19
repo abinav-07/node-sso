@@ -18,12 +18,11 @@ const {
 //Queries
 const UserQueries = require('../../queries/users');
 const initOAuth = require('../../services/oAuth');
-const { custom, TokenSet } = require('openid-client');
 
 const jwtSecretKey = `${process.env.JWT_SECRET_KEY}`;
 
 /**
- * @api {post} /api/users/login Login User
+ * @api {post} /v1/users/login Login User
  * @apiName LoginUser
  * @apiGroup Auth
  *
@@ -81,7 +80,7 @@ const loginUser = async (req, res, next) => {
     delete user.password
 
     res.status(200).json({
-      user: user,
+      user,
       token,
     });
   } catch (err) {
@@ -90,7 +89,7 @@ const loginUser = async (req, res, next) => {
 };
 
 /**
- * @api {post} /api/users/register Register User
+ * @api {post} /v1/users/register Register User
  * @apiName RegisterUser
  * @apiGroup Auth
  *
@@ -148,7 +147,7 @@ const registerUser = async (req, res, next) => {
     delete user.password
 
     res.status(200).json({
-      user: user,
+      user,
       token,
     });
   } catch (err) {
@@ -157,7 +156,7 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * @api {post} /api/users/oauth/sign-in OAuth Sign in User
+ * @api {post} /v1/users/oauth/sign-in OAuth Sign in User
  * @apiName OAuthSignIn
  * @apiGroup Auth
  *
@@ -191,7 +190,7 @@ const OAuthSignIn = async (req, res, next) => {
 };
 
 /**
- * @api {post} /api/users/oauth/callback OAuth Sign in callback
+ * @api {post} /v1/users/oauth/callback OAuth Sign in callback
  * @apiName OAuthCallback
  * @apiGroup Auth
  *
@@ -264,7 +263,7 @@ const OAuthCallback = async (req, res, next) => {
 };
 
 /**
- * @api {post} /api/users/oauth/logout OAuth logout  User
+ * @api {post} /v1/users/oauth/logout OAuth logout  User
  * @apiName OAuthLogout
  * @apiGroup Auth
  *
@@ -314,7 +313,7 @@ const OAuthLogout = async (req, res, next) => {
 
 
 /**
- * @api {post} /api/users/oauth/check Check OAuth
+ * @api {post} /v1/users/oauth/check Check OAuth
  * @apiName checkSSO
  * @apiGroup Auth
  *
