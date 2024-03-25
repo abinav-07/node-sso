@@ -176,13 +176,15 @@ const registerUser = async (req, res, next) => {
  */
 const OAuthSignIn = async (req, res, next) => {
   try {
+
     const OAuthClient = await initOAuth();
     const url = OAuthClient.authorizationUrl({
       scope: 'openid profile email',
       response_type: 'code',
+      state:req.get('Referer')
     });
     console.log('Sign in URL:', url);
-    res.redirect(url);
+    res.status(200).send(url)
   } catch (err) {
     next(err);
   }
@@ -299,8 +301,11 @@ const OAuthLogout = async (req, res, next) => {
         token_expiry_time: null,
       });
 
+      // Remove Cookie from client
+      res.cookie('go-node-sso', '', { expires: new Date(0) });
+
       res.status(200).json({
-        message: 'Signed our successfully',
+        message: 'Signed out successfully',
       });
     } catch (err) {
       console.log(err);
