@@ -176,15 +176,14 @@ const registerUser = async (req, res, next) => {
  */
 const OAuthSignIn = async (req, res, next) => {
   try {
-
     const OAuthClient = await initOAuth();
     const url = OAuthClient.authorizationUrl({
       scope: 'openid profile email',
       response_type: 'code',
-      state:req.get('Referer')
+      state: req.get('Referer'),
     });
     console.log('Sign in URL:', url);
-    res.status(200).send(url)
+    res.status(200).send(url);
   } catch (err) {
     next(err);
   }
